@@ -16,6 +16,9 @@
     <module>yefimchukProj</module>
     <module>kniazievaProj</module>
     <module>knutarovaProj</module>
+    <module>petrovProj</module>
+    <module>nishavichProj</module>
+    <module>kolesnykProj</module>
   </modules>
 
   <name>G5_TAF</name>
