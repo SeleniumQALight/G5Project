@@ -10,6 +10,12 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>overAll</module>
+    <module>kotProj</module>
+    <module>demchukProj</module>
+    <module>boiaryntsevaProj</module>
+    <module>yefimchukProj</module>
+    <module>kniazievaProj</module>
+    <module>knutarovaProj</module>
   </modules>
 
   <name>G5_TAF</name>
