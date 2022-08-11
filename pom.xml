@@ -19,6 +19,15 @@
     <module>petrovProj</module>
     <module>nishavichProj</module>
     <module>kolesnykProj</module>
+      <module>aleshkoProj</module>
+    <module>nikuradzeProj</module>
+    <module>yakymenkoProj</module>
+    <module>shushkovaProj</module>
+    <module>drebotProj</module>
+    <module>kostiushkoProj</module>
+    <module>pohlodProj</module>
+    <module>tishchenkoProj</module>
+    <module>slobodyanuykProj</module>
   </modules>
 
   <name>G5_TAF</name>
