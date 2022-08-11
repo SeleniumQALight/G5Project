@@ -1,0 +1,6 @@
+//locators witch you need, group by pages
+#Login Page
+loginPageHeader.input.loginHeader='.//input'
+
+#HomePage
+...
