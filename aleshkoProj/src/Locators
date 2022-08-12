@@ -1,0 +1,5 @@
+PageObject pattern
+#LoginPage
+loginPage.input.login='.//input'
+
+#HomePage
