@@ -1,0 +1,6 @@
+#Register Page
+registerPage.input.username=' .//input[@name='username' and @id='username-register' ]
+registerPage.input.email= './/input[@name='email' and @id='email-register' ]'
+
+
+#Home Page
