@@ -1,6 +1,66 @@
-TC1-5
+TC1 Sign in to Complex app (existing user)
+Preconditions: user has an existing account
 STR:
-1.2.3.
+1. User opens https://qa-complex-app-for-testing.herokuapp.com/
+2. User fills in 'Username' input field
+3. User fills in 'Password' input field
+4. User press 'Sign in' button
 ER:
+1. 'Hello @username' message is displayed (verify username used in Step2)
+2.  Username is displayed in the header
+3. 'Create post' button is displayed
+4. 'Sign out' button is displayed
 
-TC2
+
+TC2 Create new post
+Preconditions: user is logged in and on landing page
+STR:
+1. User clicks on 'Create post' button
+2. User fills in 'Title' input field
+3. User fills in 'Body content' text
+4. User selects 'Unique' check-box
+5. User selects value from drop down
+6. User clicks on 'Save new post' button
+ER:
+1. 'New post successfully created' message is displayed
+2. 'Posted by [USER] on [DATE]' text is displayed
+3. Title and Body content used in Step 2 and 3 are displayed
+4. 'Edit' and 'Delete' buttons are available
+5. 'Note: This post was written for [Value from step5]' text is displayed
+
+
+TC3 Search existing post
+Preconditions: user is logged in and on landing page,  post was created
+STR:
+1. User clicks on search magnifier in the header
+2. User types in title of the post created in TC2
+3. User clicks on search result that corresponds to search criteria from previous step
+ER:
+1.'Posted by [USER] on [DATE]' text is displayed
+2. Title and Body content used in Step 2 and 3 are displayed
+3. 'Edit' and 'Delete' buttons are available
+
+
+TC4 Send new chat message
+Preconditions: user is logged in and on landing page
+STR:
+1. User clicks on chat icon in the header
+2. User types in message in appeared chat window
+3. User clicks enter
+ER:
+1. Entered message is displayed in the chat box
+2. Button to close the chat box is available
+
+
+TC5 User follow functionality
+Preconditions: user is logged in and on landing page, test user&post to be followed are created
+STR:
+1. Click on search magnifier
+2. Enter post title created by user to be followed and click on it in the search result list
+3. Click on username near 'posted by' text
+4. Note number of 'followers' and click on 'Follow' button
+ER:
+1. 'Successfully followed [Username]' message is displayed
+2. 'Stop following' button is appeared
+3. Number of followers is increased by one
+
