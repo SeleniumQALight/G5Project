@@ -1,0 +1,5 @@
+#Login Page
+loginPage.input.loginHeader='.//input'
+(page/type/logic)
+
+#Home Page
