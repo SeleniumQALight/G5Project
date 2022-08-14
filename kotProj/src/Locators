@@ -1,6 +1,44 @@
 #Register Page
 registerPage.input.username=' .//input[@name='username' and @id='username-register' ]
 registerPage.input.email= './/input[@name='email' and @id='email-register' ]'
+registerPage.input.password = './/input [@id='password-register']'
+registerPage.SignUpForOurApp.button = './/button [@type='submit']'
+
+#Login Page
+LoginPage.input.username = './/input[@id='username0']'
+LoginPage.input.password = './/input[@name='password' and @class='form-control form-control-sm input-dark']'
+LoginPage.signIn.button = './/button [@class='btn btn-primary btn-sm']'
 
 
 #Home Page
+homePage.search.button = './/a[@href='#']'
+homePage.chat.button = './/span[@aria-describedby='tooltip219844']'
+homePage.MyProfile.button = './/a[@href='/profile/vickykot']'
+homePage.CreatePost.button = './/a[@class="btn btn-sm btn-success mr-2"]'
+homePage.SignOut.button = './/button[@class="btn btn-sm btn-secondary"]'
+
+#SearchResult
+searchField.input = './/input[@name='_csrf']]
+searchForPost.resultLink ='.//div[@class='list-group']//a[@class='list-group-item list-group-item-action' and @href='/post/6278c755eedcf300047789f1']'
+searchResult.anotherProfile.link = './/a[@href="/profile/qwerty"] [1]'
+searchResult.anotherProfile.FollowButton = './/button[@class="btn btn-primary btn-sm"] '
+searchResult.anotherProfile.UnfollowButton = './/button[@class='btn btn-danger btn-sm']'
+
+
+#ChatPage
+chat.input.field ='.//input[@id='chatField']'
+chat.closeButton ='.//span[@class="chat-title-bar-close"]'
+chat.messageArea ='.//div[@class='chat-message-inner']'
+
+
+#CreateFirstPostPage
+homePage.CreatePost.button = './/a[@class="btn btn-sm btn-success mr-2"]'
+createPost.input.title = './/input[@id="post-title"] '
+createPost.input.BodyContent = './/textarea[@id="post-body"] '
+createPost.Unique.checkbox = './/input[@type='checkbox'] '
+createPost.SaveNewPost.button = './/button[@class="btn btn-primary"] '
+createPost.checkFirstPostCreated. = './/a[@class='list-group-item list-group-item-action'][1]'
+
+
+
+
