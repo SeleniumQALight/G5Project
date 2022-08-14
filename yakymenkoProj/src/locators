@@ -1,4 +1,37 @@
 #Login Page
-loginPage.input.loginHeader='.//input'
+loginPage.input.loginHeader=.//input[@id='username0']
+loginPage.input.passwordHeader=.//input[@name='password' and @placeholder='Password']
+loginPage.button.signIn=.//button[text()='Sign In']
+
+#Registration Form
+registrationForm.input.usernameRegister=.//input[@id='username-register']
+registrationForm.input.emailRegister=.//input[@id='email-register']
+registrationForm.input.passwordRegister=.//input[@id='password-register']
+registrationForm.button.signUp=.//button[text()='Sign up for OurApp']
 
 #Home Page
+header.button.search=.//a/*[@data-icon='search']
+header.button.myProfile=.//img[@data-original-title='My Profile']
+header.button.createPost=.//a[text()='Create Post']
+header.button.signOut=.//button[text()='Sign Out']
+
+#Search Field
+search.input.searchField=.//input[@id='live-search-field']
+search.result.searchTarasUser=.//a/span[starts-with(text(),'by taras')]
+
+#My Profile
+profile.tab.navTabPost=.//a[contains(text(),'Posts')]
+profile.tab.navTabFollowers=.//a[contains(text(),'Followers')]
+profile.tab.navTabFollowing=.//a[contains(text(),'Following')]
+navTabFollowing.list.itemTaras=.//a[@href='/profile/taras']
+
+#Create Post Form
+createPost.input.title=.//input[@id='post-title']
+createPost.textarea.bodyContent=.//textarea[@id='post-body']
+createPost.checkbox.thisIsAUniquePost=.//input[@id='”UniquePost”']
+createPost.select.selectValue=.//select[@id='select1']
+selectValue.value.groupMassage=.//option[@value='Group Message']
+createPost.button.saveNewPost=.//button[@class='btn btn-primary']
+
+
+
