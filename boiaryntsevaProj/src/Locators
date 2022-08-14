@@ -1,5 +1,41 @@
 #Login Page
-loginPage.input.loginHeader='.//input'
-(page/type/logic)
+loginPage.input.loginHeader='.//header//input[@name='username']'
+loginPage.input.password='.//header//input[@name='password']'
+loginPage.button.signIn='.//header//button'
 
 #Home Page
+homePage.text.welcomeMessage='//h2[text()='The Latest From Those You Follow']'
+homePage.text.loggedInUserName='.//header//span[2]'
+homePage.link.createPost'.//a[@href='/create-post']'
+homePage.button.signOut='.//form//button'
+homePage.button.searchMagnifier='.//header//*[local-name()='svg' and @data-icon='search']'
+homepage.input.search='.//*[@id='live-search-field']'
+homepage.button.chat='.//*[local-name() = 'svg' and @data-icon='comment']'
+
+#Create Post Page
+createPostPage.input.postTitle='.//*[@id='post-title']'
+createPostPage.text.bodyContent='.//textarea'
+createPostPage.checkBox.uniquePost='.//*[@id='”UniquePost”']'
+createPostPage.dropDown.selectAvailability='.//select[@name='select1']'
+createPostPage.button.savePost='.//button[text()='Save New Post']'
+
+#Post details page
+postDetails.class.successMessage='.//*[text()='New post successfully created.']'
+postDetails.class.postUserDateInfo='.//div//p[@class]'
+postDetails.text.postTitle='.//h2'
+postDetails.text.postBody='.//div[@class='body-content'][2]'
+postDetails.text.postAvailability='.//div[@class='body-content'][1]'
+postDetails.button.edit='.//*[local-name() = 'svg' and @data-icon='edit']'
+postDetails.button.delete='.//*[local-name() = 'svg' and @data-icon='trash']'
+postDetails.text.userName='.//p//a[2]'
+
+#Chat box
+chatBox.input.messageInput='.//*[@id='chatField']'
+chatbox.button.close='.//span[@class='chat-title-bar-close']//*[local-name() = 'svg' and @data-icon='times-circle']'
+
+
+#User Page
+userPage.button.follow='.//button[@class='btn btn-primary btn-sm']'
+usePage.button.stopFollowing='.//button[@class="btn btn-danger btn-sm"]'
+userPage.text.successFollowingMessage='.//div[@class='alert alert-success text-center']'
+userPage.text.numberOfFollowers='.//a[@href='/profile/pastest/followers']'
