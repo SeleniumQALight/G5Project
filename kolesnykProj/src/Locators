@@ -1,6 +1,6 @@
 
 login Page :
-1. Username field on header menu : //input[@id='username5']
+1. Username field on header menu : //input[@name='username' and @placeholder='Username']
 2. Password field on header menu : //input[@name='password' and @placeholder='Password']
 3. Sign in button : //button[@class='btn btn-primary btn-sm']
 4. Username filed on register form : //input[@id="username-register"]
@@ -22,6 +22,9 @@ Post page :
 6. Validation message 'Post successfully updated.': //div[contains(text(),'Post successfully deleted')]
 7. Edit button : //a[@class='text-primary mr-2']
 8. Delete button : //button[@class='delete-post-button text-danger']
+9. Post title : //div[@class='d-flex justify-content-between']
+10. Body content : //div[@class='body-content'][2]//p[1]
+11. Back to post permalink : //a[text()='« Back to post permalink']
 
 Profile page :
 1. First element in Posts table : //div[@class='list-group']//a[1]

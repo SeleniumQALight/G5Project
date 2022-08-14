@@ -39,11 +39,19 @@ Steps to reproduce:
 Expected result:
 1. Validation message with followed text is displayed :
 - 'New post successfully created.'
+2. Title of newly created post is displayed
+
+
+After test :
+1. delete created post
 =====================================
 
 
 #4 Edit Post
 ---------------------
+Precondition:
+1. Create a new post
+
 Steps to reproduce:
 1. Login as existed user (username : rosko48 / password : 12345678912345)
 2. Click on 'My Profile' button on header menu
@@ -52,15 +60,21 @@ Steps to reproduce:
 5. Add text 'Edit' to title
 6. Add text 'edit' to message body
 7. Click on 'Save Updates' button
+8. Click on 'Back to post permalink' link
 
 Expected result:
 1. Validation message with followed text is displayed :
 - 'Post successfully updated.'
+2. Check that title has newly added changes
+3. Check that message body has newly added changes
 =====================================
 
 
 #5 Delete post
 ----------------------
+Precondition:
+1. Create a new post
+
 Steps to reproduce:
 1. Login as existed user (username : rosko48 / password : 12345678912345)
 2. Click on 'My Profile' button on header menu
