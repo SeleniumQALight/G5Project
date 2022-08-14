@@ -5,7 +5,7 @@ LoginPage.Input.Password = './/input[@name='password' and @id='password-register
 LoginPage.Button.OurApp = './/button[@type='submit' and @class='py-3 mt-4 btn btn-lg btn-success btn-block']'
 
 #Login Page Header
-LoginPage.Input.UsernameHeader = './/input[@name='username' and @id='username0']'
+LoginPage.Input.UsernameHeader = './/input[@name='username' and @class='form-control form-control-sm input-dark']'
 LoginPage.Input.PasswordHeader = './/input[@name='password' and @class='form-control form-control-sm input-dark']'
 LoginPage.Button.SignIn = './/button [@class='btn btn-primary btn-sm']'
 

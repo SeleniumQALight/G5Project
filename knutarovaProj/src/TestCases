@@ -53,6 +53,21 @@ Expected result: we have to see form with the next fields: "Title", "Body Conten
 Expected result: we have to see field with text "New post successfully created", under that field we can see Title
 of my post, under that Username and date of post, under that we can see who can read this post and under that we
 can see Text of the post.
+Post conditions:
+1. Turn on the button "My profile" in the Home page.
+Expected result: we go to page with all our posts. This page must have next fields:
+"Posts: count", "Followers: count", "Following: count" and under first tab "Posts: count" we have to see all our posts
+with date of that created.
+2. Turn on the field with text "My first post on 8/12/2022".
+Expected result: we following to page with next text:
+"My first post.
+Posted by irynaknutarova on 8/12/2022.
+Note: This post was written for All Users.
+Test".
+And on the right we can see edit text icon and delete post icon.
+3. Turn on icon for delete post.
+Expected result: we have to see massage: "Post successfully deleted" and we can't see this post under this massage in
+the list of posts.
 
 TEST-ATAM-G5-6-1132
 Summary: CHECKING THE BUTTON "SIGN OUT"
