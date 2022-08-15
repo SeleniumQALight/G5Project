@@ -1,7 +1,41 @@
-TC1 [name]
+TC1 [Registration of new user]:
+Preconditions:
+Open https://qa-complex-app-for-testing.herokuapp.com/ as unauthorized user
 STR:
-1.
-2.
+1. Enter any unused username into the "Username" field
+2. Enter any valid unused email address into the "Email" field (e.g. [test@test.test])
+3. Enter [qwertyqwerty]
+4. Click "Sing up" button
 ER:
+1. "Sign Out" button is displayed in the header
+2. Text "Hello krill, your feed is empty." displays  on the page
 
-TC2 [name]
+TC2 [Create Post]
+Preconditions:
+Open https://qa-complex-app-for-testing.herokuapp.com/ as authorized user
+STR:
+1. Click "Create Post" button
+    ER: The [/create-post] page is opened
+2. Input [titleText] into the "Title" field
+3. Input [someText] into the "Body Content" field
+4. Click "Save New Post" button
+    ER: Alert with text "New post successfully created." is displayed.
+        "titleText" is displayed in the "Title" field
+        "someText" is displayed in the "Body" field
+
+
+TC3 [Delete Post]
+
+
+TC4 [Use Chat]
+Preconditions:
+Open https://qa-complex-app-for-testing.herokuapp.com/ as authorized user
+STR:
+1. Click "Chat" button in the header
+    ET: Chat-form is visible in the bottom right side of the page
+2. Enter "Hello World" into the input field of Chat-form
+3. Submit the input
+    ET: Input was cleared
+        The "Hello World" text is displayed in the chat-log
+
+TC5 [Find user and Subscribe]

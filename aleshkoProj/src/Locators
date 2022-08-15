@@ -39,6 +39,15 @@ createPostPage.button = ".//form[@action='/create-post']//button"
 
 #ProfilePage
 profilePage.title = ".//h2"
+profilePage.button.follow = ".//button[text()='Follow ']"
 profilePage.postTab = ".//h2//..//a[1]"
 profilePage.followersTab = ".//h2//..//a[2]"
 profilePage.followingTab = ".//h2//..//a[3]"
+
+#PostPage
+postPage.alert = ".//div[text()='New post successfully created.']"
+postPage.title = ".//h2"
+postPage.button.editPost = ".//h2//..//a"
+postPage.button.deletePost = ".//h2//..//form"
+postPage.note = ".//div[@class='body-content'][1]//p"
+postPage.bodyText = ".//div[@class='body-content'][2]"
