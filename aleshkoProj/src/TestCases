@@ -6,11 +6,11 @@ STR:
 2. Enter any valid unused email address into the "Email" field (e.g. [test@test.test])
 3. Enter [qwertyqwerty]
 4. Click "Sing up" button
-ER:
-1. "Sign Out" button is displayed in the header
-2. Text "Hello krill, your feed is empty." displays  on the page
+    ER: "Sign Out" button is displayed in the header
+        Text "Hello krill, your feed is empty." displays  on the page
 
-TC2 [Create Post]
+
+TC2 [Create and Delete Post]
 Preconditions:
 Open https://qa-complex-app-for-testing.herokuapp.com/ as authorized user
 STR:
@@ -22,9 +22,29 @@ STR:
     ER: Alert with text "New post successfully created." is displayed.
         "titleText" is displayed in the "Title" field
         "someText" is displayed in the "Body" field
+5. Click on "Delete" button
+    ER: The profile page is opened
+        Alert with text "Post successfully deleted" is displayed
+        Post with title "titleText" does not displayed in the "Posts" tab
 
 
-TC3 [Delete Post]
+TC3 [Edit Post]
+Preconditions:
+Open https://qa-complex-app-for-testing.herokuapp.com/ as authorized user
+User have at least one post in account
+STR:
+1. Click "My Profile" button
+    ER: Number of posts in "Posts" tab not equal zero
+2. Click on any post in the list
+    ER: The post page is opened
+3. Click "Edit" button
+    ER: The post creation page is opened
+        The "Title" input field contains title from step 2
+        The "Body Content" input field contains body content from step 2
+4. Input [newTitle] into the "Title" field
+5. Input [newText] into the "Body Content" field
+6. Click "Save Updates" button
+    ET: Alert with text "Post successfully updated." is displayed.
 
 
 TC4 [Use Chat]
@@ -32,10 +52,25 @@ Preconditions:
 Open https://qa-complex-app-for-testing.herokuapp.com/ as authorized user
 STR:
 1. Click "Chat" button in the header
-    ET: Chat-form is visible in the bottom right side of the page
+    ER: Chat-form is visible in the bottom right side of the page
 2. Enter "Hello World" into the input field of Chat-form
 3. Submit the input
-    ET: Input was cleared
+    ER: Input was cleared
         The "Hello World" text is displayed in the chat-log
 
-TC5 [Find user and Subscribe]
+
+TC5 [Find user by post and Subscribe]
+Preconditions:
+Open https://qa-complex-app-for-testing.herokuapp.com/ as authorized user
+STR:
+1. Click "Search" button in the header
+2. Enter "test" into the input field of SearchOverlay
+    ER: The list of posts, which title contains "test" is displayed
+3. Click on any post in the list
+    ER: Post page is opened
+        Title from opened page and title from clicked item on step 2 are equals
+4. Click on author's username or icon
+    ER: Profile page is opened
+        Title from opened page and author's username from post page are equals
+5. Click "Follow" button
+    ER: Alert with text "Successfully followed {username}" is displayed.

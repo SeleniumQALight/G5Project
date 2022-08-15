@@ -47,6 +47,7 @@ profilePage.followingTab = ".//h2//..//a[3]"
 #PostPage
 postPage.alert = ".//div[text()='New post successfully created.']"
 postPage.title = ".//h2"
+postPage.author = ".//p[@class='text-muted small mb-4']//a"
 postPage.button.editPost = ".//h2//..//a"
 postPage.button.deletePost = ".//h2//..//form"
 postPage.note = ".//div[@class='body-content'][1]//p"
