@@ -1,5 +1,44 @@
-PageObject pattern
+---PageObject pattern---
+
+#HeaderAuthorized
+headerAuthorized.button.search = ".//a[@href='#']"
+headerAuthorized.input.searchOverlay = ".//input[@id='live-search-field']"
+headerAuthorized.span.searchOverlayClose = ".//span[@class='close-live-search']"
+headerAuthorized.button.chat = ".//span[@data-original-title='Chat']"
+headerAuthorized.chatForm = ".//div[@id='chat-wrapper']"
+headerAuthorized.chatForm.input = ".//div[@id='chat-wrapper']//input"
+headerAuthorized.chatForm.span.closeForm = ".//div[@id='chat-wrapper']//span"
+headerAuthorized.button.profile = ".//a[@class='mr-2']"
+headerAuthorized.nickName = ".//span[@class='text-white mr-2']"
+headerAuthorized.button.createPost = ".//a[@href='/create-post']"
+headerAuthorized.button.signOut = ".//form[@action]//button"
+
+#Fotter
+footer.text = ".//footer//p"
+
 #LoginPage
-loginPage.input.login='.//input'
+loginPage.login.input.username = ".//input[@id='username1']"
+loginPage.login.input.password = ".//input[@placeholder='Password']"
+loginPage.login.button = ".//button[@class='btn btn-primary btn-sm']"
+loginPage.register.input.username = ".//input[@id='username-register']"
+loginPage.register.input.email = ".//input[@id='email-register']"
+loginPage.register.input.password = ".//input[@id='password-register']"
+loginPage.register.button = ".//button[@type='submit']"
 
 #HomePage
+homePage.centerText.title = ".//h2"
+homePage.centerText.text = ".//div[@class='text-center']//p"
+homePage.chatForm = ".//div[@id='chat-wrapper']"
+
+#CreatePostPage
+createPostPage.input.title = ".//input[@id='post-title']"
+createPostPage.input.bodyContent = ".//textarea[@id='post-body']"
+createPostPage.input.checkbox = ".//input[@type='checkbox']"
+createPostPage.input.selectForm = ".//select"
+createPostPage.button = ".//form[@action='/create-post']//button"
+
+#ProfilePage
+profilePage.title = ".//h2"
+profilePage.postTab = ".//h2//..//a[1]"
+profilePage.followersTab = ".//h2//..//a[2]"
+profilePage.followingTab = ".//h2//..//a[3]"
