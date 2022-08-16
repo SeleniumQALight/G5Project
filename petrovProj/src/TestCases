@@ -10,7 +10,7 @@ TC2
 TC1 name: Создание нового пользователя
 
 Pre condition:
-1. Открываем браузет хром
+1. Открыть браузер хром
 2. Перейти по ссылке https://qa-complex-app-for-testing.herokuapp.com/
 
 STR
@@ -37,7 +37,7 @@ Post condition:
 TC2 mane: Авторизация пользователя
 
 Pre condition:
-1. Открываем браузет хром
+1. Открыть браузер хром
 2. Перейти по ссылке https://qa-complex-app-for-testing.herokuapp.com/
 
 STR
@@ -58,7 +58,7 @@ Post condition:
 ТС3 name: Создать пост
 
 Pre condition:
-1. Открываем браузет хром
+1. Открыть браузер хром
 2. Перейти по ссылке https://qa-complex-app-for-testing.herokuapp.com/
 3. Залогиниться userName='testname1' , password='Asdfghjkl123'
 
@@ -75,3 +75,23 @@ ER
 указан селект который был выбран
 Присутствует тело поста, и оно такое же как мы вводили.
 есть кнопки редактировать и удалить пост.
+
+
+TC4 name: Добавление фаловеров
+
+Pre condition:
+1. Открыть браузер хром
+2. Перейти по ссылке https://qa-complex-app-for-testing.herokuapp.com/
+3. Залогиниться userName='testname1' , password='Asdfghjkl123'
+
+STR
+1. В шапке страницы кликнуть на search - ER: Появился инпут для поиска статьи по тайтлу
+2. Вводим текст "test"  - ER: Под поиском с нашим введенным текстом появился блок Search Result
+3. В блокет Search Result выбираем пост написаным не нами. - R: Переходим на страницу выбраного поста
+4. Кликаем на имя юзера которое указано после текста 'Posted by', что размещено под тайтлом.
+ER: Переходим в пофиль юзера. Присутствует кнопку Follow
+5. Нажать кнопку Follow.
+
+ER: Появилось сообщение 'Successfully followed + имя юзера', Появилась кнопка 'Stop Following' вместо кнопки "Follow"
+
+
