@@ -17,7 +17,7 @@ headerAuthorized.button.signOut = ".//form[@action]//button"
 footer.text = ".//footer//p"
 
 #LoginPage
-loginPage.login.input.username = ".//input[@id='username1']"
+loginPage.login.input.username = ".//form[@action='/login']//input[@name='username']"
 loginPage.login.input.password = ".//input[@placeholder='Password']"
 loginPage.login.button = ".//button[@class='btn btn-primary btn-sm']"
 loginPage.register.input.username = ".//input[@id='username-register']"

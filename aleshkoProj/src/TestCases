@@ -7,7 +7,7 @@ STR:
 3. Enter [qwertyqwerty]
 4. Click "Sing up" button
     ER: "Sign Out" button is displayed in the header
-        Text "Hello krill, your feed is empty." displays  on the page
+        Text "Hello {{username}}, your feed is empty." displays  on the page
 
 
 TC2 [Create and Delete Post]
@@ -44,7 +44,10 @@ STR:
 4. Input [newTitle] into the "Title" field
 5. Input [newText] into the "Body Content" field
 6. Click "Save Updates" button
-    ET: Alert with text "Post successfully updated." is displayed.
+    ER: Alert with text "Post successfully updated." is displayed.
+7. Click "Back to post permalink"
+    ER: [newTitle] is displayed in post's title
+        [newText] is displayed in post's body
 
 
 TC4 [Use Chat]
@@ -61,6 +64,7 @@ STR:
 
 TC5 [Find user by post and Subscribe]
 Preconditions:
+Post with title "test" was created by second user
 Open https://qa-complex-app-for-testing.herokuapp.com/ as authorized user
 STR:
 1. Click "Search" button in the header
