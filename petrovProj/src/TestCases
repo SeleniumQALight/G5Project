@@ -7,7 +7,7 @@ ER
 TC2
 .....
 
-TC1 name: create new account
+TC1 name: Создание нового пользователя
 
 Pre condition:
 1. Открываем браузет хром
@@ -31,4 +31,23 @@ Post condition:
 1. Вылогиниваемся с сайты
 2. Закрываем браузер хром
 
-// созданый юзер  testname1 testname@test.com Asdfghjkl123
+// созданый юзер  'testname1' 'testname@test.com' 'Asdfghjkl123'
+
+TC2 mane: Авторизация пользователя
+Pre condition:
+1. Открываем браузет хром
+2. Перейти по ссылке https://qa-complex-app-for-testing.herokuapp.com/
+
+STR
+1. В шапке в поле инпута "Username" ввести имя 'testname1'
+2. В поле инпута Password ввести пароль  'Asdfghjkl123'
+3. Кликнуть кнопку "Sing In"
+
+ER
+В шапке отсутствует форма авторизации.
+Отсутствует форма создания пользователя.
+Мы залогиниваемся, в шапке появляеться введенное нами имя 'testname1', появляються кнопки "Create Post" и "Sign Out"
+
+Post condition:
+1. Вылогиниваемся с сайты
+2. Закрываем браузер хром
