@@ -22,6 +22,7 @@ ER: User appears on his profile page, username is visible,
 TC 3: Follow another profile:
 Preconditions:
 1. Sign in to the profile with created already credentials ( username:VickyKOt, password: Kot@08091988)
+2. Make sure there is another profiles created already
 STR:
       	1.	Click on search button in main menu inside profile page
       	2.	Type “post” word into opened search field
@@ -30,6 +31,8 @@ STR:
       	5.	Click on the name-link under the post title that leads to the profile that created that post
       	6.	In the opened profile click on “Follow+” button next to the profile name
 ER: “Successfully followed <name>” text appears and Stop following button appears instead of Follow.
+Switch to your profile 'Following' tab and make sure new profile that is followed is added to the list.
+
 
 ===================================================================================================
 TC 4: Type message in common chat:
@@ -53,7 +56,9 @@ STR:
        	4.	Put checkmark for “unique” post
        	5.	Click on 'Save new post' button under the text fields
 ER: New post successfully created message appears.
-Click on 'My profile' button in menu and observe 'Posts' tab, make sure new post was added.
+Click on 'My profile' button in menu and observe 'Posts' tab, make sure new post was added. Switch to your profile,
+ 'posts' tan and make sure nw post appears there.
+Postconditions: 1.Click on created post title in the 'posts' tab of the profile and in the opened window click on delete button to remove the post.
 ================================================================================================
 
 

@@ -5,7 +5,7 @@ registerPage.input.password = './/input [@id='password-register']'
 registerPage.SignUpForOurApp.button = './/button [@type='submit']'
 
 #Login Page
-LoginPage.input.username = './/input[@id='username0']'
+LoginPage.input.username = './/input[@name='username' and @class='form-control form-control-sm input-dark']'
 LoginPage.input.password = './/input[@name='password' and @class='form-control form-control-sm input-dark']'
 LoginPage.signIn.button = './/button [@class='btn btn-primary btn-sm']'
 
@@ -37,7 +37,9 @@ createPost.input.title = './/input[@id="post-title"] '
 createPost.input.BodyContent = './/textarea[@id="post-body"] '
 createPost.Unique.checkbox = './/input[@type='checkbox'] '
 createPost.SaveNewPost.button = './/button[@class="btn btn-primary"] '
-createPost.checkFirstPostCreated. = './/a[@class='list-group-item list-group-item-action'][1]'
+createPost.checkFirstPostCreated.link = './/div[@class='list-group']//a[@class='list-group-item list-group-item-action']'
+createPost.deleteFirstPost.button = './/button[@class='delete-post-button text-danger']'
+
 
 
 
