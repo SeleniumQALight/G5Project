@@ -1,9 +1,136 @@
-TC1 name
-Step to reproduce:
-1.
-2.
-Expected Result:
+TC1 register new user
+STR:
+1.open page https://qa-complex-app-for-testing.herokuapp.com/
+2.input 'Username' at least 3 characters - letters and numbers (ex: user + random(0,100000))
+3.input 'Email' (ex: user + random(0,100000) + @test.com)
+4.input 'Password' at least 12 characters
+5.press button 'Sign up for OurApp'
+ER:
+1.'Hello [Username], your feed is empty' message is displayed
+2.Username is displayed in the header
+3.button 'My Profile' is appeared
+4.press button 'Sign Out'
+5.fill 'Username' by value from step2
+6.'That username is already taken.' message is displayed
 
-TC2
-....
 
+
+TC2 login existing user
+Precondition:
+1.open page https://qa-complex-app-for-testing.herokuapp.com/
+2.input 'Username' at least 3 characters - letters and numbers (ex: user + random(0,100000))
+3.input 'Email' (ex: user + random(0,100000) + @test.com)
+4.input 'Password' at least 12 characters
+5.press button 'Sign up for OurApp'
+6.press button 'Sign Out'
+STR:
+1.fill 'Username' in header by value from precondition step2
+2.fill 'Password' in header by value from precondition step4
+3.press button 'Sign In'
+ER:
+1.'Hello [Username], your feed is empty' message is displayed
+2.Username is displayed in the header
+3.button 'My Profile' is appeared
+
+
+
+TC3 create post
+Precondition:
+1.open page https://qa-complex-app-for-testing.herokuapp.com/
+2.input 'Username' at least 3 characters - letters and numbers (ex: user + random(0,100000))
+3.input 'Email' (ex: user + random(0,100000) + @test.com)
+4.input 'Password' at least 12 characters
+5.press button 'Sign up for OurApp'
+6.press button 'Sign Out'
+7.fill 'Username' in header by value from precondition step2
+8.fill 'Password' in header by value from precondition step4
+9.press button 'Sign In'
+10.press button 'My Profile'
+11.check 'Post:[post_number]','Followers:[followers_number]]','Following:[following_number]'
+STR:
+1.press button 'Create Post'
+2.input 'Title' at least 1 characters
+3.input 'Body Content' at least 1 characters
+4.put in/out checkbox 'This is a unique post'
+5.choose value from drop dawn list 'Select value'
+6.press button 'Save New Post'
+ER:
+1.'New post successfully created.' message is displayed
+2.value [Title] corresponds to content from Step2 of STR
+3.value [Body Content] corresponds to content from Step3 of STR
+4.'Posted by [USER] on [DATE]' text is displayed
+5.'Note: This post was written for [Select value from step5]' text is displayed
+6.press button 'My Profile'
+7.'Post:[post_number+1]' is increased by one
+8.value [Title] corresponds to content from Step2 of STR
+Post Condition:
+1.press button 'My Profile'
+2.click on 'Post:[post_number+1]'
+3.click on '[Title] on [DATE]'
+4.click on 'Delete'
+
+
+
+TC4 following user
+Precondition:
+1.open page https://qa-complex-app-for-testing.herokuapp.com/
+2.input 'Username1' at least 3 characters - letters and numbers (ex: user + random(0,100000))
+3.input 'Email1' (ex: user + random(0,100000) + @test.com)
+4.input 'Password1' at least 12 characters
+5.press button 'Sign up for OurApp'
+6.press button 'Sign Out'
+7.fill 'Username1' in header by value from precondition step2
+8.fill 'Password1' in header by value from precondition step4
+9.press button 'Sign In'
+10.press button 'Create Post'
+11.input 'Title' at least 1 characters
+12.input 'Body Content' at least 1 characters
+13.put in/out checkbox 'This is a unique post'
+14.choose value from drop dawn list 'Select value'
+15.press button 'Save New Post'
+16.press button 'Sign Out'
+17.open page https://qa-complex-app-for-testing.herokuapp.com/
+18.input 'Username2' at least 3 characters - letters and numbers (ex: user + random(0,100000))
+19.input 'Email2' (ex: user + random(0,100000) + @test.com)
+20.input 'Password2' at least 12 characters
+21.press button 'Sign up for OurApp'
+22.press button 'Sign Out'
+23.fill 'Username2' in header by value from precondition step18
+24.fill 'Password2' in header by value from precondition step20
+25.press button 'Sign In'
+STR:
+1.press button 'My Profile2'
+2.check 'Post:[post_number]','Followers:[followers_number]]','Following:[following_number]'
+3.click on 'Search'
+4.input 'Title' value from precondition step11
+5.click on 'Title' in list below
+6.click on user from 'Posted by [USER_FIND] on [DATA]]'
+7.click on 'Follow'
+ER:
+1.'Successfully followed [USER_FIND]' message is displayed
+2.button 'Stop Following' is appeared
+3.click on 'Followers', find in list below [USER] which corresponds [USER2] from precondition step18
+4.press button 'My Profile'
+5.click on 'Following:[following_number+1]'
+6.'Following:[following_number+1]' is increased by one
+7.in list below, [USER] correspond [USER_FIND]
+
+
+
+TC5 create message in chat
+Precondition:
+1.open page https://qa-complex-app-for-testing.herokuapp.com/
+2.input 'Username' at least 3 characters - letters and numbers (ex: user + random(0,100000))
+3.input 'Email' (ex: user + random(0,100000) + @test.com)
+4.input 'Password' at least 12 characters
+5.press button 'Sign up for OurApp'
+6.press button 'Sign Out'
+7.fill 'Username' in header by value from precondition step2
+8.fill 'Password' in header by value from precondition step4
+9.press button 'Sign In'
+STR:
+1.press button 'Chat'
+2.input 'Type a message..'
+3.press Enter
+ER:
+1.message from step2 of STR correspond appeared message
