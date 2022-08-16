@@ -11,4 +11,21 @@
         LoginPage.button='.//form[@action='/login']//button'
 
 #HomePage
-....
+    #CreatePost
+        HomePage.anchor[CreatePost]='.//a[@href='/create-post']'\
+        CreatePostPage.title='.//input[@id='post-title']'
+        CreatePostPage.BodyContent='.//textarea[@id='post-body']'
+        CreatePostPage.SelectValue.AllUsers='.//select//option[@value='All Users']'
+        CreatePostPage.Button.SaveNewPost='.//form[@action='/create-post']//button'
+
+    #AddFolowers
+        HomePage.Search='.//a[@data-original-title='Search']'
+
+
+#PostPage
+    PostPage.UserName='.//p//a[2]'
+
+#ProfilePage
+    ProfilePage.addFollow.button='.//form[contains(@action,'addFollow')]//button'
+
+
