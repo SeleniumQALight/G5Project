@@ -45,7 +45,7 @@ STR:
 5. Input [newText] into the "Body Content" field
 6. Click "Save Updates" button
     ER: Alert with text "Post successfully updated." is displayed.
-7. Click "Back to post permalink"
+7. Click "Back to post permalink" button
     ER: [newTitle] is displayed in post's title
         [newText] is displayed in post's body
 
