@@ -1,0 +1,4 @@
+Locators per pages
+#Login Page
+LoginPage.input.LoginHeader=()
+input login ....
