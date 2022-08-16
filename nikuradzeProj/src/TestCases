@@ -1,0 +1,73 @@
+TC1 'Sign up'
+STR:
+1. Open login page
+2. In respective form fill valid username, email and password
+3. Click on 'Sign up for OurApp' button
+
+ER: 'Sign Out' button is displayed at the top
+
+Post-conditions:
+1. Click on 'Sign Out' button and try to login with created user
+ER: User is logged in, 'Sign Out' button is displayed
+2. Log out and try to register again with the same credentials
+ER: Validation errors are displayed for username and email fields
+
+
+TC2 'Sign in'
+STR:
+Pre-conditions: user (snik123/qwerty123456) has been registered
+1. Open login page
+2. Fill registered username and password in the header
+3. Click on 'Sign In' button
+
+ER: 'Sign Out' button is displayed at the top
+
+TC3 'Create post'
+STR:
+Pre-conditions: user (snik123/qwerty123456) has been registered
+1. Log in
+2. Click on 'Create Post' link
+3. Fill some text (TestTitle) in 'Title' and 'Body Content' (Some rough text) fields
+4. Click on 'Save New Post' button
+
+ER: Page with 'New post successfully created.' message and 'Delete' post button is displayed
+
+TC4 'Delete post'
+Pre-conditions:
+- user (snik123/qwerty123456) has been registered;
+- one post has been created ('Posts' counter is '1')
+1. Log in
+2. Click on 'My profile' link
+3. Click on the post
+4. Click on the 'Delete' button
+
+ER: 'Post successfully deleted' notification is displayed, 'Posts' counter is '0', no posts are displayed
+
+TC5 'Follow somebody'
+Pre-conditions:
+- user (snik123/qwerty123456) has been registered;
+- DB is full of users
+1. Log in
+2. Click on 'Search' in header
+3. Find and open post, e.g. type '1' and select 'which a 22.1 by xipch408540 on 7/4/2022'
+4. Click on its author
+5. Click on 'Follow' button
+6. Click on 'My Profile'
+7. Select 'Following' tab
+
+ER: 'xipch408540' profile is displayed, 'Following' counter is '1'
+
+TC6 'Unfollow somebody'
+Pre-conditions:
+- user (snik123/qwerty123456) has been registered;
+- DB is full of users
+- Follow 'xipch408540' user
+1. Log in
+2. Click on 'My Profile'
+3. Select 'Following' tab
+4. Click on its item
+5. Click on 'Stop Following' button
+6. Go to 'My Profile'
+7. Select 'Following' tab
+
+ER: No users are displayed, 'Following' counter is '0'

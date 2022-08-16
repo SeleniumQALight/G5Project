@@ -1,0 +1,99 @@
+
+#1 Register new user
+-------------------
+Steps to reproduce:
+1. Open https://qa-complex-app-for-testing.herokuapp.com/ link
+2. Fill in 'Username' filed (which has 'Pick a username') with random unique name
+3. Fill in 'Email' field with email valid address
+4. Fill in Password field with valid password
+
+Expected result:
+Main page is opened :
+- 'Create Post' button is displayed
+===================================
+
+
+#2. Login as already register user
+--------------------
+Steps to reproduce:
+1. Open https://qa-complex-app-for-testing.herokuapp.com/ link
+2. Fill in 'Username' field in header menu with followed data (username = rosko48)
+3. Fill in 'Password' field in header manu with followed data (password : 12345678912345)
+4. Click on 'Sign in' button
+
+Expected result:
+Main page is opened :
+- 'Create Post' button is displayed
+===================================
+
+
+#3 Create a new post as logged in user
+--------------------
+Steps to reproduce:
+1. Login to application (username : rosko48 / password : 12345678912345)
+2. Click on 'Create Post' button
+4. Fill in 'Title' field with text (text = New title)
+5. Fill in Body of the message with text (text = 'hello new world')
+6. Click on 'Save New Post' button
+
+Expected result:
+1. Validation message with followed text is displayed :
+- 'New post successfully created.'
+2. Title of newly created post is displayed
+
+
+After test :
+1. delete created post
+=====================================
+
+
+#4 Edit Post
+---------------------
+Precondition:
+1. Create a new post
+
+Steps to reproduce:
+1. Login as existed user (username : rosko48 / password : 12345678912345)
+2. Click on 'My Profile' button on header menu
+3. Click on the first post in table (if it empty create a new one post)
+4. Click on 'Edit' button
+5. Add text 'Edit' to title
+6. Add text 'edit' to message body
+7. Click on 'Save Updates' button
+8. Click on 'Back to post permalink' link
+
+Expected result:
+1. Validation message with followed text is displayed :
+- 'Post successfully updated.'
+2. Check that title has newly added changes
+3. Check that message body has newly added changes
+=====================================
+
+
+#5 Delete post
+----------------------
+Precondition:
+1. Create a new post
+
+Steps to reproduce:
+1. Login as existed user (username : rosko48 / password : 12345678912345)
+2. Click on 'My Profile' button on header menu
+3. Click on the first post in table (if it empty create a new one post)
+4. Click on 'Delete' button
+
+Expected result:
+1. Validation message with followed text is displayed :
+- 'Post successfully deleted'
+2. Post title which was deleted in not present on post table
+======================================
+
+
+#6 Logout
+-----------------------
+Steps to reproduce:
+1. Login as existed user (username : rosko48 / password : 12345678912345)
+2. Click on 'Sing Out' button on header menu
+
+Expected result:
+1. User is logged out :
+- 'Sign in' button is displayed

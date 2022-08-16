@@ -1,0 +1,44 @@
+#Login Page
+loginPage.input.loginMain=.//*[@id='username-register']
+loginPage.input.loginMain=.//*[@name='email']
+loginPage.input.loginMain=.//*[@id='password-register']
+loginPage.button.loginMain=.//*[text()='Sign up for OurApp']
+loginPage.alert.loginMain.username=.//*[text()='That username is already taken.']
+loginPage.alert.loginMain.email=.//*[text()='That email is already being used.']
+
+loginPage.input.loginHeader=.//*[@placeholder='Username']
+loginPage.input.loginHeader=.//*[@placeholder='Password']
+loginPage.button.loginHeader=.//*[text()='Sign In']
+
+#HomePage
+homePage.button.signOut=.//button
+homePage.link.createPost=.//a[@href='/create-post']
+homePage.link.myProfile=.//a//img[@title='']
+homePage.searchLink=.//a[@href='#']
+homePage.search.input=.//*[@id='live-search-field']
+homePage.search.searchResultLink=.//a[5]
+
+
+#Create Post page
+createPost.title=.//*[@id='post-title']
+createPost.textarea=.//textarea
+createPost.submit=.//*[text()='Save New Post']
+
+#Post page
+postPage.delete=.//*[@class="delete-post-button text-danger"]
+postPage.newPostNotification.//*[@class='alert alert-success text-center']
+postPage.profileLink=.//div//p//a
+
+#Profile page
+myProfile.posts.notEmptyCheck=.//a[text()='Posts: 1']
+myProfile.posts.emptyCheck=.//a[text()='Posts: 0']
+myProfile.posts.deleteNotification=.//*[@class='alert alert-success text-center']
+myProfile.posts.noPosts=.//div[@class='list-group'][not(a)]
+myProfile.posts.linkToPost=.//a//strong
+otherProfile.posts.followButton=.//*[@class='btn btn-primary btn-sm']
+otherProfile.posts.unFollowButton=.//*[@class='btn btn-danger btn-sm']
+myProfile.following.notEmptyCheck=.//*[text()='Following: 1']
+myProfile.following.emptyCheck=.//*[text()='Following: 0']
+myProfile.following.linkToProfile=.//*[@class='list-group']/a
+myProfile.following.noFollowing=.//div[@class='list-group'][not(a)]
+
