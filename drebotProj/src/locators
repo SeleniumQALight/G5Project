@@ -1,6 +1,61 @@
-//locators witch you need, group by pages
 #Login Page
-loginPageHeader.input.loginHeader='.//input'
+loginPageHeader.input.loginHeader='.//input[@name='username' and @class='form-control form-control-sm input-dark']'
+loginPageHeader.input.passwordHeader='.//input[@name='password' and @class='form-control form-control-sm input-dark']'
+loginPageHeader.button.signIn='.//button[@class='btn btn-primary btn-sm']'
+loginPageRegistration.input.loginRegistration='.//input[@id='username-register']'
+loginPageRegistration.input.emailRegistration='.//input[@id='email-register']'
+loginPageRegistration.input.passwordRegistration='.//input[@id='password-register']'
+loginPageRegistration.button.signUpForOurApp='.//button[@class='py-3 mt-4 btn btn-lg btn-success btn-block']'
+loginPageRegistration.message.userAlreadyTaken='.//div[text()='That username is already taken.']'
 
 #HomePage
-...
+homePage.text.helloUser='.//h2[text()='Hello ']'+'.//h2//strong'+'.//h2[text()=', your feed is empty.']'
+homePageHeader.text.userName='.//span[@class='text-white mr-2']'
+homePageHeader.icon.search='.//a[@href='#']'
+homePageHeader.icon.chat='.//span[@class='text-white mr-2 header-chat-icon']'
+homePageHeader.icon.myProfile='.//a[@class='mr-2']'
+homePageHeader.button.createPost='.//a[@class='btn btn-sm btn-success mr-2']'
+homePageHeader.button.signOut='.//button[@class='btn btn-sm btn-secondary']'
+
+#SearchPage
+searchPage.input.searchText='.//input[@id='live-search-field']'
+searchPage.list.searchingText='.//a[@class='list-group-item list-group-item-action'][1]'
+searchPage.elementOfList.titleText=".//strong[text()='" + title "']'"
+
+#PostInfoPage
+postInfoPage.text.title='.//div[@class='d-flex justify-content-between']'
+postInfoPage.text.bodyContent=".//p[text()='" + BodyContent "']'"
+postInfoPage.text.selectValue='.//u'
+postInfoPage.text.postedBy='.//p[@class='text-muted small mb-4']'
+postInfoPage.icon.userName='.//img[@class='avatar-tiny']'
+postInfoPage.message.postCreated='.//div[text()='New post successfully created.']'
+postInfoPage.button.delete='.//form[@class='delete-post-form d-inline']'
+
+#CreatePostPage
+createPostPage.input.title='.//input[@id='post-title']'
+createPostPage.input.bodyContent='.//textarea[@id='post-body']'
+createPostPage.checkBox.uniquePost='.//u'
+createPostPage.dropList.selectValue='.//select[@id='select1']'
+createPostPage.button.saveNewPost='.//button[@class='btn btn-primary']'
+
+#ProfilePage
+profilePage.text.userName=".//h2[text()"+userName+"']'"
+profilePage.text.post=".//a[@href='/profile/"+userName+"']"
+profilePage.text.listOfPost='.//a[@class='list-group-item list-group-item-action']'
+profilePage.text.followers=".//a[@href='/profile/"+userName+"/followers']"
+profilePage.text.listOfFollowers='.//a[@class='list-group-item list-group-item-action']'
+profilePage.text.following=".//a[@href='/profile/"+userName+"/following']"
+profilePage.text.listOfFollowing='.//a[@class='list-group-item list-group-item-action']'
+profilePage.message.successfullyFollowed=".//div[text()='Successfully followed "+user+"']"
+profilePage.button.follow='.//button[@class='btn btn-primary btn-sm']'
+profilePage.button.stopFollowing ='.//button[@class='btn btn-danger btn-sm']'
+profilePage.url.userNameFollowers=".//a[@href='/profile/"+userName+"']"
+
+
+#ChatPage
+chatPage.input.typeMessage='.//input[@id='chatField']'
+chatPage.text.showText=".//div[contains(text(),'"+typeMessage+"')]"
+
+
+
+
