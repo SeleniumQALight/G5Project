@@ -40,7 +40,7 @@ public class LoginTest {
         Assert.assertTrue("button 'Sign Out' is not visible", isButtonSignOutDisplayed());
 
 
-        webDriver.quit();//close brouser and delete object
+        webDriver.quit();//close browser and delete object
         System.out.println("Browser was closed");
     }
 
