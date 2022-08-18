@@ -1,4 +1,4 @@
-package negativeLoginTest;
+package negativePasswordTest;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class NegativeLoginTest {
+public class NegativePasswordTest {
     WebDriver webDriver;
 
     @Test
@@ -27,9 +27,9 @@ public class NegativeLoginTest {
         inputLogin.sendKeys("qaauto");
         System.out.println("qaauto was inputted into login input");
 
-        WebElement inputPassword = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
-        inputPassword.clear();
-        inputPassword.sendKeys("123456qwerty123456");
+        WebElement inputNegativePassword = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
+        inputNegativePassword.clear();
+        inputNegativePassword.sendKeys("123456qwerty123456");
         System.out.println("password was inputted");
 
         webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click();
