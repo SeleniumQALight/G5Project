@@ -1,0 +1,62 @@
+Test case №1 'Sign in'
+STR:
+Pre-conditions: user has been registered. Login =   qaauto    Password = 123456qwerty
+1. Open page https://qa-complex-app-for-testing.herokuapp.com/
+2. Fill the username field with qaauto
+3. Fill in the password field with the value 123456qwerty
+4. Click the "Login" button
+
+ER: 'Sign Out' button is displayed
+
+
+
+Test case №2 ‘Register new user’
+STR:
+1. Open page https://qa-complex-app-for-testing.herokuapp.com/
+2. Fill in the 'Username' field with the value: User + day + month + year (eg User18082022)
+3. Fill in the 'Email' field with the value: User + day+month+year+@test.com (for example: User18082022@test.com)
+4. Fill in the 'Password' field with the value: User + day + month + year (eg User18082022)
+5. Click the 'Sign up for OurApp' button
+
+ER: 'Sign Out' button is displayed
+
+Post-conditions:
+Delete the created user from the database
+
+
+Test case №3 'Create post'
+Pre-conditions: user has been registered and logged. Login =   qaauto    Password = 123456qwerty
+Authorization steps are described in test case №1
+
+STR:
+1. Click the 'Create post' button
+2. Fill in the Title field with the text "Hello world [day+month+year]"
+3. Fill in the Body Content field with the text "[day+month+year] Hello world"
+4. Click the ''Save New Post' button
+ER:  Text is displayed: ‘New post successfully created.’
+
+Post-conditions:
+Delete the created post from the database
+
+
+Test case №4 'Delete post'
+Pre-conditions: user has been registered and logged. Login =   qaauto    Password = 123456qwerty
+Authorization steps are described in test case №1
+The steps for creating a post are described in test case #3
+
+STR:
+1. Click the '[Title post name]' button
+2. Click the 'Delete' button
+
+ER:  Text is displayed: ‘Post successfully deleted.’
+
+
+Test case №5 ‘Send message to chat’
+Pre-conditions: user has been registered and logged. Login =   qaauto    Password = 123456qwerty
+Authorization steps are described in test case №1
+
+STR:
+1.  Click the ‘Chat’ button
+2. Enter the text "Hello world" in the "Type a message..." field and press enter
+
+ER:  Text is displayed: ‘Hello world’
