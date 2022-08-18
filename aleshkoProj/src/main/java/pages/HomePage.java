@@ -1,0 +1,22 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class HomePage extends ParentPage {
+    public HomePage(WebDriver webDriver) {
+        super(webDriver);
+    }
+
+    public boolean isButtonSignOutDisplayed() {
+        try {
+            WebElement buttonSignOut = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));
+            logger.info("\"Sign Out\" button is displayed");
+            return buttonSignOut.isDisplayed();
+        } catch (Exception e) {
+            logger.error("\"Sign Out\" button does not displays");
+            return false;
+        }
+    }
+}
