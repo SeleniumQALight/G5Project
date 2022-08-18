@@ -1,7 +1,83 @@
-TC1 Sucsecfull login
+TC1 Successful Sign In
 STR:
-1.
-2.
-ER:
+1. Go to https://qa-complex-app-for-testing.herokuapp.com/
+2. Add valid Username (ex. UserMy) to the 'Username' input field
+3. Add valid Password (ex. trust@test.com) to the 'Password' input field
+4. Click on the 'Sign In' button
 
-TC2
+ER:
+'Create Post' button is shown
+
+
+TC2 Successful Sign Out
+STR:
+1. Go to https://qa-complex-app-for-testing.herokuapp.com/
+2. Add valid data to the 'Username' (ex. UserMy) input field
+3. Add valid data to the 'Email' (ex. trust@test.com) input field
+4. Add valid data to the 'Password' (ex. PassWord2022) input field
+5. Click on the 'Sign up for OurApp' btn
+
+ER:
+'Hello [Username], your feed is empty.' text is shown
+
+TC3 Finding a post
+Preconditions:
+1. Go to https://qa-complex-app-for-testing.herokuapp.com/
+2. Add valid Username (ex. UserMy) to the 'Username' input field
+3. Add valid Password (ex. trust@test.com) to the 'Password' input field
+4. Click on the 'Sign In' button
+
+STR:
+1. Click on my Profile icon
+2. Click on the Search icon
+3. Enter 'test' text into the search field
+4. Choose any search result item
+
+ER:
+Post with the searched text is shown
+
+
+TC4 Sendind messages
+Preconditions:
+1. Go to https://qa-complex-app-for-testing.herokuapp.com/
+2. Add valid Username (ex. UserMy) to the 'Username' input field
+3. Add valid Password (ex. trust@test.com) to the 'Password' input field
+4. Click on the 'Sign In' button
+
+STR:
+1. Click on the Chat icon
+2. Add any text to the input field
+3. Press 'Enter' keyboard key
+
+ER:
+Message is shown in the chat
+
+TC5 Create post
+Preconditions:
+1. Go to https://qa-complex-app-for-testing.herokuapp.com/
+2. Add valid Username (ex. UserMy) to the 'Username' input field
+3. Add valid Password (ex. trust@test.com) to the 'Password' input field
+4. Click on the 'Sign In' button
+
+STR:
+1. Click on the 'Create Post' button
+2. Add any text to the 'Title' input field
+3. Add any text into the 'Body Content' input field
+4. Click on the 'Save New Post' button
+
+ER:
+'New post successfully created.' text is shown
+
+TC5 Delete post
+Preconditions:
+1. Go to https://qa-complex-app-for-testing.herokuapp.com/
+2. Add valid Username (ex. UserMy) to the 'Username' input field
+3. Add valid Password (ex. trust@test.com) to the 'Password' input field
+4. Click on the 'Sign In' button
+
+STR:
+1. Click on the post
+2. Click on the trash icon
+
+ER:
+'Post successfully deleted' text is shown
