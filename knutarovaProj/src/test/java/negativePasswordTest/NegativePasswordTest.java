@@ -43,7 +43,7 @@ public class NegativePasswordTest {
 
     private boolean isAMessageInvalidUsernamePassword(){
         try {
-            WebElement message = webDriver.findElement(By.xpath(".//div[contains(text(),'Invalid username / password')]"));
+            WebElement message = webDriver.findElement(By.xpath(".//div[contains(text(),'Invalid username / pasword')]"));
             return message.isDisplayed();
         }catch (Exception e) {
             return false;
