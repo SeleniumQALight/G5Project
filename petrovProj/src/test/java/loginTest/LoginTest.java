@@ -65,7 +65,7 @@ public class LoginTest {
 
         WebElement inputLogin = webDriver.findElement(By.xpath(".//input[@name='username' and @placeholder='Username']"));
         inputLogin.clear();
-        inputLogin.sendKeys("qaauto");
+        inputLogin.sendKeys("qaauto1");
         System.out.println("inValid login - qaauto1 was inputted into login input");
 
         WebElement inputPassword = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
