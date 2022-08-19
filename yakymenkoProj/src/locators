@@ -1,5 +1,5 @@
 #Login Page
-loginPage.input.loginHeader=.//input[@id='username0']
+loginPage.input.loginHeader=.//input[@placeholder='Username']
 loginPage.input.passwordHeader=.//input[@name='password' and @placeholder='Password']
 loginPage.button.signIn=.//button[text()='Sign In']
 
@@ -24,6 +24,7 @@ profile.tab.navTabPost=.//a[contains(text(),'Posts')]
 profile.tab.navTabFollowers=.//a[contains(text(),'Followers')]
 profile.tab.navTabFollowing=.//a[contains(text(),'Following')]
 navTabFollowing.list.itemTaras=.//a[@href='/profile/taras']
+navTabPosts.list.itemTitleForFirstPost=.//strong[text()='Title for first post']
 
 #Create Post Form
 createPost.input.title=.//input[@id='post-title']
@@ -33,5 +34,7 @@ createPost.select.selectValue=.//select[@id='select1']
 selectValue.value.groupMassage=.//option[@value='Group Message']
 createPost.button.saveNewPost=.//button[@class='btn btn-primary']
 
+#Edit Post Page
+editPostPage.button.deleteCreatedPost=.//button[@data-original-title='Delete']
 
 
