@@ -61,7 +61,7 @@ public class LoginTest {
 
         WebElement inputPassword = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
         inputPassword.clear();
-        inputPassword.sendKeys("123456qwerty");
+        inputPassword.sendKeys("1123456qwerty");
         System.out.println("Incorrect pass is sent");
 
         webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click();
