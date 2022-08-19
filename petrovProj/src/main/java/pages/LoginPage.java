@@ -58,4 +58,14 @@ public class LoginPage extends ParentPage {
         Assert.fail("Can not work with element " + e);
     }
 
+    public boolean isMessageErrorLoginOrPassword(){
+        try{
+            WebElement messageErrorLoginOrPassword = webDriver.findElement(By.xpath(".//div[text()='Invalid username / pasword']"));
+            return messageErrorLoginOrPassword.isDisplayed();
+        }catch (Exception e){
+            return false;
+        }
+
+    }
+
 }
