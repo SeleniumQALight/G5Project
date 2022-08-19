@@ -1,0 +1,132 @@
+TC1 Register new user
+Precondition:
+1. open https://qa-complex-app-for-testing.herokuapp.com/
+STR:
+1. input 'User name' at least 3 characters - letters and number.
+2. input 'Email'  - (ex: user + number + @test.com).
+3. input 'Password'  at least 12 characters.
+4. press 'Sign up for OurApp'
+ER:
+1. 'Hello [User], your feed is empty.' message is appeared.
+2. 'Username' text is displayed in the header.
+3. 'Create post' button is displayed.
+4. 'Sign out' button is displayed.
+5. 'My profile' link is displayed.
+6. 'Username' value corresponds to the value STR1
+
+TC2 Login existing user
+Precondition:
+1. open https://qa-complex-app-for-testing.herokuapp.com/
+2. input 'Username' at least 3 characters - letters and number.
+3. input 'Email'  - (ex: user + number + @test.com).
+4. input 'Password'  at least 12 characters.
+5. press 'Sign up for OurApp'
+6. press 'Sigh out'.
+STR:
+1. fill 'Username' in the header from PRK2
+2. fill 'Password' in the header from PRK3
+3. press 'Sign in' button
+ER:
+1. 'Hello [User], your feed is empty.' message is appeared.
+2. 'Username' text is displayed in the header.
+3. 'Create post' button is displayed.
+4. 'Sign out' button is displayed.
+5. 'My profile' link is displayed.
+6. 'Username' value corresponds to the value STR1
+
+TC3 Create post
+Precondition:
+1. open https://qa-complex-app-for-testing.herokuapp.com/
+2. input 'Username' at least 3 characters - letters and number.
+3. input 'Email'  - (ex: user + number + @test.com).
+4. input 'Password'  at least 12 characters.
+5. press 'Sign up for OurApp'
+6. press 'Sigh out'.
+7. fill 'Username' in the header from PRK2
+8. fill 'Password' in the header from PRK3
+9. press 'Sign in' button
+STR:
+1. press 'Create post' button
+2. input 'Title' at least 1 character
+3. input 'Body Content' at least 1 character
+4. put in/out checkbox 'This is a unique post'
+5. choose value from drp down 'Select value'
+6. press 'Save New Post' button
+ER:
+1. 'New post successfully created.' message is appeared.
+2. value [Title] corresponds to  value STR2
+3. value [Body Content] corresponds to  value STR3
+4. 'Note: This post was written for [value corresponds to STR5]' text is displayed
+5. 'Posted by [value corresponds to PRK7] on 8/19/2022' text is displayed
+6. press 'My profile' button
+7. Post:[post_number+1] is increased by one.
+8. in list of Posts is displayed 'Title' corresponds to to  value STR2
+Post condition:
+1. press 'My profile' button
+2. click on the 'Title' corresponds to to  value STR2
+3. click on the 'Delete' button
+
+TC4 Following user
+Precondition:
+1. open https://qa-complex-app-for-testing.herokuapp.com/
+2. input 'Username1' at least 3 characters - letters and number.
+3. input 'Email'  - (ex: user + number + @test.com).
+4. input 'Password'  at least 12 characters.
+5. press 'Sign up for OurApp'
+6. press 'Sigh out'.
+7. fill 'Username1' in the header from PRK2
+8. fill 'Password' in the header from PRK3
+9. press 'Sign in' button
+10. press 'Create post' button
+11. input 'Title' at least 1 character
+12. input 'Body Content' at least 1 character
+13. put in/out checkbox 'This is a unique post'
+14. choose value from drp down 'Select value'
+15. press 'Save New Post' button
+16. press 'Sign out' button
+17. open https://qa-complex-app-for-testing.herokuapp.com/
+18. input 'Username2' at least 3 characters - letters and number.
+19. input 'Email'  - (ex: user + number + @test.com).
+20. input 'Password'  at least 12 characters.
+21. press 'Sign up for OurApp'
+22. press 'Sigh out'.
+23. fill 'Username2' in the header from PRK2
+24. fill 'Password' in the header from PRK3
+25. press 'Sign in' button
+STR:
+1. press 'My profile' button
+2. click on the 'Search'
+3. input 'Title' value from PRK11
+4. click on the 'Title' in list below
+5. click on user from' Posted by [USER] on 8/19/2022'
+6. click on the 'Follow' button
+ER:
+1. 'Successfully followed vadim' message is appeared
+2. 'Stop Following' is displayed
+3. 'Followers' Tab is [Followers + 1]
+4. click on the 'Followers' find  in list below [USER] corresponds value PRK18
+5. click on the 'My profile' button
+6. click on Following: [Following +1]
+7. 'Following': is increased by one [Following +1]
+7. click on the 'Following' tab find in list below [USER] corresponds value PRK2
+
+
+TC5 Create message in  chat
+Precondition:
+1. open https://qa-complex-app-for-testing.herokuapp.com/
+2. input 'Username' at least 3 characters - letters and number.
+3. input 'Email'  - (ex: user + number + @test.com).
+4. input 'Password'  at least 12 characters.
+5. press 'Sign up for OurApp'
+6. press 'Sigh out'.
+7. fill 'Username' in the header from PRK2
+8. fill 'Password' in the header from PRK3
+9. press 'Sign in' button
+STR:
+1. press 'Chat' button
+2. input 'Type a message' text at least 1 character
+3. press 'Enter' button
+ER:
+1. Message is appeared in Chat, value corresponds from value STR2
+
+
