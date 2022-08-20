@@ -44,11 +44,49 @@ public class LoginTest {
         System.out.println("Browser was closed");
 
     }
+    @Test
+    public void validLoginAndInvalidPassword(){
+        WebDriverManager.chromedriver().setup();
+        webDriver = new ChromeDriver();
+        webDriver.manage().window().maximize();
+        webDriver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+
+        webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
+        System.out.println("Site was opened");
+
+        WebElement inputLogin = webDriver.findElement(By.xpath(".//input[@name='username' and @placeholder='Username']"));
+        inputLogin.clear();
+        inputLogin.sendKeys("qaauto");
+        System.out.println("qaauto was inputted into login input");
+
+        WebElement inputPassword = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
+        inputPassword.clear();
+        inputPassword.sendKeys("123456qwerty1");
+        System.out.println("invalid password 123456qwerty1 was inputted");
+
+        webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click();
+        System.out.println("Sign In was clicked");
+
+//        WebElement alertInvalidUsernamePassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
+        Assert.assertTrue("Alert 'Invalid username / pasword' is not visible",isAlertDisplayed());
+
+        webDriver.quit(); // закриває браузер і знищує його як об'єкт
+        System.out.println("Browser was closed");
+    }
 
     private boolean isButtonSignOutDisplayed() {
         try {
             WebElement buttonSignOut = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));
             return buttonSignOut.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean isAlertDisplayed() {
+        try {
+            WebElement alertInvalidUsernamePassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
+            return alertInvalidUsernamePassword.isDisplayed();
         } catch (Exception e) {
             return false;
         }
