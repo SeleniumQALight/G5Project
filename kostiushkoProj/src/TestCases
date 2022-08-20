@@ -7,6 +7,8 @@ Pre-conditions: user has been registered. Login =   qaauto    Password = 123456q
 4. Click the "Login" button
 
 ER: 'Sign Out' button is displayed
+    Login name is displayed in the header of the site
+
 
 
 
@@ -32,8 +34,10 @@ STR:
 1. Click the 'Create post' button
 2. Fill in the Title field with the text "Hello world [day+month+year]"
 3. Fill in the Body Content field with the text "[day+month+year] Hello world"
-4. Click the ''Save New Post' button
+4. Click the 'Save New Post' button
 ER:  Text is displayed: ‘New post successfully created.’
+5. Click the "My profile" button in the header of the site
+ER:  A post with the title entered in paragraph 2 is displayed
 
 Post-conditions:
 Delete the created post from the database
@@ -47,8 +51,9 @@ The steps for creating a post are described in test case #3
 STR:
 1. Click the '[Title post name]' button
 2. Click the 'Delete' button
-
 ER:  Text is displayed: ‘Post successfully deleted.’
+3. Click the "My profile" button in the header of the site
+ER:  There is no post with the title '[Title post name]'
 
 
 Test case №5 ‘Send message to chat’
