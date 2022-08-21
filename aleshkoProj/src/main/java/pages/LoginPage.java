@@ -51,6 +51,28 @@ public class LoginPage extends ParentPage {
         }
     }
 
+    public boolean isAlertDisplayed() {
+        try {
+            WebElement buttonSignIn = webDriver.findElement(By.xpath(".//div[text()='Invalid username / pasword']"));
+            logger.info("Alert about wrong username/password is visible");
+            return buttonSignIn.isDisplayed();
+        } catch (Exception e) {
+            logger.error("Alert about wrong username/password is not visible: " + e);
+            return false;
+        }
+    }
+
+    public boolean isButtonSignInDisplayed() {
+        try {
+            WebElement buttonSignIn = webDriver.findElement(By.xpath(".//button[text()='Sign In']"));
+            logger.info("Button \"Sign In\" is visible");
+            return buttonSignIn.isDisplayed();
+        } catch (Exception e) {
+            logger.error("Button \"Sign In\" is not visible: " + e);
+            return false;
+        }
+    }
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Cannot work with element: " + e);
         Assert.fail("Cannot work with element: " + e);
