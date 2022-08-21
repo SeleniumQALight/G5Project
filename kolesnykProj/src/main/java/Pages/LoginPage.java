@@ -53,6 +53,16 @@ public class LoginPage extends ParentPage {
         }
     }
 
+    public boolean isButtonSignInDisplayed(){
+        try {
+            WebElement singInButton = driver.findElement(By.xpath("//button[@class='btn btn-primary btn-sm']"));
+            return singInButton.isDisplayed();
+        }catch (Exception e){
+            System.out.println("Button 'Sight In' is not found");
+            return false;
+        }
+    }
+
     private void printErrorAndStopTest(Exception e) {
         log.error("Cannot work with element " + e);
         Assert.fail("Cannot work with element " + e);

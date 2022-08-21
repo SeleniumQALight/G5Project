@@ -98,7 +98,7 @@ public class LoginTest {
         }
     }
 
-    private boolean isButtonSignInDisplayed(){
+    public boolean isButtonSignInDisplayed(){
         try {
             WebElement singInButton = driver.findElement(By.xpath("//button[@class='btn btn-primary btn-sm']"));
             return singInButton.isDisplayed();
@@ -124,4 +124,5 @@ public class LoginTest {
             return true;
         }else{return  false;}
     }
+
 }
