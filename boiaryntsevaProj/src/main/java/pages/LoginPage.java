@@ -57,4 +57,13 @@ public class LoginPage extends ParentPage {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
     }
+
+    public boolean isInvalidLoginMsgVisible(){
+        try{
+            WebElement invalidLoginMessage = webDriver.findElement(By.xpath(".//div[contains(text(), 'Invalid')]"));
+            return invalidLoginMessage.isDisplayed();
+        } catch (Exception e){
+            return false;
+        }
+    }
 }
