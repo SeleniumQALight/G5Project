@@ -32,7 +32,7 @@ public class BaseTest {
     @After
     public void tearDown() {
         webDriver.quit();
-        logger.info("Browser closed");
+        logger.info("Browser is closed");
 
 
     }

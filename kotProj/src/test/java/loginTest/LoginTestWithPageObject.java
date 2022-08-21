@@ -16,5 +16,15 @@ loginPage.clickOnButtonLogIn();
 
    }
 
+@Test
+    public void invalidLogin(){
+       loginPage.openLoginPage();
+       loginPage.enterUsernameIntoLoginInput("qaauto");
+       loginPage.enterPasswordIntoPasswordInput("Invalid");
+       loginPage.clickOnButtonLogIn();
+       loginPage.alertInvalidPassword();
+
+       Assert.assertTrue("Alert Invalid password does not appears", homePage.doesAlertInvalidPasswordAppear());
+}
 
 }

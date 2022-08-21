@@ -58,6 +58,14 @@ public class LoginPage extends ParentPage {
         }
     }
 
+    public void alertInvalidPassword(){
+        try{
+            WebElement webElement = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
+            logger.info("Alert Invalid Password appears");
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
     private void printErrorAndStopTest(Exception e) {
         logger.info("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
