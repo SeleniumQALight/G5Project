@@ -21,6 +21,7 @@ STR:
 5. Click the 'Sign up for OurApp' button
 
 ER: 'Sign Out' button is displayed
+     Login name ([User + day + month + year]) is displayed in the header of the site
 
 Post-conditions:
 Delete the created user from the database

@@ -1,5 +1,5 @@
 #Login Page
-loginPage.input.loginHeader = ‘.//input [@name="username"]’
+loginPage.input.loginHeader = ‘.//input [@placeholder="Username"]’
 loginPage.input.passwordHeader = ‘.//header//input [@name="password"]’
 loginPage.button.signIn = ‘.//button[@class="btn btn-primary btn-sm"]’
 loginPage.input.loginRegister = ‘.//input [@id="username-register"]’
