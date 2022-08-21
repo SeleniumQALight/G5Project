@@ -16,4 +16,12 @@ public class HomePage extends ParentPage{
             return false;
         }
     }
+    public boolean isTextNoLogginDisplayed() {
+        try {
+            WebElement textNoLoggin = webDriver.findElement(By.xpath(".//* [@class='alert alert-danger text-center']"));
+            return textNoLoggin.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
