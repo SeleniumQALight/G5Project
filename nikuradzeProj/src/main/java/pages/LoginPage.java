@@ -56,5 +56,14 @@ public class LoginPage extends ParentPage{
         Assert.fail("Can not work with element " + e);
     }
 
+    public boolean areButtonSignInAndAlertDisplayed(){
+        try{
+            WebElement buttonSignIn = webDriver.findElement(By.xpath(".//button[text()='Sign In']"));
+            WebElement alert = webDriver.findElement(By.xpath(".//div[text()='Invalid username / pasword']"));
+            return buttonSignIn.isDisplayed() & alert.isDisplayed();
+        }catch (Exception e){
+            return false;
+        }
+    }
 
 }
