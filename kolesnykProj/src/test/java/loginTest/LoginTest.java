@@ -98,7 +98,7 @@ public class LoginTest {
         }
     }
 
-    public boolean isButtonSignInDisplayed(){
+    private boolean isButtonSignInDisplayed(){
         try {
             WebElement singInButton = driver.findElement(By.xpath("//button[@class='btn btn-primary btn-sm']"));
             return singInButton.isDisplayed();
