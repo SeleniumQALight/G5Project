@@ -3,8 +3,6 @@ package negativePasswordTest;
 import baseTest.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
-import pages.HomePage;
-import pages.ParentPage;
 
 public class NegativePasswordTestWithPageObject extends BaseTest {
     @Test
