@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginTest {
     WebDriver webDriver;
-//just text
+
     @Test
     public void validLogin() {
         WebDriverManager.chromedriver().setup();
