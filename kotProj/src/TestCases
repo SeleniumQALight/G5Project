@@ -1,10 +1,66 @@
-TC 1
-STR:
-1.
-2.
-ER:
+TC 1: Registration
 
-TC2
 STR:
-1.
-2.
+1. Go to registration page: https://qa-complex-app-for-testing.herokuapp.com/
+	2.	Type any username into “username” field
+	3.	Type correct email address into “email” field (like name@gmail.com)
+	4.	Type 12 symbol password into “password” field (LongName@123)
+	5.	Click on “Sign up for ourApp”  button
+ER:
+New profile is created, username is visible, log out button is present.
+Click log out button and type the same credentials to make sure this email is used already.
+==================================================================================================
+TC 2: Login to the created profile
+	1.	Go to the login page https://qa-complex-app-for-testing.herokuapp.com/
+	2.	Type username that was used during registration (VickyKOt) into “username” field
+	3.	Type password that was used during registration (e.g. Kot@08091988) into “password” field
+	4.  Click on 'Sign in' button
+ER: User appears on his profile page, username is visible,
+'Create post' button appears and 'log out' button appears in menu
+===================================================================================================
+
+TC 3: Follow another profile:
+Preconditions:
+1. Sign in to the profile with created already credentials ( username:VickyKOt, password: Kot@08091988)
+2. Make sure there is another profiles created already
+STR:
+      	1.	Click on search button in main menu inside profile page
+      	2.	Type “post” word into opened search field
+      	3.  Click 'Enter' button on keyboard
+      	4.	Click on the first post from the opened list
+      	5.	Click on the name-link under the post title that leads to the profile that created that post
+      	6.	In the opened profile click on “Follow+” button next to the profile name
+ER: “Successfully followed <name>” text appears and Stop following button appears instead of Follow.
+Switch to your profile 'Following' tab and make sure new profile that is followed is added to the list.
+
+
+===================================================================================================
+TC 4: Type message in common chat:
+Preconditions:
+1. Sign in to the profile with created already credentials ( username:VickyKOt, password: Kot@08091988)
+STR:
+      	1.	Click on the 'Chat' button in menu
+      	2.	Type text in the opened chat field
+      	3.	Click enter on keyboard
+Er: message appears in the main chat window.
+Close and reopen chat window to make sure message is in the chat window.
+
+==================================================================================================
+
+TC 5:Create first unique post
+Preconditions: 1. Sign in to the profile with created already credentials ( username:VickyKOt, password: Kot@08091988)
+STR:
+        1.	Click 'create post' button in menu
+       	2.	Type any text into 'title' field
+       	3.	Type any text into 'Body content' field
+       	4.	Put checkmark for “unique” post
+       	5.	Click on 'Save new post' button under the text fields
+ER: New post successfully created message appears.
+Click on 'My profile' button in menu and observe 'Posts' tab, make sure new post was added. Switch to your profile,
+ 'posts' tan and make sure nw post appears there.
+Postconditions: 1.Click on created post title in the 'posts' tab of the profile and in the opened window click on delete button to remove the post.
+================================================================================================
+
+
+
+
