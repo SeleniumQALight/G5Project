@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class invalidLogin {
+public class InvalidLogin {
     WebDriver webDriver;
     @Test
     public void invalidLogin(){
