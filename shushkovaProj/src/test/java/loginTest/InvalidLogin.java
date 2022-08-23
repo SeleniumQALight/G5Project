@@ -10,10 +10,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginTest {
+public class InvalidLogin {
     WebDriver webDriver;
     @Test
-    public void validLogin(){
+    public void invalidLogin(){
         WebDriverManager.chromedriver().setup();
         webDriver=new ChromeDriver();
         webDriver.manage().window().maximize();
@@ -22,7 +22,7 @@ public class LoginTest {
         System.out.println("Site opened");
         WebElement inputLogin = webDriver.findElement(By.xpath(".//input[@name='username' and @placeholder='Username']"));
         inputLogin.clear();
-        inputLogin.sendKeys("qaauto");
+        inputLogin.sendKeys("qaaut");
 
         WebElement inputPassword = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
         inputPassword.clear();
@@ -30,21 +30,21 @@ public class LoginTest {
 
         webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click();
 
-        Assert.assertTrue("Button SingOut is not visible",isButtonSingOutDisplayed());
+        Assert.assertTrue("Message InvalidNameOrPasswordDisplayed ",isMessageInvalidNameOrPasswordDisplayed());
 
         webDriver.quit();
         System.out.println("Browser closed");
 
     }
-    private boolean isButtonSingOutDisplayed(){
+    private boolean isMessageInvalidNameOrPasswordDisplayed(){
         try {
-            WebElement buttonSingout = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));
-            return buttonSingout.isDisplayed();
+            WebElement messageInvalidNameOrPassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
+            return messageInvalidNameOrPassword.isDisplayed();
 
         }catch (Exception e){
             return false;
         }
-        }
-
     }
+
+}
 
