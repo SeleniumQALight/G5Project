@@ -4,8 +4,19 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends ParentPage {
+    @FindBy(xpath = ".//input[@name='username' and @placeholder='Username']")
+    private WebElement inputUserNameHeader;
+
+    @FindBy(xpath = ".//input[@placeholder='Password']")
+    private WebElement inputPasswordHeader;
+
+    @FindBy(xpath = ".//button[text()='Sign In']")
+    private WebElement buttonSingIn;
+
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -21,39 +32,31 @@ public class LoginPage extends ParentPage {
     }
 
     public void enterUserNameIntoLoginInput(String userName) {
-        try {
-            WebElement webElement = webDriver.findElement(By.xpath(".//input[@name='username' and " +
-                    "@placeholder='Username']"));
-            webElement.clear();
-            webElement.sendKeys(userName);
-            logger.info(userName + "was entered into input");
-        } catch (Exception e) {
-            printErrorAndStopTest(e);
-        }
-    }
-    public void enterPasswordIntoInputPassword (String password){
-        try {WebElement webElement = webDriver.findElement(By.xpath(".//input[@placeholder='Password'] "));
-            webElement.clear();
-            webElement.sendKeys(password);
-            logger.info(password + "was entered into input");
-        }catch (Exception e){
-            printErrorAndStopTest(e);
-        }
-    }
-    public void clickOnButtonLogin(){
-        try {webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click();
-            logger.info("Button Sign in was clicked");
-
-        }catch (Exception e){
-            printErrorAndStopTest(e);
-        }
+//        try {
+////            WebElement webElement = webDriver
+////                    .findElement(By.xpath(".//input[@name='username' and " +
+////                            "@placeholder='Username']"));
+//            inputUserNameHeader.clear();
+//            inputUserNameHeader.sendKeys(userName);
+//            logger.info(userName + " was entered into input");
+//        } catch (Exception e) {
+//            printErrorAndStopTest(e);
+//        }
+        enterTextIntoElement(inputUserNameHeader, userName);
     }
 
-    private void printErrorAndStopTest(Exception e) {
-        logger.error("Can not work with element" + e);
-
+    public void enterPasswordIntoInputPassword(String password) {
+        enterTextIntoElement(inputPasswordHeader, password);
     }
+
+    public void clickOnButtonLogIn() {
+        clickOnElement(buttonSingIn);
+    }
+
+
+//    private void printErrorAndStopTest(Exception e) {
+//        logger.error("Can not work with element " + e);
+//        Assert.fail("Can not work with element " + e);
+//    }
+
 }
-
-
-
