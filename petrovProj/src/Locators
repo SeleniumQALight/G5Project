@@ -21,6 +21,8 @@
     #AddFolowers
         HomePage.Search='.//a[@data-original-title='Search']'
 
+        FindPostResult='.//strong[text()='Search Results']'
+
 
 #PostPage
     PostPage.UserName='.//p//a[2]'
@@ -28,4 +30,6 @@
 #ProfilePage
     ProfilePage.addFollow.button='.//form[contains(@action,'addFollow')]//button'
 
+    MyProfile.returnToMyProfile='.//a//img[@data-original-title='My Profile']'
+    GoToTabFollowingInMyProfile='.//div//a[contains(text(),'Following')]'
 
