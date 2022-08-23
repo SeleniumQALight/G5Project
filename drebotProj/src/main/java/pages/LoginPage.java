@@ -15,8 +15,8 @@ public class LoginPage extends ParentPage {
             webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
             logger.info("Login page was opened");
         } catch (Exception ex) {
-            logger.error("Can't work with site");//pishem v consol i loger
-            Assert.fail("Can't work with site");//pishem v report
+            logger.error("Can't work with site");
+            Assert.fail("Can't work with site");
         }
     }
 
@@ -31,7 +31,7 @@ public class LoginPage extends ParentPage {
         }
     }
 
-    public void enterPasswordIntoInputPassword(String password) {
+    public void enterPasswordIntoPasswordInput(String password) {
         try {
             WebElement webElement = webDriver.findElement(By.xpath(".//input[@name='password' and @class='form-control form-control-sm input-dark']"));
             webElement.clear();
@@ -54,5 +54,14 @@ public class LoginPage extends ParentPage {
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can't work with element " + e);
         Assert.fail("Can't work with element " + e);
+    }
+
+    public boolean isMessageInvalidUserPassword() {
+        try {
+            WebElement messageInvalidUserPassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
+            return messageInvalidUserPassword.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
