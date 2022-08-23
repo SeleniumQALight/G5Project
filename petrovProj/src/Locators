@@ -1,5 +1,35 @@
 #Login page
-logonPage.input.loginHeader='.//input....'
+    #createForm
+        LoginPage.input.CreateUserName='.//input[@id='username-register']'
+        LoginPage.input.Email='.//input[@id='email-register']'
+        LoginPage.input.CreateUserPassword='.//input[@id='password-register']'
+        LoginPage.button='.//form[@action='/register']//button'
+
+    #authorization
+        loginPage.input.loginHeaderUserName='.//input[@name='username' and @placeholder="Username"]'
+        loginPage.input.LoginHeaderPassword='.//input[@name='password' and @placeholder='Password']'
+        LoginPage.button='.//form[@action='/login']//button'
 
 #HomePage
-....
+    #CreatePost
+        HomePage.anchor[CreatePost]='.//a[@href='/create-post']'\
+        CreatePostPage.title='.//input[@id='post-title']'
+        CreatePostPage.BodyContent='.//textarea[@id='post-body']'
+        CreatePostPage.SelectValue.AllUsers='.//select//option[@value='All Users']'
+        CreatePostPage.Button.SaveNewPost='.//form[@action='/create-post']//button'
+
+    #AddFolowers
+        HomePage.Search='.//a[@data-original-title='Search']'
+
+        FindPostResult='.//strong[text()='Search Results']'
+
+
+#PostPage
+    PostPage.UserName='.//p//a[2]'
+
+#ProfilePage
+    ProfilePage.addFollow.button='.//form[contains(@action,'addFollow')]//button'
+
+    MyProfile.returnToMyProfile='.//a//img[@data-original-title='My Profile']'
+    GoToTabFollowingInMyProfile='.//div//a[contains(text(),'Following')]'
+
