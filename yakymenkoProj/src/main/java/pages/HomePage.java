@@ -17,4 +17,13 @@ public class HomePage extends ParentPage { // Alt + Insert
             return false;
         }
     }
+
+    public boolean isAlertDisplayed() {
+        try {
+            WebElement alertInvalidUsernamePassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
+            return alertInvalidUsernamePassword.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
