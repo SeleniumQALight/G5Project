@@ -13,7 +13,7 @@ ER:
 4. 'Sign out' button is displayed.
 5. 'My profile' link is displayed.
 6. 'Username' value corresponds to the value STR1
-//Just text
+
 TC2 Login existing user
 Precondition:
 1. open https://qa-complex-app-for-testing.herokuapp.com/

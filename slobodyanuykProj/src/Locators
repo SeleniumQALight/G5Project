@@ -1,5 +1,4 @@
 
-//Just text
 #Login Page
 LoginPage.input.login.Username=.//input[@placeholder='Username']
 LoginPage.input.login.Password=.//input[@placeholder='Password']
