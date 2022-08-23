@@ -1,5 +1,5 @@
 #Login Page
-LoginPage.input.login.Username=.//input[@id='username1']
+LoginPage.input.login.Username=.//input[@placeholder='Username']
 LoginPage.input.login.Password=.//input[@placeholder='Password']
 LoginPage.button.login.SignIn=.//button[text() ='Sign In']
 

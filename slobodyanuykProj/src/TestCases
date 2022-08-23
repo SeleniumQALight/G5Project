@@ -2,7 +2,7 @@ TC1 Register new user
 Precondition:
 1. open https://qa-complex-app-for-testing.herokuapp.com/
 STR:
-1. input 'User name' at least 3 characters - letters and number.
+1. input 'Username' at least 3 characters -letters and numbers (ex: user + random(0,100000)).
 2. input 'Email'  - (ex: user + number + @test.com).
 3. input 'Password'  at least 12 characters.
 4. press 'Sign up for OurApp'
@@ -109,6 +109,8 @@ ER:
 6. click on Following: [Following +1]
 7. 'Following': is increased by one [Following +1]
 7. click on the 'Following' tab find in list below [USER] corresponds value PRK2
+Post condition:
+1. Delete  post of 'Username1' created in PRK18 .
 
 
 TC5 Create message in  chat
