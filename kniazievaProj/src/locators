@@ -3,7 +3,7 @@ loginPage.input.usernameRegister ='.//input[@id = 'username-register']'
 loginPage.input.emailRegister = './/input[@id = 'email-register']'
 loginPage.input.passwordRegister = './/input[@id = 'password-register']'
 loginPage.button.singUpForOurApp = './/button[@type = 'submit']'
-loginPage.input.headerUsername = './/input[@id = 'username2']'
+loginPage.input.headerUsername = './/input[@name = 'username' and @placeholder = 'Username']'
 loginPage.input.headerPassword = './/input[@placeholder = 'Password']'
 loginPage.button.signIn = './/button[contains(text(), 'Sign In')]'
 
