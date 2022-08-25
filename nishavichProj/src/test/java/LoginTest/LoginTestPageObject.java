@@ -9,7 +9,7 @@ public class LoginTestPageObject  extends BaseTest {
         loginPage.openLoginPage();
         loginPage.enterUserNameIntoLoginInput("qaauto");
         loginPage.enterPasswordIntoInputPassword("123456qwerty");
-        loginPage.clickOnButtonLogin();
+        loginPage.clickOnButtonLogIn();
         Assert.assertTrue("Button Signout is not Displayed", homePage.isButtonSignOutDisplayed());
 
     }
