@@ -67,7 +67,7 @@ public class CommonActionsWithElements {
     protected void selectValueInDropDown(WebElement webElement,String value){
         try{
             Select select=new Select(webElement);
-            select.selectByVisibleText(value);
+            select.selectByValue(value);
             logger.info("'"+value+"' was selected in DropDown");
         }catch (Exception e){
             printErrorAndStopTest(e);
