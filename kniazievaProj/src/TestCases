@@ -1,8 +1,126 @@
-TC1 name
-STR:
-1.
-2.
-ER:
+TestCase#1 Registration
 
-TC2
-....
+Preconditions:
+
+1.  User go to https://qa-complex-app-for-testing.herokuapp.com
+
+Steps to reproduce:
+
+1.  On the Login Page in field "Username" input Username, which contains only with letters and numbers, must be at least
+    3 characters. Example: test0tost. For generate unique login, should create cycle test(+1)tost.
+
+2.  On the Login Page in field Email input valid email address. Example: testtost12345678@gmail.com
+
+3.  On the Login Page in field Password input no less then 12 characters
+
+4.  After fill in third previous field correct, on the Login Page press on the button which has text
+    "Sign up for OurApp"
+
+Expected result:
+
+* On the header of HomePage is button with text "Sign Out"
+* On the header of HomePage is Username which equal to Username that was input on Registration form
+* On the header of HomePage is button with text "Create Post"
+* Do TestCase#3 Sign In with this credentials for check that this user was successful registered
+
+
+
+TestCase#2 Sign Out
+
+Preconditions:
+
+1.  User must be registered early (Do TestCase#1)
+
+2.  User must be login with credentials which he used for registration (Do TestCase#3)
+
+Steps to reproduce:
+
+1. On the header of Home Page press on the button with text 'Sign Out'
+
+Expected result:
+
+* On the header of Login Page is field 'Username'
+* On the header of Login Page is field 'Password'
+* On the header of Login Page is button with text 'Sign In'
+* On the Login Page in the Registration form is button with 'Sign up for OurApp'
+
+
+
+TestCase#3 Sign In
+
+Preconditions:
+
+1.  User go to https://qa-complex-app-for-testing.herokuapp.com
+
+2.  User registered early and has account ( Do TestCase#1 )
+
+3.  User must be login with credentials which he used for registration (Do TestCase#3)
+
+Steps to reproduce:
+
+1.  On the header of Login Page in field 'Username' input Username which was registered early
+
+2.  On the header of Login Page in field 'Password' input valid password which was registered with this Username
+
+3.  On the header of Login Page press on button with text 'Sign In'
+
+Expected result:
+
+* On the header of HomePage is button with text "Sign Out"
+* On the header of HomePage is Username which equal to Username that was input on Registration form
+* On the header of HomePage is button with text "Create Post"
+
+
+
+TestCase#4 Create Post (go to Create Post Page)
+
+Preconditions:
+
+1.  User go to https://qa-complex-app-for-testing.herokuapp.com
+
+2.  User registered early and has account ( Do TestCase#1 )
+
+3.  User must be login with credentials which he used for registration (Do TestCase#3)
+
+Steps for reproduce:
+
+1. On the header of Home Page press on the button with text 'Create Post'
+
+Expected Result:
+
+Customer go to the Create Post Page and has on this page next element:
+    * Input field with lable 'Title'
+    * Input field with label 'Body Content'
+    * Submit button with text 'Save New Post'
+
+
+
+TestCase#5 Create Post
+
+Preconditions:
+
+1.  User go to https://qa-complex-app-for-testing.herokuapp.com
+
+2.  User registered early and has account ( Do TestCase#1 )
+
+3.  User must be login with credentials which he used for registration (Do TestCase#3)
+
+Steps for reproduce:
+
+1.  On the Create Post Page in the field 'Title' input title for post
+
+2.  On the Create Post Page in the textarea 'Body Content' input text of post
+
+3.  Put tick in the checkbox with inscription "This is unique post"
+
+4.  Select value for group of people who can view this post in select with name 'Select value'
+
+3.  Press on the button with text 'Save New Post'
+
+Expected result:
+
+    * On the page 'My profile' is post with title and date
+
+Post conditionals:
+
+    * Delete post
