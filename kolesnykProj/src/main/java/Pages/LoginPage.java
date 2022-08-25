@@ -4,8 +4,19 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends ParentPage {
+
+    @FindBy(xpath = "//input[@name='username' and @placeholder='Username']")
+    private WebElement inputUserNameHeader;
+
+    @FindBy(xpath = "//input[@name='password' and @placeholder='Password']")
+    private WebElement inputPasswordHeader;
+
+    @FindBy(xpath = "//button[@class='btn btn-primary btn-sm']")
+    private WebElement buttonSingIn;
+
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -22,35 +33,15 @@ public class LoginPage extends ParentPage {
     }
 
     public void enterUserNameIntoLoginInput(String username) {
-        try {
-            WebElement element = driver.findElement(By.xpath("//input[@name='username' and @placeholder='Username']"));
-            element.clear();
-            element.sendKeys(username);
-            log.info(username + " was entered inti input");
-        } catch (Exception e) {
-            printErrorAndStopTest(e);
-        }
+        enterTextIntoElement(inputUserNameHeader, username);
     }
 
     public void enterPasswordIntoInputPassword(String password) {
-        try {
-            WebElement element = driver.findElement(By.xpath("//input[@name='password' and @placeholder='Password']"));
-            element.clear();
-            element.sendKeys(password);
-            log.info(password + " was entered into input Password");
-        } catch (Exception e) {
-            printErrorAndStopTest(e);
-
-        }
+        enterTextIntoElement(inputPasswordHeader, password);
     }
 
     public void clickOnLoginButton() {
-        try {
-            driver.findElement(By.xpath("//button[@class='btn btn-primary btn-sm']")).click();
-            log.info("Button 'Sing In' was clicked");
-        } catch (Exception e) {
-            printErrorAndStopTest(e);
-        }
+        clickOnElement(buttonSingIn);
     }
 
     public boolean isButtonSignInDisplayed(){
@@ -63,8 +54,8 @@ public class LoginPage extends ParentPage {
         }
     }
 
-    private void printErrorAndStopTest(Exception e) {
-        log.error("Cannot work with element " + e);
-        Assert.fail("Cannot work with element " + e);
-    }
+//    private void printErrorAndStopTest(Exception e) {
+//        log.error("Cannot work with element " + e);
+//        Assert.fail("Cannot work with element " + e);
+//    }
 }
