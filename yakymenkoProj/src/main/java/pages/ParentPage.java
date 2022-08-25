@@ -1,13 +1,10 @@
 package pages;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-public class ParentPage {
-    WebDriver webDriver;
-    Logger logger = Logger.getLogger(getClass());
-
+// У цьому класі наслідуються всі пейджі
+public class ParentPage extends CommonActionsWithElements { // Alt+Enter
     public ParentPage(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
     }
 }
