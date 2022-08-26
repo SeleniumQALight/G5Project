@@ -18,7 +18,8 @@ STR:
 5. Click on the 'Sign up for OurApp' btn
 
 ER:
-'Hello [Username], your feed is empty.' text is shown
+1.'Hello [Username], your feed is empty.' text is shown
+2. Ability to login with the new created user
 
 TC3 Finding a post
 Preconditions:
@@ -26,6 +27,7 @@ Preconditions:
 2. Add valid Username (ex. UserMy) to the 'Username' input field
 3. Add valid Password (ex. trust@test.com) to the 'Password' input field
 4. Click on the 'Sign In' button
+5. Create post with the 'test' text
 
 STR:
 1. Click on my Profile icon
@@ -66,7 +68,8 @@ STR:
 4. Click on the 'Save New Post' button
 
 ER:
-'New post successfully created.' text is shown
+1.'New post successfully created.' text is shown
+2. Created post is shown in the search results
 
 TC5 Delete post
 Preconditions:
@@ -74,10 +77,12 @@ Preconditions:
 2. Add valid Username (ex. UserMy) to the 'Username' input field
 3. Add valid Password (ex. trust@test.com) to the 'Password' input field
 4. Click on the 'Sign In' button
+5. Create post with the 'TestPost' text
 
 STR:
-1. Click on the post
+1. Click on the post with the 'TestPost' text
 2. Click on the trash icon
 
 ER:
-'Post successfully deleted' text is shown
+1.'Post successfully deleted' text is shown
+2. Post is not shown in the search results
