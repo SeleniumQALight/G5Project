@@ -1,4 +1,51 @@
+
 #Login Page
-LoginPage.input.login=.//input'
+LoginPage.input.login.Username=.//input[@placeholder='Username']
+LoginPage.input.login.Password=.//input[@placeholder='Password']
+LoginPage.button.login.SignIn=.//button[text() ='Sign In']
+
+LoginPage.input.Register.Username=.//input[@id='username-register']
+LoginPage.input.Register.Email=.//input[@id='email-register']
+LoginPage.input.Register.Password=.//input[@id='password-register']
+LoginPage.button.Register.SignUpForOurApp=.//button[text() ='Sign up for OurApp' and @type ='submit']
 
 #Home page
+HomePage.Header.a.Search=.//a[@data-original-title='Search']
+HomePage.Header.span.Chat=.//span[@data-original-title='Chat']
+HomePage.Header.a.MyProfile=.//a [@href='/profile/vadim2']
+HomePage.Header.span.UserName=.//span[@class='text-white mr-2']
+HomePage.Header.a.CreatePost =.//a[@class='btn btn-sm btn-success mr-2']
+HomePage.Header.button.SignOut = .//button[@class='btn btn-sm btn-secondary']
+HomePage.H2_Strong.HelloUser.//h2 [text() ='Hello ' ]//strong.//h2[text() = ', your feed is empty.']
+
+
+#Search page
+Search.input.Search =.//input[@id='live-search-field']
+Search.input.Close = .//span[@class='close-live-search']
+Search.input.ListPosts = .//a//strong[text() = 'Test vadim title']
+
+#My profile page
+MyProfilePage.input.Username =.//input[@id='live-search-field']
+MyProfilePage.a.Posts = .//a[text() = 'Posts: count']
+MyProfilePage.a.PostsInList = .//a//strong[text() = 'Test vadim title']
+MyProfilePage.a.Followers = .//a [contains(text(),'Followers')]
+MyProfilePage.a.Following = .//a [contains(text(),'Following')]
+
+#Create post
+CreatePost.input.Title =.//input[@id='post-title']
+CreatePost.textarea.BodyContent =.//textarea[@id='post-body']
+CreatePost.input.UniquePost =.//input[@id='”UniquePost”']
+CreatePost.select.SelectValue = .//select[@id='select1']
+CreatePost.button.SaveNewPost = .//button[text() = 'Save New Post']
+
+#ChatPage
+ChatPage.input.TypeMessage =.//input[@id='chatField']
+ChatPage.div.DisplayMessage = .//div[@id='chat']
+ChatPage.span.CloseChat = .//span[@class='chat-title-bar-close']
+
+
+
+
+
+
+

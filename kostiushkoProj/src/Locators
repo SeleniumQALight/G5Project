@@ -1,0 +1,22 @@
+#Login Page
+loginPage.input.loginHeader = ‘.//input [@placeholder="Username"]’
+loginPage.input.passwordHeader = ‘.//header//input [@name="password"]’
+loginPage.button.signIn = ‘.//button[@class="btn btn-primary btn-sm"]’
+loginPage.input.loginRegister = ‘.//input [@id="username-register"]’
+loginPage.input.emailRegister = ‘.//input [@id="email-register"]’
+loginPage.input.passwordRegister =  ‘.//input [@id="password-register"]’
+loginPage.button.signupforOurApp = ‘.//button[@type="submit"]’
+
+#Home Page
+homePage. button.signOut = ‘.//button[@class="btn btn-sm btn-secondary"]’
+homePage. button. createPost = ‘.//a [@href="/create-post"]’
+homePage. button.chat = ‘.//header//span //* [@fill="currentColor"]’
+homePage. input.chat = ‘.//input [@type="text"]’
+homePage. text.chat =’.//div [contains(text(),'Hello world')]’
+homePage. text.loginname = './/*[contains(text(), ' qaauto')]'
+homePage. button.myprofile = './/* [@data-original-title="My Profile"]'
+homePage. text.postname = './/strong [contains(text(), 'Hello world '+[day+month+year])]'
+#Create Post Page
+createPostPage. input.title = ‘.//input [@id="post-title"]’
+createPostPage. textarea.body = ‘.//textarea [@id="post-body"]’
+createPostPage. button. saveNewPost = ‘.//button[@class="btn btn-primary"]’

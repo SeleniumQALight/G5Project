@@ -7,6 +7,7 @@ loginPageRegistration.input.emailRegistration='.//input[@id='email-register']'
 loginPageRegistration.input.passwordRegistration='.//input[@id='password-register']'
 loginPageRegistration.button.signUpForOurApp='.//button[@class='py-3 mt-4 btn btn-lg btn-success btn-block']'
 loginPageRegistration.message.userAlreadyTaken='.//div[text()='That username is already taken.']'
+loginPageRegistration.message.invalidUserPassword=".//div[@class='alert alert-danger text-center']"
 
 #HomePage
 homePage.text.helloUser='.//h2[text()='Hello ']'+'.//h2//strong'+'.//h2[text()=', your feed is empty.']'

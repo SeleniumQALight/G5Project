@@ -1,5 +1,28 @@
 #Login Page
-loginPage.input.login ='.//input'
+loginPage.input.usernameRegister ='.//input[@id = 'username-register']'
+loginPage.input.emailRegister = './/input[@id = 'email-register']'
+loginPage.input.passwordRegister = './/input[@id = 'password-register']'
+loginPage.button.singUpForOurApp = './/button[@type = 'submit']'
+loginPage.input.headerUsername = './/input[@name = 'username' and @placeholder = 'Username']'
+loginPage.input.headerPassword = './/input[@placeholder = 'Password']'
+loginPage.button.signIn = './/button[contains(text(), 'Sign In')]'
+
 
 
 #HomePage
+homePage.button.signOut = './/button[contains(text(),'Sign Out')]'
+homePage.button.createPost = './/a[@href = '/create-post']'
+homePage.inscription.usernameHeader = './/span[contains(text(),'username')]'
+homePage.img.myProfile = './/img[@data-original-title = 'My Profile']'
+
+
+
+#CreatePostPage
+createPostPage.input.title = './/input[@id = 'post-title']'
+createPostPage.textarea.bodyContent = './/textarea[@id = 'post-body']'
+createPostPage.button.saveNewPost = './/button[contains(text(), 'Save New Post')]'
+
+
+
+#MyProfile
+myProfile.post = './/a//strong[text()='Number First']'
