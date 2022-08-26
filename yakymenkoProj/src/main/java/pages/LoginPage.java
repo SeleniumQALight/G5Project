@@ -1,5 +1,6 @@
 package pages;
 
+import libs.TestData;
 import org.junit.Assert;
 
 import org.openqa.selenium.WebDriver;
@@ -57,7 +58,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓
         enterTextIntoElement(inputPasswordHeader, password);
     }
 
-    public void clickButtonLogIn() {
+    public void clickOnButtonLogIn() {
 //        try {
 ////            webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click();
 //            buttonSignIn.click();
@@ -66,6 +67,14 @@ public class LoginPage extends ParentPage { // Alt+Insert↓
 //            printErrorAndStopTest(e);
 //        }
         clickOnElement(buttonSignIn);
+    }
+
+    public HomePage loginWithValidCred() {
+        openLoginPage();
+        enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
+        enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
+        clickOnButtonLogIn();
+        return new HomePage(webDriver);
     }
 
 //    private void printErrorAndStopTest(Exception e) {
