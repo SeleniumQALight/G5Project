@@ -49,7 +49,7 @@ public class LoginPage extends ParentPage {
     }
 
     public boolean isMessageErrorLoginOrPassword(){
-       return isElementTrue(messageErrorLoginOrPassword);
+       return isElementWasDisplayed(messageErrorLoginOrPassword);
 
     }
 

@@ -26,6 +26,7 @@
 
 #PostPage
     PostPage.UserName='.//p//a[2]'
+    PostPageMessageSuccessfully = './/div//div[text()='New post successfully created.']'
 
 #ProfilePage
     ProfilePage.addFollow.button='.//form[contains(@action,'addFollow')]//button'
