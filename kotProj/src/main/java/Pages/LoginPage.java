@@ -1,5 +1,6 @@
 package Pages;
 
+import libs.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,6 +50,16 @@ private WebElement buttonSignIn;
 
     public void clickOnButtonLogIn() {
         clickOnElement(buttonSignIn);
+    }
+
+    public HomePage loginWithValidCred() {
+        openLoginPage();
+        enterUsernameIntoLoginInput(TestData.VALID_LOGIN);
+        enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
+        clickOnButtonLogIn();
+
+
+        return new HomePage(webDriver);
     }
 
 //    private void printErrorAndStopTest(Exception e) {
