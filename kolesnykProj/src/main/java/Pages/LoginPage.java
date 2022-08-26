@@ -6,6 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static libs.TestData.*;
+
+
 public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//input[@name='username' and @placeholder='Username']")
@@ -53,6 +56,15 @@ public class LoginPage extends ParentPage {
             return false;
         }
     }
+
+    public HomePage loginWithValidCredentials() {
+        openLoginPage();
+        enterUserNameIntoLoginInput(VALID_LOGIN);
+        enterPasswordIntoInputPassword(VALID_PASSWORD);
+        clickOnLoginButton();
+        return new HomePage(driver);
+    }
+
 
 //    private void printErrorAndStopTest(Exception e) {
 //        log.error("Cannot work with element " + e);
