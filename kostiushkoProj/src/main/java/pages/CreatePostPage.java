@@ -27,10 +27,6 @@ public class CreatePostPage extends ParentPage{
         return this;
     }
 
-    public CreatePostPage selecttextInDropDownRole(String textForSelect) {
-        return this;
-    }
-
     public CreatePostPage selectTextInDropDownRole(String textForSelect) {
         this.selectTextInDropDown(dropDownRole, textForSelect);
         return this;
