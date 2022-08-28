@@ -1,5 +1,6 @@
 package pages;
 
+import libs.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -74,4 +75,11 @@ public class LoginPage extends ParentPage {
         Assert.fail("Can't work with element " + e);
     }
 
+    public HomePage LoginWithValidCred() {
+        openLoginPage();
+        enterUsernameIntoLoginInput(TestData.VALID_LOGIN);
+        enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
+        clickOnButtonLogIn();
+        return new HomePage(webDriver);
+    }
 }

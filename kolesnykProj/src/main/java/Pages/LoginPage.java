@@ -6,6 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static libs.TestData.*;
+
+
 public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//input[@name='username' and @placeholder='Username']")
@@ -45,14 +48,17 @@ public class LoginPage extends ParentPage {
     }
 
     public boolean isButtonSignInDisplayed(){
-        try {
-            WebElement singInButton = driver.findElement(By.xpath("//button[@class='btn btn-primary btn-sm']"));
-            return singInButton.isDisplayed();
-        }catch (Exception e){
-            System.out.println("Button 'Sight In' is not found");
-            return false;
-        }
+        return isElementDisplayed(buttonSingIn);
     }
+
+    public HomePage loginWithValidCredentials() {
+        openLoginPage();
+        enterUserNameIntoLoginInput(VALID_LOGIN);
+        enterPasswordIntoInputPassword(VALID_PASSWORD);
+        clickOnLoginButton();
+        return new HomePage(driver);
+    }
+
 
 //    private void printErrorAndStopTest(Exception e) {
 //        log.error("Cannot work with element " + e);

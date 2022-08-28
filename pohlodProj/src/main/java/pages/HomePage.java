@@ -18,4 +18,13 @@ public class HomePage extends ParentPage {
             return false;
         }
     }
+
+    public boolean isTextDisplayed() {
+        try{
+            WebElement invalidPasswordLoginMessage = webDriver.findElement(By.xpath(".//div[text()='Invalid username / pasword']"));
+            return invalidPasswordLoginMessage.isDisplayed();
+        }catch (Exception e){
+            return false;
+        }
+    }
 }
