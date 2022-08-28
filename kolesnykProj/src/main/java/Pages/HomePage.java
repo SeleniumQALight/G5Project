@@ -14,14 +14,11 @@ public class HomePage extends ParentPage {
         super(driver);
     }
 
+    @FindBy(xpath = "//button[@class='btn btn-sm btn-secondary']")
+        WebElement singOutButton;
+
     public boolean isButtonSignOutDisplayed() {
-        try {
-            WebElement singOutButton = driver.findElement(By.xpath("//button[@class='btn btn-sm btn-secondary']"));
-            return singOutButton.isDisplayed();
-        } catch (Exception e) {
-            System.out.println("Button 'Sight Out' is not found");
-            return false;
-        }
+        return isElementDisplayed(singOutButton);
     }
 
     public HomePage checkIsRedirectToHomePage(){
