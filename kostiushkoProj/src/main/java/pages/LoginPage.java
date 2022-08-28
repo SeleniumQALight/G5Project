@@ -1,5 +1,6 @@
 package pages;
 
+import libs.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -59,6 +60,14 @@ public class LoginPage extends  ParentPage {
 //            prinErrorAndStopTest(e);
 //        }
         clicOnElement(buttonSignIn);
+    }
+
+    public HomePage loginWithWalidCred() {
+        openLoginPage();
+        enterUserNameIntoLogininInput(TestData.VALID_LOGIN);
+        enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
+        clickOnButtonLogIn();
+        return new HomePage(webDriver);
     }
 //    private void prinErrorAndStopTest(Exception e) {
 //        logger.error("Can not work with element " + e);
