@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public class LoginTest {
     WebDriver webDriver;
@@ -18,7 +18,7 @@ public class LoginTest {
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize(); // зробили на весь екран
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // дефолтне очікування
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5)); // дефолтне очікування
 
         webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
         System.out.println("Site was opened");
@@ -44,13 +44,13 @@ public class LoginTest {
         System.out.println("Browser was closed");
 
     }
+
     @Test
-    public void validLoginAndInvalidPassword(){
+    public void validLoginAndInvalidPassword() {
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
         System.out.println("Site was opened");
 
@@ -68,7 +68,7 @@ public class LoginTest {
         System.out.println("Sign In was clicked");
 
 //        WebElement alertInvalidUsernamePassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
-        Assert.assertTrue("Alert 'Invalid username / pasword' is not visible",isAlertDisplayed());
+        Assert.assertTrue("Alert 'Invalid username / pasword' is not visible", isAlertDisplayed());
 
         webDriver.quit(); // закриває браузер і знищує його як об'єкт
         System.out.println("Browser was closed");

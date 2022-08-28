@@ -6,13 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.elements.HeaderElement;
 
-public class HomePage extends ParentPage { // Alt + Insert
+public class HomePage extends ParentPage { // Alt + Insert → create constructor
     private HeaderElement headerElement = new HeaderElement(webDriver);
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public boolean isButtonSignOutDisplayed() {
+    public boolean isButtonSignOutDisplayed() { // constructor
         try {
             WebElement buttonSignOut = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));
             return buttonSignOut.isDisplayed();
@@ -32,16 +33,18 @@ public class HomePage extends ParentPage { // Alt + Insert
 
     /**
      * Перевірка чи завантажилась HomePage
+     *
      * @return
      */
-    public HomePage checkIsRedirectToHomePage(){
+    public HomePage checkIsRedirectToHomePage() {
         //TODO checkURL
-        Assert.assertTrue("HomePage does not loaded",isButtonSignOutDisplayed());
+        Assert.assertTrue("HomePage does not loaded", isButtonSignOutDisplayed());
         return this;
     }
 
     /**
      * Метод який відкриває Home Page і перевіряє що саме вона відкривлась
+     *
      * @return
      */
     public HomePage openHomePage() {
@@ -58,6 +61,7 @@ public class HomePage extends ParentPage { // Alt + Insert
 
     /**
      * Віддає приватний елемент Header
+     *
      * @return
      */
     public HeaderElement getHeaderElement() {
