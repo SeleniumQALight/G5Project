@@ -12,9 +12,20 @@ public class CreatePostTest extends BaseTest {
                 .checkIsRedirectToCreatePostPage()
                 .enterTextIntoTitleInput("aleshko-post")
 //                .selectTextInDropDownRole("Приватне повідомлення")
-                .selectValueInDropDownRole("One Person")
+                .selectValueInDropDownRole("One Person");
+    }
 
-        ;
 
+    @Test
+    public void createNewPostHomeWork() {
+        homePage
+                .openHomePage()
+                .getHeaderElement().clickOnButtonCreatePost()
+                .enterTextIntoTitleInput("New_Title")
+                .enterTextIntoBodyInput("New_BodyText")
+                .selectTextInDropDownRoleLikeUI("Групове повідомлення")
+                .clickOnSaveNewPostButton()
+                .checkRedirectToPostPageAfterNewPostCreation()
+                .checkTitleAndBodyTextsAfterNewPostCreation("New_Title", "New_BodyText");
     }
 }
