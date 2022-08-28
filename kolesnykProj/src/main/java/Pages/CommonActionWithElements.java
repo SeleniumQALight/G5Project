@@ -2,6 +2,7 @@ package Pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -71,6 +72,15 @@ public class CommonActionWithElements {
         }
     }
 
+    protected void selectDropDownByText(WebElement element, String text){
+        clickOnElement(element);
+        findElementByText(text).click();
+    }
+
+    private WebElement findElementByText(String text) {
+        WebElement element = driver.findElement(By.xpath("//*[text()='"+text+"']"));
+        return element;
+    }
 
 
     private void printErrorAndStopTest(Exception e) {
