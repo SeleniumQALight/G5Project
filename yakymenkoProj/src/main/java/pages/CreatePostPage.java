@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CreatePostPage extends ParentPage{ // alt+enter → constructor
+public class CreatePostPage extends ParentPage { // alt+enter → constructor
     // .//*[@name='title']
     @FindBy(name = "title")
     private WebElement inputTitle;
@@ -16,14 +16,14 @@ public class CreatePostPage extends ParentPage{ // alt+enter → constructor
         super(webDriver);
     }
 
-    public CreatePostPage checkIsRedirectToCreatePostPage(){
+    public CreatePostPage checkIsRedirectToCreatePostPage() {
         // TODO check url
         Assert.assertTrue("Page CreatePost is not loaded", isElementDisplayed(inputTitle));
         return this;
     }
 
     // Метод який заповнить тайтл
-    public CreatePostPage enterTextInInputTitle(String title){
+    public CreatePostPage enterTextInInputTitle(String title) {
         enterTextIntoElement(inputTitle, title);
         return this;
     }
