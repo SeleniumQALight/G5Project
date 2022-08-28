@@ -16,6 +16,9 @@ public class LoginPage extends  ParentPage {
     @FindBy (xpath = ".//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy (xpath = ".//* [@class='alert alert-danger text-center']")
+    private WebElement textNoLoggin;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -68,6 +71,11 @@ public class LoginPage extends  ParentPage {
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
         return new HomePage(webDriver);
+    }
+
+    public void isTextNoLogginDisplayed(){
+        //TODo check url
+        Assert.assertTrue("Text 'No Loggin' not displayed", isElementDisplayed(textNoLoggin));
     }
 //    private void prinErrorAndStopTest(Exception e) {
 //        logger.error("Can not work with element " + e);
