@@ -88,6 +88,20 @@ public class CommonActionsWithElements {
         }
     }
 
+    /**
+     * знаходить в dropDown елемент по тексту
+     * @param dropDownByUI
+     * @param text
+     */
+    protected void selectTextInDropDownByUICase(WebElement dropDownByUI, String text){
+        try{
+            isElementDisplayed(dropDownByUI);
+            clickOnElement(dropDownByUI);
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
+
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can't work with element " + e);
