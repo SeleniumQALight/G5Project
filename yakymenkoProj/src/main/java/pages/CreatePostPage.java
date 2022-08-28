@@ -29,7 +29,7 @@ public class CreatePostPage extends ParentPage { // alt+enter → constructor
     }
 
     public CreatePostPage selectTextInDropDownRole(String textForSelect) {
-        selectTextInDropDown(dropDownRole, textForSelect);
+        selectTextInDropDown(dropDownRole, textForSelect); // Alt+enter → Create field 'dropDownRole' in 'CreatePostPage'
         return this;
     }
 
