@@ -1,4 +1,4 @@
-package baseTest;
+package baseTest; // Батько для всіх тестів
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
@@ -21,18 +21,18 @@ public class BaseTest {
     @Before
     public void setUp() {
         WebDriverManager.chromedriver().setup();// перед кожним тестом перевіряємо чи встановлений екзешнік
-        webDriver = new ChromeDriver();
+        webDriver = new ChromeDriver(); // створюємо новий браузер
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         logger.info("Browser was opened");
-        loginPage = new LoginPage(webDriver);
-        homePage = new HomePage(webDriver);
+        loginPage = new LoginPage(webDriver); // Місце де ми створюємо кожну пейджу
+        homePage = new HomePage(webDriver); // Місце де ми створюємо кожну пейджу
     }
 
     @After
     public void tearDown() {
         webDriver.quit();
-        logger.info("Browser war closed");
+        logger.info("Browser was closed");
 
     }
 }
