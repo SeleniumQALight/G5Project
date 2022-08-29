@@ -77,7 +77,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
 
     public HomePage loginWithValidCred() {
         openLoginPage();
-        enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
+        enterUserNameIntoLoginInput(TestData.VALID_LOGIN);// звертаємось до TestData і кажемо - дістань VALID_LOGIN
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
         return new HomePage(webDriver);
