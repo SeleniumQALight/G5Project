@@ -1,19 +1,19 @@
 package baseTest;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.HomePage;
 import pages.LoginPage;
 
 import java.time.Duration;
 
 public class BaseTest {
-    protected WebDriver webDriver;
-    protected Logger logger = Logger.getLogger(getClass());
+    WebDriver webDriver;
+    Logger logger = Logger.getLogger(getClass());
     protected LoginPage loginPage;
     protected HomePage homePage;
 
@@ -29,8 +29,9 @@ public class BaseTest {
     }
 
     @After
-    public void testDown() {
+    public void tearDown() {
         webDriver.quit();
         logger.info("Browser was closed");
     }
+
 }
