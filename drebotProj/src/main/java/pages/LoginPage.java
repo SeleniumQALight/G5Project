@@ -2,7 +2,6 @@ package pages;
 
 import libs.TestData;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +16,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = ".//button[@class='btn btn-primary btn-sm']")
     private WebElement buttonSignIn;
+
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement messageInvalidUserPassword;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -67,18 +69,14 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignIn);
     }
 
-//    private void printErrorAndStopTest(Exception e) {
-//        logger.error("Can't work with element " + e);
-//        Assert.fail("Can't work with element " + e);
-//    }
-
     public boolean isMessageInvalidUserPassword() {
-        try {
-            WebElement messageInvalidUserPassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
-            return messageInvalidUserPassword.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+//        try {
+//            WebElement messageInvalidUserPassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
+//            return messageInvalidUserPassword.isDisplayed();
+//        } catch (Exception e) {
+//            return false;
+//        }
+        return isElementDisplayed(messageInvalidUserPassword);
     }
 
     public HomePage loginWithValidCredential() {
