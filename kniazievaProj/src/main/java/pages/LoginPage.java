@@ -52,6 +52,24 @@ public class LoginPage extends ParentPage {
         }
     }
 
+    public boolean isButtonSignInDisplayed(){
+        try{
+            WebElement buttonSignIn = webDriver.findElement(By.xpath(".//button[text() = 'Sign In' ]"));
+            return buttonSignIn.isDisplayed();
+        }catch(Exception e){
+            return false;
+        }
+    }
+
+    public boolean isLoginOrPassInvalid(){
+        try{
+            WebElement inscriptionInvalidLogin = webDriver.findElement(By.xpath(".//div[text() = 'Invalid username / pasword']"));
+            return inscriptionInvalidLogin.isDisplayed();
+        }catch(Exception e){
+            return false;
+        }
+    }
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
