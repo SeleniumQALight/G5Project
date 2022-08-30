@@ -1,18 +1,24 @@
 package postTests;
 
 import baseTest.BaseTest;
+import libs.TestData;
 import org.junit.Test;
 
 public class CreatePostTest extends BaseTest {
     @Test
-    public void createNewPost(){
+    public void createNewPost() {
         homePage
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
                 .enterTextInputTitle("dr-post")
+                .enterTextInputBodyContent("dr-Body-Content")
+                .selectTextInDropDownByUI(TestData.VALUE_DROPDOWN_CREATE_POST[2])
                 //.selectTextInDropDownRole("Приватне повідомлення")
-                .selectValueInDropDownRole("One Person");
+                //.selectValueInDropDownRole("One Person")
+                .clickSaveNewPost()
+                .checkIsRedirectToPostInfoPage()
+                .checkTitleInPostInfoPage("dr-post");
     }
 
 
