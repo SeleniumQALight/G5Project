@@ -6,17 +6,25 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 
 public class Commonactions {
     protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
+    protected WebDriverWait webDriverWait10, webDriverWait15;
 
     public Commonactions(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        webDriverWait15 =  new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
+
 
     public void enterTextIntoElement (WebElement webElement, String text ) {
         try {
@@ -31,6 +39,7 @@ public class Commonactions {
 
     protected void clickOnElement (WebElement webElement) {
         try {
+            webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
             String name = webElement.getAccessibleName();
             webElement.click();
             logger.info("'" + name + "' was clicked");
