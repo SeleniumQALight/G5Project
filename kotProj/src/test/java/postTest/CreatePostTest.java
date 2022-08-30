@@ -10,10 +10,16 @@ public class CreatePostTest extends BaseTest {
     homePage
             .openHomePage()
             .getHeaderElement().clickOnButtonCreatePOst()
-            .checkIsRedirectToCreatePostPage()
+        .checkIsRedirectToCreatePostPage()
             .enterTextInInputTitle("title of the post")
+            .enterTextInInputBody("text")
           //  .selectTextInDropDownRole("Приватне повідомлення")
             .selectValueInDropDownRole("One Person")
+            .clickOnSavePostButton()
+       .checkIsRedirectedToPostPage()
+            .checkTextInAlert("New post successfully created.")
+            .getHeaderElement().clickOnMyProfileButton()
+            .checkIsRedirectToMyProfilePage()
     ;
 
 
