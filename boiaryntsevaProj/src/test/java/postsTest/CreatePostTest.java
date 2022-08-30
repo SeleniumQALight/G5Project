@@ -13,8 +13,11 @@ public class CreatePostTest extends BaseTest {
                 .getHeaderElement().clickOnCreatePostButton()
                 .checkIsRedirectToCreatePostPage()
                 .enterTextInputTitle("boiaryntseva-post")
-                //    .selectTextInDropDownRole("Приватне повідомлення");
-                .selectValueInDropDownRole("One Person");
+                // .selectTextInDropDownRole("Приватне повідомлення");
+                // .selectValueInDropDownRole("One Person");
+                .enterTextInputBody("Text entered into body")
+                .selectValueInDropDown()
+                .savePost();
 
     }
 }

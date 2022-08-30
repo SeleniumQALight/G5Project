@@ -13,6 +13,15 @@ public class CreatePostPage extends ParentPage {
     @FindBy(tagName = "select")
     private WebElement dropDownRole;
 
+    @FindBy(xpath = " .//*[text()='Групове повідомлення']")
+    private WebElement valueInDropDown;
+
+    @FindBy(id = "post-body")
+    private WebElement inputBody;
+
+    @FindBy(xpath = ".//button[text()='Save New Post']")
+    private WebElement savePostButton;
+
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -28,6 +37,11 @@ public class CreatePostPage extends ParentPage {
         return this;
     }
 
+    public CreatePostPage enterTextInputBody(String body) {
+        enterTextIntoElement(inputBody, body);
+        return this;
+    }
+
     public CreatePostPage selectTextInDropDownRole(String textForSelect) {
         selectValueInDropDown(dropDownRole, textForSelect);
         return this;
@@ -36,5 +50,15 @@ public class CreatePostPage extends ParentPage {
     public CreatePostPage selectValueInDropDownRole(String valueToSelect) {
         selectValueInDropDown(dropDownRole, valueToSelect);
         return this;
+    }
+
+    public CreatePostPage selectValueInDropDown() {
+        selectValueInDropDown(dropDownRole, valueInDropDown);
+        return this;
+    }
+
+    public PostPage savePost() {
+        clickOnElement(savePostButton);
+        return new PostPage(webDriver);
     }
 }

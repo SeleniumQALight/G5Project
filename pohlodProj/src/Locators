@@ -1,5 +1,29 @@
 #Login Page
-loginPage.input.loginHeader='.//input'
+loginPage.input.userNameHeader='.//input[@placeholder="Username"]'
+loginPage.input.passwordHeader='.//input[@placeholder="Password"]'
+loginPage.button.signIn='.//button[@class='btn btn-primary btn-sm']'
+loginPage.input.registerForm.userName='.// input [@placeholder="Username"]'
+loginPage.input.registerForm.email='.// input [@placeholder="you@example.com"]'
+loginPage.input.registerForm.password ='.// input [@placeholder="Create a password"]'
+loginPage.button.registerForm.signUp ='.//button[@type="submit"]'
 
-#HomePage
-page.element
+
+#UserPage
+userPage.link.profile='.//a[@class='mr-2']'
+userPage.button.signOut='.//button[@class='btn btn-sm btn-secondary']'
+userPage.link.followers='.//div[@class="profile-nav nav nav-tabs pt-2 mb-4"]//a[2]'
+userPage.link.search='.//a[@class="text-white mr-2 header-search-icon"]'
+userPage.input.search='.//input[@id="live-search-field"]'
+userPage.link.searchedItems='.//a[@class="list-group-item list-group-item-action"]'
+userPage.span.chatIcon='.//span[@data-original-title="Chat"]'
+userPage.button.createPost='.//a[@href="/create-post"]'
+
+#Chat
+chat.input.message='.//input[@id='chatField']'
+chat.div.messages='.//div[contains(text(),'"+typeMessage+"')]'
+
+#CreatePost
+createPost.input.title='.//input[@name="title"]'
+createPost.input.bodyContent='.//textarea[@name="body"]'
+createPost.button.savePost='.//button[@class="btn btn-primary"]'
+createPost.button.deletePost='.//button[@class="delete-post-button text-danger"]'

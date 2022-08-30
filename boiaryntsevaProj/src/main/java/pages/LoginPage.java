@@ -17,6 +17,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//button[text()='Sign In']")
     private WebElement buttonSingIn;
 
+    @FindBy(xpath = ".//div[contains(text(), 'Invalid')]")
+    private WebElement invalidLoginMessage;
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -74,12 +77,13 @@ public class LoginPage extends ParentPage {
 //    }
 
     public boolean isInvalidLoginMsgVisible() {
-        try {
-            WebElement invalidLoginMessage = webDriver.findElement(By.xpath(".//div[contains(text(), 'Invalid')]"));
-            return invalidLoginMessage.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+//        try {
+//            WebElement invalidLoginMessage = webDriver.findElement(By.xpath(".//div[contains(text(), 'Invalid')]"));
+//            return invalidLoginMessage.isDisplayed();
+//        } catch (Exception e) {
+//            return false;
+//        }
+        return isElementDisplayed(invalidLoginMessage);
     }
 
     public HomePage loginWithValidCred() {
