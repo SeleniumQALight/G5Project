@@ -15,7 +15,11 @@ public class CreatePostTest extends BaseTest {
                 .selectTextInDropDownByUIRole()
 //                .selectTextInDropdownRole("Приватне повідомлення")
 //                .selectValueInDropDownRole("One Person")
-                .clickOnButtonSaveNewPost();
+                .clickOnButtonSaveNewPost()
+              .checkIsRedirectRoPostPage()
+                .checkTextInAlert("New post successfully created.")
+                .getHeaderElement().clickOnMyProfileButton()
+              .checkIsRedirectToMyProfilePage()
         ;
 
     }

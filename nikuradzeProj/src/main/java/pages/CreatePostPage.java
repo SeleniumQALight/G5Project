@@ -45,8 +45,9 @@ public class CreatePostPage extends ParentPage{
         selectTextInDropDownByUI(dropDownRole, privateMessage);
         return this;
     }
-    public void clickOnButtonSaveNewPost(){
+    public PostPage clickOnButtonSaveNewPost(){
         clickOnElement(buttonSaveNewPost);
+        return new PostPage(webDriver);
     }
 
     public CreatePostPage selectValueInDropDownRole(String valueForSelect) {
