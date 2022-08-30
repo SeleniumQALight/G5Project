@@ -7,36 +7,29 @@ import org.openqa.selenium.WebElement;
 
 import pages.elements.HeaderElement;
 
-public class HomePage extends ParentPage{
+public class HomePage extends ParentPage {
     private HeaderElement headerElement = new HeaderElement(webDriver);
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public boolean isButtonSighOutDisplayed() {
-        try {
-            WebElement buttonSignOut = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));
-            return buttonSignOut.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     /**
      * Перевірка чи завантажилась HomePage
+     *
      * @return
      */
-    public HomePage checkIsRedirectToHomePage(){
+    public HomePage checkIsRedirectToHomePage() {
         //TODO  checkURL
         Assert.assertTrue("HomePage does not loaded"
-                , isButtonSighOutDisplayed());
+                , getHeaderElement().isButtonSighOutDisplayed());
         return this;
     }
 
     /**
      * Метод який відкриває Home Page
      * і перевіряє що саме вона відкрилась
+     *
      * @return
      */
     public HomePage openHomePage() {
@@ -47,7 +40,8 @@ public class HomePage extends ParentPage{
     }
 
     /**
-     *  Віддає приватний елемент Header
+     * Віддає приватний елемент Header
+     *
      * @return
      */
     public HeaderElement getHeaderElement() {

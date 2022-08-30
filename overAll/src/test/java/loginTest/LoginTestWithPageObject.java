@@ -14,7 +14,7 @@ public class LoginTestWithPageObject extends BaseTest {
         loginPage.clickOnButtonLogIn();
 
         Assert.assertTrue("Button SinOut is not Displayed"
-                , homePage.isButtonSighOutDisplayed());
+                , homePage.getHeaderElement().isButtonSighOutDisplayed());
 
     }
 }
