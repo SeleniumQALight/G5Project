@@ -39,6 +39,7 @@ createPostPage.button = ".//form[@action='/create-post']//button"
 
 #ProfilePage
 profilePage.title = ".//h2"
+profilePage.smallAvatar = ".//img[@class='avatar-small']"
 profilePage.button.follow = ".//button[text()='Follow ']"
 profilePage.postTab = ".//h2//..//a[1]"
 profilePage.followersTab = ".//h2//..//a[2]"

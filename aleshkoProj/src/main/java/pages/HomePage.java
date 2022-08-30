@@ -2,8 +2,6 @@ package pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import pages.elements.HeaderElement;
 
 public class HomePage extends ParentPage {
@@ -14,7 +12,8 @@ public class HomePage extends ParentPage {
     }
 
     public HomePage checkIsRedirectToHomePage() {
-        //TODO checkURL
+        //TODO check URL
+        waitChatToBeHide();
         Assert.assertTrue("HomePage does not loaded", headerElement.isButtonSignOutDisplayed());
         return this;
     }
