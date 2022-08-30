@@ -2,7 +2,6 @@ package pages;
 
 import libs.TestData;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +15,8 @@ public class LoginPage extends ParentPage{
 
     @FindBy(xpath = ".//button[text()='Sign In']")
     private WebElement buttonSignIn;
+    @FindBy(xpath = ".//div[text()='Invalid username / pasword']")
+    private WebElement alertInvalidLogin;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -75,14 +76,18 @@ public class LoginPage extends ParentPage{
         Assert.fail("Can not work with element " + e);
     }*/
 
-    public boolean areButtonSignInAndAlertDisplayed(){
-        try{
+    public boolean isButtonSignInDisplayed(){
+  /*      try{
             WebElement buttonSignIn = webDriver.findElement(By.xpath(".//button[text()='Sign In']"));
             WebElement alert = webDriver.findElement(By.xpath(".//div[text()='Invalid username / pasword']"));
             return buttonSignIn.isDisplayed() & alert.isDisplayed();
         }catch (Exception e){
             return false;
-        }
+        }*/
+        return isElementDisplayed(buttonSignIn);
+    }
+    public boolean isAlertInvalidLoginDisplayed(){
+        return isElementDisplayed(alertInvalidLogin);
     }
 
     public HomePage loginWithValidCred() {

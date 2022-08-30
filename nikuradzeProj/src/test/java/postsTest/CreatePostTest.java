@@ -11,8 +11,11 @@ public class CreatePostTest extends BaseTest {
                 .getHeaderElement().clickOnButtonCreatePost()
               .checkIsRedirectToCreatePostPage()
                 .enterTextInInputTitle("nikuradze-post")
+                .enterTextInInputBody("Dummy text in body")
+                .selectTextInDropDownByUIRole()
 //                .selectTextInDropdownRole("Приватне повідомлення")
-                .selectValueInDropDownRole("One Person")
+//                .selectValueInDropDownRole("One Person")
+                .clickOnButtonSaveNewPost();
         ;
 
     }

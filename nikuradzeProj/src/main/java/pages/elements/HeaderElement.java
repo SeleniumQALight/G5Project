@@ -9,6 +9,8 @@ import pages.CreatePostPage;
 public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = ".//a[text()='Create Post']")
     private WebElement buttonCreatePost;
+    @FindBy(xpath = ".//button[text()='Sign Out']")
+    private WebElement buttonSignOut;
 
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
@@ -22,5 +24,8 @@ public class HeaderElement extends CommonActionsWithElements {
     public CreatePostPage clickOnButtonCreatePost(){
         clickOnElement(buttonCreatePost);
         return new CreatePostPage(webDriver);
+    }
+    public boolean isButtonSignOutDisplayed(){
+        return isElementDisplayed(buttonSignOut);
     }
 }
