@@ -1,6 +1,7 @@
 package pages;
 
 import libs.TestData;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,28 +20,30 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         openPage("https://qa-complex-app-for-testing.herokuapp.com/");
+        return this;
     }
 
-    public void enterUsernameIntoLoginInput(String userName) {
+    public LoginPage enterUsernameIntoLoginInput(String userName) {
         enterTextIntoElement(inputUsernameHeader, userName);
+        return this;
     }
 
-    public void enterPasswordIntoPasswordInput(String password) {
+    public LoginPage enterPasswordIntoPasswordInput(String password) {
         enterTextIntoElement(inputPasswordHeader, password);
+        return this;
     }
 
-    public void clickOnSignInButton() {
+    public HomePage clickOnSignInButton() {
         clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
     }
 
-    public boolean isAlertDisplayed() {
-        return isElementDisplayed(alertInvalidLoginOrPassword);
-    }
-
-    public boolean isButtonSignInDisplayed() {
-        return isElementDisplayed(buttonSignIn);
+    public LoginPage checkInlavidLoginAction() {
+        Assert.assertTrue("Alert about wrong username/password is not visible", isElementDisplayed(alertInvalidLoginOrPassword));
+        Assert.assertTrue("Button ''Sign In' is not visible", isElementDisplayed(buttonSignIn));
+        return this;
     }
 
     public HomePage loginWithValidCred() {

@@ -32,7 +32,7 @@ public class HomePage extends ParentPage { // Alt + Insert → create constructo
     }
 
     /**
-     * Перевірка чи завантажилась HomePage
+     * Перевірка чи дійсно завантажилась HomePage
      *
      * @return
      */
@@ -49,7 +49,7 @@ public class HomePage extends ParentPage { // Alt + Insert → create constructo
      */
     public HomePage openHomePage() {
         //Login Page
-        LoginPage loginPage = new LoginPage(webDriver);
+        LoginPage loginPage = new LoginPage(webDriver);// створюємо об'єкт Логін пейджі
         loginPage.loginWithValidCred(); //alt+enter → LoginPage
         //checkHomePage
         checkIsRedirectToHomePage();

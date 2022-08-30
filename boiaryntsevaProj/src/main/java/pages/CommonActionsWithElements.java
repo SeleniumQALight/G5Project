@@ -31,7 +31,7 @@ public class CommonActionsWithElements {
         try {
             String name = webElement.getAccessibleName();
             webElement.click();
-            logger.info("" + name + "was clicked");
+            logger.info("" + name + " was clicked");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -66,6 +66,15 @@ public class CommonActionsWithElements {
             Select select = new Select(dropDown);
             select.selectByValue(value);
             logger.info("'" + value + "' was selected in Drop down ");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void selectValueInDropDown(WebElement dropdown, WebElement textToSelect) {
+        try {
+            clickOnElement(dropdown);
+            clickOnElement(textToSelect);
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
