@@ -11,8 +11,14 @@ public class CreatePostTest extends BaseTest {
                 .getHeaderElement().clickOnButtonCreatePost() //alt+enter → HomePage
                 .checkIsRedirectToCreatePostPage()
                 .enterTextInInputTitle("yakymenko-post")
+                .enterTextInInputBody("test")
 //                .selectTextInDropDownRole("Приватне повідомлення") //alt+enter → CreatePostPage
                 .selectValueInDropDownRole("One Person")
+                .clickOnSavePostButton()
+                .checkIsRedirectToPostPage()
+                .checkTextInAlert("New post successfully created.")
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
         ;
     }
 
@@ -26,6 +32,7 @@ public class CreatePostTest extends BaseTest {
                 .enterTextInInputBodyContent("Yakymenko-bodyContentForHW")
                 .selectValueInDropDownRoleUI()
                 .clickOnSaveNewPostButton()
+
         ;
     }
 }
