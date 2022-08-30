@@ -6,30 +6,28 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CreatePostPage extends ParentPage{
-    @FindBy (name = "title")
+public class CreatePostPage extends ParentPage {
+    @FindBy(name = "title")
     private WebElement inputTitle;
-    @FindBy (tagName = "select")
+    @FindBy(tagName = "select")
     private WebElement dropDownRole;
-    @FindBy (id = "post-body")
+    @FindBy(id = "post-body")
     private WebElement postBody;
-    @FindBy (xpath = ".//button[@class='btn btn-primary']")
+    @FindBy(xpath = ".//button[@class='btn btn-primary']")
     private WebElement buttonSaveNewPost;
-
-
 
 
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public CreatePostPage chekIsRedirectToCreatePostPage(){
+    public CreatePostPage chekIsRedirectToCreatePostPage() {
         //TODo check url
         Assert.assertTrue("Page CreatePost is not loaded", isElementDisplayed(inputTitle));
         return this;
     }
 
-    public CreatePostPage enterTextInInputTitle(String title){
+    public CreatePostPage enterTextInInputTitle(String title) {
         enterTextIntoElement(inputTitle, title);
         return this;
     }
@@ -45,23 +43,23 @@ public class CreatePostPage extends ParentPage{
         return this;
     }
 
-    public CreatePostPage selectTextInDropDownByUI (String valueForSelect) {
+    public CreatePostPage selectTextInDropDownByUI(String valueForSelect) {
         selectTextInDropDownByUI(dropDownRole, valueForSelect);
-       return this;
+        return this;
     }
 
-    public CreatePostPage enterTextInTextAreaBodyContent(String text){
+    public CreatePostPage enterTextInTextAreaBodyContent(String text) {
         enterTextIntoElement(postBody, text);
         return this;
     }
 
     /**
      * clicking on the post button.
-     * For now, returns the post creation page.
+     *
      * @return
      */
-        public CreatePostPage clikSaveNewPostButton () {
+    public PostPage clikSaveNewPostButton() {
         clicOnElement(buttonSaveNewPost);
-        return this;
+        return new PostPage(webDriver);
     }
 }

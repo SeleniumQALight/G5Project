@@ -11,19 +11,24 @@ public class CreatePostTest extends BaseTest {
 
 
     @Test
-    public void createNewPost (){
+    public void createNewPost() {
 
-    homePage
-            .openHomePage()
-            .getHeaderElement().clickOnButtonCreatePost()
-            .chekIsRedirectToCreatePostPage()
-           .enterTextInInputTitle("Kostiushko")
+        homePage
+                .openHomePage()
+                .getHeaderElement().clickOnButtonCreatePost()
+                .chekIsRedirectToCreatePostPage()
+                .enterTextInInputTitle("Kostiushko")
 //            .selecttextInDropDownRole("Приватне повідомлення")
 //            .selectValueInDropDownRole("One Person")
-            .selectTextInDropDownByUI("Групове повідомлення")
-            .enterTextInTextAreaBodyContent("Text for body")
-            .clikSaveNewPostButton()
-            ;
+                .selectTextInDropDownByUI("Групове повідомлення")
+                .enterTextInTextAreaBodyContent("Text for body")
+                .clikSaveNewPostButton()
+                .chekIsRedirectToPostPage()
+                .checkTextInAllert("New post successfully created.")
+                .getHeaderElement().clickOnMyProfileButton()
+                .chekIsRedirectTomyProfilePage()
+
+        ;
     }
 
 
