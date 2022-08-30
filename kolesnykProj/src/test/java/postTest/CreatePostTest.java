@@ -16,10 +16,13 @@ public class CreatePostTest extends BaseTest {
  //               .selectTextInDropDownRole("Приватне повідомлення")
 //                .selectValueInDropDownRole("One Person")
                 .selectDropDown("Приватне повідомлення")
-                .clickOnButtonSaveNewPost();
+                .clickOnButtonSaveNewPost()
+                .checkIsRedirectToPostPage()
+                .checkTextInAlert("New post successfully created.")
+                .getHeaderElements().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+
         ;
-
-
 
     }
 }

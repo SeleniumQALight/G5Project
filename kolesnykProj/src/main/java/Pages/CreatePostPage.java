@@ -55,7 +55,8 @@ public class CreatePostPage extends ParentPage{
         return this;
     }
 
-    public void clickOnButtonSaveNewPost(){
+    public PostPage clickOnButtonSaveNewPost(){
         clickOnElement(buttonSaveNewPost);
+        return new PostPage(driver);
     }
 }
