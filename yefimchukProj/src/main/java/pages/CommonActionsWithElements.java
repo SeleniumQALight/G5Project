@@ -5,15 +5,23 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
 
+    protected WebDriverWait webDriverWait10, webDriverWait15;
+
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
 
     protected void enterTextIntoElement(WebElement webElement, String text) {
@@ -30,6 +38,7 @@ public class CommonActionsWithElements {
 
     protected void clickOnElement(WebElement webElement) {
         try {
+            webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
             String name = webElement.getAccessibleName();
             webElement.click();
             logger.info("'" + name + "' was clicked");
@@ -64,8 +73,9 @@ public class CommonActionsWithElements {
 
     /**
      * вибираємо значення в dropdown по видимому тексту
+     *
      * @param dropdown
-     * @param text- видимий текст
+     * @param text-    видимий текст
      */
 
     protected void selectTextInDropdown(WebElement dropdown, String text) {
