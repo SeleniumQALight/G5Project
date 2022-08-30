@@ -9,12 +9,18 @@ public class CreatePostTest extends BaseTest {
         homePage
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
-                .checkIsRedirectToCreatePage()
+             .checkIsRedirectToCreatePage()
                 .enterTextInInputTitle("petrov-post_v1")
                 .enterTextInInputBodyContent("Text into tag textArea on page create post")
                 .selectOptionInDropDownByUI()
  //               .selectValueInDropDownRole("One Person")
-                .clickOnCreatePostButton();
+                .clickOnCreatePostButton()
+             .checkIsRedirectToPostPage()
+                .checkTestIsAlert("New post successfully created.")
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+
+        ;
 
 //                .selectTextInDropDownRole("Приватне повідомлення")
         ;
