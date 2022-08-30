@@ -54,8 +54,8 @@ public class CreatePostPage extends ParentPage{
         return this;
     }
 
-    public CreatePostPage selectOptionInDropDownByUI(String textFromOption){
-        selectTextInDropDownByUI(dropDownRole, optionGroupMessage, textFromOption);
+    public CreatePostPage selectOptionInDropDownByUI(){
+        selectTextInDropDownByUI();
         return this;
     }
 

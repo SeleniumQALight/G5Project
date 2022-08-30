@@ -12,7 +12,7 @@ public class CreatePostTest extends BaseTest {
                 .checkIsRedirectToCreatePage()
                 .enterTextInInputTitle("petrov-post_v1")
                 .enterTextInInputBodyContent("Text into tag textArea on page create post")
-                .selectOptionInDropDownByUI("Групове повідомлення")
+                .selectOptionInDropDownByUI()
  //               .selectValueInDropDownRole("One Person")
                 .clickOnCreatePostButton();
 

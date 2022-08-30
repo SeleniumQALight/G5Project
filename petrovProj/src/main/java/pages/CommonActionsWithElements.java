@@ -97,12 +97,11 @@ public class CommonActionsWithElements {
     }
 
 
-    protected void selectTextInDropDownByUI(WebElement dropDown, WebElement selectOption, String textFromOption){
+    protected void selectTextInDropDownByUI(){
         try {
-            Select select = new Select(dropDown);
-            clickOnElement(dropDown);
-            select.selectByVisibleText(textFromOption);
-            clickOnElement(selectOption);
+            clickOnElement(webDriver.findElement(By.xpath(".//option[text()='Загальнодоступне']")));
+            clickOnElement(webDriver.findElement(By.xpath(".//option[text()='Групове повідомлення']")));
+
 
         }catch (Exception e){
             printErrorAndStopTest(e);
