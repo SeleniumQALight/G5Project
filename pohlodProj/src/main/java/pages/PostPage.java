@@ -4,20 +4,35 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.elements.HeaderElement;
 
 public class PostPage extends ParentPage{
-    @FindBy(xpath = ".//div[contains(text(),'New post successfully created.')]")
-    private WebElement newPostCreated;
+
+    private HeaderElement headerElement = new HeaderElement(webDriver);
+
+    @FindBy(xpath = ".//a[@data-original-title='Edit']")
+    private WebElement editButton;
+
+    @FindBy(xpath = ".//*[@class='alert alert-success text-center']")
+    private WebElement alertSuccess;
 
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
     }
 
+    public HeaderElement getHeaderElement() {
+        return headerElement;
+    }
+
     public PostPage checkIsRedirectToPostPage (){
         //TODO checkURL
-        Assert.assertTrue("Page Post is not loaded", isElementDisplayed(newPostCreated));
+        Assert.assertTrue( "Post Page is not loaded", isElementDisplayed(editButton));
         return this;
     }
 
+    public PostPage checkTextInAlert(String text) {
+        Assert.assertEquals("Text in Alert", text, alertSuccess.getText());
+        return this;
+    }
 }
