@@ -14,7 +14,18 @@ public class CreatePostTest extends BaseTest {
 //                .selectTextInDropDownRole("Приватне повідомлення") //alt+enter → CreatePostPage
                 .selectValueInDropDownRole("One Person")
         ;
+    }
 
-
+    @Test
+    public void createNewPostForHW() {
+        homePage
+                .openHomePage()
+                .getHeaderElement().clickOnButtonCreatePost()
+                .checkIsRedirectToCreatePostPage()
+                .enterTextInInputTitle("yakymenko-postForHW")
+                .enterTextInInputBodyContent("Yakymenko-bodyContentForHW")
+                .selectValueInDropDownRoleUI()
+                .clickOnSaveNewPostButton()
+        ;
     }
 }

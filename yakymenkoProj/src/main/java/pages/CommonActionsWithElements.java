@@ -101,6 +101,17 @@ public class CommonActionsWithElements { // загальні дії з елем�
         }
     }
 
+    protected void selectTextInDropDownUI(WebElement dropDown, WebElement textInSelect) {
+        try {
+            clickOnElement(dropDown);
+            clickOnElement(textInSelect);
+            logger.info("'" + textInSelect + "' was selected in DropDown");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
