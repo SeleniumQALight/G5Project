@@ -88,6 +88,15 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
+    protected void selectTextInDropDownByUI(WebElement dropdown, WebElement option){
+        try {
+            dropdown.click();
+            option.click();
+            logger.info("'" + option + "' was selected in DropDown");
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);

@@ -1,6 +1,5 @@
 package pages.elements;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,7 +7,6 @@ import pages.CommonActionsWithElements;
 import pages.CreatePostPage;
 
 public class HeaderElement extends CommonActionsWithElements {
-    Logger logger = Logger.getLogger(getClass());
     @FindBy(xpath = ".//a[text()='Create Post']")
     private WebElement buttonCreatePost;
     @FindBy(xpath = ".//button[text()='Sign Out']")

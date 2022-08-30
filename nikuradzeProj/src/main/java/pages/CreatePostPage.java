@@ -13,6 +13,8 @@ public class CreatePostPage extends ParentPage{
     private WebElement inputBodyContent;
     @FindBy(tagName = "select")
     private WebElement dropDownRole;
+    @FindBy(xpath = ".//option[text()='Приватне повідомлення']")
+    private WebElement privateMessage;
     @FindBy(xpath = ".//*[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
 
@@ -37,6 +39,10 @@ public class CreatePostPage extends ParentPage{
 
     public CreatePostPage selectTextInDropdownRole(String textForSelect) {
         selectTextInDropDown(dropDownRole, textForSelect);
+        return this;
+    }
+    public CreatePostPage selectTextInDropDownByUIRole(){
+        selectTextInDropDownByUI(dropDownRole, privateMessage);
         return this;
     }
     public void clickOnButtonSaveNewPost(){
