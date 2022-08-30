@@ -2,6 +2,8 @@ package postTest;
 
 import baseTest.BaseTest;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import pages.CreatePostPage;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,8 +19,10 @@ public class CreatePostTest extends BaseTest {
             .chekIsRedirectToCreatePostPage()
            .enterTextInInputTitle("Kostiushko")
 //            .selecttextInDropDownRole("Приватне повідомлення")
-            .selectValueInDropDownRole("One Person")
-
+//            .selectValueInDropDownRole("One Person")
+            .selectTextInDropDownByUI("Групове повідомлення")
+            .enterTextInTextAreaBodyContent("Text for body")
+            .clikSaveNewPostButton()
             ;
     }
 

@@ -11,9 +11,7 @@ public class LoginTestWithPageObject extends BaseTest {
         loginPage.enterUserNameIntoLogininInput("qaauto");
         loginPage.enterPasswordIntoInputPassword("123456qwerty");
         loginPage.clickOnButtonLogIn();
-
-        Assert.assertTrue("Button SinOut is not Displayed ",
-                homePage.isButtonSignOutDisplayed());
+        homePage.isButtonSignOutDisplayed();
 
     }
     @Test
@@ -22,9 +20,7 @@ public class LoginTestWithPageObject extends BaseTest {
         loginPage.enterUserNameIntoLogininInput("qaauto");
         loginPage.enterPasswordIntoInputPassword("NoValidPassword");
         loginPage.clickOnButtonLogIn();
-
-        Assert.assertTrue("Tetx 'Invalid username / pasword' is not visible ",
-                homePage.isTextNoLogginDisplayed());
+        loginPage.isTextNoLogginDisplayed();
 
     }
 
