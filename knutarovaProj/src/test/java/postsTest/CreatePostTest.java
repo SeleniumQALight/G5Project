@@ -11,8 +11,12 @@ public class CreatePostTest extends BaseTest {
                 .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePotsPage()
                 .enterTextInInputTitle("knutarova-post")
-//                .selectTextInDropDownRole("Приватне повідомлення")
+//              .selectTextInDropDownRole("Приватне повідомлення")
                 .selectValueInDropDownRole("One Person")
+                .enterTextInInputBody("It's my grate post")
+                .selectTextInDropDownByUI("Групове повідомлення")
+                .clickOnButtonSaveNewPost()
+
 
 
 

@@ -6,8 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import pages.CommonActionsWithElements;
 import pages.CreatePostPage;
 
-import javax.swing.*;
-
 public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath =".//a[text()='Create Post']")
     private WebElement buttonCreatePost;
