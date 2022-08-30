@@ -7,24 +7,21 @@ import org.openqa.selenium.support.FindBy;
 import pages.elements.HeaderElement;
 
 public class HomePage extends ParentPage {
-    private HeaderElement headerElement = new HeaderElement(webDriver);
-
-    @FindBy(xpath = ".//button[text()='Sign Out']")
-    private WebElement buttonSignOut;
-
+    private final HeaderElement headerElement = new HeaderElement(webDriver);
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public boolean isButtonSignOutDisplayed() {
-        return isElementDisplayed(buttonSignOut);
-    }
-
     public HomePage checkIsRedirectToHomePage() {
         //TODO checkURL
-        Assert.assertTrue("HomePage does not loaded", isButtonSignOutDisplayed());
+        Assert.assertTrue("HomePage does not loaded", headerElement.isButtonSignOutDisplayed());
         return this;
+    }
+
+    public LoginPage checkIsRedirectToHomePageDoesNotHappened() {
+        Assert.assertFalse("HomePage was loaded", headerElement.isButtonSignOutDisplayed());
+        return new LoginPage(webDriver);
     }
 
     public HomePage openHomePage() {

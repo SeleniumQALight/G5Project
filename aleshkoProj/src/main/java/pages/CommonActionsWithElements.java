@@ -2,6 +2,7 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -26,11 +27,11 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected void enterTextIntoElement(WebElement webElement, String text) {
+    protected void enterTextIntoElement(WebElement webElement, String textForInput) {
         try {
             webElement.clear();
-            webElement.sendKeys(text);
-            logger.info("'" + text + "' was inputted into '" + webElement.getAccessibleName() + "'");
+            webElement.sendKeys(textForInput);
+            logger.info("'" + textForInput + "' was inputted into '" + webElement.getAccessibleName() + "'");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -61,6 +62,16 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected boolean isElementContainsText(WebElement webElement, String text) {
+        try {
+            String webElementText = webElement.getText();
+            return webElementText.equals(text);
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
+    }
+
     protected void selectTextInDropDown(WebElement dropdown, String text) {
         try {
             Select select = new Select(dropdown);
@@ -81,6 +92,16 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void selectTextInDropDownLikeUI(WebElement dropdown, String text) {
+        try {
+            dropdown.click();
+            WebElement webElement = webDriver.findElement(By.xpath(".//select//*[text()='" + text + "']"));
+            webElement.click();
+            logger.info("'" + text + "' was selected in dropdown");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Cannot work with element: " + e);
