@@ -11,10 +11,12 @@ public class CreatePostTest extends BaseTest {
                 .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePage()
                 .enterTextInInputTitle("petrov-post_v1")
+                .enterTextInInputBodyContent("Text into tag textArea on page create post")
+                .selectOptionInDropDownByUI()
+ //               .selectValueInDropDownRole("One Person")
+                .clickOnCreatePostButton();
+
 //                .selectTextInDropDownRole("Приватне повідомлення")
-                .selectValueInDropDownRole("One Person")
-
-
         ;
     }
 }

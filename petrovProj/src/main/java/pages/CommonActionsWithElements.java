@@ -2,6 +2,7 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -37,7 +38,7 @@ public class CommonActionsWithElements {
     }
 
 
-    public boolean isElementTrue(WebElement webElement){
+    public boolean isElementWasDisplayed(WebElement webElement){
         try{
            return webElement.isDisplayed();
         }catch (Exception e){
@@ -89,6 +90,18 @@ public class CommonActionsWithElements {
             Select select = new Select(dropDown);
             select.selectByValue(valueForSelect);
             logger.info("'" + valueForSelect + "' was selected in DropDown");
+
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
+
+
+    protected void selectTextInDropDownByUI(){
+        try {
+            clickOnElement(webDriver.findElement(By.xpath(".//option[text()='Загальнодоступне']")));
+            clickOnElement(webDriver.findElement(By.xpath(".//option[text()='Групове повідомлення']")));
+
 
         }catch (Exception e){
             printErrorAndStopTest(e);
