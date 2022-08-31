@@ -16,9 +16,10 @@ public class CreatePostTest extends BaseTest {
                 .enterTextInInputBody("It's my grate post")
                 .selectTextInDropDownByUI("Групове повідомлення")
                 .clickOnButtonSaveNewPost()
-
-
-
+                .checkIsRedirectToPostPage()
+                .checkTextInAlert("New post successfully created.")
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
 
         ;
 

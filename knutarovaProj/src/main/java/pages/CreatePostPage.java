@@ -16,7 +16,7 @@ public class CreatePostPage extends ParentPage {
     private WebElement inputBody;
 
     @FindBy(xpath = ".//button[@class='btn btn-primary']")
-    private WebElement clickOnButtonSaveNewPost;
+    private WebElement ButtonSaveNewPost;
 
     @FindBy(xpath = ".//option[text()='Групове повідомлення']")
     private WebElement dropDownByUI;
@@ -55,14 +55,14 @@ public class CreatePostPage extends ParentPage {
         return this;
     }
 
-    public CreatePostPage enterTextInInputBody(String body) {
-        enterTextIntoElement(inputBody, body);
+    public CreatePostPage enterTextInInputBody(String text) {
+        enterTextIntoElement(inputBody, text);
         return this;
     }
 
-    public CreatePostPage clickOnButtonSaveNewPost() {
-        clickOnElement(clickOnButtonSaveNewPost);
-        return new CreatePostPage(webDriver);
+    public PostPage clickOnButtonSaveNewPost() {
+        clickOnElement(ButtonSaveNewPost);
+        return new PostPage(webDriver);
     }
 
 }
