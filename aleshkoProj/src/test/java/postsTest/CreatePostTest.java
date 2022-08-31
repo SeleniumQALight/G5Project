@@ -8,11 +8,13 @@ public class CreatePostTest extends BaseTest {
     public void createNewPost() {
         homePage
                 .openHomePage()
-                .getHeaderElement().clickOnButtonCreatePost()
+                .getHeaderElement().clickOnCreatePostButton()
                 .checkIsRedirectToCreatePostPage()
                 .enterTextIntoTitleInput("aleshko-post")
-//                .selectTextInDropDownRole("Приватне повідомлення")
-                .selectValueInDropDownRole("One Person");
+                .enterTextIntoBodyInput("")
+                .selectValueInDropDownRole("One Person")
+                .clickOnSaveNewPostButton()
+                .checkRedirectToPostPage();
     }
 
 
@@ -20,12 +22,16 @@ public class CreatePostTest extends BaseTest {
     public void createNewPostHomeWork() {
         homePage
                 .openHomePage()
-                .getHeaderElement().clickOnButtonCreatePost()
-                .enterTextIntoTitleInput("New_Title")
-                .enterTextIntoBodyInput("New_BodyText")
+                .getHeaderElement().clickOnCreatePostButton()
+                .enterTextIntoTitleInput("Aleshko_New_Title")
+                .enterTextIntoBodyInput("Aleshko_New_BodyText")
                 .selectTextInDropDownRoleLikeUI("Групове повідомлення")
                 .clickOnSaveNewPostButton()
-                .checkRedirectToPostPageAfterNewPostCreation()
-                .checkTitleAndBodyTextsAfterNewPostCreation("New_Title", "New_BodyText");
+                .checkRedirectToPostPage()
+                .checkAlertAboutNewPostCreation("New post successfully created.")
+                .checkTitleAndBodyTextsAfterNewPostCreation("Aleshko_New_Title", "Aleshko_New_BodyText")
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+        ;
     }
 }

@@ -21,6 +21,7 @@ public class CreatePostPage extends ParentPage {
 
     public CreatePostPage checkIsRedirectToCreatePostPage() {
         //TODO check_URL
+        waitChatToBeHide();
         Assert.assertTrue("CreatePost page does not loaded", isElementDisplayed(inputTitle));
         return this;
     }
