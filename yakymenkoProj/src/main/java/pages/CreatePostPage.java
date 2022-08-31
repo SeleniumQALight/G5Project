@@ -17,6 +17,10 @@ public class CreatePostPage extends ParentPage { // alt+enter → constructor
     private WebElement groupMessageValueInDropDown;
     @FindBy(xpath = ".//button[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
+    @FindBy(xpath = ".//textarea[@id='post-body']")
+    private WebElement inputBody;
+    @FindBy(xpath = ".//form[@action='/create-post']//button")
+    private WebElement buttonSavePost;
 
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
@@ -57,5 +61,15 @@ public class CreatePostPage extends ParentPage { // alt+enter → constructor
     public CreatePostPage clickOnSaveNewPostButton() {
         clickOnElement(buttonSaveNewPost);
         return this;
+    }
+
+    public CreatePostPage enterTextInInputBody(String text) {
+        enterTextIntoElement(inputBody, text);
+        return this;
+    }
+
+    public PostPage clickOnSavePostButton() {
+        clickOnElement(buttonSavePost);
+        return new PostPage(webDriver);
     }
 }

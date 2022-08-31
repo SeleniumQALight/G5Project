@@ -5,16 +5,23 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CommonActionsWithElements { // загальні дії з елементами які ми будемо робити на всіх сторінках
     protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass()); // ↓Alt+Insert з нового рядка
+    protected WebDriverWait webDriverWait10, webDriverWait15;
 
     // Конструктор працює тільки при створенні об'єкту
     public CommonActionsWithElements(WebDriver webDriver) { // якщо метод public - ми до нього будемо звертатися з тесту
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); // ініціалізує елементи які наслідуються з цього класу
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
 
     /**
@@ -37,6 +44,7 @@ public class CommonActionsWithElements { // загальні дії з елем�
      */
     protected void clickOnElement(WebElement webElement) { // метод protected - до нього можна буде достукатись тільки в пейджах
         try {
+            webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));// очікування
             String name = webElement.getAccessibleName(); //спочатку беремо в нього ім'я
             webElement.click(); // клікаємо по елементу
             logger.info("'" + name + "' was clicked");// потім пишемо логгер
