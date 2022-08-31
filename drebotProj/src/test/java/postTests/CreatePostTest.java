@@ -18,7 +18,10 @@ public class CreatePostTest extends BaseTest {
                 //.selectValueInDropDownRole("One Person")
                 .clickSaveNewPost()
                 .checkIsRedirectToPostInfoPage()
-                .checkTitleInPostInfoPage("dr-post");
+                .checkTextInAlert("New post successfully created.")
+                .checkTitleInPostInfoPage("dr-post")
+                .getHeaderElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage();
     }
 
 
