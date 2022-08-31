@@ -17,7 +17,12 @@ public class CreatePostTest extends BaseTest {
                 // .selectValueInDropDownRole("One Person");
                 .enterTextInputBody("Text entered into body")
                 .selectValueInDropDown()
-                .savePost();
+                .savePost()
+                .checkIsRedirectToPostPage()
+                .checkTextInAlert("New post successfully created.")
+                .getHeaderElement()
+                .clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage();
 
     }
 }
