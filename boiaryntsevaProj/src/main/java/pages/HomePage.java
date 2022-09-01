@@ -9,8 +9,6 @@ import pages.elements.HeaderElement;
 
 public class HomePage extends ParentPage {
 
-    @FindBy(xpath = ".//button[text()='Sign Out']")
-    private WebElement signOutButton;
 
     private HeaderElement headerElement = new HeaderElement(webDriver);
 
@@ -18,28 +16,23 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
-    public boolean isButtonSignedOutDisplayed() {
-//        try {
-//            WebElement buttonSignOut = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));
-//            return buttonSignOut.isDisplayed();
-//        } catch (Exception e) {
-//            return false;
-//        }
-        return isElementDisplayed(signOutButton);
-    }
 
     public HomePage checkIsRedirectToHomePage() {
         //TODO checkURL
-        Assert.assertTrue("Home page is not loaded", isButtonSignedOutDisplayed());
+        Assert.assertTrue("Home page is not loaded", headerElement.isButtonSignedOutDisplayed());
         return this;
     }
 
     public HomePage openHomePage() {
         //Login page
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.loginWithValidCred();
+        if (!getHeaderElement().isButtonSignedOutDisplayed()) {
+            LoginPage loginPage = new LoginPage(webDriver);
+            loginPage.loginWithValidCred();
+        }
         checkIsRedirectToHomePage();
         return this;
+
+
     }
 
     public HeaderElement getHeaderElement() {
