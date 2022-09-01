@@ -2,6 +2,7 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -44,10 +45,10 @@ public class CommonActionsWithElements { // загальні дії з елем�
      */
     protected void clickOnElement(WebElement webElement) { // метод protected - до нього можна буде достукатись тільки в пейджах
         try {
-            webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));// очікування
+            webDriverWait15.withMessage("Button is not clickable").until(ExpectedConditions.elementToBeClickable(webElement));// очікування
             String name = webElement.getAccessibleName(); //спочатку беремо в нього ім'я
             webElement.click(); // клікаємо по елементу
-            logger.info("'" + name + "' was clicked");// потім пишемо логгер
+            logger.info("Element '" + name + "' was clicked");// потім пишемо логгер
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -65,9 +66,9 @@ public class CommonActionsWithElements { // загальні дії з елем�
             boolean state = webElement.isDisplayed();
             String message;
             if (state) {
-                message = "Element is displayed";
+                message = "Element '" + webElement.getAccessibleName() + "' is displayed";
             } else {
-                message = "Element is Not displayed";
+                message = "Element '" + webElement.getAccessibleName() + "' is Not displayed";
             }
             logger.info(message);
             return state;
@@ -109,16 +110,25 @@ public class CommonActionsWithElements { // загальні дії з елем�
         }
     }
 
-    protected void selectTextInDropDownUI(WebElement dropDown, WebElement textInSelect) {
+    //    protected void selectTextInDropDownUI(WebElement dropDown, WebElement textInSelect) {
+//        try {
+//            clickOnElement(dropDown);
+//            clickOnElement(textInSelect);
+//            logger.info("'" + textInSelect + "' was selected in DropDown");
+//        } catch (Exception e) {
+//            printErrorAndStopTest(e);
+//        }
+//    }
+// ↓↑
+    protected void selectTextInDropDownUI(WebElement dropDown, String text) {
         try {
-            clickOnElement(dropDown);
-            clickOnElement(textInSelect);
-            logger.info("'" + textInSelect + "' was selected in DropDown");
+            dropDown.click();
+            webDriver.findElement(By.xpath(".//select//*[text()='" + text + "']")).click();
+            logger.info("'" + text + "' was selected in DropDown");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
-
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);

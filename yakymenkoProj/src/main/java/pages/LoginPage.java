@@ -8,21 +8,21 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructor
-    // Описані елементи, які ми робимо через анотацію @FindBy та ініціалізуємо через PageFactory.initElements який ми винесли в цей батьківський клас
+    // Описані елементи, які ми робимо через анотацію @FindBy та ініціалізуємо через PageFactory.initElements який ми винесли в цей батьківський клас:
     @FindBy(xpath = ".//input[@name='username' and @placeholder='Username']")
     private WebElement inputUserNameHeader;
-
     @FindBy(xpath = ".//input[@placeholder='Password']")
     private WebElement inputPasswordHeader;
-
     @FindBy(xpath = ".//button[text()='Sign In']")
     private WebElement buttonSignIn;
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement alertInvalidUsernamePassword;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     } //constructor
 
-    // Дії над ціми (@FindBy) елементами
+    // Дії над цими (@FindBy) елементами:
 
     /**
      * Метод, який буде відкривати LoginPage
@@ -51,7 +51,6 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
         enterTextIntoElement(inputUserNameHeader, userName); // ↑ замінили на виклик метода
     }
 
-
     public void enterPasswordIntoInputPassword(String password) {
 //        try {
 ////            WebElement webElement = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
@@ -73,6 +72,14 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
 //            printErrorAndStopTest(e);
 //        }
         clickOnElement(buttonSignIn);
+    }
+
+    public boolean isAlertDisplayed(){
+        return isElementDisplayed(alertInvalidUsernamePassword);
+    }
+
+    public boolean isButtonSignInDisplayed(){
+        return isElementDisplayed(buttonSignIn);
     }
 
     public HomePage loginWithValidCred() {
