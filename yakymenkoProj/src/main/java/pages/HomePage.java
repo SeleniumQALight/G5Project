@@ -49,8 +49,10 @@ public class HomePage extends ParentPage { // Alt + Insert → create constructo
      */
     public HomePage openHomePage() {
         //Login Page
-        LoginPage loginPage = new LoginPage(webDriver);// створюємо об'єкт Логін пейджі
-        loginPage.loginWithValidCred(); //alt+enter → LoginPage
+        if (!getHeaderElement().isButtonSignOutDisplayed()) { // робимо перевірку що якщо ми не залогінені - потрібно залогінитись, інакше - ...(дописати)
+            LoginPage loginPage = new LoginPage(webDriver);// створюємо об'єкт Логін пейджі
+            loginPage.loginWithValidCred(); //alt+enter → LoginPage
+        }
         //checkHomePage
         checkIsRedirectToHomePage();
         return this;
