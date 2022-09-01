@@ -30,7 +30,9 @@ public class CreatePostTest extends BaseTest {
                 .checkIsRedirectToCreatePostPage()
                 .enterTextInInputTitle("yakymenko-postForHW")
                 .enterTextInInputBodyContent("Yakymenko-bodyContentForHW")
-                .selectValueInDropDownRoleUI()
+//                .selectValueInDropDownRoleUI()
+// ↓↑
+                .selectValueInDropDownRoleUI("Групове повідомлення")
                 .clickOnSaveNewPostButton()
 
         ;

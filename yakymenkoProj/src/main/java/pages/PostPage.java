@@ -10,7 +10,6 @@ public class PostPage extends ParentPage {
     private HeaderElement headerElement = new HeaderElement(webDriver);
     @FindBy(xpath = ".//a[@data-original-title='Edit']")
     private WebElement buttonEdit;
-
     @FindBy(xpath = ".//*[@class='alert alert-success text-center']")
     private WebElement alertSuccess;
 

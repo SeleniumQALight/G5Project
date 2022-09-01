@@ -10,7 +10,8 @@ import pages.MyProfilePage;
 public class HeaderElement extends CommonActionsWithElements {//alt+enter → constructor
     @FindBy(xpath = ".//a[text()='Create Post']")
     private WebElement buttonCreatePost;
-
+    @FindBy(xpath = ".//button[text()='Sign Out']")
+    private WebElement buttonSignOut;
     @FindBy(xpath = ".//*[@data-original-title='My Profile']")
     private WebElement buttonMyProfile;
 
@@ -21,11 +22,16 @@ public class HeaderElement extends CommonActionsWithElements {//alt+enter → co
     /**
      * клік на кнопку "Створення поста"
      * і повертаємо пейджу Створення поста
+     *
+     * @return
      */
     public CreatePostPage clickOnButtonCreatePost() {
         clickOnElement(buttonCreatePost);
         return new CreatePostPage(webDriver);
+    }
 
+    public boolean isButtonSignOutDisplayed() {
+        return isElementDisplayed(buttonSignOut);
     }
 
     public MyProfilePage clickOnMyProfileButton() {

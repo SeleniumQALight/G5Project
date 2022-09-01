@@ -53,7 +53,12 @@ public class CreatePostPage extends ParentPage { // alt+enter → constructor
         return this;
     }
 
-    public CreatePostPage selectValueInDropDownRoleUI() {
+    //    public CreatePostPage selectValueInDropDownRoleUI() {
+//        selectTextInDropDownUI(dropDownRole, groupMessageValueInDropDown);
+//        return this;
+//    }
+// ↓↑
+    public CreatePostPage selectValueInDropDownRoleUI(String groupMessageValueInDropDown) {
         selectTextInDropDownUI(dropDownRole, groupMessageValueInDropDown);
         return this;
     }

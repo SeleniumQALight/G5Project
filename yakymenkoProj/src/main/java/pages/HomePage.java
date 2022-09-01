@@ -13,23 +13,23 @@ public class HomePage extends ParentPage { // Alt + Insert → create constructo
         super(webDriver);
     }
 
-    public boolean isButtonSignOutDisplayed() { // constructor
-        try {
-            WebElement buttonSignOut = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));
-            return buttonSignOut.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
+//    public boolean isButtonSignOutDisplayed() { // constructor
+//        try {
+//            WebElement buttonSignOut = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));
+//            return buttonSignOut.isDisplayed();
+//        } catch (Exception e) {
+//            return false;
+//        }
+//    }
 
-    public boolean isAlertDisplayed() {
-        try {
-            WebElement alertInvalidUsernamePassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
-            return alertInvalidUsernamePassword.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
+//    public boolean isAlertDisplayed() {
+//        try {
+//            WebElement alertInvalidUsernamePassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
+//            return alertInvalidUsernamePassword.isDisplayed();
+//        } catch (Exception e) {
+//            return false;
+//        }
+//    }
 
     /**
      * Перевірка чи дійсно завантажилась HomePage
@@ -38,12 +38,12 @@ public class HomePage extends ParentPage { // Alt + Insert → create constructo
      */
     public HomePage checkIsRedirectToHomePage() {
         //TODO checkURL
-        Assert.assertTrue("HomePage does not loaded", isButtonSignOutDisplayed());
+        Assert.assertTrue("HomePage is not loaded", getHeaderElement().isButtonSignOutDisplayed());
         return this;
     }
 
     /**
-     * Метод який відкриває Home Page і перевіряє що саме вона відкривлась
+     * Метод який відкриває Home Page і перевіряє що саме вона відкрилась
      *
      * @return
      */
