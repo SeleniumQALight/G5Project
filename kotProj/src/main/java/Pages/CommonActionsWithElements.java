@@ -2,6 +2,7 @@ package Pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -99,6 +100,15 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void selectTextInDropDownUI(WebElement dropdown, WebElement groupMessage) {
+        try {
+            dropdown.click();
+            clickOnElement(groupMessage);
+            logger.info("'" + groupMessage + "' was selected in dropdown");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
 
     private void printErrorAndStopTest(Exception e) {
         logger.info("Can not work with element " + e);
