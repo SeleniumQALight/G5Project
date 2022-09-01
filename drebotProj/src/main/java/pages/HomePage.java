@@ -31,10 +31,11 @@ public class HomePage extends ParentPage {
 
     public HomePage openHomePage() {
 
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.loginWithValidCredential();
+        if (!headerElement.isButtonSignOutDisplayed()) {
+            LoginPage loginPage = new LoginPage(webDriver);
+            loginPage.loginWithValidCredential();
+        }
         checkIsRedirectToHomePage();
-
         return this;
     }
 
