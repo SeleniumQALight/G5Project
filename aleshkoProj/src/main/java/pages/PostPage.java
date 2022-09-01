@@ -15,9 +15,9 @@ public class PostPage extends ParentPage {
     private WebElement titleTextField;
     @FindBy(xpath = ".//div[@class='body-content'][2]")
     private WebElement bodyTextField;
-    @FindBy(xpath = ".//h2//..//a")
+    @FindBy(xpath = ".//*[@data-original-title='Edit']")
     private WebElement buttonEditPost;
-    @FindBy(xpath = ".//h2//..//form")
+    @FindBy(xpath = ".//*[@data-original-title='Delete']")
     private WebElement buttonDeletePost;
 
     public PostPage(WebDriver webDriver) {
@@ -44,5 +44,10 @@ public class PostPage extends ParentPage {
         waitChatToBeHide();
         Assert.assertTrue("Post page is not loaded", isElementDisplayed(buttonEditPost));
         return this;
+    }
+
+    public MyProfilePage clickOnDeletePostButton() {
+        clickOnElement(buttonDeletePost);
+        return new MyProfilePage(webDriver);
     }
 }
