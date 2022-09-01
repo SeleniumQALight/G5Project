@@ -17,6 +17,8 @@ public class CreatePostPage extends ParentPage {
     @FindBy(xpath = ".//form[@action='/create-post']//button")
     private WebElement buttonSavedPost;
 
+    @FindBy(xpath = ".//option[text()='Групове повідомлення']")
+    private WebElement groupMessage;
 
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
@@ -40,11 +42,18 @@ public class CreatePostPage extends ParentPage {
         return this;
     }
 
-    public CreatePostPage selectValueInDropDownRole(String valueForSelect) {
+     public CreatePostPage selectValueInDropDownRole(String valueForSelect) {
         selectValueInDropDown(dropDownRole, valueForSelect);
         return this;
 
     }
+
+    public CreatePostPage selectValueInDropDownUI (){
+        selectTextInDropDownUI(dropDownRole, groupMessage);
+        return this;
+    }
+
+
 
     public CreatePostPage enterTextInInputBody(String text) {
         enterTextIntoElement(inputBody, text);
