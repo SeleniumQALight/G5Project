@@ -73,7 +73,7 @@ public class CommonActionsWithElements { // загальні дії з елем�
             logger.info(message);
             return state;
         } catch (Exception e) {
-            logger.info("Element '" + webElement.getAccessibleName() + "' is Not displayed");
+            logger.info("Element is Not displayed");
             return false;
         }
     }
