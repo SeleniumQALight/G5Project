@@ -1,9 +1,12 @@
 package postsTests;
 
 import baseTest.BaseTest;
+import libs.Util;
+import org.junit.After;
 import org.junit.Test;
 
 public class CreatePostTest extends BaseTest {
+    final String TITLE = "pohlod-post" + Util.getDateAndTimeFormatted();
 
     @Test
     public void createNewPost() {
@@ -11,7 +14,7 @@ public class CreatePostTest extends BaseTest {
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
-                .enterTextIntoTheInputTitle("pohlod-post")
+                .enterTextIntoTheInputTitle(TITLE)
                 .enterTextIntoTheInputBodyContent("pohlod-body-content")
                 //      .selectTextInDropDownRole("Приватне повідомлення")
                 .selectValueInDropDownRole("One Person")
@@ -21,7 +24,19 @@ public class CreatePostTest extends BaseTest {
                 .checkTextInAlert("New post successfully created.")
                 .getHeaderElement().clickOnButtonProfile()
                 .checkIsRedirectToMyProfilePage()
+                .checkPostWasCreated(TITLE)
         ;
+
+    }
+
+    @After
+    public void deletePost(){
+        homePage
+                .openHomePage()
+                .getHeaderElement()
+                .clickOnButtonProfile()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostWithTitleTillPresent(TITLE);
 
     }
 
