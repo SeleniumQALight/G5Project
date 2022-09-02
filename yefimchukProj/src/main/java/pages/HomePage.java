@@ -14,13 +14,7 @@ public class HomePage extends ParentPage {
     }
 
     public boolean isButtonSignOutDisplayed() {
-        try {
-            WebElement buttonSingOut = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));
-            return buttonSingOut.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-
+        return headerElement.isButtonSignOutDisplayed();
     }
 
     /**
@@ -34,6 +28,7 @@ public class HomePage extends ParentPage {
         return this; //return HomePage
     }
 
+
     /**
      * метод який відкриває Home Page
      * і перевіряє що саме вона відкрилась
@@ -41,8 +36,10 @@ public class HomePage extends ParentPage {
      * @return
      */
     public HomePage openHomePage() {
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.loginWithValidCred();
+        if (!headerElement.isButtonSignOutDisplayed()) {
+            LoginPage loginPage = new LoginPage(webDriver);
+            loginPage.loginWithValidCred();
+        }
         checkIsRedirectToHomePage();
         return this;
     }
