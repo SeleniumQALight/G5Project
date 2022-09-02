@@ -17,6 +17,8 @@ public class PostInfoPage extends ParentPage {
     private WebElement buttonEdit;
     @FindBy(xpath = ".//*[@class='alert alert-success text-center']")
     private WebElement alertSuccess;
+    @FindBy(xpath = ".//button[@data-original-title='Delete']")
+    private WebElement buttonDelete;
 
     public PostInfoPage(WebDriver webDriver) {
         super(webDriver);
@@ -29,7 +31,7 @@ public class PostInfoPage extends ParentPage {
     public PostInfoPage checkIsRedirectToPostInfoPage() {
         //TODO check url
         Assert.assertTrue("PostInfoPage is not loaded", isElementDisplayed(buttonEdit));
-        Assert.assertTrue("Page InfoPost was NOT loaded", isElementDisplayed(messageSuccessfullyCreated));
+        //Assert.assertTrue("Page InfoPost was NOT loaded", isElementDisplayed(messageSuccessfullyCreated));
         return this;
     }
 
@@ -42,5 +44,10 @@ public class PostInfoPage extends ParentPage {
     public PostInfoPage checkTextInAlert(String text) {
         Assert.assertEquals("Text in Alert", text, alertSuccess.getText());
         return this;
+    }
+
+    public MyProfilePage clickOnDeleteButton() {
+        clickOnElement(buttonDelete);
+        return new MyProfilePage(webDriver);
     }
 }

@@ -1,5 +1,6 @@
 package pages.elements;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,5 +33,14 @@ public class HeaderElement extends CommonActionsWithElements {
     public MyProfilePage clickOnMyProfileButton() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
+    }
+    public boolean isButtonSignOutDisplayed() {
+        try {
+            WebElement buttonSingOut = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));
+            return buttonSingOut.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 }

@@ -41,7 +41,7 @@ public class HomePage extends ParentPage {
 //        }
 //    }
 
-    public boolean isAMessageInvalidUsernamePassword(){
+    public boolean isAMessageInvalidUsernamePassword() {
         isElementDisplayed(message);
         return true;
     }
@@ -64,14 +64,17 @@ public class HomePage extends ParentPage {
      */
 
     public HomePage openHomePage() {
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.LoginWithValidCred();
+        if (!headerElement.isButtonSignOutDisplayed()) {
+            LoginPage loginPage = new LoginPage(webDriver);
+            loginPage.LoginWithValidCred();
+        }
         checkIsRedirectToHomePage();
         return this;
     }
 
     /**
      * віддіає private HeaderElement
+     *
      * @return
      */
     public HeaderElement getHeaderElement() {

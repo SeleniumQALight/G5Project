@@ -15,6 +15,9 @@ public class PostPage extends ParentPage{
     @FindBy(xpath = ".//a[@data-original-title='Edit']")
     private WebElement buttonEdit;
 
+    @FindBy(xpath = ".//button[@data-original-title='Delete']")
+    private WebElement buttonDelete;
+
     public PostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -32,5 +35,10 @@ public class PostPage extends ParentPage{
     public PostPage checkTestIsAlert(String text) {
         Assert.assertEquals("Text in Alert", text, AlertMessageSuccessfully.getText());
         return this;
+    }
+
+    protected MyProfilePage clickOnDeleteButton() {
+        clickOnElement(buttonDelete);
+        return new MyProfilePage(webDriver);
     }
 }
