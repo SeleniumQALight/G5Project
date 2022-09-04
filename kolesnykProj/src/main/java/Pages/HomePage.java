@@ -17,22 +17,32 @@ public class HomePage extends ParentPage {
     @FindBy(xpath = "//button[@class='btn btn-sm btn-secondary']")
         WebElement singOutButton;
 
-    public boolean isButtonSignOutDisplayed() {
-        return isElementDisplayed(singOutButton);
-    }
+//    public boolean isButtonSignOutDisplayed() {
+//        return isElementDisplayed(singOutButton);
+//    }
 
     public HomePage checkIsRedirectToHomePage(){
         //TODO checkURL
-        Assert.assertTrue("Home page is not opened", isButtonSignOutDisplayed());
+        Assert.assertTrue("Home page is not opened", headerElements.isButtonSignOutDisplayed());
         return this;
     }
 
-    public HomePage openHomePage() {
-        // action on Login page
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginWithValidCredentials();
+//    public HomePage openHomePage() {
+//        // action on Login page
+//        if (getHeaderElements().isButtonSignInDisplayed()){
+//            LoginPage loginPage = new LoginPage(driver);
+//            loginPage.loginWithValidCredentials();
+//        }
+//        // check that home page open
+//        checkIsRedirectToHomePage();
+//        return this;
+//    }
 
-        // check that home page open
+    public HomePage openHomePage() {
+        if (!headerElements.isButtonSignOutDisplayed()) {
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.loginWithValidCredentials();
+        }
         checkIsRedirectToHomePage();
         return this;
     }
