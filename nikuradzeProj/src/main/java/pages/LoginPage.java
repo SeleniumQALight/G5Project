@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class LoginPage extends ParentPage{
     @FindBy(xpath = ".//input[@name='username' and @placeholder='Username']")
     private WebElement inputUserNameHeader;
@@ -17,6 +19,14 @@ public class LoginPage extends ParentPage{
     private WebElement buttonSignIn;
     @FindBy(xpath = ".//div[text()='Invalid username / pasword']")
     private WebElement alertInvalidLogin;
+    @FindBy(id = "username-register")
+    private WebElement inputUserNameSignUp;
+    @FindBy(id = "email-register")
+    private WebElement inputEmailSignUp;
+    @FindBy(id = "password-register")
+    private WebElement inputPasswordSignUp;
+    @FindBy(xpath = ".//*[contains(@class, 'visible')]")
+    private List<WebElement> validationMessage;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -96,5 +106,33 @@ public class LoginPage extends ParentPage{
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
         return new HomePage(webDriver);
+    }
+
+    public void enterUserNameIntoRegistrationInput(String userName) {
+        enterTextIntoElement(inputUserNameSignUp, userName);
+    }
+
+    public void enterEmailIntoRegistrationInput(String email) {
+        enterTextIntoElement(inputEmailSignUp, email);
+    }
+
+    public void enterPasswordIntoRegistrationInput(String password) {
+        enterTextIntoElement(inputPasswordSignUp, password);
+    }
+    public void checkValidationMessagesNumber() throws InterruptedException {
+        Thread.sleep(3000);
+        Assert.assertEquals("Incorrect number of alerts are displayed", 3, validationMessage.size());
+        logger.info("Number of error messages on registration form is " + validationMessage.size());
+    }
+
+    public void checkValidationMessageText() {
+        Assert.assertEquals("Username must be at least 3 characters.", validationMessage.get(0).getText());
+        logger.info("Valid username error message: " + validationMessage.get(0).getText());
+        Assert.assertEquals("You must provide a valid email address.", validationMessage.get(1).getText());
+        logger.info("Valid email error message: " + validationMessage.get(1).getText());
+        Assert.assertEquals("Password must be at least 12 characters.", validationMessage.get(2).getText());
+        logger.info("Valid password error message: " + validationMessage.get(2).getText());
+
+
     }
 }
