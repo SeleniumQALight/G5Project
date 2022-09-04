@@ -15,7 +15,7 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//input[@placeholder='Password']")
     private WebElement inputUserPasswordHeader;
 
-    @FindBy(xpath = ".//input[@placeholder='Password']")
+    @FindBy(xpath = ".//button[text()='Sign In']")
     private WebElement buttonSingIn;
 
     public LoginPage(WebDriver webDriver) {
@@ -43,13 +43,7 @@ public class LoginPage extends ParentPage {
     }
 
     public void clickOnButtonSignIn() {
-        try {
-            buttonSingIn.click();
-            logger.info("Button sign in was clicked");
-
-        } catch (Exception e) {
-            printErrorAndStopTest(e);
-        }
+       clickOnElement(buttonSingIn);
     }
     public boolean isMessageInvalidCredsDisplayed(){
         try {
