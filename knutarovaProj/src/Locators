@@ -1,0 +1,29 @@
+#Login Page
+LoginPage.Input.Username = './/input[@name='username' and @id='username-register']'
+LoginPage.Input.Email = './/input[@name='email' and @id='email-register']'
+LoginPage.Input.Password = './/input[@name='password' and @id='password-register']'
+LoginPage.Button.OurApp = './/button[@type='submit' and @class='py-3 mt-4 btn btn-lg btn-success btn-block']'
+
+#Login Page Header
+LoginPage.Input.UsernameHeader = './/input[@name='username' and @class='form-control form-control-sm input-dark']'
+LoginPage.Input.PasswordHeader = './/input[@name='password' and @class='form-control form-control-sm input-dark']'
+LoginPage.Button.SignIn = './/button [@class='btn btn-primary btn-sm']'
+
+#Home Page
+HomePage.Button.MyProfileHeader = './/a[@href='/profile/irynaknutarova' and @class='mr-2']'
+HomePage.UsernameHeader = './/span[contains(text(),'irynaknutarova')]'
+HomePage.Button.CreatePostHeader = './/a[@class='btn btn-sm btn-success mr-2']'
+HomePage.Button.SignOutHeader = './/form[@action='/logout' and @method='POST']'
+
+#Create Post
+CreatePost.Input.Title = './/input[@name='title' and @id='post-title']'
+CreatePost.Textarea.BodyContent = './/textarea[@name='body' and @id='post-body']'
+CreatePost.Checkbox.ThisIsAUniquePosts = './/input[@type='checkbox' and @id='UniquePost']'
+CreatePost.Drop-down.SelectValueОбщедоступное = './/option[@value='All Users']'
+CreatePost.Button.SaveNewPost = './/option[@value='All Users']'
+
+#Posts And Followers
+PostsAndFollowers.Field.Username = './/h2'
+PostsAndFollowers.Field.PostsCount = './/a[@class='profile-nav-link nav-item nav-link active']'
+PostsAndFollowing.Field.FollowingCount = './/a[@class='profile-nav-link nav-item nav-link '][1]'
+PostsAndFollowing.Field.FollowersCount = './/a[@class='profile-nav-link nav-item nav-link '][2]'
