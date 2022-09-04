@@ -29,6 +29,7 @@ public class CreatePostTest extends BaseTest {
                 .enterTextIntoTitleInput(TITLE)
                 .enterTextIntoBodyInput("Aleshko_New_BodyText")
                 .selectTextInDropDownRoleLikeUI("Групове повідомлення")
+                .setCheckBoxWithValue("uncheck")
                 .clickOnSaveNewPostButton()
                 .checkRedirectToPostPage()
                 .checkAlertAboutNewPostCreation("New post successfully created.")
