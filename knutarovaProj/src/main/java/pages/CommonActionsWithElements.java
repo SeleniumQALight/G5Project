@@ -97,13 +97,13 @@ public class CommonActionsWithElements {
 
     /**
      * знаходить в dropDown елемент по тексту
-     * @param dropDownByUI
-     * @param text
+     * @param dropDownClosed
+     * @param textLine
      */
-    protected void selectTextInDropDownByUICase(WebElement dropDownByUI, String text){
+    protected void selectTextInDropDownByUICase(WebElement dropDownClosed, WebElement textLine){
         try{
-            isElementDisplayed(dropDownByUI);
-            clickOnElement(dropDownByUI);
+            clickOnElement(dropDownClosed);
+            clickOnElement(textLine);
         }catch (Exception e){
             printErrorAndStopTest(e);
         }
