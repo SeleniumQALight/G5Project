@@ -29,6 +29,10 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = ".//button[@data-original-title='Delete']")
     private WebElement buttonDelete;
 
+
+    @FindBy(xpath = ".//div//div[4]//p")
+    private WebElement textWeatherPostIsUnique;
+
     public PostPage checkIsRedirectToPostPage() {
         //TODO check URL
         Assert.assertTrue("Post page is not loaded", isElementDisplayed(buttonEdit));
@@ -43,5 +47,17 @@ public class PostPage extends ParentPage {
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDelete);
         return new MyProfilePage(webDriver);
+    }
+
+    public PostPage validateCheckBoxStateOnPost(String checkBoxValue){
+        if (checkBoxValue=="check"){
+            Assert.assertTrue(textWeatherPostIsUnique.getText().contains("yes"));
+            logger.info("Checkbox is displayed as 'checked' on Post Page");
+        } else if (checkBoxValue=="uncheck") {
+            Assert.assertTrue(textWeatherPostIsUnique.getText().contains("no"));
+            logger.info("Checkbox is displayed as 'not checked' on Post Page");
+        }
+
+        return this;
     }
 }

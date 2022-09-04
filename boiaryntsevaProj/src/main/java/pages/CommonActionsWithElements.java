@@ -55,12 +55,13 @@ public class CommonActionsWithElements {
 
     protected boolean isElementDisplayed(WebElement webElement) {
         try {
+            String name = webElement.getAccessibleName();
             boolean state = webElement.isDisplayed();
             String message;
             if (state) {
-                message = "Element is displayed";
+                message = name + "Element is displayed";
             } else {
-                message = "Element is not displayed";
+                message = name + "Element is not displayed";
             }
             logger.info(message);
             return state;
@@ -87,6 +88,20 @@ public class CommonActionsWithElements {
             clickOnElement(textToSelect);
         } catch (Exception e) {
             printErrorAndStopTest(e);
+        }
+    }
+
+    protected void selectCheckBoxValue(WebElement checkbox, String neededValue){
+        if (checkbox.isSelected() && neededValue=="check"){
+            logger.info("Check box is already selected");
+        } else if (checkbox.isSelected() && neededValue=="uncheck" ){
+            checkbox.click();
+            logger.info("Checkbox is unselected");
+        } else if ((!checkbox.isSelected()) && neededValue=="check") {
+            checkbox.click();
+            logger.info("Checkbox is selected");
+        } else if ((!checkbox.isSelected()) && neededValue=="uncheck") {
+            logger.info("Checkbox is already not selected");
         }
     }
 }
