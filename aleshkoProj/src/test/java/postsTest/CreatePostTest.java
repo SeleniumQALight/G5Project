@@ -33,7 +33,7 @@ public class CreatePostTest extends BaseTest {
                 .clickOnSaveNewPostButton()
                 .checkRedirectToPostPage()
                 .checkAlertAboutNewPostCreation("New post successfully created.")
-                .checkTitleAndBodyTextsAfterNewPostCreation(TITLE, "Aleshko_New_BodyText")
+                .checkPostContentAfterNewPostCreation(TITLE, "Aleshko_New_BodyText", "no")
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWasCreated(TITLE)
