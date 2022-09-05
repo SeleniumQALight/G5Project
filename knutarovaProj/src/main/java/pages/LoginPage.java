@@ -2,32 +2,45 @@ package pages;
 
 import libs.TestData;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//input[@name='username' and @placeholder='Username']")
     private WebElement inputUserNameHeader;
-
     @FindBy(xpath = ".//input[@placeholder='Password']")
     private WebElement inputPasswordHeader;
-
     @FindBy(xpath = ".//button[text()='Sign In']")
     private WebElement buttonSignIn;
+    @FindBy(xpath = ".//input[@id='username-register']")
+    private WebElement inputUsername;
+    @FindBy(xpath = ".//input[@id='email-register']")
+    private WebElement inputEmail;
+    @FindBy(xpath = ".//input[@id='password-register']")
+    private WebElement inputPassword;
+
+    private String validationMessagesLocator =
+            ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+
+    private String errorMessageLocator = ".//div[text()='%s']";
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         try {
             webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
             logger.info("Login page was opened");
         } catch (Exception e) {
             logger.error("Can't work with site");
             Assert.fail("Can't work with site");
-        }
+        }return this;
     }
 
     public void enterUsernameIntoLoginInput(String userName) {
@@ -82,4 +95,40 @@ public class LoginPage extends ParentPage {
         clickOnButtonLogIn();
         return new HomePage(webDriver);
     }
+
+    public LoginPage enterTextInInputUsername(String text) {
+        enterTextIntoElement(inputUsername, text);
+        return this;
+    }
+
+    public LoginPage enterTextInInputEmail(String text) {
+        enterTextIntoElement(inputEmail, text);
+        return this;
+    }
+
+    public LoginPage enterTextInInputPassword(String text) {
+        enterTextIntoElement(inputPassword, text);
+        return this;
+    }
+
+    public LoginPage checkWeSeeThreeValidationMessagesInRegistrationForm() {
+        List<WebElement> registrationValidationMessagesList = getListWithRegistrationValidationMessages();
+        Assert.assertEquals("There are not enough validation messages", 3,
+                registrationValidationMessagesList.size());
+        return this;
+    }
+
+    public List<WebElement> getListWithRegistrationValidationMessages() {
+        webDriverWait10.withMessage("Validation messages is not on display")
+                .until(ExpectedConditions
+                        .numberOfElementsToBe(By.xpath(validationMessagesLocator),3));
+        return webDriver.findElements(By.xpath(validationMessagesLocator));
+    }
+
+    public LoginPage checkErrorMessageDisplayed(String text){
+        WebElement errorMessage = webDriver.findElement(By.xpath(String.format(errorMessageLocator,text)));
+        Assert.assertTrue(isElementDisplayed(errorMessage));
+        return this;
+    }
+
 }
