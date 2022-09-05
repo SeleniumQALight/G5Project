@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class RegistrationFormTest extends BaseTest {
     @Test
-    public void validationMessages () throws InterruptedException {
+    public void validationMessages (){
         loginPage.openLoginPage();
         loginPage.enterUserNameIntoRegistrationInput("tr");
         loginPage.enterEmailIntoRegistrationInput("test.com");

@@ -1,11 +1,11 @@
 package pages;
 
 import libs.TestData;
-import libs.Util;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -120,14 +120,16 @@ public class LoginPage extends ParentPage{
     public void enterPasswordIntoRegistrationInput(String password) {
         enterTextIntoElement(inputPasswordSignUp, password);
     }
-    public void checkValidationMessagesNumber() throws InterruptedException {
-        Util.waitABit(3);
+    public void checkValidationMessagesNumber(){
+        //Util.waitABit(3);
+        webDriverWait10.until(ExpectedConditions.visibilityOfAllElements(validationMessage.get(0), validationMessage.get(1), validationMessage.get(2)));
         Assert.assertEquals("Incorrect number of alerts are displayed", 3, validationMessage.size());
         logger.info("Number of error messages on registration form is " + validationMessage.size());
     }
 
     public void checkValidationMessageText() {
-        Util.waitABit(3);
+        //Util.waitABit(3);
+        webDriverWait10.until(ExpectedConditions.visibilityOfAllElements(validationMessage.get(0), validationMessage.get(1), validationMessage.get(2)));
         Assert.assertEquals("Username must be at least 3 characters.", validationMessage.get(0).getText());
         logger.info("Valid username error message: " + validationMessage.get(0).getText());
         Assert.assertEquals("You must provide a valid email address.", validationMessage.get(1).getText());
