@@ -1,0 +1,38 @@
+//Методи для натискання кнопок і відкриття нової вкладки і переключення в неї
+
+public void usersPressesKeyEnterTime(int numberOfTimes) {
+        Actions actions = new Actions(webDriver);
+        for (int i = 0; i < numberOfTimes; i++) {
+            actions.sendKeys(Keys.ENTER).build().perform();
+        }
+    }
+
+    public void usersPressesKeyTabTime(int numberOfTimes) {
+        Actions actions = new Actions(webDriver);
+        for (int i = 0; i < numberOfTimes; i++) {
+            actions.sendKeys(Keys.TAB).build().perform();
+        }
+    }
+
+    public void userOpensNewTab() {
+        ((JavascriptExecutor)webDriver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<> (webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(1));
+    }
+
+//Метод moveToElement (аналог скрола )
+    WebElement element = driver.findElement(By.id("my-id"));
+    Actions actions = new Actions(driver);
+    actions.moveToElement(element);
+    actions.perform();
+
+//Метод скрола з використанням javaScript
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    js.executeScript("javascript:window.scrollBy(250,350)");
+
+//Емуляція натискання PageDown
+    WebElement.sendKeys(Keys.DOWN);
+
+//Скрол до елемента з javaScript
+    webElement = driver.findElement(By.xpath("bla-bla-bla"));
+    ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);

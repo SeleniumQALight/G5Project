@@ -1,12 +1,11 @@
 package pages;
 
 import libs.TestData;
-import libs.Util;
 import org.junit.Assert;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
     private WebElement inputEmailRegister;
     @FindBy(id = "password-register")
     private WebElement inputPasswordRegister;
-    @FindBy(xpath = ".//div[contains(@class, 'alert') and contains(@class, 'visible')]")
+    @FindBy(xpath = ".//div[contains(@class, 'alert')]")
     private List<WebElement> visibleAlert;
 
     public LoginPage(WebDriver webDriver) {
@@ -89,13 +88,17 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
     }
 
     public void checkValidationAlertNumber() {
-        Util.waitABit(3);
+//        Util.waitABit(3);
+        webDriverWait10.withMessage("Alerts are not shown")
+                .until(ExpectedConditions
+                        .visibilityOfAllElements(visibleAlert));
         Assert.assertEquals("Incorrect number of alerts in Register form", 3, visibleAlert.size());
         logger.info("Number of alerts in Register form: " + visibleAlert.size());
     }
 
     public void checkValidationAlertText() {
-        Util.waitABit(3);
+//        Util.waitABit(3);
+        webDriverWait10.until(ExpectedConditions.visibilityOfAllElements(visibleAlert));
         Assert.assertEquals("Username must be at least 3 characters.", visibleAlert.get(0).getText());
         logger.info("Visible alert in UsernameRegister: " + visibleAlert.get(0).getText());
         Assert.assertEquals("You must provide a valid email address.", visibleAlert.get(1).getText());
