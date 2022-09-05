@@ -2,9 +2,12 @@ package pages;
 
 import libs.TestData;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class LoginPage extends ParentPage {
 
@@ -19,6 +22,21 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
     private WebElement messageInvalidUserPassword;
+
+    @FindBy(id = "username-register")
+    private WebElement inputUserNameRegistration;
+
+    @FindBy(id = "email-register")
+    private WebElement inputEmailRegistration;
+
+    @FindBy(id = "password-register")
+    private WebElement inputPasswordRegistration;
+
+    @FindBy(xpath = ".//button[@class='py-3 mt-4 btn btn-lg btn-success btn-block']")
+    private WebElement buttonSignUpForOurApp;
+
+    private String alertTextLocator = ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible' and contains(text(),'%s')]";//".//div[text()='%s']";
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -86,5 +104,45 @@ public class LoginPage extends ParentPage {
         clickOnButtonLogIn();
 
         return new HomePage(webDriver);
+    }
+
+    public void enterUserNameIntoRegistration(String userName) {
+        enterTextIntoElement(inputUserNameRegistration, userName);
+    }
+
+    public void enterEmailIntoRegistration(String email) {
+        enterTextIntoElement(inputEmailRegistration, email);
+    }
+
+    public void enterPasswordIntoRegistration(String password) {
+        enterTextIntoElement(inputPasswordRegistration, password);
+    }
+
+    public void clickOnSignUpForOurApp() {
+        waitChatToBeHide();
+        clickOnElement(buttonSignUpForOurApp);
+    }
+
+    public void checkAlertText(String[] text) {
+        for (int i = 0; i < text.length; i++) {
+            List<WebElement> listAlarmMessage = getAlertsListInRegistration(text[i]);
+            if (!listAlarmMessage.isEmpty()) {
+                Assert.assertTrue("element '" + text[i] + "' is not displayed", isElementDisplayed(webDriver.findElement(By.xpath(String.format(alertTextLocator, text[i])))));
+                logger.info("alert message '" + webDriver.findElement(By.xpath(String.format(alertTextLocator, text[i]))).getText() + "' is displayed");
+            } else {
+                logger.info("expected alert '" + text[i] + "' is not displayed");
+                Assert.fail("can't find element '" + text[i] + "' ");
+            }
+        }
+    }
+
+    public void checkCountAlertMessage(String[] text) {
+        List<WebElement> listAlarmMessage = webDriver.findElements(By.xpath(String.format(alertTextLocator,"")));
+        Assert.assertEquals("3 alert are not displayed", text.length, listAlarmMessage.size());
+        logger.info("3 alert are displayed");
+    }
+
+    private List<WebElement> getAlertsListInRegistration(String message) {
+        return webDriver.findElements(By.xpath(String.format(alertTextLocator, message)));
     }
 }
