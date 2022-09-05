@@ -11,6 +11,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+
+import static org.junit.Assert.fail;
 
 public class CommonActionWithElements {
 
@@ -85,15 +88,41 @@ public class CommonActionWithElements {
         findElementByText(text).click();
     }
 
-    private WebElement findElementByText(String text) {
+    protected WebElement findElementByText(String text) {
         WebElement element = driver.findElement(By.xpath("//*[text()='"+text+"']"));
         return element;
     }
 
 
-    private void printErrorAndStopTest(Exception e) {
+    protected void printErrorAndStopTest(Exception e) {
         log.error("Cannot work with element " + e);
-        Assert.fail("Cannot work with element " + e);
+        fail("Cannot work with element " + e);
+    }
+
+
+    protected List<WebElement> findAlerts(){
+        List<WebElement> listOfAlert = driver.findElements(By.xpath("//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']"));
+        return listOfAlert;
+    }
+
+    protected void actionWithCheckBox(WebElement element, String action){
+        try {
+            if(!element.isSelected()){
+                if(action.equals("Check")){
+                    clickOnElement(element);
+                }
+            }else{
+                if (action.equals("Uncheck")){
+                    clickOnElement(element);
+                }
+            }
+            if (!action.equals("Check") && !action.equals("Uncheck")){
+                log.error("Cannot work with element : checkbox");
+                fail("Cannot work with element : checkbox");
+            }
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
     }
 
 
