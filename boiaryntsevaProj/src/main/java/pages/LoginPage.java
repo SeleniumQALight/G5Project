@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -34,6 +35,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy (xpath = ".//div//button[@type='submit']")
     private WebElement buttonSignUp;
+
+    @FindBy (xpath = ".//div[@class='form-group'][3]//div")
+    private WebElement validationErrorMessagePassword;
 
     @FindBys(@FindBy (xpath = "//div[contains (@class, 'alert')]"))
     private List <WebElement> validationErrorMessage;
@@ -66,8 +70,9 @@ public class LoginPage extends ParentPage {
         enterTextIntoElement(inputUserNameHeader, username);
     }
 
-    public void enterUserNameIntoRegistrationInput(String username){
+    public LoginPage enterUserNameIntoRegistrationInput(String username){
         enterTextIntoElement(inputUserNameRegister, username);
+        return this;
     }
 
     public void enterPasswordIntoPasswordInput(String password) {
@@ -116,33 +121,34 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
-    public LoginPage loginWithInvalidCred(){
+    public LoginPage loginWithInvalidCred(String name, String pass, String email){
         openLoginPage();
-        enterUserNameIntoRegistrationInput(TestData.INVALID_LOGIN);
-        enterUserPasswordIntoRegistrationInput(TestData.INVALID_PASSWORD);
-        enterEmailIntoRegistrationInput(TestData.INVALID_EMAIL);
-        clickOnElement(buttonSignUp);
+        enterUserNameIntoRegistrationInput(name);
+        enterEmailIntoRegistrationInput(email);
+        enterUserPasswordIntoRegistrationInput(pass);
+       // clickOnElement(buttonSignUp);
         return this;
     }
 
-    private void enterEmailIntoRegistrationInput(String email) {
+    public LoginPage enterEmailIntoRegistrationInput(String email) {
         enterTextIntoElement(inputEmailRegister, email);
+        return this;
     }
 
-    private void enterUserPasswordIntoRegistrationInput(String password) {
-        enterTextIntoElement(inputEmailRegister, password);
+    public LoginPage enterUserPasswordIntoRegistrationInput(String password) {
+        enterTextIntoElement(inputPasswordRegister, password);
+        return this;
     }
 
     public LoginPage validateErrorMessagesCountOnLoginPage(){
-        loginWithInvalidCred();
         Assert.assertEquals("Not all error messages are displayed", 3, validationErrorMessage.size());
         logger.info("Error messages count on sign up form is " + validationErrorMessage.size());
         return this;
     }
 
 
-    public void validateErrorMessagesTextOnSignUp() {
-        loginWithInvalidCred();
+    public void validateErrorMessagesTextOnSignUp()  {
+        webDriverWait10.until(ExpectedConditions.visibilityOf(validationErrorMessagePassword));
         Assert.assertEquals("Username must be at least 3 characters."
                 ,validationErrorMessage.get(0).getText());
         logger.info("Text for username error message is validated: "

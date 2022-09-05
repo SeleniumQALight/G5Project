@@ -91,17 +91,21 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected void selectCheckBoxValue(WebElement checkbox, String neededValue){
-        if (checkbox.isSelected() && neededValue=="check"){
+    protected void selectCheckBoxValue(WebElement checkbox, String neededValue) {
+        if ((!neededValue.equalsIgnoreCase("check")) || (!neededValue.equalsIgnoreCase("uncheck"))) {
+            logger.info("Invalid input for checkbox");
+        } else if (checkbox.isSelected() && neededValue.equalsIgnoreCase("check")) {
             logger.info("Check box is already selected");
-        } else if (checkbox.isSelected() && neededValue=="uncheck" ){
+        } else if (checkbox.isSelected() && neededValue.equalsIgnoreCase("uncheck")) {
             checkbox.click();
             logger.info("Checkbox is unselected");
-        } else if ((!checkbox.isSelected()) && neededValue=="check") {
+        } else if ((!checkbox.isSelected()) && neededValue.equalsIgnoreCase("check")) {
             checkbox.click();
             logger.info("Checkbox is selected");
-        } else if ((!checkbox.isSelected()) && neededValue=="uncheck") {
+        } else if ((!checkbox.isSelected()) && neededValue.equalsIgnoreCase("uncheck")) {
             logger.info("Checkbox is already not selected");
         }
+
+
     }
 }

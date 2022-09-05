@@ -50,10 +50,13 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage validateCheckBoxStateOnPost(String checkBoxValue){
-        if (checkBoxValue=="check"){
+        if ((!checkBoxValue.equalsIgnoreCase("check")) || (!checkBoxValue.equalsIgnoreCase("uncheck"))) {
+            logger.info("Invalid value for checkbox was entered - Validation");
+        }
+        else if (checkBoxValue.equalsIgnoreCase("check")){
             Assert.assertTrue(textWeatherPostIsUnique.getText().contains("yes"));
             logger.info("Checkbox is displayed as 'checked' on Post Page");
-        } else if (checkBoxValue=="uncheck") {
+        } else if (checkBoxValue.equalsIgnoreCase("uncheck")) {
             Assert.assertTrue(textWeatherPostIsUnique.getText().contains("no"));
             logger.info("Checkbox is displayed as 'not checked' on Post Page");
         }

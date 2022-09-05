@@ -7,13 +7,13 @@ public class LoginFormValidationTest extends BaseTest {
 
     @Test
 
-    public void validateSignUpFormErrorMessagesCount(){
-        loginPage.validateErrorMessagesCountOnLoginPage();
+    public void validateSignUpFormErrorMessagesCountAndText() {
+        loginPage.openLoginPage();
+        loginPage.enterUserNameIntoRegistrationInput("tr")
+                .enterUserPasswordIntoRegistrationInput("123")
+                .enterEmailIntoRegistrationInput("t.com")
+                .validateErrorMessagesCountOnLoginPage()
+                .validateErrorMessagesTextOnSignUp();
     }
 
-    @Test
-
-    public void validateSignUpFormErrorMessagesText(){
-        loginPage.validateErrorMessagesTextOnSignUp();
-    }
 }
