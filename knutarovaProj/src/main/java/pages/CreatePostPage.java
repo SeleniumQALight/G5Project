@@ -51,7 +51,7 @@ public class CreatePostPage extends ParentPage {
     }
 
     public CreatePostPage selectTextInDropDownByUI(String textForSelect) {
-        selectTextInDropDownByUICase(dropDownByUI, textForSelect);
+        selectTextInDropDownByUICase(dropDownRole, dropDownByUI);
         return this;
     }
 
