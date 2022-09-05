@@ -15,6 +15,12 @@ public class HeaderElements extends CommonActionWithElements {
     @FindBy(xpath = "//img[@data-toggle='tooltip']")
     private WebElement buttonMyProfile;
 
+    @FindBy(xpath = "//button[@class='btn btn-primary btn-sm']")
+    private WebElement buttonSingIn;
+
+    @FindBy(xpath = "//button[@class='btn btn-sm btn-secondary']")
+    WebElement singOutButton;
+
     public HeaderElements(WebDriver driver) {
         super(driver);
     }
@@ -27,5 +33,13 @@ public class HeaderElements extends CommonActionWithElements {
     public MyProfilePage clickOnButtonMyProfile(){
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(driver);
+    }
+
+    public boolean isButtonSignInDisplayed() {
+        return isElementDisplayed(buttonSingIn);
+    }
+
+    public boolean isButtonSignOutDisplayed(){
+        return isElementDisplayed(singOutButton);
     }
 }

@@ -13,7 +13,17 @@ public class LoginTestWithPageObject extends BaseTest {
         loginPage.enterPasswordIntoLoginInput("123456qwerty");
         loginPage.clickOnButtonSignIn();
         Assert.assertTrue("Button SinOut is not Displayed"
-                , homePage.isButtonSingOutDisplayed());
+                , homePage.getHeaderElement().isButtonSingOutDisplayed());
+
+    }
+    @Test
+    public void invalidLogin(){
+        loginPage.openLoginPage();
+        loginPage.enterUserNameIntoLoginInput("qaauto");
+        loginPage.enterPasswordIntoLoginInput("123456");
+        loginPage.clickOnButtonSignIn();
+        Assert.assertTrue("Message 'Invalid username / pasword' is displayed "
+                , loginPage.isMessageInvalidCredsDisplayed());
 
     }
 }

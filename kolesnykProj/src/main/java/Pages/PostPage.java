@@ -9,6 +9,9 @@ import org.openqa.selenium.support.FindBy;
 public class PostPage extends ParentPage{
 
     private HeaderElements headerElements = new HeaderElements(driver);
+    @FindBy(xpath = "//button[@data-original-title='Delete']")
+    private WebElement buttonDelete;
+
     public PostPage(WebDriver driver) {
         super(driver);
     }
@@ -33,5 +36,10 @@ public class PostPage extends ParentPage{
     public PostPage checkTextInAlert(String text) {
         Assert.assertEquals("Text in Alert",text ,alertSuccess.getText());
         return this;
+    }
+
+    public MyProfilePage clickOnDeleteButton() {
+        clickOnElement(buttonDelete);
+        return new MyProfilePage(driver);
     }
 }
