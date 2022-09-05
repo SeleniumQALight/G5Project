@@ -52,6 +52,7 @@ public class PostPage extends ParentPage {
     public PostPage validateCheckBoxStateOnPost(String checkBoxValue){
         if ((!checkBoxValue.equalsIgnoreCase("check")) || (!checkBoxValue.equalsIgnoreCase("uncheck"))) {
             logger.info("Invalid value for checkbox was entered - Validation");
+            Assert.fail("Invalid value for checkbox was entered - Validation");
         }
         else if (checkBoxValue.equalsIgnoreCase("check")){
             Assert.assertTrue(textWeatherPostIsUnique.getText().contains("yes"));
