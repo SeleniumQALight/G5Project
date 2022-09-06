@@ -2,9 +2,11 @@ package pages;
 
 import libs.TestData;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 public class LoginPage extends ParentPage {
 
@@ -19,6 +21,15 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = ".//div[text()='Invalid username / pasword']")
     private WebElement messageErrorLoginOrPassword;
+
+    @FindBy(xpath = ".//input[@id='username-register']")
+    private WebElement inputUserNameCreateForm;
+
+    @FindBy(xpath = ".//input[@id='email-register']")
+    private WebElement inputUserEmailCreateForm;
+
+    @FindBy(xpath = ".//input[@id='password-register']")
+    private WebElement inputUserPasswordCreateForm;
 
 
     public LoginPage(WebDriver webDriver) {
@@ -53,6 +64,24 @@ public class LoginPage extends ParentPage {
 
     }
 
+    public void enterUserNameIntoCreateUserInput(String userNameCreate){
+        enterTextIntoElement(inputUserNameCreateForm, userNameCreate);
+    }
+    public void enterEmailIntoCreateUserInput(String userEmail) {
+        enterTextIntoElement(inputUserEmailCreateForm, userEmail);
+    }
+    public void enterPasswordIntoCreateUserInput(String userPassword){
+        enterTextIntoElement(inputUserPasswordCreateForm, userPassword);
+    }
+
+
+
+    public boolean isMessageErrorDisplayed(String messageText){
+        return isElementWasDisplayed(webDriver.findElement(By.xpath(".//form[@action='/register']//div[text()='" + messageText + "']")));
+
+    }
+
+
     public HomePage loginWithValidCred() {
         openLoginPage();
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
@@ -61,4 +90,6 @@ public class LoginPage extends ParentPage {
 
         return new HomePage(webDriver);
     }
+
+
 }
