@@ -1,12 +1,15 @@
 package pages;
 
 import libs.TestData;
+import libs.Util;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class LoginPage extends ParentPage {
 
@@ -23,20 +26,25 @@ public class LoginPage extends ParentPage {
     private WebElement messageErrorLoginOrPassword;
 
     @FindBy(xpath = ".//input[@id='username-register']")
-    private WebElement inputUserNameCreateForm;
+    private WebElement inputUserNameRegisterForm;
 
     @FindBy(xpath = ".//input[@id='email-register']")
-    private WebElement inputUserEmailCreateForm;
+    private WebElement inputUserEmailRegistrationForm;
 
     @FindBy(xpath = ".//input[@id='password-register']")
-    private WebElement inputUserPasswordCreateForm;
+    private WebElement inputUserPasswordRegistrationForm;
+
+    private String listOfErrorsLocator = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+
+    @FindBy(xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
+    private List<WebElement> listOfErrors;
 
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         try {
             webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
             logger.info("Login page was opened");
@@ -45,6 +53,7 @@ public class LoginPage extends ParentPage {
             Assert.fail("Can not work with site");
 
         }
+        return this;
     }
 
     public void enterUserNameIntoLoginInput(String userName) {
@@ -64,21 +73,23 @@ public class LoginPage extends ParentPage {
 
     }
 
-    public void enterUserNameIntoCreateUserInput(String userNameCreate){
-        enterTextIntoElement(inputUserNameCreateForm, userNameCreate);
+    public LoginPage enterUserNameIntoRegistrationForm(String userNameCreate){
+        enterTextIntoElement(inputUserNameRegisterForm, userNameCreate);
+        return this;
     }
-    public void enterEmailIntoCreateUserInput(String userEmail) {
-        enterTextIntoElement(inputUserEmailCreateForm, userEmail);
+    public LoginPage enterEmailIntoRegistrationForm(String userEmail) {
+        enterTextIntoElement(inputUserEmailRegistrationForm, userEmail);
+        return this;
     }
-    public void enterPasswordIntoCreateUserInput(String userPassword){
-        enterTextIntoElement(inputUserPasswordCreateForm, userPassword);
+    public LoginPage enterPasswordIntoRegistrationForm(String userPassword){
+        enterTextIntoElement(inputUserPasswordRegistrationForm, userPassword);
+        return this;
     }
 
 
 
     public boolean isMessageErrorDisplayed(String messageText){
-        return isElementWasDisplayed(webDriver.findElement(By.xpath(".//form[@action='/register']//div[text()='" + messageText + "']")));
-
+        return isElementDisplayed(webDriver.findElement(By.xpath(".//form[@action='/register']//div[text()='" + messageText + "']")));
     }
 
 
@@ -92,4 +103,16 @@ public class LoginPage extends ParentPage {
     }
 
 
+    public LoginPage checkErrorsMessage(String expectedErrors) {
+        String[] expectedErrorsArray = expectedErrors.split(";");
+        webDriverWait10
+                .withMessage("Number of message should be "+ expectedErrors.length())
+                .until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfErrorsLocator), expectedErrorsArray.length));
+
+        Util.waitABit(1);
+
+        Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
+
+        return this;
+    }
 }
