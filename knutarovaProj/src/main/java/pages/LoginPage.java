@@ -111,9 +111,9 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public LoginPage checkWeSeeThreeValidationMessagesInRegistrationForm() {
+    public LoginPage checkWeSeeValidationMessagesInRegistrationForm(int number) {
         List<WebElement> registrationValidationMessagesList = getListWithRegistrationValidationMessages();
-        Assert.assertEquals("There are not enough validation messages", 3,
+        Assert.assertEquals("There are not enough validation messages", number,
                 registrationValidationMessagesList.size());
         return this;
     }
@@ -126,8 +126,13 @@ public class LoginPage extends ParentPage {
     }
 
     public LoginPage checkErrorMessageDisplayed(String text){
-        WebElement errorMessage = webDriver.findElement(By.xpath(String.format(errorMessageLocator,text)));
-        Assert.assertTrue(isElementDisplayed(errorMessage));
+        try {
+            WebElement errorMessage = webDriver.findElement(By.xpath(String.format(errorMessageLocator, text)));
+            Assert.assertTrue(isElementDisplayed(errorMessage));
+        }catch (Exception e){
+            logger.error("Validation message" + text + "not found");
+            Assert.fail("Validation message" + text + "not found");
+        }
         return this;
     }
 
