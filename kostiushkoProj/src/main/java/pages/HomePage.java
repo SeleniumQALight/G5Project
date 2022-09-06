@@ -28,9 +28,9 @@ public class HomePage extends ParentPage{
      */
     public HomePage openHomePage(){
         //login Page
+        if(!headerElement.isElementDisplayed(buttonSingOut)){
         LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.loginWithWalidCred();
-        //chekHomePage
+        loginPage.loginWithWalidCred();}
         return this;
     }
 
