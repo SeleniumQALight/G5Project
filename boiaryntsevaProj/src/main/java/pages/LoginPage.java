@@ -1,6 +1,7 @@
 package pages;
 
 import libs.TestData;
+import libs.Util;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,30 +25,34 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//div[contains(text(), 'Invalid')]")
     private WebElement invalidLoginMessage;
 
-    @FindBy(xpath = ".//*[@id='username-register']")
+    @FindBy(id = "username-register")
     private WebElement inputUserNameRegister;
 
-    @FindBy (xpath = ".//*[@id='email-register']")
+    @FindBy(xpath = ".//*[@id='email-register']")
     private WebElement inputEmailRegister;
 
-    @FindBy (xpath = ".//*[@id='password-register']")
+    @FindBy(xpath = ".//*[@id='password-register']")
     private WebElement inputPasswordRegister;
 
-    @FindBy (xpath = ".//div//button[@type='submit']")
+    @FindBy(xpath = ".//div//button[@type='submit']")
     private WebElement buttonSignUp;
 
-    @FindBy (xpath = ".//div[@class='form-group'][3]//div")
+    @FindBy(xpath = ".//div[@class='form-group'][3]//div")
     private WebElement validationErrorMessagePassword;
 
-    @FindBys(@FindBy (xpath = "//div[contains (@class, 'alert')]"))
-    private List <WebElement> validationErrorMessage;
+    @FindBys(@FindBy(xpath = "//div[contains (@class, 'alert')]"))
+    private List<WebElement> validationErrorMessage;
 
+    @FindBy(xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
+    private List<WebElement> listOfErrors;
+
+    private String listOfErrorsLocator = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         try {
             webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
             logger.info("Login Page is opened");
@@ -55,6 +60,7 @@ public class LoginPage extends ParentPage {
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
         }
+        return this;
     }
 
     public void enterUserNameIntoLoginInput(String username) {
@@ -70,7 +76,7 @@ public class LoginPage extends ParentPage {
         enterTextIntoElement(inputUserNameHeader, username);
     }
 
-    public LoginPage enterUserNameIntoRegistrationInput(String username){
+    public LoginPage enterUserNameIntoRegistrationInput(String username) {
         enterTextIntoElement(inputUserNameRegister, username);
         return this;
     }
@@ -121,12 +127,12 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
-    public LoginPage loginWithInvalidCred(String name, String pass, String email){
+    public LoginPage loginWithInvalidCred(String name, String pass, String email) {
         openLoginPage();
         enterUserNameIntoRegistrationInput(name);
         enterEmailIntoRegistrationInput(email);
         enterUserPasswordIntoRegistrationInput(pass);
-       // clickOnElement(buttonSignUp);
+        // clickOnElement(buttonSignUp);
         return this;
     }
 
@@ -140,7 +146,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public LoginPage validateErrorMessagesCountOnLoginPage(int countOfErrorMessages){
+    public LoginPage validateErrorMessagesCountOnLoginPage(int countOfErrorMessages) {
         webDriverWait10.until(ExpectedConditions.numberOfElementsToBe
                 (By.xpath("//div[contains (@class, 'alert')]"), countOfErrorMessages));
         Assert.assertEquals("Not all error messages are displayed", countOfErrorMessages, validationErrorMessage.size());
@@ -149,21 +155,35 @@ public class LoginPage extends ParentPage {
     }
 
 
-    public void validateErrorMessagesTextOnSignUp()  {
+    public void validateErrorMessagesTextOnSignUp() {
         webDriverWait10.until(ExpectedConditions.visibilityOf(validationErrorMessagePassword));
         Assert.assertEquals("Username must be at least 3 characters."
-                ,validationErrorMessage.get(0).getText());
+                , validationErrorMessage.get(0).getText());
         logger.info("Text for username error message is validated: "
-                +validationErrorMessage.get(0).getText());
+                + validationErrorMessage.get(0).getText());
         Assert.assertEquals("You must provide a valid email address."
-                ,validationErrorMessage.get(1).getText());
+                , validationErrorMessage.get(1).getText());
         logger.info("Text for email error message is validated: "
-                +validationErrorMessage.get(1).getText());
+                + validationErrorMessage.get(1).getText());
         Assert.assertEquals("Password must be at least 12 characters."
-                ,validationErrorMessage.get(2).getText());
+                , validationErrorMessage.get(2).getText());
         logger.info("Text for password error message is validated: "
-                +validationErrorMessage.get(2).getText());
+                + validationErrorMessage.get(2).getText());
 
 
+    }
+
+    public LoginPage checkErrorMessages(String expectedErrors) {
+        String[] expectedErrorsArray = expectedErrors.split(";");
+        webDriverWait10
+                .withMessage("Number of messages should be " + expectedErrorsArray.length)
+                .until(
+                        ExpectedConditions.numberOfElementsToBe(
+                                By.xpath(listOfErrorsLocator
+                                ), expectedErrorsArray.length));
+        Util.waitABit(1);
+        Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
+
+        return this;
     }
 }
