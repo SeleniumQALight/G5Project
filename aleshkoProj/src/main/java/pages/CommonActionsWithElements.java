@@ -55,6 +55,24 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void setCheckboxWithStatus(WebElement checkBox, String state) {
+        if (state.equalsIgnoreCase("check") || state.equalsIgnoreCase("uncheck")) {
+            if (checkBox.isSelected() && state.equals("check")) {
+                logger.info("Checkbox is already selected");
+            } else if (!checkBox.isSelected() && state.equalsIgnoreCase("check")) {
+                checkBox.click();
+                logger.info("Checkbox is selected");
+            } else if (checkBox.isSelected() && state.equalsIgnoreCase("uncheck")) {
+                checkBox.click();
+                logger.info("Checkbox is unselected");
+            } else if (!checkBox.isSelected() && state.equalsIgnoreCase("uncheck")) {
+                logger.info("Checkbox is not already selected");
+            }
+        } else {
+            Assert.fail("Inputted state for checkbox is not valid");
+        }
+    }
+
     protected boolean isElementDisplayed(WebElement webElement) {
         try {
             boolean isElementDisplayedStatus = webElement.isDisplayed();

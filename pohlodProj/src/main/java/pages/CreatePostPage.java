@@ -61,4 +61,16 @@ public class CreatePostPage extends ParentPage{
     }
 
 
+    @FindBy(xpath = ".//input[@type=\"checkbox\"]")
+    private WebElement checkboxUniquePost;
+
+
+    public CreatePostPage checkboxIsPostUniqueState(String state){
+        checkboxState(checkboxUniquePost,state);
+        return this;
+    }
+
+
+
+
 }

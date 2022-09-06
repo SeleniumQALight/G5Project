@@ -93,6 +93,25 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void checkboxState(WebElement webElement, String state){
+        if (state.equalsIgnoreCase("check")  && !webElement.isSelected()) {
+            clickOnElement(webElement);
+            logger.info("Checkbox is checked");
+        } else if (state.equalsIgnoreCase("check")  && webElement.isSelected()) {
+            logger.info("Checkbox is checked");
+        }
+        else if (state.equalsIgnoreCase("uncheck") && !webElement.isSelected()){
+            logger.info("Checkbox is unchecked");
+        } else if (state.equalsIgnoreCase("uncheck") && webElement.isSelected()){
+            clickOnElement(webElement);
+            logger.info("Checkbox is unchecked");
+        }
+        else {
+            logger.info("Checkbox state is incorrect");
+            Assert.fail("Checkbox state is incorrect");
+        }
+    }
+
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
