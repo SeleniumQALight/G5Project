@@ -10,6 +10,8 @@ public class CreatePostPage extends ParentPage {
     private WebElement inputTitle;
     @FindBy(xpath = ".//textarea[@id='post-body']")
     private WebElement inputBody;
+    @FindBy(xpath = ".//input[@type='checkbox']")
+    private WebElement checkBoxUnique;
     @FindBy(tagName = "select")
     private WebElement dropDownRole;
     @FindBy(xpath = ".//form[@action='/create-post']//button")
@@ -33,6 +35,11 @@ public class CreatePostPage extends ParentPage {
 
     public CreatePostPage enterTextIntoBodyInput(String bodyText) {
         enterTextIntoElement(inputBody, bodyText);
+        return this;
+    }
+
+    public CreatePostPage setCheckBoxWithValue(String stateValue) {
+        setCheckboxWithStatus(checkBoxUnique, stateValue);
         return this;
     }
 

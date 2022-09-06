@@ -19,6 +19,8 @@ public class PostPage extends ParentPage {
     private WebElement buttonEditPost;
     @FindBy(xpath = ".//*[@data-original-title='Delete']")
     private WebElement buttonDeletePost;
+    @FindBy(xpath = ".//p[contains(text(),'Is this post unique?')]")
+    private WebElement textPostIsUnique;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -33,10 +35,26 @@ public class PostPage extends ParentPage {
         return this;
     }
 
-    public PostPage checkTitleAndBodyTextsAfterNewPostCreation(String titleText, String bodyText) {
+    public PostPage checkPostContentAfterNewPostCreation(String titleText, String bodyText, String postIsUnique) {
         Assert.assertTrue("Post's title contains another text than entered while creation", isElementContainsText(titleTextField, titleText));
         Assert.assertTrue("Post's body contains another text than entered while creation", isElementContainsText(bodyTextField, bodyText));
+        Assert.assertTrue("Post's unique condition has not expected condition", isPostUniqueCondition(postIsUnique));
         return this;
+    }
+
+    private boolean isPostUniqueCondition(String postIsUnique) {
+        if (postIsUnique.equalsIgnoreCase("yes") || postIsUnique.equalsIgnoreCase("no")) {
+            if (postIsUnique.equalsIgnoreCase("yes") && textPostIsUnique.getText().equals("Is this post unique? : yes")) {
+                return true;
+            } else if (postIsUnique.equalsIgnoreCase("no") && textPostIsUnique.getText().equals("Is this post unique? : no")) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            Assert.fail("Inputted state for unique condition is not valid");
+            return false;
+        }
     }
 
     public PostPage checkRedirectToPostPage() {
