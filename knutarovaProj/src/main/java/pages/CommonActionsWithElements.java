@@ -116,14 +116,14 @@ public class CommonActionsWithElements {
 
     protected void checkConditionInCheckBox(WebElement webElement, String text) {
         try {
-            if (text.toUpperCase().equals("check")) {
+            if (text.equalsIgnoreCase("check")) {
                 if (webElement.isSelected()) {
                     logger.info("webElement was clicked");
                 } else {
                     clickOnElement(webElement);
                     logger.info("webElement wasn't clicked");
                 }
-            } else if (text.toUpperCase().equals("uncheck")) {
+            } else if (text.equalsIgnoreCase("uncheck")) {
                 if (webElement.isSelected()) {
                     clickOnElement(webElement);
                     logger.info("webElement was clicked");
