@@ -1,6 +1,7 @@
 package pages;
 
 import libs.TestData;
+import libs.Util;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,11 +31,16 @@ public class LoginPage extends ParentPage{
     @FindBy(xpath = ".//*[contains(@class, 'liveValidateMessage--visible')]")
     private List<WebElement> validationMessage;
 
+    private String listOfErrorsLocator = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+
+    @FindBy(xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
+    private List<WebElement> listOfErrors;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void openLoginPage(){
+    public LoginPage openLoginPage(){
         try{
             webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
             logger.info("Login page was opened");
@@ -42,6 +48,7 @@ public class LoginPage extends ParentPage{
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
         }
+        return this;
     }
 
     public void enterUserNameIntoLoginInput(String userName){
@@ -110,16 +117,19 @@ public class LoginPage extends ParentPage{
         return new HomePage(webDriver);
     }
 
-    public void enterUserNameIntoRegistrationInput(String userName) {
+    public LoginPage enterUserNameIntoRegistrationInput(String userName) {
         enterTextIntoElement(inputUserNameSignUp, userName);
+        return this;
     }
 
-    public void enterEmailIntoRegistrationInput(String email) {
+    public LoginPage enterEmailIntoRegistrationInput(String email) {
         enterTextIntoElement(inputEmailSignUp, email);
+        return this;
     }
 
-    public void enterPasswordIntoRegistrationInput(String password) {
+    public LoginPage enterPasswordIntoRegistrationInput(String password) {
         enterTextIntoElement(inputPasswordSignUp, password);
+        return this;
     }
     public void checkValidationMessagesNumber(int numberOfAlerts){
         webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"), numberOfAlerts));
@@ -135,5 +145,14 @@ public class LoginPage extends ParentPage{
         logger.info("Valid email error message: " + validationMessage.get(1).getText());
         Assert.assertEquals("Password must be at least 12 characters.", validationMessage.get(2).getText());
         logger.info("Valid password error message: " + validationMessage.get(2).getText());
+    }
+
+    public LoginPage checkErrorsMessages(String expectedErrors) {
+        String[] expectedErrorsArray = expectedErrors.split(";");
+        webDriverWait10.withMessage("Number of messages should be " + expectedErrorsArray.length)
+                .until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfErrorsLocator), expectedErrorsArray.length));
+        Util.waitABit(1);
+        Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
+        return this;
     }
 }
