@@ -10,9 +10,9 @@ public class LoginFormValidationTest extends BaseTest {
     public void validateSignUpFormErrorMessagesCountAndText() {
         loginPage.openLoginPage();
         loginPage.enterUserNameIntoRegistrationInput("tr")
-                .enterUserPasswordIntoRegistrationInput("123")
                 .enterEmailIntoRegistrationInput("t.com")
-                .validateErrorMessagesCountOnLoginPage()
+                .enterUserPasswordIntoRegistrationInput("123")
+                .validateErrorMessagesCountOnLoginPage(3)
                 .validateErrorMessagesTextOnSignUp();
     }
 
