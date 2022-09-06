@@ -1,8 +1,8 @@
 package pages;
 
 import libs.TestData;
-import libs.Util;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -121,20 +121,14 @@ public class LoginPage extends ParentPage{
     public void enterPasswordIntoRegistrationInput(String password) {
         enterTextIntoElement(inputPasswordSignUp, password);
     }
-    public void checkValidationMessagesNumber(){
-        Util.waitABit(2);
-    //    webDriverWait10.until(ExpectedConditions.visibilityOf(validationMessage.get(0)));
-    //    webDriverWait10.until(ExpectedConditions.visibilityOf(validationMessage.get(1)));
-    //    webDriverWait10.until(ExpectedConditions.visibilityOf(validationMessage.get(2)));
-        Assert.assertEquals("Incorrect number of alerts are displayed", 3, validationMessage.size());
+    public void checkValidationMessagesNumber(int numberOfAlerts){
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"), numberOfAlerts));
+        Assert.assertEquals("Incorrect number of alerts are displayed", numberOfAlerts, validationMessage.size());
         logger.info("Number of error messages on registration form is " + validationMessage.size());
     }
 
     public void checkValidationMessageText() {
-        Util.waitABit(2);
-    //    webDriverWait10.until(ExpectedConditions.visibilityOf(validationMessage.get(0)));
-    //    webDriverWait10.until(ExpectedConditions.visibilityOf(validationMessage.get(1)));
-    //    webDriverWait10.until(ExpectedConditions.visibilityOf(validationMessage.get(2)));
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"), 3));
         Assert.assertEquals("Username must be at least 3 characters.", validationMessage.get(0).getText());
         logger.info("Valid username error message: " + validationMessage.get(0).getText());
         Assert.assertEquals("You must provide a valid email address.", validationMessage.get(1).getText());

@@ -10,7 +10,7 @@ public class RegistrationFormTest extends BaseTest {
         loginPage.enterUserNameIntoRegistrationInput("tr");
         loginPage.enterEmailIntoRegistrationInput("test.com");
         loginPage.enterPasswordIntoRegistrationInput("123");
-        loginPage.checkValidationMessagesNumber();
+        loginPage.checkValidationMessagesNumber(3);
         loginPage.checkValidationMessageText();
 
     }
