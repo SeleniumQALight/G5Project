@@ -43,10 +43,10 @@ public class PostPage extends ParentPage{
 
     public PostPage checkPostUniqueness() {
         if (isUnique.getText().contains("yes")){
-            Assert.assertTrue("Post is not unique", isElementDisplayed(isUnique) & isUnique.getText().contains("yes"));
+            Assert.assertTrue("Post is not unique", isUnique.getText().contains("yes"));
             logger.info("Post is unique");
         } else {
-            Assert.assertTrue("Post is unique", isElementDisplayed(isUnique) & isUnique.getText().contains("no"));
+            Assert.assertTrue("Post is unique", isUnique.getText().contains("no"));
             logger.info("Post is not unique");
         }
         return this;
