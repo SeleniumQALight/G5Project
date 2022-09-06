@@ -2,9 +2,13 @@ package pages;
 
 import libs.TestData;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//input[@name='username' and @placeholder='Username']")
@@ -16,12 +20,24 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(id="username-register")
+    private WebElement inputUserNameRegistration;
+
+    @FindBy(id="email-register")
+    private WebElement inputUserEmailRegistration;
+
+    @FindBy(id="password-register")
+    private WebElement inputPasswordRegistration;
+
+    @FindBy(xpath = ".//button[@type=\"submit\"]")
+    private WebElement getButtonSignUp;
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void openLoginPage(){
+    public LoginPage openLoginPage(){
         try{
             webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
             logger.info("Login page was opened");
@@ -29,6 +45,7 @@ public class LoginPage extends ParentPage {
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
         }
+        return this;
     }
 
     public void enterUserNameIntoLoginInput(String userName){
@@ -70,5 +87,65 @@ public class LoginPage extends ParentPage {
         clickOnButtonLogIn();
 
         return new HomePage(webDriver);
+    }
+
+    public LoginPage enterUserNameIntoTheRegisterForm (String username){
+        enterTextIntoElement(inputUserNameRegistration, username);
+        return this;
+    }
+
+    public LoginPage enterEmailIntoTheRegisterForm (String email){
+        enterTextIntoElement(inputUserEmailRegistration, email);
+        return this;
+    }
+
+    public LoginPage enterPasswordIntoTheRegisterForm (String password){
+        enterTextIntoElement(inputPasswordRegistration, password);
+        return this;
+    }
+
+    public LoginPage clickOnTheSignUpButton (){
+        clickOnElement(getButtonSignUp);
+        return this;
+    }
+
+
+
+    private String validationErrorLocators  = ".//div[@class=\"alert alert-danger small liveValidateMessage liveValidateMessage--visible\"]";
+
+    @FindBy (xpath = ".//div[@class=\"alert alert-danger small liveValidateMessage liveValidateMessage--visible\"]")
+    private WebElement error;
+
+    @FindBy (xpath = ".//*[text()=\"Username must be at least 3 characters.\"]")
+    private WebElement errorUserName;
+
+    @FindBy (xpath = ".//*[text()=\"You must provide a valid email address.\"]")
+    private WebElement errorEmail;
+
+    @FindBy (xpath = ".//*[text()=\"Password must be at least 12 characters.\"]")
+    private WebElement errorPassword;
+
+    public LoginPage checkNumberOfValidationErrorMessages(){
+        List <WebElement> errorsList = webDriver.findElements(By.xpath(String.format(validationErrorLocators)));
+        Assert.assertEquals("Number of validation errors: ",3, errorsList.size());
+        logger.info(errorsList.size() + " validation errors found");
+        return this;
+    }
+
+    private List<String> listOfErrors(){
+        List<String> errorList = new ArrayList<String>();
+        errorList.add(errorUserName.getText());
+        errorList.add(errorEmail.getText());
+        errorList.add(errorPassword.getText());
+        return errorList;
+    }
+    public LoginPage checkTextOnError(String text) {
+        if (listOfErrors().contains(text)){
+        logger.info("Error is displayed: " + text);}
+        else {
+            logger.info("Error is NOT displayed " + text);
+            Assert.fail("Error is not displayed");
+        }
+        return this;
     }
 }
