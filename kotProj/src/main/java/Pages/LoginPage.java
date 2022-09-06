@@ -3,6 +3,7 @@ package Pages;
 
 import libs.TestData;
 import libs.Util;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoginPage extends ParentPage {
@@ -115,8 +117,17 @@ private String notValidCredentialsMessage = ".//div[@class='alert alert-danger s
                 .until(ExpectedConditions.numberOfElementsToBe(By.xpath(notValidCredentialsMessage), expectedErrorsArray.length));
         Util.waitABit(1);
         Assert.assertEquals(expectedErrorsArray.length,listOfErrors.size());
+        ArrayList<String> actualTextFromErrors =new ArrayList<>();
+        for (WebElement element:listOfErrors) {
+            actualTextFromErrors.add(element.getText());
+        }
+        SoftAssertions softAssertions=new SoftAssertions();
+        for (int i = 0; i < expectedErrorsArray.length; i++) {
+            softAssertions.assertThat(expectedErrorsArray[i]).isIn(actualTextFromErrors);
+        }
 
 
+        softAssertions.assertAll();
         return this;
     }
 
