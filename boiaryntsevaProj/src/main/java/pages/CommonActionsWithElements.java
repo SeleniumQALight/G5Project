@@ -55,12 +55,13 @@ public class CommonActionsWithElements {
 
     protected boolean isElementDisplayed(WebElement webElement) {
         try {
+            String name = webElement.getAccessibleName();
             boolean state = webElement.isDisplayed();
             String message;
             if (state) {
-                message = "Element is displayed";
+                message = name + "Element is displayed";
             } else {
-                message = "Element is not displayed";
+                message = name + "Element is not displayed";
             }
             logger.info(message);
             return state;
@@ -88,5 +89,24 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
+    }
+
+    protected void selectCheckBoxValue(WebElement checkbox, String neededValue) {
+        if ((neededValue.equalsIgnoreCase("check")) || (neededValue.equalsIgnoreCase("uncheck"))) {
+
+            if ((checkbox.isSelected() && neededValue.equalsIgnoreCase("check")) ||
+            ((!checkbox.isSelected()) && neededValue.equalsIgnoreCase("uncheck"))){
+                logger.info("Check box value is as needed");
+            } else if ((checkbox.isSelected() && neededValue.equalsIgnoreCase("uncheck")) ||
+            ((!checkbox.isSelected()) && neededValue.equalsIgnoreCase("check"))) {
+                checkbox.click();
+                logger.info("Checkbox value is changed");
+            }
+        }
+        else {
+            logger.info("Invalid values");
+            Assert.fail(); // ZYPINILI TEST
+        }
+
     }
 }
