@@ -19,7 +19,7 @@ public class RegistrationTest extends BaseTest {
     public void registrationErrors(){
         loginPage
                 .openLoginPage()
-                .enterUserNameIntoRegistrationForm("tr")
+                .enterUserNameIntoRegistrationForm(SHORT_USER_NAME)
                 .enterEmailIntoRegistrationFrom("test.com")
                 .enterPasswordIntoRegistrationForm("123")
                 .checkErrorsMessages(expectedErrors)
