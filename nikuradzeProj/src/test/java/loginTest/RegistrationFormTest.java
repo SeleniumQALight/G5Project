@@ -12,6 +12,5 @@ public class RegistrationFormTest extends BaseTest {
         loginPage.enterPasswordIntoRegistrationInput("123");
         loginPage.checkValidationMessagesNumber(3);
         loginPage.checkValidationMessageText();
-
     }
 }
