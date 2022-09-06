@@ -111,6 +111,16 @@ public class CommonActionsWithElements {
         }
     }
 
+    public void checkAllVisibilityOf(WebElement webElement){
+        WebDriverWait waitUntilVisibilityOf = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+       waitUntilVisibilityOf.until(ExpectedConditions.visibilityOfAllElements(webElement));
+    }
+
+    public String getTextFromElement (WebElement webElement){
+        String text = webElement.getText();
+        return text;
+    }
+
 
     private void prinErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
