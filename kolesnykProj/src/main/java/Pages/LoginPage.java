@@ -1,9 +1,14 @@
 package Pages;
 
+import libs.Util;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 import static libs.TestData.*;
 
@@ -30,6 +35,10 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement buttonSubmit;
+
+    private String listOfErrorsLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+    @FindBy(xpath = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
+    private List<WebElement> listOfErrors;
 
 
     public LoginPage(WebDriver driver) {
@@ -81,13 +90,18 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    private LoginPage fillInUserNameRegister(String text){
+    public LoginPage fillInUserNameRegister(String text){
         enterTextIntoElement(inputUserNameRegister, text);
         return this;
     }
 
-    private LoginPage fillInUserEmailRegister(String email){
+    public LoginPage fillInUserEmailRegister(String email){
         enterTextIntoElement(inputUserEmailRegister, email);
+        return this;
+    }
+
+    public LoginPage fillInUserPasswordRegister(String password){
+        enterTextIntoElement(inputUserPasswordRegister, password);
         return this;
     }
 
@@ -103,11 +117,6 @@ public class LoginPage extends ParentPage {
     }
 
 
-    private LoginPage fillInUserPasswordRegister(String password){
-        enterTextIntoElement(inputUserPasswordRegister, password);
-        return this;
-    }
-
     public LoginPage clickOnButtonSubmit(){
         clickOnElement(buttonSubmit);
         return this;
@@ -122,6 +131,18 @@ public class LoginPage extends ParentPage {
         }
         return this;
     }
+
+    public LoginPage checkErrorMessages(String expectedError) {
+        String[] expectedErrorsArray = expectedError.split(";");
+        webDriverWait10
+                .withMessage("Number of messages should be " + expectedErrorsArray.length)
+                .until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfErrorsLocator), expectedErrorsArray.length));
+        Util.waitABit(1);
+        Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
+
+        return this;
+    }
+
 
 //    private void printErrorAndStopTest(Exception e) {
 //        log.error("Cannot work with element " + e);
