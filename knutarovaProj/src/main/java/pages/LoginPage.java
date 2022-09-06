@@ -1,6 +1,8 @@
 package pages;
 
+import com.google.common.cache.AbstractCache;
 import libs.TestData;
+import libs.Util;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -28,6 +30,8 @@ public class LoginPage extends ParentPage {
             ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
 
     private String errorMessageLocator = ".//div[text()='%s']";
+    @FindBy(xpath = ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
+    private List<WebElement> listOfErrors;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -130,10 +134,20 @@ public class LoginPage extends ParentPage {
             WebElement errorMessage = webDriver.findElement(By.xpath(String.format(errorMessageLocator, text)));
             Assert.assertTrue(isElementDisplayed(errorMessage));
         }catch (Exception e){
-            logger.error("Validation message" + text + "not found");
-            Assert.fail("Validation message" + text + "not found");
+            logger.error("Validation message " + text + " not found");
+            Assert.fail("Validation message " + text + " not found");
         }
         return this;
     }
 
+
+    public LoginPage checkErrorsMessages(String expectedErrors) {
+        String[] expectedErrorsArray = expectedErrors.split(";");
+        webDriverWait10.withMessage("Number of messages shoud be " + expectedErrors.length())
+                .until(ExpectedConditions.numberOfElementsToBe
+                        (By.xpath(validationMessagesLocator), expectedErrorsArray.length));
+        Util.waitABit(1);
+        Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
+        return this;
+    }
 }
