@@ -141,7 +141,8 @@ public class LoginPage extends ParentPage {
     }
 
     public LoginPage validateErrorMessagesCountOnLoginPage(int countOfErrorMessages){
-        webDriverWait10.until(ExpectedConditions.visibilityOf(validationErrorMessagePassword));
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe
+                (By.xpath("//div[contains (@class, 'alert')]"), countOfErrorMessages));
         Assert.assertEquals("Not all error messages are displayed", countOfErrorMessages, validationErrorMessage.size());
         logger.info("Error messages count on sign up form is " + validationErrorMessage.size());
         return this;
