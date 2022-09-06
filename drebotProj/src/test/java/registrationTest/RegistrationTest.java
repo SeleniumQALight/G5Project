@@ -16,7 +16,7 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void registrationErrors() {
         loginPage.openLoginPage()
-                .enterUserNameIntoRegistration("qaauto")
+                .enterUserNameIntoRegistration(SHORT_USER_NAME)
                 .enterEmailIntoRegistration("test.com")
                 .enterPasswordIntoRegistration("123456")
                 .checkErrorMessages(expectedErrors)
