@@ -1,9 +1,9 @@
-package loginTest;
+package registrationTest;
 
 import baseTest.BaseTest;
 import org.junit.Test;
 
-public class RegistrationTest extends BaseTest {
+public class RegistrationTestHW4 extends BaseTest {
     @Test
     public void checkValidationAlertsInRegistrationForm() {
         loginPage.openLoginPage();

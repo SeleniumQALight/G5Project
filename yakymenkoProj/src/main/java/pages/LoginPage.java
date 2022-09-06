@@ -1,7 +1,9 @@
 package pages;
 
 import libs.TestData;
+import libs.Util;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +29,16 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
     private WebElement inputPasswordRegister;
     @FindBy(xpath = ".//div[contains(@class, 'alert')]")
     private List<WebElement> visibleAlert;
+    @FindBy(id = "username-register")
+    private WebElement inputLoginRegistration;
+    @FindBy(id = "email-register")
+    private WebElement inputEmailRegistration;
+    @FindBy(id = "password-register")
+    private WebElement inputPasswordRegistration;
+
+    private String listOfErrorsLocator = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+    @FindBy(xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
+    private List<WebElement> listOfErrors;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -37,7 +49,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
     /**
      * Метод, який буде відкривати LoginPage
      */
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         try {
             webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
             logger.info("Login page was opened");
@@ -45,6 +57,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
             logger.error("Can not work with site"); // повідомлення в наш лог
             Assert.fail("Can not work with site"); // якщо тест дійшов до цього повідомлення то маркає червоним і виходить з цього блоку
         }
+        return this;
     }
 
     public void enterUserNameIntoLoginInput(String userName) {
@@ -105,5 +118,34 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
         logger.info("Visible alert in EmailRegister: " + visibleAlert.get(1).getText());
         Assert.assertEquals("Password must be at least 12 characters.", visibleAlert.get(2).getText());
         logger.info("Visible alert in PasswordRegister: " + visibleAlert.get(2).getText());
+    }
+
+    public LoginPage enterUsernameIntoRegistrationForm(String userName) {
+        enterTextIntoElement(inputLoginRegistration, userName);
+        return this;
+    }
+
+    public LoginPage enterEmailIntoRegistrationForm(String email) {
+        enterTextIntoElement(inputEmailRegistration, email);
+        return this;
+    }
+
+    public LoginPage enterPasswordIntoRegistrationForm(String password) {
+        enterTextIntoElement(inputPasswordRegistration, password);
+        return this;
+    }
+
+    public LoginPage checkErrorsMessages(String expectedErrors) {
+        // test;test1 → array[0] = test , array[1] = test1
+        String[] expectedErrorsArray = expectedErrors.split(";");// пройдеться і розіб'є на частини у масив
+        webDriverWait10
+                .withMessage("Number of messages should be " + expectedErrorsArray.length)
+                .until(ExpectedConditions.numberOfElementsToBe
+                        (By.xpath(listOfErrorsLocator), expectedErrorsArray.length));
+        Util.waitABit(1);
+        Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
+
+
+        return this;
     }
 }
