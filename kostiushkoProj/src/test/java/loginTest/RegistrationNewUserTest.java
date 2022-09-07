@@ -15,11 +15,10 @@ static String userNameShort = "Username must be at least 3 characters.";
         loginPage.enterUserNameIntoRegistrationUserNameField("tr");
         loginPage.enterEmailIntoRegistrationEmailField("test.com");
         loginPage.enterPasswordIntoRegistrationPasswordField("123");
-
-        loginPage.getMessageListWithXpath(userNameShort);
-        loginPage.getMessageListWithXpath(noValidEmail);
-        loginPage.getMessageListWithXpath(passwordShort);
-        Assert.assertEquals("3",3, loginPage.countingTheNumberOfElements());
+        loginPage.checkMessageEquals(userNameShort);
+        loginPage.checkMessageEquals(noValidEmail);
+        loginPage.checkMessageEquals(passwordShort);
+        Assert.assertEquals("The number of messages does not match the expected number",3, loginPage.countingTheNumberOfMessage());
     }
 
 

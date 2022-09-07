@@ -1,5 +1,6 @@
 package pages;
 
+import libs.Util;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -121,6 +123,16 @@ public class CommonActionsWithElements {
         return text;
     }
 
+    public List<WebElement> createListWithElements (String xPath){
+        Util.waitABit(1);
+        List<WebElement> list = webDriver.findElements(By.xpath(xPath));
+        return list;
+    }
+    public int countingTheNumberOfElements (String xPath){
+        List<WebElement> listMessage = webDriver.findElements(By.xpath(xPath));
+        int number = listMessage.size();
+        return number;
+    }
 
     private void prinErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);

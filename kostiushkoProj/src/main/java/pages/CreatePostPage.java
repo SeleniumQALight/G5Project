@@ -62,4 +62,10 @@ public class CreatePostPage extends ParentPage {
         clicOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
     }
+
+    public CreatePostPage  chekChekBox(String check) {
+
+        Assert.assertTrue(webDriver.findElement(By.xpath(".//* [@name=\"uniquePost\"]")).isSelected());
+        return this;
+    }
 }

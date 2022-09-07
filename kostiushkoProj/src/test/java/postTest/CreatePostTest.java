@@ -4,10 +4,7 @@ import baseTest.BaseTest;
 import libs.Util;
 import org.junit.After;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import pages.CreatePostPage;
 
-import java.util.concurrent.TimeUnit;
 
 public class CreatePostTest extends BaseTest {
     final String TITLE = "TC1_Kostiushko" + Util.getDateAndTimeFormatted();
@@ -25,6 +22,7 @@ public class CreatePostTest extends BaseTest {
 //            .selectValueInDropDownRole("One Person")
                 .selectTextInDropDownByUI("Групове повідомлення")
                 .enterTextInTextAreaBodyContent("Text for body")
+                .chekChekBox("check")
                 .clikSaveNewPostButton()
                 .chekIsRedirectToPostPage()
                 .checkTextInAllert("New post successfully created.")

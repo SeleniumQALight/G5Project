@@ -3,7 +3,6 @@ package pages;
 
 import libs.TestData;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -105,27 +104,19 @@ public class LoginPage extends  ParentPage {
     enterTextIntoElement(inputRegistationPassword, password );
     }
 
-    public void getMessageListWithXpath (String text) {
-        List<WebElement> listMessage = webDriver.findElements(By.xpath(alerValidateMessage));
-        for (int i = 0; i < listMessage.size(); i++) {
-            if (listMessage.get(i).getText().equals(text)) {
+    public void checkMessageEquals(String text) {
+        List<WebElement> list = createListWithElements(alerValidateMessage);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getText().equals(text)) {
                logger.info("Message '"+text+"' wos displayed");
                 break;
             }
         }
     }
-    public int countingTheNumberOfElements (){
-
-        List<WebElement> listMessage = webDriver.findElements(By.xpath(alerValidateMessage));
-        int number = listMessage.size();
-        return number;
+public int countingTheNumberOfMessage (){
+    int   numberElements =  countingTheNumberOfElements(alerValidateMessage);
+return numberElements;
     }
-
-    public void getTextFromAllertMessage (WebElement webElement){
-        getTextFromElement(webElement);
-    }
-
-
 //    private void prinErrorAndStopTest(Exception e) {
 //        logger.error("Can not work with element " + e);
 //        Assert.fail("Can not work with element " + e);
