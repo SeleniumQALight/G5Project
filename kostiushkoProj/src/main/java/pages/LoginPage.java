@@ -115,6 +115,7 @@ public class LoginPage extends  ParentPage {
         }
     }
     public int countingTheNumberOfElements (){
+
         List<WebElement> listMessage = webDriver.findElements(By.xpath(alerValidateMessage));
         int number = listMessage.size();
         return number;
