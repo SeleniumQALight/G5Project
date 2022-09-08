@@ -40,7 +40,7 @@ public class MyProfilePage extends ParentPage{
             clickOnElement(webDriver.findElement(By.xpath(String.format(postTitleLocator,title))));
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
-                    .clickOnDeleetButton()
+                    .clickOnDeleteButton()
                     .checkIsSuccessDeletedPostMessagePresent();
             logger.info("Post was deleted with title " + title);
             listPost = getPostsListsWithTitle(title);
