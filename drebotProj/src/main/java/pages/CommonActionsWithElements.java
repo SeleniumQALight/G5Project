@@ -102,14 +102,14 @@ public class CommonActionsWithElements {
             boolean state = checkBox.isSelected();
             String message;
             if (state) {
-                message = "Element is check";
+                message = "Initial state of checkbox: element is check";
             } else {
-                message = "Element isn't check";
+                message = "Initial state of checkbox: element isn't check";
             }
             logger.info(message);
             return state;
         } catch (Exception e) {
-            logger.info("Element isn't check: "+e);
+            logger.info("Initial state of checkbox: element isn't check: " + e);
             return false;
         }
     }

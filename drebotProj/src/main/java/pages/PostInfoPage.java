@@ -2,7 +2,6 @@ package pages;
 
 import libs.TestData;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,10 +41,10 @@ public class PostInfoPage extends ParentPage {
     }
 
     public PostInfoPage checkTextInCheckBox(String check) {
-        if (check == TestData.CHECK) {
-            Assert.assertEquals("CheckBox doesn't work", "Is this post unique? : yes", checkBoxText.getText());//webDriver.findElement(By.xpath(String.format(checkBoxLocator, "yes"))).getText());
-        } else if (check == TestData.UNCHECK) {
-            Assert.assertEquals("CheckBox doesn't work", "Is this post unique? : no", checkBoxText.getText());//webDriver.findElement(By.xpath(String.format(checkBoxLocator, "no"))).getText());
+        if (check.equalsIgnoreCase(TestData.CHECK)) {
+            Assert.assertEquals("CheckBox doesn't work", "Is this post unique? : yes", checkBoxText.getText());
+        } else if (check.equalsIgnoreCase(TestData.UNCHECK)) {
+            Assert.assertEquals("CheckBox doesn't work", "Is this post unique? : no", checkBoxText.getText());
         } else {
             Assert.fail("CheckBox doesn't work");
         }

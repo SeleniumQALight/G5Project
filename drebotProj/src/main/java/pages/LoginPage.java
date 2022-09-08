@@ -39,7 +39,7 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//button[@class='py-3 mt-4 btn btn-lg btn-success btn-block']")
     private WebElement buttonSignUpForOurApp;
 
-    private String alertTextLocator = ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";// and contains(text(),'%s')]";//".//div[text()='%s']";
+    private String alertTextLocator = ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible' and contains(text(),'%s')]";
     @FindBy(xpath = ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible' ]")
     private List<WebElement> listOfError;
 
@@ -127,46 +127,38 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public void clickOnSignUpForOurApp() {
-        waitChatToBeHide();
-        clickOnElement(buttonSignUpForOurApp);
-    }
-
     public void checkAlertText(String[] text) {
         for (int i = 0; i < text.length; i++) {
-            List<WebElement> listAlarmMessage = getAlertsListInRegistration(text[i]);
-            if (!listAlarmMessage.isEmpty()) {
-                Assert.assertTrue("element '" + text[i] + "' is not displayed", isElementDisplayed(webDriver.findElement(By.xpath(String.format(alertTextLocator, text[i])))));
-                logger.info("alert message '" + webDriver.findElement(By.xpath(String.format(alertTextLocator, text[i]))).getText() + "' is displayed");
-            } else {
+
+            if (listOfError.isEmpty()) {
                 logger.info("expected alert '" + text[i] + "' is not displayed");
                 Assert.fail("can't find element '" + text[i] + "' ");
             }
+            Assert.assertTrue("element '" + text[i] + "' is not displayed", isElementDisplayed(listOfError.get(0)));
+            logger.info("alert message '" + text[i] + "' is displayed");
+
         }
     }
 
     public void checkCountAlertMessage(String[] text) {
-        List<WebElement> listAlarmMessage = webDriver.findElements(By.xpath(String.format(alertTextLocator, "")));
-        Assert.assertEquals("'" + text.length + "' alert are not displayed", text.length, listAlarmMessage.size());
-        logger.info("'" + listAlarmMessage.size() + "' alert are displayed");
-    }
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(String.format(alertTextLocator, "")), text.length));
 
-    private List<WebElement> getAlertsListInRegistration(String message) {
-        return webDriver.findElements(By.xpath(String.format(alertTextLocator, message)));
+        Assert.assertEquals("'" + text.length + "' alert are not displayed", text.length, listOfError.size());
+        logger.info("'" + listOfError.size() + "' alert are displayed");
     }
 
     public LoginPage checkErrorMessages(String expectedErrors) {
         String[] expectedErrorsArray = expectedErrors.split(";");
-        webDriverWait10.withMessage("Number of messages ").until(ExpectedConditions.numberOfElementsToBe(By.xpath(alertTextLocator), expectedErrorsArray.length));
+        webDriverWait10.withMessage("Number of messages ").until(ExpectedConditions.numberOfElementsToBe(By.xpath(String.format(alertTextLocator, "")), expectedErrorsArray.length));
 
         Util.waitABit(1);
         Assert.assertEquals(expectedErrorsArray.length, listOfError.size());
 
-        ArrayList<String> actualTextFromErrors=new ArrayList<>();
-        for (WebElement element: listOfError) {
+        ArrayList<String> actualTextFromErrors = new ArrayList<>();
+        for (WebElement element : listOfError) {
             actualTextFromErrors.add(element.getText());
         }
-        SoftAssertions softAssertions=new SoftAssertions();
+        SoftAssertions softAssertions = new SoftAssertions();
         for (int i = 0; i < expectedErrorsArray.length; i++) {
             softAssertions.assertThat(expectedErrorsArray[i]).isIn(actualTextFromErrors);
         }

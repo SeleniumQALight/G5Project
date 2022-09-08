@@ -39,7 +39,6 @@ public class LoginTestWithPageObject extends BaseTest {
         loginPage.enterUserNameIntoRegistration("tr");
         loginPage.enterEmailIntoRegistration("test.com");
         loginPage.enterPasswordIntoRegistration("123");
-        loginPage.clickOnSignUpForOurApp();
 
         Assert.assertFalse("Button SignOut is Displayed", homePage.getHeaderElement().isButtonSignOutDisplayed());
 

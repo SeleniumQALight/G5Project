@@ -59,17 +59,17 @@ public class CreatePostPage extends ParentPage {
 
     public CreatePostPage putCheckBoxIntoRequiredCondition(String condition) {
 
-        if (condition == "check") {
+        if (condition.equalsIgnoreCase("check")) {
             if (!isCheckCheckBox(checkBox)) {
                 clickOnElement(checkBox);
             }
-            logger.info("checkBox is 'check'");
+            logger.info("state of checkBox was changed to 'check'");
 
-        } else if (condition == "uncheck") {
+        } else if (condition.equalsIgnoreCase("uncheck")) {
             if (isCheckCheckBox(checkBox)) {
                 clickOnElement(checkBox);
             }
-            logger.info("checkBox is 'uncheck'");
+            logger.info("state of checkBox was changed to 'uncheck'");
 
         } else {
             logger.info("checkBox hasn't condition '" + condition + "'");

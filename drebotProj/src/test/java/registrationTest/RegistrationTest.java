@@ -22,9 +22,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @Parameters({
-            SHORT_USER_NAME +        COMMA + "test.com" + COMMA + "123" + COMMA + ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
-            , TestData.VALID_LOGIN + COMMA + "qqq"      + COMMA + "123" + COMMA + ERROR_ALREADY_EXIST+ SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
-            , "" + COMMA+ "text@test.com"+COMMA+"123"+COMMA+ERROR_USERNAME+SEMICOLON+ERROR_PASSWORD
+            SHORT_USER_NAME + COMMA + "test.com" + COMMA + "123" + COMMA + ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
+            , TestData.VALID_LOGIN + COMMA + "qqq" + COMMA + "123" + COMMA + ERROR_ALREADY_EXIST + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
+            , "qa" + COMMA + "text@test.com" + COMMA + "123" + COMMA + ERROR_USERNAME + SEMICOLON + ERROR_PASSWORD
     })
     @TestCaseName("registrationErrors : login ={0}, email = {1}, password = {2}")
     public void registrationErrors(String userName, String email, String password, String expectedErrors) {
