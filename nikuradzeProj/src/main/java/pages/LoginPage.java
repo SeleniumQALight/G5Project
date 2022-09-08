@@ -53,7 +53,7 @@ public class LoginPage extends ParentPage{
         return this;
     }
 
-    public void enterUserNameIntoLoginInput(String userName){
+    public LoginPage enterUserNameIntoLoginInput(String userName){
 /*        try{
         //    WebElement webElement = webDriver.findElement(By.xpath(".//input[@name='username' and @placeholder='Username']"));
         //    webElement.clear();
@@ -65,9 +65,10 @@ public class LoginPage extends ParentPage{
             printErrorAndStopTest(e);
         }*/
         enterTextIntoElement(inputUserNameHeader, userName);
+        return this;
     }
 
-    public void enterPasswordIntoInputPassword(String password){
+    public LoginPage enterPasswordIntoInputPassword(String password){
        /* try{
         //    WebElement webElement = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
         //    webElement.clear();
@@ -79,9 +80,10 @@ public class LoginPage extends ParentPage{
             printErrorAndStopTest(e);
         }*/
         enterTextIntoElement(inputPasswordHeader, password);
+        return this;
     }
 
-    public void clickOnButtonLogIn(){
+    public LoginPage clickOnButtonLogIn(){
     /*    try{
         //    webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click();
             buttonSignIn.click();
@@ -90,6 +92,7 @@ public class LoginPage extends ParentPage{
             printErrorAndStopTest(e);
         }*/
         clickOnElement(buttonSignIn);
+        return this;
     }
 
 /*    private void printErrorAndStopTest(Exception e) {
@@ -166,6 +169,10 @@ public class LoginPage extends ParentPage{
         }
 
         softAssertions.assertAll();
+        return this;
+    }
+    public LoginPage checkInvalidLogin() {
+        Assert.assertTrue("Button Sign In and alert message are not visible", isButtonSignInDisplayed() & isAlertInvalidLoginDisplayed());
         return this;
     }
 }
