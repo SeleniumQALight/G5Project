@@ -106,7 +106,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
 //        Util.waitABit(3);
         webDriverWait10.withMessage("Alerts are not shown")
                 .until(ExpectedConditions
-                        .visibilityOfAllElements(visibleAlert));
+                        .numberOfElementsToBe(By.xpath(listOfErrorsLocator),3));
         Assert.assertEquals("Incorrect number of alerts in Register form", 3, visibleAlert.size());
         logger.info("Number of alerts in Register form: " + visibleAlert.size());
     }
