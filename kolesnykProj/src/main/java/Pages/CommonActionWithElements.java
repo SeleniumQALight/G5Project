@@ -21,6 +21,8 @@ public class CommonActionWithElements {
     Logger log = Logger.getLogger(getClass());
 
     protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected static boolean checkboxSelected;
+
     public CommonActionWithElements(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -100,23 +102,25 @@ public class CommonActionWithElements {
     }
 
 
-    protected List<WebElement> findAlerts(){
-        List<WebElement> listOfAlert = driver.findElements(By.xpath("//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']"));
-        return listOfAlert;
-    }
+
 
     protected void actionWithCheckBox(WebElement element, String action){
         try {
             if(!element.isSelected()){
-                if(action.equals("Check")){
+                if(action.equalsIgnoreCase("Check")){
                     clickOnElement(element);
+                    checkboxSelected = true;
                 }
             }else{
                 if (action.equals("Uncheck")){
                     clickOnElement(element);
+                    checkboxSelected = false;
+                }else {
+                    log.info("Checkbox is already selected");
                 }
+
             }
-            if (!action.equals("Check") && !action.equals("Uncheck")){
+            if (!action.equalsIgnoreCase("Check") && !action.equalsIgnoreCase("Uncheck")){
                 log.error("Cannot work with element : checkbox");
                 fail("Cannot work with element : checkbox");
             }

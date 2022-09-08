@@ -38,6 +38,7 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement buttonSubmit;
 
+
     private String listOfErrorsLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
     private List<WebElement> listOfErrors;
@@ -83,12 +84,12 @@ public class LoginPage extends ParentPage {
         return new HomePage(driver);
     }
 
-    public LoginPage registerUserWithInvalidCredential(String username, String email, String password){
+    public LoginPage registerNewUserWithCredential(String username, String email, String password){
         openLoginPage()
                 .fillInUserNameRegister(username)
                 .fillInUserEmailRegister(email)
-                .fillInUserPasswordRegister(password)
-                .clickOnButtonSubmit();
+                .fillInUserPasswordRegister(password);
+
         return this;
     }
 
@@ -109,9 +110,10 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkAmountOfAlertDuringRegistration(){
         try {
-            if (findAlerts().size() == 3){
-                log.info("All three Alerts are displayed");
-            }
+            webDriverWait10.until(ExpectedConditions
+                    .numberOfElementsToBe(By.xpath("//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']"),3));
+            Assert.assertEquals(3, findAlerts().size());
+            log.info("All three Alerts are displayed");
         }catch (Exception e){
             printErrorAndStopTest(e);
         }
@@ -126,7 +128,8 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkAlertsText(String alertText){
         try {
-            findElementByText(alertText);
+            WebElement element = findElementByText(alertText);
+            Assert.assertEquals(alertText, element.getText());
             log.info("Alert with text : '"+ alertText + "' found");
         }catch (Exception e){
             printErrorAndStopTest(e);
@@ -155,6 +158,11 @@ public class LoginPage extends ParentPage {
 
 
         return this;
+    }
+
+    protected List<WebElement> findAlerts(){
+        List<WebElement> listOfAlert = driver.findElements(By.xpath("//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']"));
+        return listOfAlert;
     }
 
 

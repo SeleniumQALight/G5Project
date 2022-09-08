@@ -23,6 +23,7 @@ public class CreatePostTest extends BaseTest {
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkTextInAlert("New post successfully created.")
+                .checkIsPostMarkedUnique()
                 .getHeaderElements().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWasCreated(TITLE)

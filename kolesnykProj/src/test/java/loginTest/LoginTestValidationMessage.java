@@ -9,7 +9,7 @@ public class LoginTestValidationMessage extends BaseTest {
     public void checkValidationMessageOnLoginPage(){
 
         loginPage
-                .registerUserWithInvalidCredential("rosko84", "fakeEmail", "fakePass")
+                .registerNewUserWithCredential("ro", "fakeEmail", "fakePass")
                 .checkAmountOfAlertDuringRegistration()
                 .checkAlertsText("Username must be at least 3 characters.")
                 .checkAlertsText("You must provide a valid email address.")
