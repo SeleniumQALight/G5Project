@@ -21,6 +21,8 @@ public class CreatePostPage extends ParentPage{
     @FindBy(xpath = ".//option[text()='Групове повідомлення']")
     private WebElement optionGroupMessage;
 
+    @FindBy(xpath = ".//input[@name='uniquePost']")
+    private WebElement check;
 
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
@@ -64,5 +66,10 @@ public class CreatePostPage extends ParentPage{
         return new PostPage(webDriver);
 
     }
+
+    /*public void isCheck(){
+        makeCheckTrue();
+    }*/
+
 
 }

@@ -122,4 +122,13 @@ public class CommonActionsWithElements {
         Assert.fail("Can not work with element " + e);
     }
 
+    private void clickOnCheck(WebElement check) {
+        try {
+
+        }catch (Exception e){
+
+        }
+
+    }
+
 }
