@@ -15,6 +15,8 @@ public class CreatePostPage extends ParentPage{
     private WebElement dropDownRole;
     @FindBy(xpath = ".//option[text()='Приватне повідомлення']")
     private WebElement privateMessage;
+    @FindBy(name = "uniquePost")
+    private WebElement isUniqueCheckbox;
     @FindBy(xpath = ".//*[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
 
@@ -55,4 +57,8 @@ public class CreatePostPage extends ParentPage{
         return this;
     }
 
+    public CreatePostPage setCheckboxValue(String state) {
+        workWithCheckbox(isUniqueCheckbox, state);
+        return this;
+    }
 }
