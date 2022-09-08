@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(JUnitParamsRunner.class)
-public class LoginTestWithParam extends BaseTest {
+public class LoginTestWithInValidParams extends BaseTest {
     final static String ERROR_USERNAME_PASSWORD = "Invalid username / pasword";
     final static String COMMA = ",";
 
