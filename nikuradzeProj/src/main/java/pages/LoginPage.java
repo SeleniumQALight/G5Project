@@ -1,10 +1,17 @@
 package pages;
 
 import libs.TestData;
+import libs.Util;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginPage extends ParentPage{
     @FindBy(xpath = ".//input[@name='username' and @placeholder='Username']")
@@ -17,12 +24,25 @@ public class LoginPage extends ParentPage{
     private WebElement buttonSignIn;
     @FindBy(xpath = ".//div[text()='Invalid username / pasword']")
     private WebElement alertInvalidLogin;
+    @FindBy(id = "username-register")
+    private WebElement inputUserNameSignUp;
+    @FindBy(id = "email-register")
+    private WebElement inputEmailSignUp;
+    @FindBy(id = "password-register")
+    private WebElement inputPasswordSignUp;
+    @FindBy(xpath = ".//*[contains(@class, 'liveValidateMessage--visible')]")
+    private List<WebElement> validationMessage;
+
+    private String listOfErrorsLocator = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+
+    @FindBy(xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
+    private List<WebElement> listOfErrors;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void openLoginPage(){
+    public LoginPage openLoginPage(){
         try{
             webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
             logger.info("Login page was opened");
@@ -30,6 +50,7 @@ public class LoginPage extends ParentPage{
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
         }
+        return this;
     }
 
     public void enterUserNameIntoLoginInput(String userName){
@@ -96,5 +117,55 @@ public class LoginPage extends ParentPage{
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage enterUserNameIntoRegistrationInput(String userName) {
+        enterTextIntoElement(inputUserNameSignUp, userName);
+        return this;
+    }
+
+    public LoginPage enterEmailIntoRegistrationInput(String email) {
+        enterTextIntoElement(inputEmailSignUp, email);
+        return this;
+    }
+
+    public LoginPage enterPasswordIntoRegistrationInput(String password) {
+        enterTextIntoElement(inputPasswordSignUp, password);
+        return this;
+    }
+    public void checkValidationMessagesNumber(int numberOfAlerts){
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"), numberOfAlerts));
+        Assert.assertEquals("Incorrect number of alerts are displayed", numberOfAlerts, validationMessage.size());
+        logger.info("Number of error messages on registration form is " + validationMessage.size());
+    }
+
+    public void checkValidationMessageText() {
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"), 3));
+        Assert.assertEquals("Username must be at least 3 characters.", validationMessage.get(0).getText());
+        logger.info("Valid username error message: " + validationMessage.get(0).getText());
+        Assert.assertEquals("You must provide a valid email address.", validationMessage.get(1).getText());
+        logger.info("Valid email error message: " + validationMessage.get(1).getText());
+        Assert.assertEquals("Password must be at least 12 characters.", validationMessage.get(2).getText());
+        logger.info("Valid password error message: " + validationMessage.get(2).getText());
+    }
+
+    public LoginPage checkErrorsMessages(String expectedErrors) {
+        String[] expectedErrorsArray = expectedErrors.split(";");
+        webDriverWait10.withMessage("Number of messages should be " + expectedErrorsArray.length)
+                .until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfErrorsLocator), expectedErrorsArray.length));
+        Util.waitABit(1);
+        Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
+
+        ArrayList<String> actualTextFromErrors = new ArrayList<>();
+        for (WebElement element: listOfErrors) {
+            actualTextFromErrors.add(element.getText());
+        }
+        SoftAssertions softAssertions = new SoftAssertions();
+        for (int i = 0; i < expectedErrorsArray.length; i++) {
+            softAssertions.assertThat(expectedErrorsArray[i]).isIn(actualTextFromErrors);
+        }
+
+        softAssertions.assertAll();
+        return this;
     }
 }
