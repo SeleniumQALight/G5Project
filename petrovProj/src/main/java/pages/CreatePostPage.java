@@ -67,9 +67,10 @@ public class CreatePostPage extends ParentPage{
 
     }
 
-    /*public void isCheck(){
-        makeCheckTrue();
-    }*/
+    public CreatePostPage actionsWithCheck(String checkCondition){
+        selectedCheckBox(check, checkCondition);
+        return this;
+    }
 
 
 }

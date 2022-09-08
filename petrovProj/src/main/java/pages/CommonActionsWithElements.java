@@ -122,13 +122,22 @@ public class CommonActionsWithElements {
         Assert.fail("Can not work with element " + e);
     }
 
-    private void clickOnCheck(WebElement check) {
-        try {
-
-        }catch (Exception e){
+    public void selectedCheckBox(WebElement check, String checkCondition) {
+        if(checkCondition.equals("check")){
+            if(!check.isSelected()){
+                clickOnElement(check);
+            }
+        }else if(checkCondition.equals("uncheck")){
+            if(check.isSelected()){
+                clickOnElement(check);
+            }
+        }else {
+            logger.error("Such a state cannot be established " + checkCondition);
+            Assert.fail("Such a state cannot be established " + checkCondition);
 
         }
-
     }
+
+
 
 }

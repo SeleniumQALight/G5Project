@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +41,10 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
     private List<WebElement> listOfErrors;
 
+    private String authInvalidErrorLocator = ".//div[@class='alert alert-danger text-center']";
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private List<WebElement>  authInvalidError;
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -59,12 +62,14 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public void enterUserNameIntoLoginInput(String userName) {
+    public LoginPage enterUserNameIntoLoginInput(String userName) {
        enterTextIntoElement(inputUserNameHeader, userName);
+       return this;
     }
 
-    public void enterPasswordIntoInputPassword(String password) {
+    public LoginPage enterPasswordIntoInputPassword(String password) {
        enterTextIntoElement(inputPasswordHeader, password);
+       return this;
     }
 
     public void clickOnButtonLogin() {
@@ -118,6 +123,32 @@ public class LoginPage extends ParentPage {
 
         ArrayList<String> actualTextFromErrors = new ArrayList<>();
         for (WebElement element: listOfErrors) {
+            actualTextFromErrors.add(element.getText());
+        }
+        SoftAssertions softAssertions = new SoftAssertions();
+        for (int i = 0; i < expectedErrorsArray.length; i++) {
+            softAssertions.assertThat(expectedErrorsArray[i]).isIn(actualTextFromErrors);
+        }
+
+        softAssertions.assertAll();
+
+        return this;
+    }
+
+
+
+    public LoginPage checkAuthErrorsMessage(String expectedErrors) {
+        String[] expectedErrorsArray = expectedErrors.split(";");
+        webDriverWait10
+                .withMessage("Number of message should be "+ expectedErrors.length())
+                .until(ExpectedConditions.numberOfElementsToBe(By.xpath(authInvalidErrorLocator), expectedErrorsArray.length));
+
+        Util.waitABit(1);
+
+        Assert.assertEquals(expectedErrorsArray.length, authInvalidError.size());
+
+        ArrayList<String> actualTextFromErrors = new ArrayList<>();
+        for (WebElement element: authInvalidError) {
             actualTextFromErrors.add(element.getText());
         }
         SoftAssertions softAssertions = new SoftAssertions();
