@@ -25,16 +25,4 @@ public class LoginTestWithPageObject extends BaseTest {
                 .checkIsRedirectToHomePageDoesNotHappened()
                 .checkInlavidLoginAction();
     }
-
-    @Test
-    public void invalidRegistrationData() {
-        loginPage
-                .openLoginPage()
-                .enterUsernameIntoRegistrationInput("tr")
-                .enterEmailIntoRegistrationInput("test.com")
-                .enterPasswordIntoRegistrationInput("123")
-                .checkAlertAboutUsernameOnSignUpForm("Username must be at least 3 characters.")
-                .checkAlertAboutEmailOnSignUpForm("You must provide a valid email address.")
-                .checkAlertAboutPasswordOnSignUpForm("Password must be at least 12 characters.");
-    }
 }
