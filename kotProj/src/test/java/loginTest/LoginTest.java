@@ -1,5 +1,6 @@
 package loginTest;
 
+import baseTest.BaseTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.junit.Test;
@@ -88,14 +89,19 @@ public class LoginTest {
 
     }
 
-private boolean doesAlertInvalidPasswordAppear(){
-        try {
-            WebElement alertInvalidpassword = webDriver.findElement(By.xpath
-                    (".//div[@class='alert alert-danger text-center']"));
-            return alertInvalidpassword.isDisplayed();
-        }catch (Exception e){
-            return false;
-        }
+
+private boolean doesAlertInvalidPasswordAppear() {
+    try {
+        WebElement alertInvalidpassword = webDriver.findElement(By.xpath
+                (".//div[@class='alert alert-danger text-center']"));
+        return alertInvalidpassword.isDisplayed();
+    } catch (Exception e) {
+        return false;
+    }
 }
 
-}
+
+      }
+
+
+

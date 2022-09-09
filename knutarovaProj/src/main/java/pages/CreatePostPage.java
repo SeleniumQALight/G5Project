@@ -11,15 +11,14 @@ public class CreatePostPage extends ParentPage {
     private WebElement inputTitle;
     @FindBy(tagName = "select")
     private WebElement dropDownRole;
-
     @FindBy(id = "post-body")
     private WebElement inputBody;
-
     @FindBy(xpath = ".//button[@class='btn btn-primary']")
     private WebElement ButtonSaveNewPost;
-
     @FindBy(xpath = ".//option[text()='Групове повідомлення']")
     private WebElement dropDownByUI;
+    @FindBy(xpath = ".//input[@type='checkbox']")
+    private WebElement checkBoxIsThisPostUnique;
 
 
     public CreatePostPage(WebDriver webDriver) {
@@ -35,8 +34,8 @@ public class CreatePostPage extends ParentPage {
     /**
      * метод, який заповнить Title
      */
-    public CreatePostPage enterTextInInputTitle(String title){
-        enterTextIntoElement(inputTitle,title);
+    public CreatePostPage enterTextInInputTitle(String title) {
+        enterTextIntoElement(inputTitle, title);
         return this;
     }
 
@@ -46,7 +45,7 @@ public class CreatePostPage extends ParentPage {
     }
 
     public CreatePostPage selectValueInDropDownRole(String valueForSelect) {
-        selectValueInDropDown(dropDownRole,valueForSelect);
+        selectValueInDropDown(dropDownRole, valueForSelect);
         return this;
     }
 
@@ -63,6 +62,11 @@ public class CreatePostPage extends ParentPage {
     public PostPage clickOnButtonSaveNewPost() {
         clickOnElement(ButtonSaveNewPost);
         return new PostPage(webDriver);
+    }
+
+    public CreatePostPage setCheckConditionInCheckBox(String text) {
+        checkConditionInCheckBox(checkBoxIsThisPostUnique, text);
+        return this;
     }
 
 }

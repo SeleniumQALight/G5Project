@@ -6,9 +6,10 @@ import org.junit.After;
 import org.junit.Test;
 
 public class CreatePostTest extends BaseTest {
-    final String TITLE = "TC1_knutarova" + Util.getDateAndTimeFormatted();
+    final String TITLE = "TC1_knutarova_" + Util.getDateAndTimeFormatted();
+
     @Test
-    public void TC1_createNewPost(){
+    public void TC1_createNewPost() {
         homePage
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
@@ -17,10 +18,12 @@ public class CreatePostTest extends BaseTest {
 //              .selectTextInDropDownRole("Приватне повідомлення")
                 .selectValueInDropDownRole("One Person")
                 .enterTextInInputBody("It's my grate post")
+                .setCheckConditionInCheckBox("check")
                 .selectTextInDropDownByUI("Групове повідомлення")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkTextInAlert("New post successfully created.")
+                .checkIsThisPostUniqueYes()
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWasCreated(TITLE)
@@ -28,13 +31,13 @@ public class CreatePostTest extends BaseTest {
     }
 
     @After
-    public void deletePosts(){
+    public void deletePosts() {
         homePage
                 .openHomePage()
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
                 .deletePostsWithTitleTillPresent(TITLE)
-                ;
+        ;
     }
 
 }
