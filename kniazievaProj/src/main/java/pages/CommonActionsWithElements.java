@@ -67,12 +67,12 @@ public class CommonActionsWithElements {
      * @param dropDown
      * @param text - видимий текст
      */
-    protected void selectTextInDropDown(WebElement dropDown, String text){
-        try{
+    protected void selectTextInDropDown(WebElement dropDown, String text) {
+        try {
             Select select = new Select(dropDown);
             select.selectByVisibleText(text);
             logger.info("'" + text + "' was selected in DropDown");
-        }catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
@@ -92,6 +92,17 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
+
+    protected void selectTextInDropDownUI(WebElement webElement, WebElement webElementText){
+        try{
+            webElement.click();
+            webElementText.click();
+            logger.info("Was selected value");
+        } catch(Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
+
 
 
     private void printErrorAndStopTest(Exception e) {

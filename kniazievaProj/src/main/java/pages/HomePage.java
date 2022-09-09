@@ -4,9 +4,13 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import pages.elements.HeaderElement;
 
 public class HomePage extends ParentPage{
+
+    @FindBy(xpath = ".//button[text() = 'Sign Out' ]")
+    protected WebElement buttonSignOut;
 
     private HeaderElement headerElement = new HeaderElement(webDriver);
     public HomePage(WebDriver webDriver) {
@@ -14,12 +18,7 @@ public class HomePage extends ParentPage{
     }
 
     public boolean isButtonSignOutDisplayed(){
-        try{
-            WebElement buttonSignOut = webDriver.findElement(By.xpath(".//button[text() = 'Sign Out' ]"));
-            return buttonSignOut.isDisplayed();
-        }catch(Exception e){
-            return false;
-        }
+        return isElementDisplayed(buttonSignOut);
     }
 
     /**
