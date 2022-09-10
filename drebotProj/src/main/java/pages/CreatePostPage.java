@@ -14,6 +14,8 @@ public class CreatePostPage extends ParentPage {
     private WebElement inputBodyContent;
     @FindBy(xpath = ".//button[@class='btn btn-primary']")
     private WebElement buttonSaveNewPost;
+    @FindBy(xpath = ".//input[@type='checkbox']")
+    private WebElement checkBox;
 
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
@@ -52,6 +54,26 @@ public class CreatePostPage extends ParentPage {
 
     public CreatePostPage selectTextInDropDownByUI(String textForSelect) {
         selectTextInDropDownByUI(dropDownRole, textForSelect);
+        return this;
+    }
+
+    public CreatePostPage putCheckBoxIntoRequiredCondition(String condition) {
+
+        if (condition.equalsIgnoreCase("check")) {
+            if (!isCheckCheckBox(checkBox)) {
+                clickOnElement(checkBox);
+            }
+            logger.info("state of checkBox was changed to 'check'");
+
+        } else if (condition.equalsIgnoreCase("uncheck")) {
+            if (isCheckCheckBox(checkBox)) {
+                clickOnElement(checkBox);
+            }
+            logger.info("state of checkBox was changed to 'uncheck'");
+
+        } else {
+            logger.info("checkBox hasn't condition '" + condition + "'");
+        }
         return this;
     }
 
