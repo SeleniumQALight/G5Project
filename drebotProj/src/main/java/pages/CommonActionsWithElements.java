@@ -62,28 +62,6 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected boolean isElementContainText(WebElement webElement, String text) {
-        try {
-            String getText = webElement.getText();
-            String message;
-            Boolean state;
-
-            if (getText.equals(text)) {
-                message = "'" + getText + "' is equaled input '" + text + "'";
-                state = true;
-            } else {
-                message = "'" + getText + "' in element is NOT equaled input '" + text + "'";
-                state = false;
-            }
-            logger.info(message);
-            return state;
-
-        } catch (Exception e) {
-            logger.info("Elements aren't equaled");
-            return false;
-        }
-    }
-
     //text po text
     protected void selectTextInDropDown(WebElement webElement, String text) {
         try {
@@ -117,6 +95,25 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
+
+    protected boolean isCheckCheckBox(WebElement checkBox) {
+
+        try {
+            boolean state = checkBox.isSelected();
+            String message;
+            if (state) {
+                message = "Initial state of checkbox: element is check";
+            } else {
+                message = "Initial state of checkbox: element isn't check";
+            }
+            logger.info(message);
+            return state;
+        } catch (Exception e) {
+            logger.info("Initial state of checkbox: element isn't check: " + e);
+            return false;
+        }
+    }
+
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can't work with element " + e);

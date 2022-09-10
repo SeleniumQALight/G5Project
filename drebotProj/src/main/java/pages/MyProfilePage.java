@@ -21,7 +21,7 @@ public class MyProfilePage extends ParentPage {
 
     public MyProfilePage checkIsRedirectToMyProfilePage() {
         waitChatToBeHide();
-        Assert.assertTrue("MyProfilePage ia not loaded", isElementDisplayed(avatar));
+        Assert.assertTrue("MyProfilePage is not loaded", isElementDisplayed(avatar));
         return this;
     }
 

@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Test;
 
 public class CreatePostTest extends BaseTest {
-    final String TITLE = "TC1_dr"+ Util.getDateAndTimeFormatted();
+    final String TITLE = "TC1_dr" + Util.getDateAndTimeFormatted();
 
     @Test
     public void createNewPost() {
@@ -17,23 +17,25 @@ public class CreatePostTest extends BaseTest {
                 .checkIsRedirectToCreatePostPage()
                 .enterTextInputTitle(TITLE)
                 .enterTextInputBodyContent("dr-Body-Content")
+
                 .selectTextInDropDownByUI(TestData.VALUE_DROPDOWN_CREATE_POST[2])
+                .putCheckBoxIntoRequiredCondition(TestData.CHECK)
+                //.putCheckBoxIntoRequiredCondition(TestData.UNCHECK)
                 //.selectTextInDropDownRole("Приватне повідомлення")
                 //.selectValueInDropDownRole("One Person")
                 .clickSaveNewPost()
                 .checkIsRedirectToPostInfoPage()
                 .checkTextInAlert("New post successfully created.")
-                .checkTitleInPostInfoPage(TITLE)
+                .checkTextInCheckBox(TestData.CHECK)
                 .getHeaderElement().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWasCreated(TITLE);
     }
 
     @After
-    public void deletePost(){
+    public void deletePost() {
         homePage.openHomePage()
-                .getHeaderElement()
-                .clickOnButtonMyProfile()
+                .getHeaderElement().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
                 .deletePostsWithTitleTillPresent(TITLE);
     }

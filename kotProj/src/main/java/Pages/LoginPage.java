@@ -1,25 +1,49 @@
 package Pages;
 
+
 import libs.TestData;
+import libs.Util;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginPage extends ParentPage {
 @FindBy(xpath = ".//input[@name='username' and @placeholder='Username']")
 private WebElement inputUserNameHeader;
-
 @FindBy(xpath=".//input[@placeholder='Password']")
 private WebElement inputUserPasswordHeader;
-
 @FindBy(xpath = ".//button[text()='Sign In']")
 private WebElement buttonSignIn;
+
+
+@FindBy(id = "username-register")
+private WebElement inputUserNameReg;
+@FindBy(id = "email-register")
+private WebElement inputEmailReg;
+@FindBy(id = "password-register")
+private WebElement inputPasswordReg;
+
+private String notValidCredentialsMessage = ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']" ;
+
+@FindBy(xpath = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']" )
+        private List<WebElement> listOfErrors;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void openLoginPage() {
+//@FindBy(xpath = ".//button[@type='submit']")
+//private WebElement buttonSignUp;
+
+
+    public LoginPage openLoginPage() {
         try {
             webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
             logger.info("Login page was opened");
@@ -27,6 +51,7 @@ private WebElement buttonSignIn;
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
         }
+        return this;
     }
 
     public void enterUsernameIntoLoginInput(String userName) {
@@ -60,6 +85,50 @@ private WebElement buttonSignIn;
 
 
         return new HomePage(webDriver);
+    }
+
+
+    public LoginPage enterUserNameIntoIntoRegInput(String userName){
+        enterTextIntoElement(inputUserNameReg, userName);
+        return this;
+    }
+
+
+    public LoginPage enterEmailIntoRegInput (String email){
+        enterTextIntoElement(inputEmailReg, email);
+        return this;
+    }
+
+    public LoginPage enterPasswordIntoRegInput (String password) {
+        enterTextIntoElement (inputPasswordReg, password);
+        return this;
+    }
+
+
+//    public HomePage clickOnSignUpButton() {
+//        clickOnElement(buttonSignUp);
+//        return new HomePage(webDriver);
+//    }
+
+    public LoginPage checkErrorsMessages(String expectedErrors) {
+        String[] expectedErrorsArray = expectedErrors.split(";"); //порізали стрінгу з еррор меседжами сплітом на куски, які пішли в масив
+        webDriverWait10
+                .withMessage("Number of Error Messages should be "+ expectedErrorsArray.length)
+                .until(ExpectedConditions.numberOfElementsToBe(By.xpath(notValidCredentialsMessage), expectedErrorsArray.length));
+        Util.waitABit(1);
+        Assert.assertEquals(expectedErrorsArray.length,listOfErrors.size());
+        ArrayList<String> actualTextFromErrors =new ArrayList<>();
+        for (WebElement element:listOfErrors) {
+            actualTextFromErrors.add(element.getText());
+        }
+        SoftAssertions softAssertions=new SoftAssertions();
+        for (int i = 0; i < expectedErrorsArray.length; i++) {
+            softAssertions.assertThat(expectedErrorsArray[i]).isIn(actualTextFromErrors);
+        }
+
+
+        softAssertions.assertAll();
+        return this;
     }
 
 //    private void printErrorAndStopTest(Exception e) {

@@ -10,7 +10,6 @@ public class CreatePostTest extends BaseTest {
 
     @Test
     public void TC1_createNewPost() {
-//    public void TC1_createNewPost() {
         homePage // метод написання ланцюгів
                 .openHomePage()//alt+Enter → HomePage
                 .getHeaderElement().clickOnButtonCreatePost() //alt+enter → HomePage

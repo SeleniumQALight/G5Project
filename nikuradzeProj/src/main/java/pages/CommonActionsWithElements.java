@@ -104,6 +104,22 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
+    protected void workWithCheckbox(WebElement checkbox, String state){
+            if (checkbox.isSelected() && state.equalsIgnoreCase("check")) {
+                logger.info("Checkbox is already selected");
+            } else if (checkbox.isSelected() && state.equalsIgnoreCase("uncheck")) {
+                checkbox.click();
+                logger.info("Checkbox is unchecked");
+            } else if ((!checkbox.isSelected()) && state.equalsIgnoreCase("check")) {
+                checkbox.click();
+                logger.info("Checkbox is checked");
+            } else if ((!checkbox.isSelected()) && state.equalsIgnoreCase("uncheck")) {
+                logger.info("Checkbox is already deselected");
+            } else {
+                logger.error("Impossible to set such a state " + "'" + state + "'");
+                Assert.fail("Impossible to set such a state " + "'" + state + "'");
+            }
+        }
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
