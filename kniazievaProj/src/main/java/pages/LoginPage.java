@@ -18,6 +18,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//button[text() = 'Sign In' ]")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = ".//div[text() = 'Invalid username / pasword']")
+    private WebElement invalidUsernameOrPassword;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -45,21 +48,11 @@ public class LoginPage extends ParentPage {
     }
 
     public boolean isButtonSignInDisplayed(){
-        try{
-            WebElement buttonSignIn = webDriver.findElement(By.xpath(".//button[text() = 'Sign In' ]"));
-            return buttonSignIn.isDisplayed();
-        }catch(Exception e){
-            return false;
-        }
+        return isElementDisplayed(buttonSignIn);
     }
 
     public boolean isLoginOrPassInvalid(){
-        try{
-            WebElement inscriptionInvalidLogin = webDriver.findElement(By.xpath(".//div[text() = 'Invalid username / pasword']"));
-            return inscriptionInvalidLogin.isDisplayed();
-        }catch(Exception e){
-            return false;
-        }
+        return isElementDisplayed(invalidUsernameOrPassword);
     }
 
     public HomePage loginWithValidCred() {
