@@ -55,5 +55,14 @@ public class LoginPage extends ParentPage {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
     }
+    public boolean messageInvalidUserPassword () {
+        try {
+             WebElement webElement =
+                     webDriver.findElement(By.xpath(".//div[text() = 'Invalid username / pasword']"));
+             return webElement.isDisplayed();
+        }catch (Exception e) {
+            return  false;
+        }
+    }
 
 }
