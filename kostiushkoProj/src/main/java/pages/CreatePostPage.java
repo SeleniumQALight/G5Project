@@ -58,14 +58,27 @@ public class CreatePostPage extends ParentPage {
      *
      * @return
      */
-    public PostPage clikSaveNewPostButton() {
+    public PostPage clickSaveNewPostButton() {
         clicOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
     }
 
-    public CreatePostPage  chekChekBox(String check) {
-
-        Assert.assertTrue(webDriver.findElement(By.xpath(".//* [@name=\"uniquePost\"]")).isSelected());
-        return this;
+    public CreatePostPage checkCheckBoxAndClick(String check) {
+    Assert.assertTrue("Invalid checkbox state", check.equals("check") || check.equals("uncheck"));
+        if (check.equals("check")) {
+            if (!webDriver.findElement(By.xpath(".//* [@name=\"uniquePost\"]")).isSelected()) {
+                webDriver.findElement(By.xpath(".//* [@name=\"uniquePost\"]")).click();
+                logger.info("Checkbox was click");
+            } else logger.info("The checkbox was not clicked");
+            return this;
+        } else if (check.equals("uncheck")) {
+            if (webDriver.findElement(By.xpath(".//* [@name=\"uniquePost\"]")).isSelected()) {
+                webDriver.findElement(By.xpath(".//* [@name=\"uniquePost\"]")).click();
+                logger.info("Checkbox was click");
+            } else logger.info("The checkbox was not clicked");
+            return this;
+        }return this;
     }
 }
+
+
