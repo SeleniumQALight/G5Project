@@ -29,6 +29,28 @@ public class CreatePostTest extends BaseTest {
     ;
 
     }
+
+    @Test
+    public void TC2_CreateUniquePost(){
+        homePage.openHomePage()
+        .getHeaderElement().clickOnButtonCreatePOst()
+                .checkIsRedirectToCreatePostPage()
+                .enterTextInInputTitle(TITLE)
+                .enterTextInInputBody("Unique")
+                .checkBoxIsClicked("Checked")
+                .selectValueInDropDownUI()
+                .clickOnSavePostButton()
+                .checkIsRedirectedToPostPage()
+                .checkTextInAlert("New post successfully created.")
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+                .checkPostWasCreated(TITLE)
+                ;
+
+
+
+
+    }
 @After
 public void deletePost(){
    homePage

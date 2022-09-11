@@ -33,9 +33,9 @@ private WebElement inputPasswordReg;
 private String notValidCredentialsMessage = ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']" ;
 
 @FindBy(xpath = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']" )
-        private List<WebElement> listOfErrors;
+private List<WebElement> listOfErrors;
 
-    public LoginPage(WebDriver webDriver) {
+public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
@@ -104,6 +104,27 @@ private String notValidCredentialsMessage = ".//div[@class='alert alert-danger s
         return this;
     }
 
+    public LoginPage checkNumberOfErrorMessages(int errorMessages){
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath
+                        (".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
+                , errorMessages));
+        Assert.assertEquals("Incorrect number of alerts are displayed", errorMessages, listOfErrors.size());
+        logger.info("Number of error messages on registration form is " + listOfErrors.size());
+        return this;
+    }
+
+
+    public LoginPage checkTextInErrorMessages() {
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"),
+                3));
+        Assert.assertEquals("Username must be at least 3 characters.", listOfErrors.get(0).getText());
+        logger.info("Username error message: " + listOfErrors.get(0).getText());
+        Assert.assertEquals("You must provide a valid email address.", listOfErrors.get(1).getText());
+        logger.info("Email error message: " + listOfErrors.get(1).getText());
+        Assert.assertEquals("Password must be at least 12 characters.", listOfErrors.get(2).getText());
+        logger.info("Password error message: " + listOfErrors.get(2).getText());
+        return this;
+    }
 
 //    public HomePage clickOnSignUpButton() {
 //        clickOnElement(buttonSignUp);
@@ -130,6 +151,8 @@ private String notValidCredentialsMessage = ".//div[@class='alert alert-danger s
         softAssertions.assertAll();
         return this;
     }
+
+
 
 //    private void printErrorAndStopTest(Exception e) {
 //        logger.info("Can not work with element " + e);
