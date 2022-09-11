@@ -14,7 +14,5 @@ public class ParentPage extends CommonActionsWithElements { // Alt+Enter → cre
         webDriverWait10.withMessage("Chat is not closed")
                 .until(ExpectedConditions
                         .invisibilityOfElementLocated(By.xpath(".//*[@id='chat-wrapper']")));
-
-
     }
 }

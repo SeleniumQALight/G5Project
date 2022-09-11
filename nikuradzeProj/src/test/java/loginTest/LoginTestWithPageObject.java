@@ -1,10 +1,15 @@
 package loginTest;
 
 import baseTest.BaseTest;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+import junitparams.naming.TestCaseName;
 import libs.TestData;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(JUnitParamsRunner.class)
 public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void validLogin(){
@@ -25,4 +30,21 @@ public class LoginTestWithPageObject extends BaseTest {
 
         Assert.assertTrue("Button Sign In and alert message are not visible", loginPage.isButtonSignInDisplayed() & loginPage.isAlertInvalidLoginDisplayed());
     }
+    @Test
+    @Parameters({
+            TestData.VALID_LOGIN + "," + "123"
+            , "qalogin"          + "," + TestData.VALID_PASSWORD
+            , "qainvalid"        + "," + "pass123"
+    })
+    @TestCaseName("loginError : login = {0}, password = {1}")
+    public void invalidLoginWithParams(String userName, String password){
+        loginPage
+                .openLoginPage()
+                .enterUserNameIntoLoginInput(userName)
+                .enterPasswordIntoInputPassword(password)
+                .clickOnButtonLogIn()
+                .checkInvalidLogin()
+        ;
+    }
+
 }

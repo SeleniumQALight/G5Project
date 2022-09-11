@@ -11,6 +11,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+
+import static org.junit.Assert.fail;
 
 public class CommonActionWithElements {
 
@@ -18,6 +21,8 @@ public class CommonActionWithElements {
     Logger log = Logger.getLogger(getClass());
 
     protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected static boolean checkboxSelected;
+
     public CommonActionWithElements(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -85,15 +90,43 @@ public class CommonActionWithElements {
         findElementByText(text).click();
     }
 
-    private WebElement findElementByText(String text) {
+    protected WebElement findElementByText(String text) {
         WebElement element = driver.findElement(By.xpath("//*[text()='"+text+"']"));
         return element;
     }
 
 
-    private void printErrorAndStopTest(Exception e) {
+    protected void printErrorAndStopTest(Exception e) {
         log.error("Cannot work with element " + e);
-        Assert.fail("Cannot work with element " + e);
+        fail("Cannot work with element " + e);
+    }
+
+
+
+
+    protected void actionWithCheckBox(WebElement element, String action){
+        try {
+            if(!element.isSelected()){
+                if(action.equalsIgnoreCase("Check")){
+                    clickOnElement(element);
+                    checkboxSelected = true;
+                }
+            }else{
+                if (action.equals("Uncheck")){
+                    clickOnElement(element);
+                    checkboxSelected = false;
+                }else {
+                    log.info("Checkbox is already selected");
+                }
+
+            }
+            if (!action.equalsIgnoreCase("Check") && !action.equalsIgnoreCase("Uncheck")){
+                log.error("Cannot work with element : checkbox");
+                fail("Cannot work with element : checkbox");
+            }
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
     }
 
 

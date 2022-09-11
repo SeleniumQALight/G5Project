@@ -1,12 +1,21 @@
 package loginTest;
 
 import baseTest.BaseTest;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+import junitparams.naming.TestCaseName;
 import libs.TestData;
 import org.junit.Assert;
 import org.junit.Test;
-import pages.elements.HeaderElement;
+import org.junit.runner.RunWith;
 
+@RunWith(JUnitParamsRunner.class)
 public class LoginTestWithPageObject extends BaseTest {
+
+    final String[] alertTextArray = {"Username must be at least 3 characters.",
+            "You must provide a valid email address.",
+            "Password must be at least 12 characters."};
+
     @Test
     public void validLogin() {
         loginPage.openLoginPage();
@@ -24,9 +33,38 @@ public class LoginTestWithPageObject extends BaseTest {
         loginPage.enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
         loginPage.clickOnButtonLogIn();
 
-        //Assert.assertFalse("Button SignOut is Displayed", homePage.isButtonSignOutDisplayed());
         Assert.assertFalse("Button SignOut is Displayed", homePage.getHeaderElement().isButtonSignOutDisplayed());
 
         Assert.assertTrue("Message: 'Invalid username / password'  was invisible", loginPage.isMessageInvalidUserPassword());
+    }
+
+    @Test
+    public void checkAlertInRegistration() {
+        loginPage.openLoginPage();
+        loginPage.enterUserNameIntoRegistration("tr");
+        loginPage.enterEmailIntoRegistration("test.com");
+        loginPage.enterPasswordIntoRegistration("123");
+
+        Assert.assertFalse("Button SignOut is Displayed", homePage.getHeaderElement().isButtonSignOutDisplayed());
+
+        loginPage.checkCountAlertMessage(alertTextArray);
+        loginPage.checkAlertText(alertTextArray);
+    }
+
+    @Test
+    @Parameters({"qw," + TestData.VALID_PASSWORD,
+            TestData.VALID_LOGIN + ",qwe",
+            "," + ""
+    })
+    @TestCaseName("loginErrors : login ={0}, password = {1}")
+    public void invalidLoginCredentials(String login, String password) {
+        loginPage.openLoginPage()
+                .enterUserNameIntoLoginInput(login)
+                .enterPasswordIntoPasswordInput(password)
+                .clickOnButtonLogIn();
+
+        Assert.assertFalse("Home page is loaded", homePage.getHeaderElement().isButtonSignOutDisplayed());
+
+        Assert.assertTrue("Message 'Invalid username / password' isn't displayed", loginPage.isMessageInvalidUserPassword());
     }
 }

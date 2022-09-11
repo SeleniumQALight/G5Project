@@ -26,6 +26,9 @@ public class PostPage extends ParentPage{
     @FindBy(xpath = "//*[@class='alert alert-success text-center']")
     WebElement alertSuccess;
 
+    @FindBy(xpath = "//div[@class='body-content']/following-sibling::div[1]/p")
+    private WebElement uniqueCheckboxResult;
+
 
     public PostPage checkIsRedirectToPostPage() {
         //TODO check URL
@@ -41,5 +44,14 @@ public class PostPage extends ParentPage{
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDelete);
         return new MyProfilePage(driver);
+    }
+
+    public PostPage checkIsPostMarkedUnique(){
+        if (checkboxSelected){
+            Assert.assertEquals("Is this post unique? : yes", uniqueCheckboxResult.getText());
+        }else {
+            Assert.assertEquals("Is this post unique? : no",uniqueCheckboxResult.getText());
+        }
+        return this;
     }
 }
