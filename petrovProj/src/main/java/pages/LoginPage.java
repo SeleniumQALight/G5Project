@@ -41,7 +41,7 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
     private List<WebElement> listOfErrors;
 
-    //private String authInvalidErrorLocator = ".//div[@class='alert alert-danger text-center']";
+
     @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
     private WebElement authInValidError;
 
@@ -56,9 +56,6 @@ public class LoginPage extends ParentPage {
             logger.info("Login page was opened");
         } catch (Exception e) {
             assertFailedLogger("Can not work with site" + e);
-           // logger.error("Can not work with site" );
-           // Assert.fail("Can not work with site");
-
         }
         return this;
     }
