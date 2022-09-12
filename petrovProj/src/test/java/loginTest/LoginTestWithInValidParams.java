@@ -22,7 +22,7 @@ public class LoginTestWithInValidParams extends BaseTest {
             "" + COMMA + "" + COMMA + ERROR_USERNAME_PASSWORD
 
     })
-    @TestCaseName("registrationErrors : login = {0}, password = {1}")
+    @TestCaseName("AuthorizationErrors : login = {0}, password = {1}")
     public void inValidLogin(String userLogin, String userPassword, String errorMessage){
         loginPage.openLoginPage()
         .enterUserNameIntoLoginInput(userLogin)

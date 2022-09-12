@@ -5,7 +5,6 @@ import libs.TestData;
 import libs.Util;
 import org.junit.After;
 import org.junit.Test;
-import pages.PostPage;
 
 public class CreatePostTest extends BaseTest {
     final String TITLE = "petrov-TC1_"+ Util.getDateAndTimeFormatted();
@@ -18,7 +17,7 @@ public class CreatePostTest extends BaseTest {
              .checkIsRedirectToCreatePage()
                 .enterTextInInputTitle(TITLE)
                 .enterTextInInputBodyContent("Text into tag textArea on page create post")
-                .actionsWithCheck("check")
+                .actionsWithCheckBox("check")
                 .selectOptionInDropDownByUI()
                 .selectValueInDropDownRole("One Person")
                 .clickOnCreatePostButton()
