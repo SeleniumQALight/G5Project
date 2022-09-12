@@ -41,9 +41,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
     private List<WebElement> listOfErrors;
 
-    private String authInvalidErrorLocator = ".//div[@class='alert alert-danger text-center']";
+    //private String authInvalidErrorLocator = ".//div[@class='alert alert-danger text-center']";
     @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
-    private List<WebElement> authInValidError;
+    private WebElement authInValidError;
 
 
     public LoginPage(WebDriver webDriver) {
@@ -55,8 +55,9 @@ public class LoginPage extends ParentPage {
             webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
             logger.info("Login page was opened");
         } catch (Exception e) {
-            logger.error("Can not work with site");
-            Assert.fail("Can not work with site");
+            assertFailedLogger("Can not work with site" + e);
+           // logger.error("Can not work with site" );
+           // Assert.fail("Can not work with site");
 
         }
         return this;
@@ -137,27 +138,14 @@ public class LoginPage extends ParentPage {
 
 
 
-    public LoginPage checkAuthErrorsMessage(String expectedErrors) {
-        String[] expectedErrorsArray = expectedErrors.split(";");
-        webDriverWait10
-                .withMessage("Number of message should be "+ expectedErrors.length())
-                .until(ExpectedConditions.numberOfElementsToBe(By.xpath(authInvalidErrorLocator), expectedErrorsArray.length));
+    public void checkAuthErrorsMessage(String expectedErrorText) {
+        isElementDisplayed(authInValidError);
+        Assert.assertEquals(expectedErrorText, authInValidError.getText());
+    }
 
-        Util.waitABit(1);
 
-        Assert.assertEquals(expectedErrorsArray.length, authInValidError.size());
-
-        ArrayList<String> actualTextFromErrors = new ArrayList<>();
-        for (WebElement element: authInValidError) {
-            actualTextFromErrors.add(element.getText());
-        }
-        SoftAssertions softAssertions = new SoftAssertions();
-        for (int i = 0; i < expectedErrorsArray.length; i++) {
-            softAssertions.assertThat(expectedErrorsArray[i]).isIn(actualTextFromErrors);
-        }
-
-        softAssertions.assertAll();
-
-        return this;
+    private void assertFailedLogger(String textForPrint){
+        logger.error(textForPrint);
+        Assert.fail(textForPrint);
     }
 }
