@@ -1,27 +1,38 @@
 package postTest;
 
 import baseTest.BaseTest;
+import libs.Util;
 import org.junit.After;
 import org.junit.Test;
 
 public class CreatePostTest extends BaseTest {
-    final String Title="radulenko-post1";
+    final String TITLE ="TC_1_shushkova-post1"+ Util.getDateAndTimeFormatted();
     @Test
     public void TC_1_createNewPost(){
         homePage
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
-                .enterTextInInputTitle("shushkova-post")
-                .selectTextInDropDownRole("Приватне повідомлення")
-//                .checkPostWasCreated(Title)
-                ;
+                .enterTextInInputTitle(TITLE)
+                .enterTextInInputBody("text")
+                .clickOnSavePostButton()
+                .checkIsRedirectToPostPage()
+                .checkTextInAlert("New post successfully created.")
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+                .checkPostWasCreated(TITLE)
+  //              .selectTextInDropDownRole("Приватне повідомлення")
 
+                ;
     }
     @After
     public void deletePosts(){
         homePage
-                .openHomePage();
+                .openHomePage()
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostWithTitleTillPresence(TITLE)
+        ;
  //               .
     }
 }
