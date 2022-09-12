@@ -10,6 +10,6 @@ public class ParentPage extends CommonActionsWithElements {
     }
 
     protected void waitChatToBeHide() {
-        webDriverWait10.withMessage("cat is not closed").until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(".//*[@id='chat-wrapper']")));
+        webDriverWait10.withMessage("chat is not closed").until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(".//*[@id='chat-wrapper']")));
     }
 }

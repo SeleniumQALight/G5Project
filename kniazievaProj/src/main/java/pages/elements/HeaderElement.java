@@ -11,7 +11,6 @@ public class HeaderElement extends CommonActionsWithElements {
     private WebElement buttonCreatePost;
 
 
-
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
     }

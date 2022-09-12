@@ -1,9 +1,7 @@
 package pages;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import pages.elements.HeaderElement;
 
 public class HomePage extends ParentPage { // Alt + Insert → create constructor
@@ -12,24 +10,6 @@ public class HomePage extends ParentPage { // Alt + Insert → create constructo
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
-
-//    public boolean isButtonSignOutDisplayed() { // constructor
-//        try {
-//            WebElement buttonSignOut = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));
-//            return buttonSignOut.isDisplayed();
-//        } catch (Exception e) {
-//            return false;
-//        }
-//    }
-
-//    public boolean isAlertDisplayed() {
-//        try {
-//            WebElement alertInvalidUsernamePassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
-//            return alertInvalidUsernamePassword.isDisplayed();
-//        } catch (Exception e) {
-//            return false;
-//        }
-//    }
 
     /**
      * Перевірка чи дійсно завантажилась HomePage
@@ -58,8 +38,6 @@ public class HomePage extends ParentPage { // Alt + Insert → create constructo
         return this;
     }
 
-//    public void clickOnCreatePostButton() { // видаляємо так як він перенесений
-//    }
 
     /**
      * Віддає приватний елемент Header

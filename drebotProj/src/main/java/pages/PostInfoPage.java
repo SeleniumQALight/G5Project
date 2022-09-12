@@ -1,5 +1,6 @@
 package pages;
 
+import libs.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,10 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import pages.elements.HeaderElement;
 
 public class PostInfoPage extends ParentPage {
-
     private HeaderElement headerElement = new HeaderElement(webDriver);
-    @FindBy(xpath = ".//div[text()='New post successfully created.']")
-    private WebElement messageSuccessfullyCreated;
+
     @FindBy(xpath = ".//div[@class='d-flex justify-content-between']")
     private WebElement textTitle;
     @FindBy(xpath = ".//a[@data-original-title='Edit']")
@@ -19,6 +18,8 @@ public class PostInfoPage extends ParentPage {
     private WebElement alertSuccess;
     @FindBy(xpath = ".//button[@data-original-title='Delete']")
     private WebElement buttonDelete;
+    @FindBy(xpath = ".//p[contains(text(),'Is this post unique? : ')]")
+    private WebElement checkBoxText;
 
     public PostInfoPage(WebDriver webDriver) {
         super(webDriver);
@@ -31,18 +32,23 @@ public class PostInfoPage extends ParentPage {
     public PostInfoPage checkIsRedirectToPostInfoPage() {
         //TODO check url
         Assert.assertTrue("PostInfoPage is not loaded", isElementDisplayed(buttonEdit));
-        //Assert.assertTrue("Page InfoPost was NOT loaded", isElementDisplayed(messageSuccessfullyCreated));
-        return this;
-    }
-
-    public PostInfoPage checkTitleInPostInfoPage(String title) {
-        Assert.assertTrue("Page InfoPost was NOT loaded", isElementContainText(textTitle, title));
-
         return this;
     }
 
     public PostInfoPage checkTextInAlert(String text) {
         Assert.assertEquals("Text in Alert", text, alertSuccess.getText());
+        return this;
+    }
+
+    public PostInfoPage checkTextInCheckBox(String check) {
+        if (check.equalsIgnoreCase(TestData.CHECK)) {
+            Assert.assertEquals("CheckBox doesn't work", "Is this post unique? : yes", checkBoxText.getText());
+        } else if (check.equalsIgnoreCase(TestData.UNCHECK)) {
+            Assert.assertEquals("CheckBox doesn't work", "Is this post unique? : no", checkBoxText.getText());
+        } else {
+            Assert.fail("CheckBox doesn't work");
+        }
+
         return this;
     }
 
