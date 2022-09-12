@@ -43,7 +43,7 @@ public class LoginPage extends ParentPage {
 
     private String authInvalidErrorLocator = ".//div[@class='alert alert-danger text-center']";
     @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
-    private List<WebElement>  authInvalidError;
+    private List<WebElement> authInValidError;
 
 
     public LoginPage(WebDriver webDriver) {
@@ -145,10 +145,10 @@ public class LoginPage extends ParentPage {
 
         Util.waitABit(1);
 
-        Assert.assertEquals(expectedErrorsArray.length, authInvalidError.size());
+        Assert.assertEquals(expectedErrorsArray.length, authInValidError.size());
 
         ArrayList<String> actualTextFromErrors = new ArrayList<>();
-        for (WebElement element: authInvalidError) {
+        for (WebElement element: authInValidError) {
             actualTextFromErrors.add(element.getText());
         }
         SoftAssertions softAssertions = new SoftAssertions();
