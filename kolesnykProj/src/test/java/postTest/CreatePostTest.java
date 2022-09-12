@@ -16,12 +16,14 @@ public class CreatePostTest extends BaseTest {
                 .checkIsRedirectToPostPage()
                 .enterTextIntoInputTitle(TITLE)
                 .enterTextIntoInputBody("Text in the body of the article")
+                .checkBoxSelectValue("Check")
  //               .selectTextInDropDownRole("Приватне повідомлення")
  //               .selectValueInDropDownRole("One Person")
                 .selectDropDown("Приватне повідомлення")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkTextInAlert("New post successfully created.")
+                .checkIsPostMarkedUnique()
                 .getHeaderElements().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWasCreated(TITLE)
@@ -36,7 +38,6 @@ public class CreatePostTest extends BaseTest {
                 .openHomePage()
                 .getHeaderElements().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
-                .deletePostsWithTitleTillPresent(TITLE)
-        ;
+                .deletePostsWithTitleTillPresent(TITLE);
     }
 }
