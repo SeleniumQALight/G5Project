@@ -9,17 +9,12 @@ import pages.elements.HeaderElement;
 
 public class HomePage extends ParentPage{
 
-    @FindBy(xpath = ".//button[text() = 'Sign Out' ]")
-    protected WebElement buttonSignOut;
 
     private HeaderElement headerElement = new HeaderElement(webDriver);
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public boolean isButtonSignOutDisplayed(){
-        return isElementDisplayed(buttonSignOut);
-    }
 
     /**
      * Перевірка чи завантажилась Home Page
@@ -28,7 +23,7 @@ public class HomePage extends ParentPage{
 
     public HomePage checkIsRedirectToHomePage(){
         //TODO checkURL
-        Assert.assertTrue("Home Page does not loaded", isButtonSignOutDisplayed());
+        Assert.assertTrue("Home Page does not loaded", getHeaderElement().isButtonSignOutDisplayed());
         return this;
     }
 

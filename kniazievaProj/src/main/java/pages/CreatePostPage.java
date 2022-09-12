@@ -60,8 +60,9 @@ public class CreatePostPage extends ParentPage{
         return this;
     }
 
-    public void clickTheSaveButton(){
+    public PostPage clickTheSaveButton(){
         clickOnElement(saveButton);
+        return new PostPage(webDriver);
     }
 
 
