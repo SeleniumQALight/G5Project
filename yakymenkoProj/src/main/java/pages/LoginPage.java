@@ -62,16 +62,19 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
         return this;
     }
 
-    public void enterUserNameIntoLoginInput(String userName) {
+    public LoginPage enterUserNameIntoLoginInput(String userName) {
         enterTextIntoElement(inputUserNameHeader, userName); // ↑ замінили на виклик метода
+        return this;
     }
 
-    public void enterPasswordIntoInputPassword(String password) {
+    public LoginPage enterPasswordIntoPasswordInput(String password) {
         enterTextIntoElement(inputPasswordHeader, password);
+        return this;
     }
 
-    public void clickOnButtonLogIn() {
+    public LoginPage clickOnButtonLogIn() {
         clickOnElement(buttonSignIn);
+        return this;
     }
 
     public boolean isAlertDisplayed() {
@@ -85,7 +88,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
     public HomePage loginWithValidCred() {
         openLoginPage();
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);// звертаємось до TestData і кажемо - дістань VALID_LOGIN
-        enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
+        enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
         return new HomePage(webDriver);
     }
@@ -106,7 +109,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
 //        Util.waitABit(3);
         webDriverWait10.withMessage("Alerts are not shown")
                 .until(ExpectedConditions
-                        .numberOfElementsToBe(By.xpath(listOfErrorsLocator),3));
+                        .numberOfElementsToBe(By.xpath(listOfErrorsLocator), 3));
         Assert.assertEquals("Incorrect number of alerts in Register form", 3, visibleAlert.size());
         logger.info("Number of alerts in Register form: " + visibleAlert.size());
     }
@@ -156,6 +159,11 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
         }
 
         softAssertions.assertAll();
+        return this;
+    }
+
+    public LoginPage checkInvalidLoginMessage() {
+        Assert.assertTrue("Button 'Sign In' and alert massage are not visible", isButtonSignInDisplayed() & isAlertDisplayed());
         return this;
     }
 }
