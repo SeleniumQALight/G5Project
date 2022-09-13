@@ -11,6 +11,6 @@ public class NegativePasswordTestWithPageObject extends BaseTest {
         loginPage.enterUsernameIntoLoginInput("qaauto");
         loginPage.enterPasswordIntoInputPassword("123456qwerty123456");
         loginPage.clickOnButtonLogIn();
-        Assert.assertTrue("Message 'Invalid username / password' is not visible", homePage.isAMessageInvalidUsernamePassword());
+        Assert.assertTrue("Message 'Invalid username / pasword' is not visible", homePage.isAMessageInvalidUsernamePassword());
     }
 }
