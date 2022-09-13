@@ -14,7 +14,7 @@ public class CreatePostTest extends BaseTest {
         homePage
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
-             .checkIsRedirectToCreatePage()
+             .checkIsRedirectToCreatePostPage()
                 .enterTextInInputTitle(TITLE)
                 .enterTextInInputBodyContent("Text into tag textArea on page create post")
                 .actionsWithCheckBox("check")
