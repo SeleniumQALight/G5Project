@@ -1,5 +1,6 @@
 package Pages;
 
+import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -48,9 +49,14 @@ public class LoginPage extends ParentPage {
         super(driver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
     public LoginPage openLoginPage() {
         try {
-            driver.get("https://qa-complex-app-for-testing.herokuapp.com/");
+            driver.get(baseUrl);
             log.info("Login page is opened");
             return this;
         } catch (Exception e) {
@@ -78,9 +84,7 @@ public class LoginPage extends ParentPage {
 
     public HomePage loginWithValidCredentials() {
         openLoginPage();
-        enterUserNameIntoLoginInput(VALID_LOGIN);
-        enterPasswordIntoInputPassword(VALID_PASSWORD);
-        clickOnLoginButton();
+        loginWithValidCredentialsWithoutOpenPage();
         return new HomePage(driver);
     }
 
@@ -163,6 +167,13 @@ public class LoginPage extends ParentPage {
     protected List<WebElement> findAlerts(){
         List<WebElement> listOfAlert = driver.findElements(By.xpath("//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']"));
         return listOfAlert;
+    }
+
+    public HomePage loginWithValidCredentialsWithoutOpenPage() {
+        enterUserNameIntoLoginInput(VALID_LOGIN);
+        enterPasswordIntoInputPassword(VALID_PASSWORD);
+        clickOnLoginButton();
+        return new HomePage(driver);
     }
 
 
