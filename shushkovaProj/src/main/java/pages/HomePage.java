@@ -15,9 +15,15 @@ public class HomePage extends ParentPage{
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
     /** метод чи завантажилась HomePage
      * */
     public HomePage checkIsRedirectToHomePage(){
+        checkUrlWithPattern();
         Assert.assertTrue("Home page is not open",headerElement.isButtonSingOutDisplayed());
         return this;
     }
@@ -26,8 +32,9 @@ public class HomePage extends ParentPage{
     public HomePage openHomePage() {
         //LoginPage
         LoginPage loginPage=new LoginPage(webDriver);
+        loginPage.openLoginPage();
         if(!getHeaderElement().isButtonSingOutDisplayed()){
-            loginPage.loginWithValidCred();
+            loginPage.loginWithValidCredWithoutOpenPage();
         }
         checkIsRedirectToHomePage();
         //check Homepage
