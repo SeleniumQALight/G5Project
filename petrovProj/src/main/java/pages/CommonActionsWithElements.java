@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Locale;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -122,13 +123,29 @@ public class CommonActionsWithElements {
         Assert.fail("Can not work with element " + e);
     }
 
-    private void clickOnCheck(WebElement check) {
-        try {
-
-        }catch (Exception e){
+    public void selectedCheckBox(WebElement check, String checkCondition) {
+        checkCondition = checkCondition.toLowerCase();
+        if(checkCondition.equals("check")){
+            if(!check.isSelected()){
+                clickOnElement(check);
+                logger.info("checkbox changed to check");
+            }else {
+                logger.info("checkbox already check");
+            }
+        }else if(checkCondition.equals("uncheck")){
+            if(check.isSelected()){
+                clickOnElement(check);
+                logger.info("checkbox changed to uncheck");
+            }else {
+                logger.info("checkbox already uncheck");
+            }
+        }else {
+            logger.error("Such a state cannot be established " + checkCondition);
+            Assert.fail("Such a state cannot be established " + checkCondition);
 
         }
-
     }
+
+
 
 }
