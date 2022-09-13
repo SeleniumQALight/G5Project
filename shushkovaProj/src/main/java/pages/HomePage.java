@@ -4,10 +4,12 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import pages.elements.HeaderElement;
 
 public class HomePage extends ParentPage{
    private HeaderElement headerElement= new HeaderElement(webDriver);
+
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -31,7 +33,7 @@ public class HomePage extends ParentPage{
         //check Homepage
         return this;
     }
-    /** віддвє приватний елемент Хедера*/
+    /** віддає приватний елемент Хедера*/
     public HeaderElement getHeaderElement() {
         return headerElement;
     }

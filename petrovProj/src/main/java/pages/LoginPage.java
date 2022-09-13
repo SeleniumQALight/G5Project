@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +42,10 @@ public class LoginPage extends ParentPage {
     private List<WebElement> listOfErrors;
 
 
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement authInValidError;
+
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -52,19 +55,19 @@ public class LoginPage extends ParentPage {
             webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
             logger.info("Login page was opened");
         } catch (Exception e) {
-            logger.error("Can not work with site");
-            Assert.fail("Can not work with site");
-
+            assertFailedLogger("Can not work with site" + e);
         }
         return this;
     }
 
-    public void enterUserNameIntoLoginInput(String userName) {
+    public LoginPage enterUserNameIntoLoginInput(String userName) {
        enterTextIntoElement(inputUserNameHeader, userName);
+       return this;
     }
 
-    public void enterPasswordIntoInputPassword(String password) {
+    public LoginPage enterPasswordIntoInputPassword(String password) {
        enterTextIntoElement(inputPasswordHeader, password);
+       return this;
     }
 
     public void clickOnButtonLogin() {
@@ -128,5 +131,18 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
 
         return this;
+    }
+
+
+
+    public void checkAuthErrorsMessage(String expectedErrorText) {
+        isElementDisplayed(authInValidError);
+        Assert.assertEquals(expectedErrorText, authInValidError.getText());
+    }
+
+
+    private void assertFailedLogger(String textForPrint){
+        logger.error(textForPrint);
+        Assert.fail(textForPrint);
     }
 }
