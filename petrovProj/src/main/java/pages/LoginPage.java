@@ -106,10 +106,15 @@ public class LoginPage extends ParentPage {
 
     public HomePage loginWithValidCred() {
         openLoginPage();
+        loginWithValidCredWithOutOpenPage();
+        return new HomePage(webDriver);
+    }
+
+
+    public HomePage loginWithValidCredWithOutOpenPage() {
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonLogin();
-
         return new HomePage(webDriver);
     }
 
@@ -150,4 +155,6 @@ public class LoginPage extends ParentPage {
         logger.error(textForPrint);
         Assert.fail(textForPrint);
     }
+
+
 }

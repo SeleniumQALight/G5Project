@@ -31,6 +31,7 @@ public class HomePage extends ParentPage{
      */
     public HomePage checkIsRedirectToHomePage(){
         //TODO checkURL
+        checkUrl();
         Assert.assertTrue("HomePage did not load", getHeaderElement().isButtonSignOutDisplayed());
         return this;
     }
@@ -40,13 +41,13 @@ public class HomePage extends ParentPage{
      * @return
      */
     public HomePage openHomePage() {
-
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
         if(!headerElement.isButtonSignOutDisplayed()){
-            LoginPage loginPage = new LoginPage(webDriver);
-            loginPage.loginWithValidCred();
+
+            loginPage.loginWithValidCredWithOutOpenPage();
         }
         checkIsRedirectToHomePage();
-
         return this;
     }
 
