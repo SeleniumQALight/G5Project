@@ -46,9 +46,14 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
     public LoginPage openLoginPage() {
         try {
-            webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
+            webDriver.get(baseUrl);
             logger.info("Login page was opened");
         } catch (Exception ex) {
             logger.error("Can't work with site");
@@ -106,6 +111,12 @@ public class LoginPage extends ParentPage {
 
     public HomePage loginWithValidCredential() {
         openLoginPage();
+        loginWithValidCredentialWithOutOpenPage();
+
+        return new HomePage(webDriver);
+    }
+
+    public HomePage loginWithValidCredentialWithOutOpenPage(){
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
