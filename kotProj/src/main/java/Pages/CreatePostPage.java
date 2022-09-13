@@ -17,6 +17,9 @@ public class CreatePostPage extends ParentPage {
     @FindBy(xpath = ".//form[@action='/create-post']//button")
     private WebElement buttonSavedPost;
 
+    @FindBy(xpath = ".//*[@class='alert alert-success text-center']")
+    private WebElement textPostIsCreated;
+
     @FindBy(xpath =" .//input[@type='checkbox']")
     private WebElement checkBox;
     @FindBy(xpath = ".//option[text()='Групове повідомлення']")
@@ -32,6 +35,7 @@ public class CreatePostPage extends ParentPage {
         Assert.assertTrue("Page CreatePost is not loaded", isElementDisplayed(inputTitle));
         return this;
     }
+
 
     public CreatePostPage enterTextInInputTitle(String title) {
         enterTextIntoElement(inputTitle, title);

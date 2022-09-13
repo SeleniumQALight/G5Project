@@ -41,6 +41,7 @@ public class CreatePostTest extends BaseTest {
                 .selectValueInDropDownUI()
                 .clickOnSavePostButton()
                 .checkIsRedirectedToPostPage()
+                .checkPostIsUnique("yes")
                 .checkTextInAlert("New post successfully created.")
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
