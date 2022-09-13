@@ -4,9 +4,18 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends ParentPage {
+    @FindBy(xpath = ".//input[@placeholder='Username']")
+    private WebElement inputUserNameHeader;
+    @FindBy(xpath = ".//input[@placeholder='Password']" )
+    private  WebElement inputPasswordHeader;
+    @FindBy(xpath =".//button[text() ='Sign In']")
+    private WebElement buttonSignIn;
+
     public LoginPage(WebDriver webDriver) {
+
         super(webDriver);
     }
 
@@ -21,47 +30,41 @@ public class LoginPage extends ParentPage {
     }
 
     public void enterUserNameIntoLoginInput(String userName) {
-        try {
-            WebElement webElement = webDriver.findElement(By.xpath(".//input[@placeholder='Username']"));
-            webElement.clear();
-            webElement.sendKeys(userName);
-            logger.info(userName + " entered in input");
-        } catch (Exception e) {
-            printErrorAndStopTest(e);
-        }
+//        try {
+//            WebElement webElement = webDriver.findElement(By.xpath(".//input[@placeholder='Username']"));
+//            inputUserNameHeader.clear();
+//            inputUserNameHeader.sendKeys(userName);
+//            logger.info(userName + " entered in input");
+//        } catch (Exception e) {
+//            printErrorAndStopTest(e);
+//        }
+        enterTextIntoElement(inputUserNameHeader,userName);
     }
 
     public void enterPasswordIntoLoginInput(String password) {
-        try {
-            WebElement webElement = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
-            webElement.clear();
-            webElement.sendKeys(password);
-            logger.info(password + " entered in input");
-        } catch (Exception e) {
-            printErrorAndStopTest(e);
-        }
+        enterTextIntoElement(inputPasswordHeader,password);
     }
 
     public void clickOnButtonLogin() {
-        try {
-            webDriver.findElement(By.xpath(".//button[text() ='Sign In']")).click();
+//        try {
+//            webDriver.findElement(By.xpath(".//button[text() ='Sign In']")).click();
+//             buttonSignIn.click();
+//
+//        } catch (Exception e) {
+//            logger.info("Button Sigh in clicked");
+//        }
+        clickOnElement(buttonSignIn);
+    }
 
+
+
+    public boolean messageInvalidUserPassword() {
+        try {
+            WebElement webElement =
+                    webDriver.findElement(By.xpath(".//div[text() = 'Invalid username / pasword']"));
+            return webElement.isDisplayed();
         } catch (Exception e) {
-            logger.info("Button Sigh in clicked");
-        }
-    }
-
-    public void printErrorAndStopTest(Exception e) {
-        logger.error("Can not work with element " + e);
-        Assert.fail("Can not work with element " + e);
-    }
-    public boolean messageInvalidUserPassword () {
-        try {
-             WebElement webElement =
-                     webDriver.findElement(By.xpath(".//div[text() = 'Invalid username / pasword']"));
-             return webElement.isDisplayed();
-        }catch (Exception e) {
-            return  false;
+            return false;
         }
     }
 
