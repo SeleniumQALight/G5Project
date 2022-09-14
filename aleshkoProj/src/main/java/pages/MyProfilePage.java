@@ -16,14 +16,18 @@ public class MyProfilePage extends ParentPage {
 
     private String postTitleLocator = ".//*[text()='%s']";
 
-
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/profile/";
+    }
+
     public MyProfilePage checkIsRedirectToMyProfilePage() {
-        //TODO Check URL
         waitChatToBeHide();
+        checkUrlWithPattern();
         Assert.assertTrue("My profile page is not loaded", isElementDisplayed(avatar));
         return this;
     }

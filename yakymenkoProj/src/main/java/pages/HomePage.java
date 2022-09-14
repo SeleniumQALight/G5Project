@@ -11,6 +11,12 @@ public class HomePage extends ParentPage { // Alt + Insert → create constructo
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
+
     /**
      * Перевірка чи дійсно завантажилась HomePage
      *
@@ -28,10 +34,11 @@ public class HomePage extends ParentPage { // Alt + Insert → create constructo
      * @return
      */
     public HomePage openHomePage() {
+        LoginPage loginPage = new LoginPage(webDriver);// створюємо об'єкт Логін пейджі
+        loginPage.openLoginPage();
         //Login Page
-        if (!getHeaderElement().isButtonSignOutDisplayed()) { // робимо перевірку що якщо ми не залогінені - потрібно залогінитись, інакше - ...(дописати)
-            LoginPage loginPage = new LoginPage(webDriver);// створюємо об'єкт Логін пейджі
-            loginPage.loginWithValidCred(); //alt+enter → LoginPage
+        if (!headerElement.isButtonSignOutDisplayed()) { // робимо перевірку що якщо ми не залогінені - потрібно залогінитись, інакше - ...(дописати)
+            loginPage.loginWithValidCredWithOutOpenPage(); //alt+enter → LoginPage
         }
         //checkHomePage
         checkIsRedirectToHomePage();

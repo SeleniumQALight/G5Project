@@ -1,18 +1,39 @@
 package Pages;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ParentPage extends CommonActionWithElements{
+import static org.hamcrest.CoreMatchers.containsString;
+
+abstract class ParentPage extends CommonActionWithElements{
+
+    protected String baseUrl;
 
     public ParentPage(WebDriver driver) {
         super(driver);
+        baseUrl = "https://qa-complex-app-for-testing.herokuapp.com";
     }
 
+    abstract String getRelativeUrl();
+    protected void checkUrl(){
+        Assert.assertEquals("Invalid page"
+                ,baseUrl + getRelativeUrl()
+                ,driver.getCurrentUrl() );
+    }
+
+    protected void checkUrlWithPattern(){
+        log.debug(driver.getCurrentUrl());
+        Assert.assertThat("Invalid page"
+                ,driver.getCurrentUrl()
+                , containsString(baseUrl + getRelativeUrl()));
+    }
     protected void waitChatToBeHide(){
         webDriverWait10.withMessage("Chat is not closed")
                 .until(ExpectedConditions
                         .invisibilityOfElementLocated(By.xpath("//div[@id='chat-wrapper']")));
     }
+
+
 }

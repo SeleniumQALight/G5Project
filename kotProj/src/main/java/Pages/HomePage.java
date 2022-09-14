@@ -13,6 +13,11 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelatedUrl() {
+        return "/";
+    }
+
     public boolean isButtonSignOutDisplayed() {
         try {
             WebElement buttonSignOut = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));
@@ -46,9 +51,11 @@ public class HomePage extends ParentPage {
      * @return
      */
     public HomePage openHomePage() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+
         if (!headerElement.isButtonSignOutDisplayed()) {
-            LoginPage loginPage = new LoginPage(webDriver);
-            loginPage.loginWithValidCred();
+            loginPage.loginWithValidCredWithoutOpeningPage();
         }
         checkIsRedirectToHomePage();
         return this;

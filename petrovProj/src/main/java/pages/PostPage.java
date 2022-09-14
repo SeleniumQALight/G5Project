@@ -20,12 +20,13 @@ public class PostPage extends ParentPage{
     private WebElement buttonDelete;
 
 
-
-
-
-
     public PostPage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    @Override
+    String getRelativeUrl() {
+        return "/post/";
     }
 
     public HeaderElement getHeaderElement() {
@@ -33,7 +34,7 @@ public class PostPage extends ParentPage{
     }
 
     public PostPage checkIsRedirectToPostPage(){
-        //TODO check url
+        checkUrlWithPattern();
         Assert.assertTrue("Page Post is not loaded", isElementWasDisplayed(buttonEdit));
         return  this;
     }
