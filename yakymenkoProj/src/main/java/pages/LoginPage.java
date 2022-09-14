@@ -67,16 +67,19 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
         return this;
     }
 
-    public void enterUserNameIntoLoginInput(String userName) {
+    public LoginPage enterUserNameIntoLoginInput(String userName) {
         enterTextIntoElement(inputUserNameHeader, userName); // ↑ замінили на виклик метода
+        return this;
     }
 
-    public void enterPasswordIntoInputPassword(String password) {
+    public LoginPage enterPasswordIntoPasswordInput(String password) {
         enterTextIntoElement(inputPasswordHeader, password);
+        return this;
     }
 
-    public void clickOnButtonLogIn() {
+    public LoginPage clickOnButtonLogIn() {
         clickOnElement(buttonSignIn);
+        return this;
     }
 
     public boolean isAlertDisplayed() {
@@ -164,8 +167,13 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
 
     public HomePage loginWithValidCredWithOutOpenPage() {
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
-        enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
+        enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage checkInvalidLoginMessage() {
+        Assert.assertTrue("Button 'Sign In' and alert massage are not visible", isButtonSignInDisplayed() & isAlertDisplayed());
+        return this;
     }
 }
