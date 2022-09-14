@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.elements.HeaderElement;
 
+import static org.hamcrest.CoreMatchers.containsString;
+
 public class PostInfoPage extends ParentPage {
     private HeaderElement headerElement = new HeaderElement(webDriver);
 
@@ -25,12 +27,17 @@ public class PostInfoPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/post/";
+    }
+
     public HeaderElement getHeaderElement() {
         return headerElement;
     }
 
     public PostInfoPage checkIsRedirectToPostInfoPage() {
-        //TODO check url
+        checkUrlWithPattern();
         Assert.assertTrue("PostInfoPage is not loaded", isElementDisplayed(buttonEdit));
         return this;
     }
@@ -39,6 +46,8 @@ public class PostInfoPage extends ParentPage {
         Assert.assertEquals("Text in Alert", text, alertSuccess.getText());
         return this;
     }
+
+
 
     public PostInfoPage checkTextInCheckBox(String check) {
         if (check.equalsIgnoreCase(TestData.CHECK)) {
