@@ -24,12 +24,17 @@ public class PostPage extends ParentPage{
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/post/";
+    }
+
     public HeaderElement getHeaderElement() {
         return headerElement;
     }
 
     public PostPage checkIsRedirectToPostPage (){
-        //TODO checkURL
+        checkUrlWithPattern();
         Assert.assertTrue( "Post Page is not loaded", isElementDisplayed(editButton));
         return this;
     }
