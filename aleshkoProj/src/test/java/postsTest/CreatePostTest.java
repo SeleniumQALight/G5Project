@@ -46,7 +46,6 @@ public class CreatePostTest extends BaseTest {
                 .openHomePage()
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
-                .deletePostWithTitleUntilPresent(TITLE)
-                ;
+                .deletePostWithTitleUntilPresent(TITLE);
     }
 }

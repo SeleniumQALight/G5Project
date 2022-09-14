@@ -6,6 +6,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -20,6 +22,7 @@ public class BaseTest {
 
     @Before
     public void setUp() {
+        log.info("----> STARTED : "+ testName.getMethodName() + " ---->");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -33,6 +36,10 @@ public class BaseTest {
     public void tearDown() {
         driver.quit();
         log.info("Browser is closed");
+        log.info("----> CLOSED : " + testName.getMethodName() + " ----<\n");
 
     }
+
+    @Rule
+    public TestName testName = new TestName();
 }

@@ -46,6 +46,11 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
         super(webDriver);
     } //constructor
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
     // Дії над цими (@FindBy) елементами:
 
     /**
@@ -53,7 +58,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
      */
     public LoginPage openLoginPage() {
         try {
-            webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
+            webDriver.get(baseUrl);
             logger.info("Login page was opened");
         } catch (Exception e) {
             logger.error("Can not work with site"); // повідомлення в наш лог
@@ -87,9 +92,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
 
     public HomePage loginWithValidCred() {
         openLoginPage();
-        enterUserNameIntoLoginInput(TestData.VALID_LOGIN);// звертаємось до TestData і кажемо - дістань VALID_LOGIN
-        enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
-        clickOnButtonLogIn();
+        loginWithValidCredWithOutOpenPage();
         return new HomePage(webDriver);
     }
 
@@ -160,6 +163,13 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
 
         softAssertions.assertAll();
         return this;
+    }
+
+    public HomePage loginWithValidCredWithOutOpenPage() {
+        enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
+        enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
+        clickOnButtonLogIn();
+        return new HomePage(webDriver);
     }
 
     public LoginPage checkInvalidLoginMessage() {
