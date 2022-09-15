@@ -5,7 +5,6 @@ import libs.Util;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -154,7 +153,7 @@ public class LoginPage extends ParentPage {
     }
 
     public void checkCountAlertMessage(String[] text) {
-        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(String.format(alertTextLocator, "")), text.length));
+        webDriverWaitLow.until(ExpectedConditions.numberOfElementsToBe(By.xpath(String.format(alertTextLocator, "")), text.length));
 
         Assert.assertEquals("'" + text.length + "' alert are not displayed", text.length, listOfError.size());
         logger.info("'" + listOfError.size() + "' alert are displayed");
@@ -162,7 +161,7 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkErrorMessages(String expectedErrors) {
         String[] expectedErrorsArray = expectedErrors.split(";");
-        webDriverWait10.withMessage("Number of messages ").until(ExpectedConditions.numberOfElementsToBe(By.xpath(String.format(alertTextLocator, "")), expectedErrorsArray.length));
+        webDriverWaitLow.withMessage("Number of messages ").until(ExpectedConditions.numberOfElementsToBe(By.xpath(String.format(alertTextLocator, "")), expectedErrorsArray.length));
 
         Util.waitABit(1);
         Assert.assertEquals(expectedErrorsArray.length, listOfError.size());
