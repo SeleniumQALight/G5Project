@@ -31,7 +31,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info("'" + text + "' was entered into" + webElement.getAccessibleName());
+            logger.info("'" + text + "' was entered into" + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -40,7 +40,7 @@ public class CommonActionsWithElements {
     protected void clickOnElement(WebElement webElement) {
         try {
             webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
-            String name = webElement.getAccessibleName();
+            String name = getElementName(webElement);
             webElement.click();
             logger.info("" + name + " was clicked");
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class CommonActionsWithElements {
 
     protected boolean isElementDisplayed(WebElement webElement) {
         try {
-            String name = webElement.getAccessibleName();
+            String name = getElementName(webElement);
             boolean state = webElement.isDisplayed();
             String message;
             if (state) {
@@ -138,6 +138,14 @@ public class CommonActionsWithElements {
         ((JavascriptExecutor) webDriver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
+    }
+    
+    private String getElementName(WebElement webElement){
+        try {
+            return webElement.getAccessibleName();
+        }catch (Exception e){
+            return "";
+        }
     }
 //
 //    метод moveToElement (аналог скрола )
