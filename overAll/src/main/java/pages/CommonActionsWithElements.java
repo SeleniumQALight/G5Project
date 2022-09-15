@@ -33,16 +33,17 @@ public class CommonActionsWithElements {
         try{
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info("'" + text + "' was inputted into '" + webElement.getAccessibleName() + "'");
+            logger.info("'" + text + "' was inputted into '" + getElementName(webElement) + "'");
         }catch (Exception e){
             printErrorAndStopTest(e);
         }
     }
 
-    protected void clickOnElement(WebElement webElement){
+
+   protected void clickOnElement(WebElement webElement){
         try{
             webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
-            String name = webElement.getAccessibleName();
+            String name = getElementName(webElement);
             webElement.click();
             logger.info("'" + name + "' was clicked");
         }catch (Exception e){
@@ -157,6 +158,15 @@ public class CommonActionsWithElements {
 //
 //            webElement = driver.findElement(By.xpath("bla-bla-bla"));
 //((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
+
+    private String getElementName(WebElement webElement){
+        try{
+            return webElement.getAccessibleName();
+        }catch (Exception e){
+            return  "";
+        }
+    }
+
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
