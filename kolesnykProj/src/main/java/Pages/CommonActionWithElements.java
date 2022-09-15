@@ -51,6 +51,15 @@ public class CommonActionWithElements {
         }
     }
 
+    protected void clickOnElement(String xPathLocator){
+        try {
+            WebElement element = driver.findElement(By.xpath(xPathLocator));
+            clickOnElement(element);
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+
+        }
+    }
     protected boolean isElementDisplayed(WebElement element){
         try {
             boolean state = element.isDisplayed();
