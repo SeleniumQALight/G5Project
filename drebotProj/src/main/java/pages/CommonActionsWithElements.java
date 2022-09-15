@@ -28,7 +28,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info("'" + text + "' was inputted into '" + webElement.getAccessibleName() + "'");
+            logger.info("'" + text + "' was inputted into '" + getElementName(webElement) + "'");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -37,7 +37,7 @@ public class CommonActionsWithElements {
     protected void clickOnElement(WebElement webElement) {
         try {
             webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
-            String name = webElement.getAccessibleName();
+            String name = getElementName(webElement);
             webElement.click();
             logger.info("'" + name + "' was clicked");
         } catch (Exception e) {
@@ -98,7 +98,7 @@ public class CommonActionsWithElements {
         try {
             dropDown.click();
             WebElement webElement = dropDown.findElement(By.xpath(".//*[text()='" + text + "']"));
-            String nameElement = webElement.getAccessibleName();
+            String nameElement = getElementName(webElement);
             webElement.click();
             logger.info("'" + nameElement + "' Element was selected in DropDown");
         } catch (Exception e) {
@@ -165,6 +165,14 @@ public class CommonActionsWithElements {
 //
 //            webElement = driver.findElement(By.xpath("bla-bla-bla"));
 //((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
+
+    private String getElementName(WebElement webElement){
+        try{
+            return webElement.getAccessibleName();
+        }catch (Exception e){
+            return "";
+        }
+    }
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can't work with element " + e);
