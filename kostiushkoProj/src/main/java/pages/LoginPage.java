@@ -39,14 +39,14 @@ public class LoginPage extends  ParentPage {
     private  String listOfErrorsLocator = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy (xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
     private List<WebElement> listOfErrors;
-    @FindBy(xpath = ".//input [@id=\"username-register\"]")
+    @FindBy(xpath = ".//input [@id='username-register']")
     private WebElement inputRegistationUserName;
-    @FindBy (xpath = ".//input [@id=\"email-register\"]")
+    @FindBy (xpath = ".//input [@id='email-register']")
     private WebElement inputRegistationEmail;
-    @FindBy (xpath = ".//input [@id=\"password-register\"]")
+    @FindBy (xpath = ".//input [@id='password-register']")
     private WebElement inputRegistationPassword;
 
-    private String alerValidateMessage = ".//div[@class=\"alert alert-danger small liveValidateMessage liveValidateMessage--visible\"]";
+    private String alerValidateMessage = ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
 
 
     public LoginPage(WebDriver webDriver) {
@@ -171,8 +171,8 @@ public class LoginPage extends  ParentPage {
     enterTextIntoElement(inputRegistationPassword, password );
     }
 
-    public void checkMessageEquals(String text) {
-        List<WebElement> list = createListWithElements(alerValidateMessage);
+    public void checkMessageEquals(String text, int numberOfElements) {
+        List<WebElement> list = createListWithElements(alerValidateMessage, numberOfElements);
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getText().equals(text)) {
                logger.info("Message '"+text+"' wos displayed");

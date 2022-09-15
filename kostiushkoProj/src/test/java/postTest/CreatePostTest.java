@@ -8,6 +8,7 @@ import org.junit.Test;
 
 public class CreatePostTest extends BaseTest {
     final String TITLE = "TC1_Kostiushko" + Util.getDateAndTimeFormatted();
+    static String checkBox = "check";
 
 
     @Test
@@ -22,9 +23,10 @@ public class CreatePostTest extends BaseTest {
 //            .selectValueInDropDownRole("One Person")
                 .selectTextInDropDownByUI("Групове повідомлення")
                 .enterTextInTextAreaBodyContent("Text for body")
-                .checkCheckBoxAndClick("check")
+                .checkCheckBoxAndClick(checkBox)
                 .clickSaveNewPostButton()
                 .chekIsRedirectToPostPage()
+                .checkTextInPostUnique(checkBox)
                 .checkTextInAllert("New post successfully created.")
                 .getHeaderElement().clickOnMyProfileButton()
                 .chekIsRedirectTomyProfilePage()
