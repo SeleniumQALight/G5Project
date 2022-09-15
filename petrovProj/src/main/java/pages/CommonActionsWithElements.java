@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -119,7 +118,6 @@ public class CommonActionsWithElements {
         try {
             clickOnElement(webDriver.findElement(By.xpath(".//option[text()='Загальнодоступне']")));
             clickOnElement(webDriver.findElement(By.xpath(".//option[text()='Групове повідомлення']")));
-
 
         }catch (Exception e){
             printErrorAndStopTest(e);
