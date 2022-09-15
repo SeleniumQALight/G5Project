@@ -45,6 +45,15 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void clickOnElement(String xpathLocator){
+        try{
+            WebElement element = webDriver.findElement(By.xpath(xpathLocator));
+            clickOnElement(element);
+        } catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
+
     protected void selectTextInDropDown (WebElement dropDown, String option){
         try{
             Select  select = new Select(dropDown);
