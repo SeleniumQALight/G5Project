@@ -153,7 +153,7 @@ public class LoginPage extends ParentPage {
     }
 
     public LoginPage validateErrorMessagesCountOnLoginPage(int countOfErrorMessages) {
-        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe
+        webDriverWaitLow.until(ExpectedConditions.numberOfElementsToBe
                 (By.xpath("//div[contains (@class, 'alert')]"), countOfErrorMessages));
         Assert.assertEquals("Not all error messages are displayed", countOfErrorMessages, validationErrorMessage.size());
         logger.info("Error messages count on sign up form is " + validationErrorMessage.size());
@@ -162,7 +162,7 @@ public class LoginPage extends ParentPage {
 
 
     public void validateErrorMessagesTextOnSignUp() {
-        webDriverWait10.until(ExpectedConditions.visibilityOf(validationErrorMessagePassword));
+        webDriverWaitLow.until(ExpectedConditions.visibilityOf(validationErrorMessagePassword));
         Assert.assertEquals("Username must be at least 3 characters."
                 , validationErrorMessage.get(0).getText());
         logger.info("Text for username error message is validated: "
@@ -181,7 +181,7 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkErrorMessages(String expectedErrors) {
         String[] expectedErrorsArray = expectedErrors.split(";");
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of messages should be " + expectedErrorsArray.length)
                 .until(
                         ExpectedConditions.numberOfElementsToBe(
