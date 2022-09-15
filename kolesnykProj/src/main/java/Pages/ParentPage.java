@@ -13,7 +13,8 @@ abstract class ParentPage extends CommonActionWithElements{
 
     public ParentPage(WebDriver driver) {
         super(driver);
-        baseUrl = "https://qa-complex-app-for-testing.herokuapp.com";
+        baseUrl = "https://[env]-complex-app-for-testing.herokuapp.com"
+                .replace("[env]", System.getProperty("env", "qa"));
     }
 
     abstract String getRelativeUrl();

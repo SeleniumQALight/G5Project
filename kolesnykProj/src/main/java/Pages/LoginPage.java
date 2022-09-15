@@ -57,6 +57,7 @@ public class LoginPage extends ParentPage {
         try {
             driver.get(baseUrl);
             log.info("Login page is opened");
+            log.info(baseUrl);
             return this;
         } catch (Exception e) {
             log.error("Warning : Login page is not opened");
