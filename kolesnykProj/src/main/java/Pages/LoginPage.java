@@ -1,6 +1,5 @@
 package Pages;
 
-import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -66,8 +65,9 @@ public class LoginPage extends ParentPage {
         }
     }
 
-    public void enterUserNameIntoLoginInput(String username) {
+    public LoginPage enterUserNameIntoLoginInput(String username) {
         enterTextIntoElement(inputUserNameHeader, username);
+        return this;
     }
 
     public void enterPasswordIntoInputPassword(String password) {
@@ -181,4 +181,14 @@ public class LoginPage extends ParentPage {
 //        log.error("Cannot work with element " + e);
 //        Assert.fail("Cannot work with element " + e);
 //    }
+
+    public LoginPage fillInPasswordField(String text){
+        usersPressesKeyTabTime(1);
+        inputPasswordHeader.sendKeys(text);
+        return this;
+    }
+
+    public void pressEnterToSubmit(){
+        usersPressesKeyEnterTime(1);
+    }
 }
