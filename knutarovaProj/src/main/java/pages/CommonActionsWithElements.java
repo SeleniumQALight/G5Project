@@ -28,7 +28,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info("'" + text + "' was inputted into '" + webElement.getAccessibleName() + "'");
+            logger.info("'" + text + "' was inputted into '" + getElementName(webElement) + "'");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -37,7 +37,7 @@ public class CommonActionsWithElements {
     protected void clickOnElement(WebElement webElement) {
         try {
             webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
-            String name = webElement.getAccessibleName();
+            String name = getElementName(webElement);
             webElement.click();
             logger.info("'" + name + "' was clicked");
         } catch (Exception e) {
@@ -53,6 +53,13 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
+     private String getElementName (WebElement webElement){
+        try{
+            return webElement.getAccessibleName();
+        }catch (Exception e){
+            return "";
+        }
+     }
 
     /**
      * метод поверне true якщо елемент показаний і false - якщо не показаний, або його взагалі немає
