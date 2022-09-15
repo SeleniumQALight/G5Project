@@ -115,7 +115,7 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkAmountOfAlertDuringRegistration(){
         try {
-            webDriverWait10.until(ExpectedConditions
+            webDriverWaitLow.until(ExpectedConditions
                     .numberOfElementsToBe(By.xpath("//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']"),3));
             Assert.assertEquals(3, findAlerts().size());
             log.info("All three Alerts are displayed");
@@ -144,7 +144,7 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkErrorMessages(String expectedError) {
         String[] expectedErrorsArray = expectedError.split(";");
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of messages should be " + expectedErrorsArray.length)
                 .until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfErrorsLocator), expectedErrorsArray.length));
         Util.waitABit(1);

@@ -2,7 +2,6 @@ package Pages;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -13,7 +12,7 @@ abstract class ParentPage extends CommonActionWithElements{
 
     public ParentPage(WebDriver driver) {
         super(driver);
-        baseUrl = "https://[env]-complex-app-for-testing.herokuapp.com"
+        baseUrl = configProperties.base_url()
                 .replace("[env]", System.getProperty("env", "qa"));
     }
 
@@ -31,7 +30,7 @@ abstract class ParentPage extends CommonActionWithElements{
                 , containsString(baseUrl + getRelativeUrl()));
     }
     protected void waitChatToBeHide(){
-        webDriverWait10.withMessage("Chat is not closed")
+        webDriverWaitLow.withMessage("Chat is not closed")
                 .until(ExpectedConditions
                         .invisibilityOfElementLocated(By.xpath("//div[@id='chat-wrapper']")));
     }
