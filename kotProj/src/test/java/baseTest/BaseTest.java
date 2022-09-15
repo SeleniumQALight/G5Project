@@ -1,5 +1,6 @@
 package baseTest;
 
+import Pages.CommonActionsWithElements;
 import Pages.HomePage;
 import Pages.LoginPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -29,7 +30,8 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        webDriver.manage().timeouts().implicitlyWait(
+                Duration.ofSeconds(CommonActionsWithElements.configProperties.TIME_FOR_DEFAULT_WAIT()));
         logger.info("Browser is opened");
         loginPage = new LoginPage(webDriver);
         homePage = new HomePage(webDriver);

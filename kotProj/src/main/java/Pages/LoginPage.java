@@ -114,7 +114,7 @@ private String notValidCredentialsMessage = ".//div[@class='alert alert-danger s
 
     public LoginPage checkErrorsMessages(String expectedErrors) {
         String[] expectedErrorsArray = expectedErrors.split(";"); //порізали стрінгу з еррор меседжами сплітом на куски, які пішли в масив
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of Error Messages should be "+ expectedErrorsArray.length)
                 .until(ExpectedConditions.numberOfElementsToBe(By.xpath(notValidCredentialsMessage), expectedErrorsArray.length));
         Util.waitABit(1);

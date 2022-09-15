@@ -1,5 +1,7 @@
 package Pages;
 
+import libs.ConfigProperties;
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -9,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.*;
 import java.time.Duration;
 import java.util.ArrayList;
 
@@ -17,13 +18,14 @@ public class CommonActionsWithElements {
 
     protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
-    protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected WebDriverWait webDriverWaitLow, webDriverWaitHigh;
+    public static ConfigProperties configProperties = ConfigFactory.create(ConfigProperties.class);
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWaitLow = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWaitHigh = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_HIGH()));
     }
 
     protected void enterTextIntoElement(WebElement webElement, String text) {
@@ -38,7 +40,7 @@ public class CommonActionsWithElements {
 
     protected void clickOnElement(WebElement webElement) {
         try {
-            webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
+            webDriverWaitHigh.until(ExpectedConditions.elementToBeClickable(webElement));
             String name = getElementName(webElement);
             webElement.click();
             logger.info("'" + name + "' was clicked");
@@ -47,15 +49,12 @@ public class CommonActionsWithElements {
         }
     }
 
-//    protected void clickOnElement (String xpathLocator)
+//    protected void clickOnElement (String xpathLocator){
 //        try {
-//            WebElement element = webDriver.findElement(by.xpath(xpathLocator));
+//            WebElement element = webDriver.findElement(By.xpath(xpathLocator));
 //            clickOnElement(element);
-//
-//
-//    }catch(Exeption e){
-//
-//    printErrorAndStopTest(e);
+//    }catch(Exception e){
+//printErrorAndStopTest(e);
 //}
 //    }
 
