@@ -3,6 +3,7 @@ package pages;
 import java.time.Duration;
 import java.util.ArrayList;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -16,16 +17,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import libs.ConfigProperties;
+
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
-    protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected WebDriverWait webDriverWaitLow, webDriverWaitHight;
+    public static ConfigProperties configProperties = ConfigFactory.create(ConfigProperties.class);
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWaitLow = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWaitHight = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_HIGHT()));
 
     }
 
@@ -42,7 +46,7 @@ public class CommonActionsWithElements {
 
    protected void clickOnElement(WebElement webElement){
         try{
-            webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
+            webDriverWaitHight.until(ExpectedConditions.elementToBeClickable(webElement));
             String name = getElementName(webElement);
             webElement.click();
             logger.info("'" + name + "' was clicked");
