@@ -44,6 +44,7 @@ public class BaseTest {
     public TestName testName = new TestName();
 
     private WebDriver initDriver() {
+
         String browser = System.getProperty("browser");
 
         if ((browser == null) || "chrome".equalsIgnoreCase(browser)) {
