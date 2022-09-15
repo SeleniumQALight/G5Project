@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
 import java.time.Duration;
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(" ' " + text + " ' was input into  '" + webElement.getAccessibleName() + " ' ");
+            logger.info(" ' " + text + " ' was input into  '" + getElementName(webElement) + " ' ");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -38,13 +39,25 @@ public class CommonActionsWithElements {
     protected void clickOnElement(WebElement webElement) {
         try {
             webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
-            String name = webElement.getAccessibleName();
+            String name = getElementName(webElement);
             webElement.click();
             logger.info("'" + name + "' was clicked");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
+
+//    protected void clickOnElement (String xpathLocator)
+//        try {
+//            WebElement element = webDriver.findElement(by.xpath(xpathLocator));
+//            clickOnElement(element);
+//
+//
+//    }catch(Exeption e){
+//
+//    printErrorAndStopTest(e);
+//}
+//    }
 
     /**
      * Метод поверне тру - якщо елемент показаний
@@ -109,12 +122,15 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
+
+
     public void usersPressesKeyEnterTime(int numberOfTimes) {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
             actions.sendKeys(Keys.ENTER).build().perform();
         }
     }
+
     public void usersPressesKeyTabTime(int numberOfTimes) {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
@@ -122,9 +138,10 @@ public class CommonActionsWithElements {
         }
 
     }
+
     public void userOpensNewTab() {
-        ((JavascriptExecutor)webDriver).executeScript("window.open()");
-        ArrayList<String> tabs = new ArrayList<> (webDriver.getWindowHandles());
+        ((JavascriptExecutor) webDriver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
     }
 //    метод moveToElement (аналог скрола )
@@ -150,8 +167,19 @@ public class CommonActionsWithElements {
 //            webElement = driver.findElement(By.xpath("bla-bla-bla"));
 //((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
 
-    private void printErrorAndStopTest(Exception e) {
-        logger.info("Can not work with element " + e);
-        Assert.fail("Can not work with element " + e);
+
+    private String getElementName(WebElement webElement) {
+
+        try {
+
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            return "";
+        }
+
     }
-}
+        private void printErrorAndStopTest (Exception e){
+            logger.info("Can not work with element " + e);
+            Assert.fail("Can not work with element " + e);
+        }
+    }
