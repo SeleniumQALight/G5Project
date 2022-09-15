@@ -3,7 +3,6 @@ package pages;
 
 import libs.TestData;
 import libs.Util;
-import org.assertj.core.api.SoftAssertionError;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -50,6 +49,7 @@ public class LoginPage extends  ParentPage {
         try {
             webDriver.get(baseUrl);
             logger.info("Login page was opened");
+            logger.info(baseUrl);
         } catch (Exception e){
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
@@ -118,7 +118,7 @@ public class LoginPage extends  ParentPage {
     public LoginPage chekErrorsMessages(String expectedErrors) {
         // test;test1 -> array[0]=test, array[1] = test1
         String [] expectedErrorsArray = expectedErrors.split(";");
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of message should be "+expectedErrorsArray.length)
                 .until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfErrorsLocator), expectedErrorsArray.length));
         Util.waitABit(1);
