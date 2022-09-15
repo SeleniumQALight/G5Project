@@ -14,7 +14,9 @@ protected String baseUrl;
 
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
-        baseUrl = "https://qa-complex-app-for-testing.herokuapp.com";
+        baseUrl = "https://[env]-complex-app-for-testing.herokuapp.com"
+                .replace("[env]", System.getProperty("[env]","qa"));                       //change environment from qa to ...
+
     }
 abstract String getRelatedUrl();
     protected void checkUrl(){
