@@ -38,7 +38,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(textForInput);
-            logger.info("'" + textForInput + "' was inputted into '" + webElement.getAccessibleName() + "'");
+            logger.info("'" + textForInput + "' was inputted into '" + getElementName(webElement) + "'");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -47,7 +47,7 @@ public class CommonActionsWithElements {
     protected void clickOnElement(WebElement webElement) {
         try {
             webDriverWait10.withMessage("Button is not clickable").until(ExpectedConditions.elementToBeClickable(webElement));
-            String webElementName = webElement.getAccessibleName();
+            String webElementName = getElementName(webElement);
             webElement.click();
             logger.info("Element '" + webElementName + "' was clicked");
         } catch (Exception e) {
@@ -86,7 +86,7 @@ public class CommonActionsWithElements {
         try {
             boolean isElementDisplayedStatus = webElement.isDisplayed();
             if (isElementDisplayedStatus) {
-                logger.info("Element '" + webElement.getAccessibleName() + "' is displayed");
+                logger.info("Element '" + getElementName(webElement) + "' is displayed");
             } else {
                 logger.info("Element is not displayed");
             }
@@ -135,6 +135,14 @@ public class CommonActionsWithElements {
             logger.info("'" + text + "' was selected in dropdown");
         } catch (Exception e) {
             printErrorAndStopTest(e);
+        }
+    }
+
+    private String getElementName(WebElement webElement) {
+        try {
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            return "";
         }
     }
 
