@@ -104,21 +104,21 @@ public class LoginPage extends ParentPage {
     }
 
     public LoginPage checkAlertAboutUsernameOnSignUpForm(String text) {
-        webDriverWait10.until(ExpectedConditions.visibilityOf(alertUsernameSignUp));
+        webDriverWaitLow.until(ExpectedConditions.visibilityOf(alertUsernameSignUp));
         Assert.assertTrue("Alert is not displayed", isElementDisplayed(alertUsernameSignUp));
         Assert.assertEquals("Alert contains another text than requested", text, alertUsernameSignUp.getText());
         return this;
     }
 
     public LoginPage checkAlertAboutEmailOnSignUpForm(String text) {
-        webDriverWait10.until(ExpectedConditions.visibilityOf(alertEmailSignUp));
+        webDriverWaitLow.until(ExpectedConditions.visibilityOf(alertEmailSignUp));
         Assert.assertTrue("Alert is not displayed", isElementDisplayed(alertEmailSignUp));
         Assert.assertEquals("Alert contains another text than requested", text, alertEmailSignUp.getText());
         return this;
     }
 
     public LoginPage checkAlertAboutPasswordOnSignUpForm(String text) {
-        webDriverWait10.until(ExpectedConditions.visibilityOf(alertPasswordSignUp));
+        webDriverWaitLow.until(ExpectedConditions.visibilityOf(alertPasswordSignUp));
         Assert.assertTrue("Alert is not displayed", isElementDisplayed(alertPasswordSignUp));
         Assert.assertEquals("Alert contains another text than requested", text, alertPasswordSignUp.getText());
         return this;
@@ -126,7 +126,7 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkErrorsMessagesOnRegistrationForm(String expectedErrors) {
         String[] expectedErrorArray = expectedErrors.split(";");
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of messages should be " + expectedErrorArray.length)
                 .until(ExpectedConditions.numberOfElementsToBe
                         (By.xpath(listOfErrorsLocator), expectedErrorArray.length));
