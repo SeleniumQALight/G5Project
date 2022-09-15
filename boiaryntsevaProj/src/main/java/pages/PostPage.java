@@ -16,6 +16,11 @@ public class PostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/post/";
+    }
+
     public HeaderElement getHeaderElement() {
         return headerElement;
     }
@@ -34,7 +39,7 @@ public class PostPage extends ParentPage {
     private WebElement textWeatherPostIsUnique;
 
     public PostPage checkIsRedirectToPostPage() {
-        //TODO check URL
+        checkUrlWithPatterns();
         Assert.assertTrue("Post page is not loaded", isElementDisplayed(buttonEdit));
         return this;
     }
@@ -50,7 +55,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage validateCheckBoxStateOnPost(String checkBoxValue){
-        if ((!checkBoxValue.equalsIgnoreCase("check")) || (!checkBoxValue.equalsIgnoreCase("uncheck"))) {
+        if ((!checkBoxValue.equalsIgnoreCase("check")) && (!checkBoxValue.equalsIgnoreCase("uncheck"))) {
             logger.info("Invalid value for checkbox was entered - Validation");
             Assert.fail("Invalid value for checkbox was entered - Validation");
         }

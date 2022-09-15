@@ -4,9 +4,8 @@ import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -47,9 +46,14 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
     public LoginPage openLoginPage() {
         try {
-            webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
+            webDriver.get(baseUrl);
             logger.info("Login page was opened");
         } catch (Exception ex) {
             logger.error("Can't work with site");
@@ -107,6 +111,12 @@ public class LoginPage extends ParentPage {
 
     public HomePage loginWithValidCredential() {
         openLoginPage();
+        loginWithValidCredentialWithOutOpenPage();
+
+        return new HomePage(webDriver);
+    }
+
+    public HomePage loginWithValidCredentialWithOutOpenPage(){
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
@@ -169,4 +179,6 @@ public class LoginPage extends ParentPage {
 
         return this;
     }
+
+
 }

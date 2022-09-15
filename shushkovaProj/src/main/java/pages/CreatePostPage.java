@@ -10,13 +10,22 @@ public class CreatePostPage extends ParentPage {
     private WebElement inputTitle;
     @FindBy(tagName="select")
     private WebElement dropDownRole;
+    @FindBy(xpath = ".//textarea[@id='post-body']")
+    private WebElement inputBody;
+    @FindBy(xpath = ".//form[@action='/create-post']//button")
+    private WebElement buttonSavePost;
 
     public CreatePostPage(WebDriver webDriver){
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/create-post";
+    }
+
     public CreatePostPage checkIsRedirectToCreatePostPage(){
-        //TODO check url
+        checkUrl();
         Assert.assertTrue("Page Create Post is not loaded",isElementDisplayed(inputTitle));
         return this;
     }
@@ -34,5 +43,16 @@ public class CreatePostPage extends ParentPage {
     public CreatePostPage selectValueInDropDownRole(String valueForSelect) {
         selectValueInDropDown(dropDownRole,valueForSelect);
         return this;
+    }
+
+    public CreatePostPage enterTextInInputBody(String text) {
+        enterTextIntoElement(inputBody,text);
+        return this;
+    }
+
+    public PostPage clickOnSavePostButton() {
+        clickOnElement(buttonSavePost);
+        return new PostPage(webDriver);
+
     }
 }

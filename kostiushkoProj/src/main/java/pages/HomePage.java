@@ -27,15 +27,21 @@ public class HomePage extends ParentPage{
      * @return
      */
     public HomePage openHomePage(){
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
         //login Page
         if(!headerElement.isElementDisplayed(buttonSingOut)){
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.loginWithWalidCred();}
+        loginPage.loginWithWalidCredWithoutOpenPage();}
         return this;
     }
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    @Override
+    String getRelateUrl() {
+        return "/";
     }
 //    public  boolean isButtonSignOutDisplayed() {
 //        try { buttonSingOut.isDisplayed();

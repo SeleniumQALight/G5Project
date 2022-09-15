@@ -14,6 +14,11 @@ public class HomePage extends ParentPage {
         super(driver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
     @FindBy(xpath = "//button[@class='btn btn-sm btn-secondary']")
         WebElement singOutButton;
 
@@ -22,7 +27,7 @@ public class HomePage extends ParentPage {
 //    }
 
     public HomePage checkIsRedirectToHomePage(){
-        //TODO checkURL
+        checkUrl();
         Assert.assertTrue("Home page is not opened", headerElements.isButtonSignOutDisplayed());
         return this;
     }
@@ -39,9 +44,10 @@ public class HomePage extends ParentPage {
 //    }
 
     public HomePage openHomePage() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.openLoginPage();
         if (!headerElements.isButtonSignOutDisplayed()) {
-            LoginPage loginPage = new LoginPage(driver);
-            loginPage.loginWithValidCredentials();
+            loginPage.loginWithValidCredentialsWithoutOpenPage();
         }
         checkIsRedirectToHomePage();
         return this;

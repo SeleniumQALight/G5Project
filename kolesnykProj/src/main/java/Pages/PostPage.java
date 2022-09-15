@@ -16,6 +16,11 @@ public class PostPage extends ParentPage{
         super(driver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/post/";
+    }
+
     public HeaderElements getHeaderElements() {
         return headerElements;
     }
@@ -31,7 +36,7 @@ public class PostPage extends ParentPage{
 
 
     public PostPage checkIsRedirectToPostPage() {
-        //TODO check URL
+        checkUrlWithPattern();
         Assert.assertTrue("Post page is not opened",isElementDisplayed(buttonEdit));
         return this;
     }

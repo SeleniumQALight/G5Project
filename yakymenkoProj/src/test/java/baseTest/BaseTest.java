@@ -4,6 +4,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.HomePage;
@@ -20,6 +22,7 @@ public class BaseTest {
 
     @Before
     public void setUp() {
+        logger.info("----- " + testName.getMethodName() + " was started -----");
         WebDriverManager.chromedriver().setup();// перед кожним тестом перевіряємо чи встановлений екзешнік
         webDriver = new ChromeDriver(); // створюємо новий браузер
         webDriver.manage().window().maximize();
@@ -33,6 +36,10 @@ public class BaseTest {
     public void tearDown() {
         webDriver.quit();
         logger.info("Browser was closed");
-
+        logger.info("----- " + testName.getMethodName() + " was ended ------ \n");
     }
+
+    // створили змінну в яку джиюніт покладе ...
+    @Rule
+    public TestName testName = new TestName();
 }

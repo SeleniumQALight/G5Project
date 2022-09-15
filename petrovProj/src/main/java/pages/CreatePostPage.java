@@ -28,8 +28,13 @@ public class CreatePostPage extends ParentPage{
         super(webDriver);
     }
 
-    public CreatePostPage checkIsRedirectToCreatePage(){
-        //TODO check url
+    @Override
+    String getRelativeUrl() {
+        return "/create-post";
+    }
+
+    public CreatePostPage checkIsRedirectToCreatePostPage(){
+        checkUrl();
         Assert.assertTrue("Page Create post is not loaded", isElementWasDisplayed(inputTitle));
         return  this;
     }
@@ -67,9 +72,10 @@ public class CreatePostPage extends ParentPage{
 
     }
 
-    /*public void isCheck(){
-        makeCheckTrue();
-    }*/
+    public CreatePostPage actionsWithCheckBox(String checkCondition){
+        selectedCheckBox(check, checkCondition);
+        return this;
+    }
 
 
 }

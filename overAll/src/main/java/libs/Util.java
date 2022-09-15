@@ -5,9 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Util {
+    private Util() {
+    }
+
     public static void waitABit(Integer second){
         try {
-            Thread.sleep(second * 1000);
+            Thread.sleep(second * 1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -15,22 +18,25 @@ public class Util {
 
     /**
      * Method returned SystemDateAndTime In Format yyyy-MM-dd_HH-mm-ss
-     * @return
      */
     public static String getDateAndTimeFormatted(){
         return getDateAndTime("yyyy-MM-dd_HH-mm-ss");
     }
 
     /**
+     * Method returned SystemDateAndTime In Format yyyy-MM-dd_HH-mm-ss
+     */
+    public static String getDateAndTimeFormattedOnlyNumbers(){
+        return getDateAndTime("yyyyMMddHHmmss");
+    }
+
+    /**
      * Method returned SystemDateAndTime
-     * @return
      */
     public static String getDateAndTime(String format){
         DateFormat dateFormat = new SimpleDateFormat(format);
         Date date = new Date();
-        String dateFormated = dateFormat.format(date);
-//        System.out.println(dateFormated);
-        return dateFormated;
+        return dateFormat.format(date);
     }
 
 }

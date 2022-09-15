@@ -8,6 +8,7 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import junitparams.naming.TestCaseName;
 import libs.TestData;
+import libs.Util;
 
 @RunWith(JUnitParamsRunner.class)
 public class RegistrationTest extends BaseTest {
@@ -21,16 +22,15 @@ public class RegistrationTest extends BaseTest {
 
 //    String expectedErrors = ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD;
 
-
     @Test
     @Parameters({
-              SHORT_USER_NAME     +COMMA+"test.com"    +COMMA + "123"+COMMA + (ERROR_USERNAME+SEMICOLON+ERROR_EMAIL+SEMICOLON+ERROR_PASSWORD)
+            SHORT_USER_NAME     +COMMA+"test.com"    +COMMA + "123"+COMMA + (ERROR_USERNAME+SEMICOLON+ERROR_EMAIL+SEMICOLON+ERROR_PASSWORD)
             , TestData.VALID_LOGIN+COMMA+"qqq"         +COMMA + "123"+COMMA + ERROR_ALREADY_EXIST+SEMICOLON+ERROR_EMAIL+SEMICOLON+ERROR_PASSWORD
             , SHORT_USER_NAME     +COMMA+"test@tex.com"+COMMA + "546"+COMMA + ERROR_USERNAME+SEMICOLON+ERROR_PASSWORD
             , ""                  +COMMA+"test@t\\ex.com"+COMMA + "546"+COMMA + ERROR_PASSWORD
     })
     @TestCaseName("registrationErrors : login = {0}, email = {1}, password = {2}")
-    public void registrationErrors(String userName, String email, String password, String expectedErrors){
+    public void TC1_registrationErrors(String userName, String email, String password, String expectedErrors){
         loginPage
                 .openLoginPage()
                 .enterUserNameIntoRegistrationForm(userName)
@@ -43,4 +43,26 @@ public class RegistrationTest extends BaseTest {
     }
 
 
+    @Test
+    @Parameters(method = "provideParameters")
+    @TestCaseName("registrationErrors : login = {0}, email = {1}, password = {2}")
+    public void TC2_registrationErrors(String userName, String email, String password, String expectedErrors){
+        loginPage
+                .openLoginPage()
+                .enterUserNameIntoRegistrationForm(userName)
+                .enterEmailIntoRegistrationFrom(email)
+                .enterPasswordIntoRegistrationForm(password)
+                .checkErrorsMessages(expectedErrors)
+
+        ;
+
+    }
+
+    final static String userDate = "user" + Util.getDateAndTimeFormattedOnlyNumbers();
+
+    public static Object[][] provideParameters() {
+        return new Object[][] {
+                new Object[] {userDate,"test@t\\ex.com", "546",ERROR_PASSWORD}
+        };
+    }
 }
