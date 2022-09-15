@@ -46,6 +46,16 @@ public class CommonActionsWithElements {
         }
 
     }
+    protected void clicOnElement(String xpathLocator) {
+        try {
+           WebElement element = webDriver.findElement(By.xpath(xpathLocator));
+           clicOnElement(element);
+        } catch (Exception e) {
+            prinErrorAndStopTest(e);
+        }
+
+    }
+
 
     /**
      * Метод вернет тру если елемент есть
