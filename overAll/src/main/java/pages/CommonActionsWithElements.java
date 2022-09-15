@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -45,6 +46,15 @@ public class CommonActionsWithElements {
             webElement.click();
             logger.info("'" + name + "' was clicked");
         }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void clickOnElement(String xpathLocator){
+        try {
+            WebElement element = webDriver.findElement(By.xpath(xpathLocator));
+            clickOnElement(element);
+        } catch (Exception e){
             printErrorAndStopTest(e);
         }
     }
