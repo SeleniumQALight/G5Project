@@ -12,7 +12,7 @@ abstract class ParentPage extends CommonActionsWithElements{
 
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
-        baseUrl = "https://[env]-complex-app-for-testing.herokuapp.com".replace("[env]", System.getProperty("env", "qa"));
+        baseUrl = configProperties.base_url().replace("[env]", System.getProperty("env", "qa"));
 
     }
 
@@ -26,7 +26,7 @@ abstract class ParentPage extends CommonActionsWithElements{
     }
 
     protected void waitChatToBeHide(){
-        webDriverWait10.withMessage("Chat is not closed")
+        webDriverWaitLow.withMessage("Chat is not closed")
                 .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(".//*[@id='chat-wrapper']")));
 
     }

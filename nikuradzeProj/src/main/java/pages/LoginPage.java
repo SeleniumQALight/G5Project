@@ -141,13 +141,13 @@ public class LoginPage extends ParentPage{
         return this;
     }
     public void checkValidationMessagesNumber(int numberOfAlerts){
-        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"), numberOfAlerts));
+        webDriverWaitLow.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"), numberOfAlerts));
         Assert.assertEquals("Incorrect number of alerts are displayed", numberOfAlerts, validationMessage.size());
         logger.info("Number of error messages on registration form is " + validationMessage.size());
     }
 
     public void checkValidationMessageText() {
-        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"), 3));
+        webDriverWaitLow.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"), 3));
         Assert.assertEquals("Username must be at least 3 characters.", validationMessage.get(0).getText());
         logger.info("Valid username error message: " + validationMessage.get(0).getText());
         Assert.assertEquals("You must provide a valid email address.", validationMessage.get(1).getText());
@@ -158,7 +158,7 @@ public class LoginPage extends ParentPage{
 
     public LoginPage checkErrorsMessages(String expectedErrors) {
         String[] expectedErrorsArray = expectedErrors.split(";");
-        webDriverWait10.withMessage("Number of messages should be " + expectedErrorsArray.length)
+        webDriverWaitLow.withMessage("Number of messages should be " + expectedErrorsArray.length)
                 .until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfErrorsLocator), expectedErrorsArray.length));
         Util.waitABit(1);
         Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
