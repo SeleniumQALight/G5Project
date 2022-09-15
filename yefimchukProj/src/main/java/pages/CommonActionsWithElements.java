@@ -2,10 +2,7 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -46,6 +43,15 @@ public class CommonActionsWithElements {
             String name = webElement.getAccessibleName();
             webElement.click();
             logger.info("'" + name + "' was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void clickOnElement(String xpathLocator) {
+        try {
+          WebElement element = webDriver.findElement(By.xpath(xpathLocator));
+          clickOnElement(element);
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -107,6 +113,7 @@ public class CommonActionsWithElements {
         logger.error("Can not work with element" + e);
         Assert.fail("Can not work with element" + e);
     }
+
     public void usersPressesKeyEnterTime(int numberOfTimes) {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
@@ -123,8 +130,8 @@ public class CommonActionsWithElements {
     }
 
     public void userOpensNewTab() {
-        ((JavascriptExecutor)webDriver).executeScript("window.open()");
-        ArrayList<String> tabs = new ArrayList<> (webDriver.getWindowHandles());
+        ((JavascriptExecutor) webDriver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
     }
 //
