@@ -46,6 +46,15 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void clickOnElement(String xpathLocator){
+        try {
+            WebElement element = webDriver.findElement(By.xpath(xpathLocator));
+            clickOnElement(element);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
 
     public boolean isElementWasDisplayed(WebElement webElement){
         try{
