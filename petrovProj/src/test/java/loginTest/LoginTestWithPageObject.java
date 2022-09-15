@@ -14,7 +14,7 @@ public class LoginTestWithPageObject extends BaseTest {
         loginPage.clickOnButtonLogin();
         Assert.assertTrue("Button Sign Out is not visible", homePage.isButtonSignOutDisplayed());
     }
-
+/*
     @Test
     public void inValidLogin(){
         loginPage.openLoginPage();
@@ -34,7 +34,7 @@ public class LoginTestWithPageObject extends BaseTest {
         Assert.assertTrue("Error message is missing", loginPage.isMessageErrorLoginOrPassword());
 
     }
-
+*/
 
 
 

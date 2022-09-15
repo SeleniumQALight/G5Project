@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import pages.CommonActionsWithElements;
 import pages.HomePage;
 import pages.LoginPage;
 
@@ -28,7 +29,8 @@ public class BaseTest {
         logger.info("\n--- "+testName.getMethodName()+" was started ---");
         webDriver = initDriver();
         webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        webDriver.manage().timeouts().implicitlyWait(
+                Duration.ofSeconds(CommonActionsWithElements.configProperties.TIME_FOR_DEFAULT_WAIT()));
         logger.info("Browser was opened");
         loginPage = new LoginPage(webDriver);
         homePage = new HomePage(webDriver);
