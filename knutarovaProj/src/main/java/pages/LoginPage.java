@@ -47,6 +47,7 @@ public class LoginPage extends ParentPage {
         try {
             webDriver.get(baseUrl);
             logger.info("Login page was opened");
+            logger.info(baseUrl);
         } catch (Exception e) {
             logger.error("Can't work with site");
             Assert.fail("Can't work with site");
