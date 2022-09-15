@@ -55,6 +55,15 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void clickOnElement(String xpathLocator) {
+        try {
+            WebElement element = webDriver.findElement(By.xpath(xpathLocator));
+            clickOnElement(element);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
     protected void setCheckboxWithStatus(WebElement checkBox, String state) {
         if (state.equalsIgnoreCase("check") || state.equalsIgnoreCase("uncheck")) {
             if (checkBox.isSelected() && state.equals("check")) {
