@@ -34,7 +34,7 @@ public class CommonActionWithElements {
         try {
             element.clear();
             element.sendKeys(text);
-            log.info("'" + text + "' was entered into '" + element.getAccessibleName() + "'");
+            log.info("'" + text + "' was entered into '" + getElementName(element) + "'");
         }catch (Exception e){
             printErrorAndStopTest(e);
         }
@@ -43,7 +43,7 @@ public class CommonActionWithElements {
     protected void clickOnElement(WebElement element){
         try {
             webDriverWait15.until(ExpectedConditions.elementToBeClickable(element));
-            String name = element.getAccessibleName();
+            String name = getElementName(element);
             element.click();
             log.info("'" + name + "' was clicked");
         }catch (Exception e){
@@ -158,5 +158,13 @@ public class CommonActionWithElements {
         driver.switchTo().window(tabs.get(1));
     }
 
+    private String getElementName(WebElement webElement){
+        try {
+            return webElement.getAccessibleName();
+        }catch (Exception e){
+            return "";
+        }
+
+    }
 
 }

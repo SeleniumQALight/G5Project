@@ -10,6 +10,8 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import java.time.Duration;
 
@@ -23,8 +25,7 @@ public class BaseTest {
     @Before
     public void setUp() {
         log.info("----> STARTED : "+ testName.getMethodName() + " ---->");
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        initDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         log.info("Browser is opened");
@@ -42,4 +43,21 @@ public class BaseTest {
 
     @Rule
     public TestName testName = new TestName();
+
+    private WebDriver initDriver(){
+        String browser = System.getProperty("browser");
+        if ((browser == null) || "chrome".equalsIgnoreCase(browser)){
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        }else if ("firefox".equalsIgnoreCase(browser)){
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
+        }else if ("ie".equalsIgnoreCase(browser)) {
+            //WebDriverManager.iedriver().setup();
+            // in most cases 32bit version is needed
+            WebDriverManager.iedriver().arch32().setup();
+            return new InternetExplorerDriver();
+        }
+        return driver;
+    }
 }
