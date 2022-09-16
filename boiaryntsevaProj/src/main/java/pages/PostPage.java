@@ -54,6 +54,11 @@ public class PostPage extends ParentPage {
         return new MyProfilePage(webDriver);
     }
 
+    public EditPostPage clickOnEditButton(){
+        clickOnElement(buttonEdit);
+        return new EditPostPage(webDriver);
+    }
+
     public PostPage validateCheckBoxStateOnPost(String checkBoxValue){
         if ((!checkBoxValue.equalsIgnoreCase("check")) && (!checkBoxValue.equalsIgnoreCase("uncheck"))) {
             logger.info("Invalid value for checkbox was entered - Validation");
