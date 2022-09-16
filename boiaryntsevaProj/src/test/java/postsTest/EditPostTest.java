@@ -21,6 +21,7 @@ public class EditPostTest extends BaseTest {
                 .selectValueInDropDown()
                 .savePost()
                 .clickOnEditButton()
+                //.checkRedirectToEditPage()
                 .enterTextInputTitleEdit("Edited") // or enterTextInputTitle if whole Title should be edited
                 .saveEditedPost()
                 .checkTextInAlert("Post successfully updated.")

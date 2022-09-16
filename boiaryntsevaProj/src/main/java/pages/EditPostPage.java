@@ -24,13 +24,19 @@ public class EditPostPage extends ParentPage{
 
     @Override
     String getRelativeUrl() {
-        return null;
+        //TODO
+        return "/post/"+"[a-zA-Z0-9]*"+"/edit";
     }
 
     private HeaderElement headerElement = new HeaderElement(webDriver);
 
     public HeaderElement getHeaderElement() {
         return headerElement;
+    }
+
+    public EditPostPage checkRedirectToEditPage(){
+        checkUrlWithPatterns();
+        return this;
     }
 
     public EditPostPage  enterTextInputTitleEdit(String title) {
