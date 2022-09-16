@@ -26,12 +26,11 @@ public class CreatePostTest extends BaseTest {
     }
     @After
     public void deletePosts(){
-     //   homePage
-          //      .openHomePage()
-           //     .getHeaderElement().clickOnMyProfileButton()
-           //     .checkIsRedirectToMyProfilePage()
-           //     .deletePostWithTitleTillPresence(TITLE)
-       // ;
- //               .
+        homePage
+                .openHomePage()
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostWithTitleTillPresence(TITLE);
+
     }
 }
