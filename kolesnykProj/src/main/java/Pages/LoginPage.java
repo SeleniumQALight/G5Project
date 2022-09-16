@@ -1,6 +1,5 @@
 package Pages;
 
-import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -58,6 +57,7 @@ public class LoginPage extends ParentPage {
         try {
             driver.get(baseUrl);
             log.info("Login page is opened");
+            log.info(baseUrl);
             return this;
         } catch (Exception e) {
             log.error("Warning : Login page is not opened");
@@ -66,8 +66,9 @@ public class LoginPage extends ParentPage {
         }
     }
 
-    public void enterUserNameIntoLoginInput(String username) {
+    public LoginPage enterUserNameIntoLoginInput(String username) {
         enterTextIntoElement(inputUserNameHeader, username);
+        return this;
     }
 
     public void enterPasswordIntoInputPassword(String password) {
@@ -114,7 +115,7 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkAmountOfAlertDuringRegistration(){
         try {
-            webDriverWait10.until(ExpectedConditions
+            webDriverWaitLow.until(ExpectedConditions
                     .numberOfElementsToBe(By.xpath("//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']"),3));
             Assert.assertEquals(3, findAlerts().size());
             log.info("All three Alerts are displayed");
@@ -143,7 +144,7 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkErrorMessages(String expectedError) {
         String[] expectedErrorsArray = expectedError.split(";");
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of messages should be " + expectedErrorsArray.length)
                 .until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfErrorsLocator), expectedErrorsArray.length));
         Util.waitABit(1);
@@ -181,4 +182,14 @@ public class LoginPage extends ParentPage {
 //        log.error("Cannot work with element " + e);
 //        Assert.fail("Cannot work with element " + e);
 //    }
+
+    public LoginPage fillInPasswordField(String text){
+        usersPressesKeyTabTime(1);
+        inputPasswordHeader.sendKeys(text);
+        return this;
+    }
+
+    public void pressEnterToSubmit(){
+        usersPressesKeyEnterTime(1);
+    }
 }
