@@ -13,6 +13,7 @@ public class CreatePostTest extends BaseTest {
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
+                .selectTextInDropDownRole("Загальнодоступне")
                 .enterTextInInputTitle(TITLE)
                 .enterTextInInputBody("text")
                 .clickOnSavePostButton()
@@ -21,18 +22,16 @@ public class CreatePostTest extends BaseTest {
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWasCreated(TITLE)
-  //              .selectTextInDropDownRole("Приватне повідомлення")
-
                 ;
     }
     @After
     public void deletePosts(){
-        homePage
-                .openHomePage()
-                .getHeaderElement().clickOnMyProfileButton()
-                .checkIsRedirectToMyProfilePage()
-                .deletePostWithTitleTillPresence(TITLE)
-        ;
+     //   homePage
+          //      .openHomePage()
+           //     .getHeaderElement().clickOnMyProfileButton()
+           //     .checkIsRedirectToMyProfilePage()
+           //     .deletePostWithTitleTillPresence(TITLE)
+       // ;
  //               .
     }
 }
