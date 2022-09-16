@@ -10,9 +10,12 @@ import static org.hamcrest.CoreMatchers.containsString;
 abstract class ParentPage extends CommonActionsWithElements {
         protected String baseUrl;
 
+
         public ParentPage(WebDriver webDriver) {
                 super(webDriver);
-                baseUrl = "https://qa-complex-app-for-testing.herokuapp.com";
+                baseUrl = configProperties.base_url()
+                        .replace("[env]", System.getProperty("env", "qa"));
+
         }
 
         abstract String getRelativeUrl();
@@ -30,7 +33,7 @@ abstract class ParentPage extends CommonActionsWithElements {
         }
 
         protected void waitChatToBeHide(){
-                webDriverWait10.withMessage("Chat is not closed")
+                webDriverWaitLow.withMessage("Chat is not closed")
                         .until(ExpectedConditions
                         .invisibilityOfElementLocated(By.xpath(".//*[@id='chat-wrapper']")));
 

@@ -47,6 +47,7 @@ public class LoginPage extends ParentPage {
         try {
             webDriver.get(baseUrl);
             logger.info("Login page was opened");
+            logger.info(baseUrl);
         } catch (Exception e) {
             logger.error("Can't work with site");
             Assert.fail("Can't work with site");
@@ -131,7 +132,7 @@ public class LoginPage extends ParentPage {
     }
 
     public List<WebElement> getListWithRegistrationValidationMessages() {
-        webDriverWait10.withMessage("Validation messages is not on display")
+        webDriverWaitLow.withMessage("Validation messages is not on display")
                 .until(ExpectedConditions
                         .numberOfElementsToBe(By.xpath(validationMessagesLocator), 3));
         return webDriver.findElements(By.xpath(validationMessagesLocator));
@@ -150,7 +151,7 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkErrorsMessages(String expectedErrors) {
         String[] expectedErrorsArray = expectedErrors.split(";");
-        webDriverWait10.withMessage("Number of messages should be " + expectedErrors.length())
+        webDriverWaitLow.withMessage("Number of messages should be " + expectedErrors.length())
                 .until(ExpectedConditions.numberOfElementsToBe
                         (By.xpath(validationMessagesLocator), expectedErrorsArray.length));
         Util.waitABit(1);
