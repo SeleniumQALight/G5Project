@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class MyProfilePage extends PostPage{
+public class MyProfilePage extends ParentPage{
     @FindBy(xpath = ".//img[@class='avatar-small']")
     private WebElement avatarOnProfilePage;
 
@@ -22,9 +22,16 @@ public class MyProfilePage extends PostPage{
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/profile/";
+    }
+
+
+
     public MyProfilePage checkIsRedirectToMyProfilePage(){
-        //TODO check url
         waitChatToBeHide();
+        checkUrlWithPattern();
         Assert.assertTrue(" MyProfilePage is not loaded", isElementDisplayed(avatarOnProfilePage));
         return  this;
     }

@@ -1,5 +1,7 @@
 package pages;
 
+import libs.ConfigProperties;
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -14,14 +16,15 @@ import java.time.Duration;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
-    protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected WebDriverWait webDriverWaitLow, webDriverWaitHigh;
     protected Logger logger = Logger.getLogger(getClass());
+    public static ConfigProperties configProperties = ConfigFactory.create(ConfigProperties.class);
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWaitLow = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWaitHigh = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_HIGH()));
     }
 
     protected void openPage(String URL) {
@@ -38,7 +41,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(textForInput);
-            logger.info("'" + textForInput + "' was inputted into '" + webElement.getAccessibleName() + "'");
+            logger.info("'" + textForInput + "' was inputted into '" + getElementName(webElement) + "'");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -46,10 +49,19 @@ public class CommonActionsWithElements {
 
     protected void clickOnElement(WebElement webElement) {
         try {
-            webDriverWait10.withMessage("Button is not clickable").until(ExpectedConditions.elementToBeClickable(webElement));
-            String webElementName = webElement.getAccessibleName();
+            webDriverWaitLow.withMessage("Button is not clickable").until(ExpectedConditions.elementToBeClickable(webElement));
+            String webElementName = getElementName(webElement);
             webElement.click();
             logger.info("Element '" + webElementName + "' was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void clickOnElement(String xpathLocator) {
+        try {
+            WebElement element = webDriver.findElement(By.xpath(xpathLocator));
+            clickOnElement(element);
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -77,7 +89,7 @@ public class CommonActionsWithElements {
         try {
             boolean isElementDisplayedStatus = webElement.isDisplayed();
             if (isElementDisplayedStatus) {
-                logger.info("Element '" + webElement.getAccessibleName() + "' is displayed");
+                logger.info("Element '" + getElementName(webElement) + "' is displayed");
             } else {
                 logger.info("Element is not displayed");
             }
@@ -126,6 +138,14 @@ public class CommonActionsWithElements {
             logger.info("'" + text + "' was selected in dropdown");
         } catch (Exception e) {
             printErrorAndStopTest(e);
+        }
+    }
+
+    private String getElementName(WebElement webElement) {
+        try {
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            return "";
         }
     }
 

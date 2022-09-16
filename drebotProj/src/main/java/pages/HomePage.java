@@ -13,6 +13,11 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
 //    public boolean isButtonSignOutDisplayed() {
 //        try {
 //            WebElement buttonSignOut = webDriver.findElement(By.xpath(".//button[@class='btn btn-sm btn-secondary']"));
@@ -23,17 +28,17 @@ public class HomePage extends ParentPage {
 //    }
 
     public HomePage checkIsRedirectToHomePage() {
-        //TODO checkURL
+        checkUrl();
         Assert.assertTrue("HomePage doesn't loaded", headerElement.isButtonSignOutDisplayed());//,isButtonSignOutDisplayed());
         return this;
     }
 
 
     public HomePage openHomePage() {
-
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
         if (!headerElement.isButtonSignOutDisplayed()) {
-            LoginPage loginPage = new LoginPage(webDriver);
-            loginPage.loginWithValidCredential();
+            loginPage.loginWithValidCredentialWithOutOpenPage();
         }
         checkIsRedirectToHomePage();
         return this;

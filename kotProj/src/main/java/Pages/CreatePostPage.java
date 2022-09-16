@@ -24,9 +24,14 @@ public class CreatePostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelatedUrl() {
+        return "/create-post";
+    }
+
     //метод для перевірки чи сторінка відкрилась
     public CreatePostPage checkIsRedirectToCreatePostPage() {
-        //TODO checkURL
+      checkUrl();
         Assert.assertTrue("Page CreatePost is not loaded", isElementDisplayed(inputTitle));
         return this;
     }
