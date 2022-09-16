@@ -17,18 +17,23 @@ abstract class ParentPage extends CommonActionsWithElements {
 
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
-        baseURL = "https://qa-complex-app-for-testing.herokuapp.com";
+        baseURL = configProperties.base_url().replace("[env]", System.getProperty("env", "qa"));
+
     }
+
     abstract String getRelativeURL();
+
     protected void checkURL() {
         Assert.assertEquals("Invalid page ", baseURL + getRelativeURL(), webDriver.getCurrentUrl());
     }
-    protected void checkURLWithPattern(){
+
+    protected void checkURLWithPattern() {
         logger.debug(webDriver.getCurrentUrl()); // info is changed to debug in file: log4j.properties
-        Assert.assertThat("Invalid page", webDriver.getCurrentUrl(),containsString(baseURL + getRelativeURL()));
+        Assert.assertThat("Invalid page", webDriver.getCurrentUrl(), containsString(baseURL + getRelativeURL()));
     }
+
     protected void waitChatToBeHide() {
-        webDriverWait10.withMessage("Chat is not closed")
+        webDriverWaitLow.withMessage("Chat is not closed")
                 .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(".//*[@id='chat-wrapper']")));
 
     }
