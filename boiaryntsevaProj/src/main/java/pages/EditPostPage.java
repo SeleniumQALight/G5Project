@@ -1,13 +1,10 @@
 package pages;
 
-import libs.Util;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.elements.HeaderElement;
-
-import java.awt.*;
 
 public class EditPostPage extends ParentPage{
     @FindBy (xpath = ".//*[@class='alert alert-success text-center']")
@@ -24,8 +21,8 @@ public class EditPostPage extends ParentPage{
 
     @Override
     String getRelativeUrl() {
-        //TODO
-        return "/post/"+"[a-zA-Z0-9]*"+"/edit";
+        //return "/post/"+"[a-zA-Z0-9]*"+"/edit";
+        return "/post/"+".*"+"/edit";
     }
 
     private HeaderElement headerElement = new HeaderElement(webDriver);
@@ -39,7 +36,7 @@ public class EditPostPage extends ParentPage{
         return this;
     }
 
-    public EditPostPage  enterTextInputTitleEdit(String title) {
+    public EditPostPage enterTextIntoTitleWithoutClearingInput(String title) {
         enterTextIntoPrefilledElement(inputTitle, title);
         return this;
     }

@@ -2,27 +2,38 @@ package postsTest;
 
 import baseTest.BaseTest;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class EditPostTest extends BaseTest {
     final String TITLE = "boiaryntseva" + Math.random();
     final String TITLE_EDITED = TITLE + "Edited";
 
-
-    @Test
-    public void editPostTitle() {
+    @Before
+    public void createPost(){
         homePage
                 .openHomePage()
-                .getHeaderElement().clickOnCreatePostButton()
+                .getHeaderElement()
+                .clickOnCreatePostButton()
                 .checkIsRedirectToCreatePostPage()
                 .enterTextInputTitle(TITLE)
                 .enterTextInputBody("Text entered into body")
                 .selectValueForCheckBox("check")
                 .selectValueInDropDown()
                 .savePost()
+                .getHeaderElement()
+                .clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+                .checkPostWasCreated(TITLE);
+    }
+    @Test
+    public void editPostTitle() {
+        homePage.getHeaderElement()
+                .clickOnMyProfileButton()
+                .clickOnPostWithTitle(TITLE)
                 .clickOnEditButton()
-                //.checkRedirectToEditPage()
-                .enterTextInputTitleEdit("Edited") // or enterTextInputTitle if whole Title should be edited
+                .checkRedirectToEditPage()
+                .enterTextIntoTitleWithoutClearingInput("Edited") // or enterTextInputTitle if whole Title should be edited
                 .saveEditedPost()
                 .checkTextInAlert("Post successfully updated.")
                 .getHeaderElement()
@@ -37,6 +48,7 @@ public class EditPostTest extends BaseTest {
                 .getHeaderElement()
                 .clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
+                .deletePostWithTitleTillPresent(TITLE)
                 .deletePostWithTitleTillPresent(TITLE_EDITED);
     }
 
