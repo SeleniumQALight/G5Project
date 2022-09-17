@@ -8,14 +8,14 @@ import org.junit.Test;
 public class LoginValidWithTabButtonTest extends BaseTest {
 
     @Test
-    public void LoginUsingTabToSwitchBetweenFields(){
+    public void LoginUsingTabToSwitchBetweenFields() throws InterruptedException {
         loginPage
                 .openLoginPage()
                 .enterUserNameIntoLoginInput(TestData.VALID_LOGIN)
-                // press tab
-                
-                //check that field active field is Password
-                .fillInPasswordField(TestData.VALID_PASSWORD)
+                .usersPressesKeyTabTime(1);
+
+        loginPage.checkPasswordHeaderActive();
+        loginPage.fillInPasswordField(TestData.VALID_PASSWORD)
                 .pressEnterToSubmit();
         Assert.assertTrue("User is not logged in", homePage.getHeaderElements().isButtonSignOutDisplayed());
     }

@@ -192,4 +192,17 @@ public class LoginPage extends ParentPage {
     public void pressEnterToSubmit(){
         usersPressesKeyEnterTime(1);
     }
+
+    public void checkPasswordHeaderActive(){
+        String attributeName = "placeholder";
+        String expectedAttributeValue = "Password";
+        WebElement element = driver.findElement(By.xpath("//input[@placeholder='Password']"));
+        Assert.assertTrue("Border-color is different",isElementActive(element,attributeName,expectedAttributeValue));
+    }
+
+    public void checkPasswordRegisterActive(){
+        String cssValue = "border-top-color";
+        String color = "rgb(128, 189, 255)";
+        Assert.assertTrue("",isElementActive(inputUserPasswordRegister,cssValue,color));
+    }
 }
