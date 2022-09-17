@@ -27,6 +27,20 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
+    public void validLoginInWindow() {
+        loginPage.loginWithValidCredential()
+                .checkIsRedirectToHomePage()
+                .getHeaderElement().checkUserNameInHeader(TestData.VALID_LOGIN);
+        homePage.openTheSameNewWindow()
+                .checkIsRedirectToHomePage()
+                .getHeaderElement().checkUserNameInHeader(TestData.VALID_LOGIN);
+
+        homePage.checkLogOutInWindow();
+
+
+    }
+
+    @Test
     public void invalidLogin() {
         loginPage.openLoginPage();
         loginPage.enterUserNameIntoLoginInput("qaauto111");
@@ -67,4 +81,18 @@ public class LoginTestWithPageObject extends BaseTest {
 
         Assert.assertTrue("Message 'Invalid username / password' isn't displayed", loginPage.isMessageInvalidUserPassword());
     }
+
+    @Test
+    public void validLoginUsingKeysTabEnter() {
+        loginPage.openLoginPage()
+                .enterLoginIntoLoginInputUsingKeyTab(TestData.VALID_LOGIN)
+                .enterPasswordIntoPasswordInputUsingKeyTab(TestData.VALID_PASSWORD)
+                .clickOnButtonLogInUsingKey()
+                .getHeaderElement().checkUserNameInHeader(TestData.VALID_LOGIN)
+        ;
+        Assert.assertTrue("Button SignOut is Displayed", homePage.getHeaderElement().isButtonSignOutDisplayed());
+
+    }
+
+
 }

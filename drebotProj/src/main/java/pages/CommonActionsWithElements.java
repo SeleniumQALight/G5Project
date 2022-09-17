@@ -126,10 +126,12 @@ public class CommonActionsWithElements {
             return false;
         }
     }
+
     public void usersPressesKeyEnterTime(int numberOfTimes) {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
             actions.sendKeys(Keys.ENTER).build().perform();
+            logger.info("'ENTER' was pressed ");
         }
     }
 
@@ -138,19 +140,30 @@ public class CommonActionsWithElements {
         for (int i = 0; i < numberOfTimes; i++) {
             actions.sendKeys(Keys.TAB).build().perform();
         }
+    }
 
+    public void usersSendTextAndPressTabTime(int numberOfTimes, String text) {
+        Actions actions = new Actions(webDriver);
+        for (int i = 0; i < numberOfTimes; i++) {
+            actions.sendKeys(text).build().perform();
+            actions.sendKeys(Keys.TAB).build().perform();
+            logger.info("value '" + text + "' was send and pressed 'TAB'");
+        }
     }
 
     public void userOpensNewTab() {
-        ((JavascriptExecutor)webDriver).executeScript("window.open()");
-        ArrayList<String> tabs = new ArrayList<> (webDriver.getWindowHandles());
+        ((JavascriptExecutor) webDriver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
+        logger.info("open and switch new window");
     }
 
+//    метод moveToElement (аналог скрола )
+//
 //    WebElement element = driver.findElement(By.id("my-id"));
 //    Actions actions = new Actions(driver);
-//actions.moveToElement(element);
-//actions.perform();
+//    actions.moveToElement(element);
+//    actions.perform();
 //
 //—————————-
 //    метод скрола з використанням javaScript

@@ -17,10 +17,11 @@ abstract public class ParentPage extends CommonActionsWithElements {
 
     }
 
-    abstract  String getRelativeUrl();
+    abstract String getRelativeUrl();
+
     protected void checkUrl() {
         Assert.assertEquals("Invalid page "
-                ,baseUrl+getRelativeUrl()
+                , baseUrl + getRelativeUrl()
                 , webDriver.getCurrentUrl());
     }
 
@@ -30,6 +31,7 @@ abstract public class ParentPage extends CommonActionsWithElements {
                 , webDriver.getCurrentUrl()
                 , containsString(baseUrl + getRelativeUrl()));
     }
+
     protected void waitChatToBeHide() {
         webDriverWaitLow.withMessage("chat is not closed").until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(".//*[@id='chat-wrapper']")));
     }

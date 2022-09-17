@@ -5,6 +5,7 @@ import libs.Util;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -99,6 +100,35 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignIn);
     }
 
+    public LoginPage enterLoginIntoLoginInputUsingKeyTab(String login) {
+
+        Actions actions = new Actions(webDriver);
+        //webDriverWait10.until(ExpectedConditions.elementToBeClickable(inputUserNameHeader));
+
+        actions.moveToElement(inputUserNameHeader).click().build().perform();
+
+        logger.info("Move to element '" + inputUserNameHeader.getAccessibleName() + "'");
+
+        usersSendTextAndPressTabTime(1, login);
+
+        return this;
+    }
+
+    public LoginPage enterPasswordIntoPasswordInputUsingKeyTab(String password) {
+
+        usersSendTextAndPressTabTime(1, password);
+
+        return this;
+    }
+
+    public HomePage clickOnButtonLogInUsingKey() {
+
+        usersPressesKeyEnterTime(1);
+
+        return new HomePage(webDriver);
+
+    }
+
     public boolean isMessageInvalidUserPassword() {
 //        try {
 //            WebElement messageInvalidUserPassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
@@ -116,12 +146,19 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
-    public HomePage loginWithValidCredentialWithOutOpenPage(){
+
+    public HomePage loginWithValidCredentialWithOutOpenPage() {
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
 
         return new HomePage(webDriver);
+    }
+
+    public LoginPage checkIsRedirectToLoginPage() {
+        checkUrl();
+        Assert.assertTrue("LoginPage doesn't loaded", isElementDisplayed(buttonSignIn));
+        return this;
     }
 
     public LoginPage enterUserNameIntoRegistration(String userName) {
