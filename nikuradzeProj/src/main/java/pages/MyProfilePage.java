@@ -57,6 +57,11 @@ public class MyProfilePage extends ParentPage{
         return this;
     }
 
+    public PostPage clickOnPost(String title){
+        clickOnElement(String.format(postTitleLocator, title));
+        return new PostPage(webDriver);
+    }
+
     private MyProfilePage checkIsSuccessDeletePostMessagePresent() {
         Assert.assertTrue("successDeletedPostMessage Element is not displayed", isElementDisplayed(successDeletedPostMessage));
         return this;

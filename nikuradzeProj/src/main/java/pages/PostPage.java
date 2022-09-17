@@ -56,4 +56,9 @@ public class PostPage extends ParentPage{
         }
         return this;
     }
+
+    public EditPostPage clickOnEditPostButton() {
+        clickOnElement(buttonEdit);
+        return new EditPostPage(webDriver);
+    }
 }
