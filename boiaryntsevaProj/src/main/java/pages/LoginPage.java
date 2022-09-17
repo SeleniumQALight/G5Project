@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginPage extends ParentPage {
+
+    @FindBy(xpath = ".//div//span[2]")
+    private WebElement textLoggedInUserName;
+
     @FindBy(xpath = ".//input[@name='username' and @placeholder='Username']")
     private WebElement inputUserNameHeader;
 
@@ -57,6 +61,10 @@ public class LoginPage extends ParentPage {
     @Override
     String getRelativeUrl() {
         return "/";
+    }
+
+    public String getTextLoggedInUserNameAsString() {
+        return textLoggedInUserName.getText();
     }
 
     public LoginPage openLoginPage() {
