@@ -54,6 +54,15 @@ public class CommonActionsWithElements { // загальні дії з елем�
         }
     }
 
+    protected void clickOnElement(String xpathLocator){
+        try{
+            WebElement element = webDriver.findElement(By.xpath(xpathLocator));
+            clickOnElement(element);
+        } catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
+
     /**
      * Метод поверне true якщо елемент показаний
      * або поверне false якщо елемент не показаний або його взагалі немає
