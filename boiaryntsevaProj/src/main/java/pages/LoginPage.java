@@ -46,7 +46,7 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//div[@class='form-group'][3]//div")
     private WebElement validationErrorMessagePassword;
 
-    @FindBys(@FindBy(xpath = "//div[contains (@class, 'alert')]"))
+    @FindBys(@FindBy(xpath = "//div[contains (@class, 'visible')]"))
     private List<WebElement> validationErrorMessage;
 
     @FindBy(xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
@@ -162,7 +162,7 @@ public class LoginPage extends ParentPage {
 
     public LoginPage validateErrorMessagesCountOnLoginPage(int countOfErrorMessages) {
         webDriverWaitLow.until(ExpectedConditions.numberOfElementsToBe
-                (By.xpath("//div[contains (@class, 'alert')]"), countOfErrorMessages));
+                (By.xpath(".//div[contains (@class, 'visible')]"), countOfErrorMessages));
         Assert.assertEquals("Not all error messages are displayed", countOfErrorMessages, validationErrorMessage.size());
         logger.info("Error messages count on sign up form is " + validationErrorMessage.size());
         return this;
