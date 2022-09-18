@@ -38,24 +38,17 @@ public class PostPage extends ParentPage {
         return this;
     }
 
-      public boolean isPostUniqueOrNot(String postUnique) {
-        if (postUnique.equalsIgnoreCase("yes") || postUnique.equalsIgnoreCase("no")) {
-            if (postUnique.equalsIgnoreCase("yes") && postIsUnique.getText().equals("Is this post unique? : yes")) {
-                return true;
-            } else if (postUnique.equalsIgnoreCase("no") && postIsUnique.getText().equals("Is this post unique? : no")) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            Assert.fail("");
-            return false;
-        }
-    }
-    public PostPage checkPostIsUnique(String postUnique) {
-        Assert.assertTrue("", isPostUniqueOrNot(postUnique));
-        return this;
-    }
+      public PostPage checkPostIsUnique() {
+          if (postIsUnique.getText().contains("yes")){
+              Assert.assertTrue("Post is not unique", postIsUnique.getText().contains("yes"));
+              logger.info("Post is unique");
+          } else {
+              Assert.assertTrue("Post is unique", postIsUnique.getText().contains("no"));
+              logger.info("Post is not unique");
+          }
+          return this;
+      }
+
 
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDeletePost);
