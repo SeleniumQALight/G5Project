@@ -210,6 +210,14 @@ public class LoginPage extends ParentPage{
         }
         return this;
     }
+    public LoginPage logOutInBothTabs(){
+        isElementDisplayed(buttonSignIn);
+        ArrayList<String> tabs = new ArrayList<> (webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(0));
+        webDriver.navigate().refresh();
+        isElementDisplayed(buttonSignIn);
+        return this;
+    }
     public void checkValidationMessagesNumber(int numberOfAlerts){
         webDriverWaitLow.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"), numberOfAlerts));
         Assert.assertEquals("Incorrect number of alerts are displayed", numberOfAlerts, validationMessage.size());

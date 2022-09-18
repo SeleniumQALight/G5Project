@@ -61,9 +61,11 @@ public class LoginTestWithPageObject extends BaseTest {
     public void userIsLoggedInNewTab(){
         homePage
                 .openHomePage()
-                .homePageInNewTab()
+                .checkHomePageUserLoggedInNewTab()
+                .getHeaderElement().clickOnSignOutButton()
+                .logOutInBothTabs()
         ;
-        Assert.assertTrue("Button Sign Out is not displayed", homePage.getHeaderElement().isButtonSignOutDisplayed());
+        Assert.assertTrue("Button Sign Out is not displayed", loginPage.isButtonSignInDisplayed());
 
     }
 
