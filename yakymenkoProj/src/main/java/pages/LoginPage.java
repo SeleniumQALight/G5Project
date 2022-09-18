@@ -111,7 +111,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
 
     public void checkValidationAlertNumber() {
 //        Util.waitABit(3);
-        webDriverWait10.withMessage("Alerts are not shown")
+        webDriverWaitLow.withMessage("Alerts are not shown")
                 .until(ExpectedConditions
                         .numberOfElementsToBe(By.xpath(listOfErrorsLocator), 3));
         Assert.assertEquals("Incorrect number of alerts in Register form", 3, visibleAlert.size());
@@ -120,7 +120,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
 
     public void checkValidationAlertText() {
 //        Util.waitABit(3);
-        webDriverWait10.until(ExpectedConditions.visibilityOfAllElements(visibleAlert));
+        webDriverWaitLow.until(ExpectedConditions.visibilityOfAllElements(visibleAlert));
         Assert.assertEquals("Username must be at least 3 characters.", visibleAlert.get(0).getText());
         logger.info("Visible alert in UsernameRegister: " + visibleAlert.get(0).getText());
         Assert.assertEquals("You must provide a valid email address.", visibleAlert.get(1).getText());
@@ -147,7 +147,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
     public LoginPage checkErrorsMessages(String expectedErrors) {
         // test;test1 → array[0] = test , array[1] = test1
         String[] expectedErrorsArray = expectedErrors.split(";");// пройдеться і розіб'є на частини у масив
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of messages should be " + expectedErrorsArray.length)
                 .until(ExpectedConditions.numberOfElementsToBe
                         (By.xpath(listOfErrorsLocator), expectedErrorsArray.length));

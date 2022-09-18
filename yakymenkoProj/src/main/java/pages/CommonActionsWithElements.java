@@ -1,5 +1,7 @@
 package pages;
 
+import libs.ConfigProperties;
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -15,14 +17,15 @@ import java.time.Duration;
 public class CommonActionsWithElements { // загальні дії з елементами які ми будемо робити на всіх сторінках
     protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass()); // ↓Alt+Insert з нового рядка
-    protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected WebDriverWait webDriverWaitLow, webDriverWaitHight;
+    public static ConfigProperties configProperties = ConfigFactory.create(ConfigProperties.class);
 
     // Конструктор працює тільки при створенні об'єкту
     public CommonActionsWithElements(WebDriver webDriver) { // якщо метод public - ми до нього будемо звертатися з тесту
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); // ініціалізує елементи які наслідуються з цього класу
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWaitLow = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWaitHight = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_HIGHT()));
     }
 
     /**
@@ -45,7 +48,7 @@ public class CommonActionsWithElements { // загальні дії з елем�
      */
     protected void clickOnElement(WebElement webElement) { // метод protected - до нього можна буде достукатись тільки в пейджах
         try {
-            webDriverWait15.withMessage("Button is not clickable").until(ExpectedConditions.elementToBeClickable(webElement));// очікування
+            webDriverWaitHight.withMessage("Button is not clickable").until(ExpectedConditions.elementToBeClickable(webElement));// очікування
             String name = getElementName(webElement); //спочатку беремо в нього ім'я
             webElement.click(); // клікаємо по елементу
             logger.info("Element '" + name + "' was clicked");// потім пишемо логгер
@@ -54,11 +57,11 @@ public class CommonActionsWithElements { // загальні дії з елем�
         }
     }
 
-    protected void clickOnElement(String xpathLocator){
-        try{
+    protected void clickOnElement(String xpathLocator) {
+        try {
             WebElement element = webDriver.findElement(By.xpath(xpathLocator));
             clickOnElement(element);
-        } catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
@@ -139,10 +142,10 @@ public class CommonActionsWithElements { // загальні дії з елем�
         }
     }
 
-    private String getElementName (WebElement webElement){
+    private String getElementName(WebElement webElement) {
         try {
             return webElement.getAccessibleName();
-        } catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
     }
