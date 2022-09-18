@@ -39,13 +39,18 @@ public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
+    @Override
+    String getRelatedUrl() {
+        return "/";
+    }
+
 //@FindBy(xpath = ".//button[@type='submit']")
 //private WebElement buttonSignUp;
 
 
     public LoginPage openLoginPage() {
         try {
-            webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
+            webDriver.get(baseUrl);
             logger.info("Login page was opened");
         } catch (Exception e) {
             logger.error("Can not work with site");
@@ -79,12 +84,8 @@ public LoginPage(WebDriver webDriver) {
 
     public HomePage loginWithValidCred() {
         openLoginPage();
-        enterUsernameIntoLoginInput(TestData.VALID_LOGIN);
-        enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
-        clickOnButtonLogIn();
-
-
-        return new HomePage(webDriver);
+      loginWithValidCredWithoutOpeningPage();
+      return new HomePage(webDriver);
     }
 
 
@@ -151,8 +152,6 @@ public LoginPage(WebDriver webDriver) {
         softAssertions.assertAll();
         return this;
     }
-
-
 
 //    private void printErrorAndStopTest(Exception e) {
 //        logger.info("Can not work with element " + e);

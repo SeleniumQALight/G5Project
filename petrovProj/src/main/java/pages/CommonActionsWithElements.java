@@ -2,15 +2,16 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -122,13 +123,79 @@ public class CommonActionsWithElements {
         Assert.fail("Can not work with element " + e);
     }
 
-    private void clickOnCheck(WebElement check) {
-        try {
+    public void selectedCheckBox(WebElement check, String checkCondition) {
+        checkCondition = checkCondition.toLowerCase();
+        if(checkCondition.equals("check")){
+            if(!check.isSelected()){
+                clickOnElement(check);
+                logger.info("checkbox changed to check");
+            }else {
+                logger.info("checkbox already check");
+            }
+        }else if(checkCondition.equals("uncheck")){
+            if(check.isSelected()){
+                clickOnElement(check);
+                logger.info("checkbox changed to uncheck");
+            }else {
+                logger.info("checkbox already uncheck");
+            }
+        }else {
+            logger.error("Such a state cannot be established " + checkCondition);
+            Assert.fail("Such a state cannot be established " + checkCondition);
 
-        }catch (Exception e){
+        }
+    }
 
+    public void usersPressesKeyEnterTime(int numberOfTimes) {
+        Actions actions = new Actions(webDriver);
+        for (int i = 0; i < numberOfTimes; i++) {
+            actions.sendKeys(Keys.ENTER).build().perform();
+        }
+    }
+
+    public void usersPressesKeyTabTime(int numberOfTimes) {
+        Actions actions = new Actions(webDriver);
+        for (int i = 0; i < numberOfTimes; i++) {
+            actions.sendKeys(Keys.TAB).build().perform();
         }
 
     }
+
+    public void userOpensNewTab() {
+        ((JavascriptExecutor)webDriver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<> (webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(1));
+    }
+
+    /*
+    скрол до елемента з javaScript
+    webElement = driver.findElement(By.xpath("bla-bla-bla"));
+((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
+
+*/
+/*
+    Емуляція натискання PageDown
+
+WebElement.sendKeys(Keys.DOWN);
+*/
+
+    /*
+    метод скрола з використанням javaScript
+
+JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("javascript:window.scrollBy(250,350)");
+
+     */
+
+    /*
+    метод moveToElement (аналог скрола )
+
+WebElement element = driver.findElement(By.id("my-id"));
+Actions actions = new Actions(driver);
+actions.moveToElement(element);
+actions.perform();
+     */
+
+
 
 }
