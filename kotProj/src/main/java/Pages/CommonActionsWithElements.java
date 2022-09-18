@@ -48,15 +48,16 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
+    protected void clickOnElement(String xPathLocator){
+        try {
+            WebElement element = webDriver.findElement(By.xpath(xPathLocator));
+            clickOnElement(element);
+        }catch (Exception e){
+            printErrorAndStopTest(e);
 
-//    protected void clickOnElement (String xpathLocator){
-//        try {
-//            WebElement element = webDriver.findElement(By.xpath(xpathLocator));
-//            clickOnElement(element);
-//    }catch(Exception e){
-//printErrorAndStopTest(e);
-//}
-//    }
+        }
+    }
+
 
     /**
      * Метод поверне тру - якщо елемент показаний

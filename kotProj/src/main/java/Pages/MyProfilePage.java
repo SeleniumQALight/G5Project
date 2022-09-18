@@ -47,8 +47,8 @@ public class MyProfilePage extends ParentPage {
     public MyProfilePage deletePostsWithTitleTillPresent(String title) {
         List<WebElement> listPost = getPostWithTitle(title);
         int counter = 0;
-        while (!listPost.isEmpty() && counter<100){
-            clickOnElement(webDriver.findElement(By.xpath(String.format(postTitleLocator, title))));
+        while (!listPost.isEmpty() && counter < 100){
+            clickOnElement(String.format(postTitleLocator,title));
             new PostPage(webDriver)
                     .checkIsRedirectedToPostPage()
                     .clickOnDeleteButton()
