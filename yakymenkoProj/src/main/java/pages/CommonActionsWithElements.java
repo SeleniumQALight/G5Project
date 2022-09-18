@@ -32,7 +32,7 @@ public class CommonActionsWithElements { // загальні дії з елем�
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info("'" + text + "' was inputted into '" + webElement.getAccessibleName() + "'");
+            logger.info("'" + text + "' was inputted into '" + getElementName(webElement) + "'");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -46,7 +46,7 @@ public class CommonActionsWithElements { // загальні дії з елем�
     protected void clickOnElement(WebElement webElement) { // метод protected - до нього можна буде достукатись тільки в пейджах
         try {
             webDriverWait15.withMessage("Button is not clickable").until(ExpectedConditions.elementToBeClickable(webElement));// очікування
-            String name = webElement.getAccessibleName(); //спочатку беремо в нього ім'я
+            String name = getElementName(webElement); //спочатку беремо в нього ім'я
             webElement.click(); // клікаємо по елементу
             logger.info("Element '" + name + "' was clicked");// потім пишемо логгер
         } catch (Exception e) {
@@ -75,9 +75,9 @@ public class CommonActionsWithElements { // загальні дії з елем�
             boolean state = webElement.isDisplayed();
             String message;
             if (state) {
-                message = "Element '" + webElement.getAccessibleName() + "' is displayed";
+                message = "Element '" + getElementName(webElement) + "' is displayed";
             } else {
-                message = "Element '" + webElement.getAccessibleName() + "' is Not displayed";
+                message = "Element '" + getElementName(webElement) + "' is Not displayed";
             }
             logger.info(message);
             return state;
@@ -136,6 +136,14 @@ public class CommonActionsWithElements { // загальні дії з елем�
             logger.info("'" + text + "' was selected in DropDown");
         } catch (Exception e) {
             printErrorAndStopTest(e);
+        }
+    }
+
+    private String getElementName (WebElement webElement){
+        try {
+            return webElement.getAccessibleName();
+        } catch (Exception e){
+            return "";
         }
     }
 
