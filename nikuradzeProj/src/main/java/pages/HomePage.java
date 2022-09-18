@@ -47,6 +47,11 @@ public class HomePage extends ParentPage{
         checkIsRedirectToHomePage();
         return this;
     }
+    public HomePage homePageInNewTab(){
+        userOpensNewTab();
+        webDriver.get(baseUrl);
+        return this;
+    }
 
     /**
      * виддае приватний елемент Header
