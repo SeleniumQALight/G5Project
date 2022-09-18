@@ -60,6 +60,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
         try {
             webDriver.get(baseUrl);
             logger.info("Login page was opened");
+            logger.info(baseUrl);
         } catch (Exception e) {
             logger.error("Can not work with site"); // повідомлення в наш лог
             Assert.fail("Can not work with site"); // якщо тест дійшов до цього повідомлення то маркає червоним і виходить з цього блоку
