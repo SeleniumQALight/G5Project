@@ -196,6 +196,8 @@ public class LoginPage extends ParentPage {
     public void checkPasswordHeaderActive(){
         String attributeName = "placeholder";
         String expectedAttributeValue = "Password";
+//        String attributeName1 = "border-top-color";
+//        String expectedAttributeValue2 = "rgb(128, 189, 255)";
         WebElement element = driver.findElement(By.xpath("//input[@placeholder='Password']"));
         Assert.assertTrue("Border-color is different",isElementActive(element,attributeName,expectedAttributeValue));
     }
