@@ -1,6 +1,7 @@
 package Pages;
 
 
+
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -29,6 +30,9 @@ private WebElement inputUserNameReg;
 private WebElement inputEmailReg;
 @FindBy(id = "password-register")
 private WebElement inputPasswordReg;
+
+@FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+private  WebElement alertInvalidUsernamePassword;
 
 private String notValidCredentialsMessage = ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']" ;
 
@@ -59,7 +63,7 @@ private String notValidCredentialsMessage = ".//div[@class='alert alert-danger s
         return this;
     }
 
-    public void enterUsernameIntoLoginInput(String userName) {
+    public LoginPage enterUsernameIntoLoginInput(String userName) {
 //        try {
 ////            WebElement webElement = webDriver.
 ////                    findElement(By.xpath(".//input[@name='username' and " +
@@ -72,14 +76,17 @@ private String notValidCredentialsMessage = ".//div[@class='alert alert-danger s
 //            printErrorAndStopTest(e);
 //        }
         enterTextIntoElement(inputUserNameHeader, userName);
+        return this;
     }
 
-    public void enterPasswordIntoPasswordInput(String password) {
+    public LoginPage enterPasswordIntoPasswordInput(String password) {
         enterTextIntoElement(inputUserPasswordHeader, password);
+        return this;
     }
 
-    public void clickOnButtonLogIn() {
+    public LoginPage clickOnButtonLogIn() {
         clickOnElement(buttonSignIn);
+        return this;
     }
 
     public HomePage loginWithValidCred() {
@@ -88,6 +95,11 @@ private String notValidCredentialsMessage = ".//div[@class='alert alert-danger s
       return new HomePage(webDriver);
     }
 
+    public LoginPage checkLoginIsInvalid() {
+        Assert.assertTrue("Invalid username/password alert does not appear", isElementDisplayed(alertInvalidUsernamePassword));
+        Assert.assertTrue("Sign In button is not displayed", isElementDisplayed(buttonSignIn));
+        return this;
+    }
 
     public LoginPage enterUserNameIntoIntoRegInput(String userName){
         enterTextIntoElement(inputUserNameReg, userName);
@@ -138,6 +150,8 @@ private String notValidCredentialsMessage = ".//div[@class='alert alert-danger s
         clickOnButtonLogIn();
         return new HomePage(webDriver);
     }
+
+
 
 //    private void printErrorAndStopTest(Exception e) {
 //        logger.info("Can not work with element " + e);
