@@ -15,12 +15,13 @@ public class CreatePostPage extends ParentPage { // alt+enter → constructor
     private WebElement inputBodyContent;
     @FindBy(xpath = ".//select/option[text()='Групове повідомлення']")
     private WebElement groupMessageValueInDropDown;
-    @FindBy(xpath = ".//button[text()='Save New Post']")
-    private WebElement buttonSaveNewPost;
+
     @FindBy(xpath = ".//textarea[@id='post-body']")
     private WebElement inputBody;
     @FindBy(xpath = ".//form[@action='/create-post']//button")
     private WebElement buttonSavePost;
+    @FindBy(xpath = ".//input[@type='checkbox' and @name='uniquePost']")
+    private WebElement checkBoxPostUnique;
 
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
@@ -33,6 +34,7 @@ public class CreatePostPage extends ParentPage { // alt+enter → constructor
 
     public CreatePostPage checkIsRedirectToCreatePostPage() {
         checkUrl();
+        waitChatToBeHide();
         Assert.assertTrue("Page CreatePost is not loaded", isElementDisplayed(inputTitle));
         return this;
     }
@@ -40,11 +42,6 @@ public class CreatePostPage extends ParentPage { // alt+enter → constructor
     // Метод який заповнить тайтл
     public CreatePostPage enterTextInInputTitle(String title) {
         enterTextIntoElement(inputTitle, title);
-        return this;
-    }
-
-    public CreatePostPage selectTextInDropDownRole(String textForSelect) {
-        selectTextInDropDown(dropDownRole, textForSelect); // Alt+enter → Create field 'dropDownRole' in 'CreatePostPage'
         return this;
     }
 
@@ -58,18 +55,8 @@ public class CreatePostPage extends ParentPage { // alt+enter → constructor
         return this;
     }
 
-    //    public CreatePostPage selectValueInDropDownRoleUI() {
-//        selectTextInDropDownUI(dropDownRole, groupMessageValueInDropDown);
-//        return this;
-//    }
-// ↓↑
     public CreatePostPage selectValueInDropDownRoleUI(String groupMessageValueInDropDown) {
         selectTextInDropDownUI(dropDownRole, groupMessageValueInDropDown);
-        return this;
-    }
-
-    public CreatePostPage clickOnSaveNewPostButton() {
-        clickOnElement(buttonSaveNewPost);
         return this;
     }
 
@@ -81,5 +68,10 @@ public class CreatePostPage extends ParentPage { // alt+enter → constructor
     public PostPage clickOnSavePostButton() {
         clickOnElement(buttonSavePost);
         return new PostPage(webDriver);
+    }
+
+    public CreatePostPage setCheckBoxWithValue(String stateValue) {
+        setCheckboxWithStatus(checkBoxPostUnique, stateValue);
+        return this;
     }
 }
