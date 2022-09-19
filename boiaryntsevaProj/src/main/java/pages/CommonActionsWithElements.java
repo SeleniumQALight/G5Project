@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CommonActionsWithElements {
 
@@ -145,7 +146,21 @@ public class CommonActionsWithElements {
         ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
     }
-    
+    public void userSwitchesToParentWindow() {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        System.out.println(tabs.size());
+        webDriver.switchTo().window(tabs.get(0));
+    }
+
+    public void userSwitchesToNextWindowTab() {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        System.out.println(tabs.size());
+        webDriver.switchTo().window(tabs.get(1));
+    }
+
+    public void refreshPage(){
+        webDriver.navigate().refresh();
+    }
     private String getElementName(WebElement webElement){
         try {
             return webElement.getAccessibleName();
