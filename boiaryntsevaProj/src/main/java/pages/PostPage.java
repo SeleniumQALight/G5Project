@@ -18,7 +18,7 @@ public class PostPage extends ParentPage {
 
     @Override
     String getRelativeUrl() {
-        return "/post/";
+        return "/post/.*";
     }
 
     public HeaderElement getHeaderElement() {
@@ -52,6 +52,11 @@ public class PostPage extends ParentPage {
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDelete);
         return new MyProfilePage(webDriver);
+    }
+
+    public EditPostPage clickOnEditButton(){
+        clickOnElement(buttonEdit);
+        return new EditPostPage(webDriver);
     }
 
     public PostPage validateCheckBoxStateOnPost(String checkBoxValue){

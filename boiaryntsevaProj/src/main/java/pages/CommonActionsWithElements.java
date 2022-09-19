@@ -1,11 +1,10 @@
 package pages;
 
+import libs.ConfigProperties;
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,23 +17,35 @@ import java.util.ArrayList;
 public class CommonActionsWithElements {
 
     protected WebDriver webDriver;
-    protected WebDriverWait webDriverWait10;
-    protected WebDriverWait webDriverWait15;
+    protected WebDriverWait webDriverWaitLow;
+    protected WebDriverWait webDriverWaitHigh;
+    public static ConfigProperties configProperties = ConfigFactory.create(ConfigProperties.class);
+
 
     Logger logger = Logger.getLogger(getClass());
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWaitLow = new WebDriverWait(webDriver, Duration.ofSeconds
+                (configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWaitHigh = new WebDriverWait(webDriver, Duration.ofSeconds
+                (configProperties.TIME_FOR_EXPLICIT_WAIT_HIGHT()));
     }
 
     protected void enterTextIntoElement(WebElement webElement, String text) {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info("'" + text + "' was entered into" + webElement.getAccessibleName());
+            logger.info("'" + text + "' was entered into" + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+    protected void enterTextIntoPrefilledElement(WebElement webElement, String text) {
+        try {
+            webElement.sendKeys(text);
+            logger.info("'" + text + "' was entered into" + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -42,14 +53,23 @@ public class CommonActionsWithElements {
 
     protected void clickOnElement(WebElement webElement) {
         try {
-            webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
-            String name = webElement.getAccessibleName();
+            webDriverWaitHigh.until(ExpectedConditions.elementToBeClickable(webElement));
+            String name = getElementName(webElement);
             webElement.click();
             logger.info("" + name + " was clicked");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
 
+    }
+
+    protected void clickOnElement(String xPathLocator) {
+        try {
+            WebElement element = webDriver.findElement(By.xpath(xPathLocator));
+            clickOnElement(element);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
     }
 
     private void printErrorAndStopTest(Exception e) {
@@ -59,7 +79,7 @@ public class CommonActionsWithElements {
 
     protected boolean isElementDisplayed(WebElement webElement) {
         try {
-            String name = webElement.getAccessibleName();
+            String name = getElementName(webElement);
             boolean state = webElement.isDisplayed();
             String message;
             if (state) {
@@ -129,9 +149,17 @@ public class CommonActionsWithElements {
     }
 
     public void userOpensNewTab() {
-        ((JavascriptExecutor)webDriver).executeScript("window.open()");
-        ArrayList<String> tabs = new ArrayList<> (webDriver.getWindowHandles());
+        ((JavascriptExecutor) webDriver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
+    }
+    
+    private String getElementName(WebElement webElement){
+        try {
+            return webElement.getAccessibleName();
+        }catch (Exception e){
+            return "";
+        }
     }
 //
 //    метод moveToElement (аналог скрола )

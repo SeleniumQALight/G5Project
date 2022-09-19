@@ -15,6 +15,13 @@ public class CreatePostPage extends ParentPage {
     @FindBy(xpath = ".//form[@action='/create-post']//button")
     private WebElement buttonSavePost;
 
+    @FindBy(id ="select1")
+    private WebElement dropDown;
+
+    @FindBy(xpath = ".//option[text()='Приватне повідомлення']")
+    private  WebElement optionDropDown;
+
+
     public CreatePostPage(WebDriver webDriver){
         super(webDriver);
     }
@@ -42,6 +49,11 @@ public class CreatePostPage extends ParentPage {
     }
     public CreatePostPage selectValueInDropDownRole(String valueForSelect) {
         selectValueInDropDown(dropDownRole,valueForSelect);
+        return this;
+    }
+
+    public CreatePostPage selectDropdownElementsUI(){
+        selectDropdownElementsUI(dropDown,optionDropDown);
         return this;
     }
 

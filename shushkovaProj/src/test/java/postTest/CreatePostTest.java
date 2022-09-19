@@ -13,6 +13,7 @@ public class CreatePostTest extends BaseTest {
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
+                .selectDropdownElementsUI()
                 .enterTextInInputTitle(TITLE)
                 .enterTextInInputBody("text")
                 .clickOnSavePostButton()
@@ -21,8 +22,6 @@ public class CreatePostTest extends BaseTest {
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWasCreated(TITLE)
-  //              .selectTextInDropDownRole("Приватне повідомлення")
-
                 ;
     }
     @After
@@ -31,8 +30,7 @@ public class CreatePostTest extends BaseTest {
                 .openHomePage()
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
-                .deletePostWithTitleTillPresence(TITLE)
-        ;
- //               .
+                .deletePostWithTitleTillPresence(TITLE);
+
     }
 }
