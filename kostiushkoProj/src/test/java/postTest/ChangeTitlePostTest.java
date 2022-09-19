@@ -3,23 +3,22 @@ package postTest;
 import baseTest.BaseTest;
 import libs.Util;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
+public class ChangeTitlePostTest extends BaseTest {
 
-public class CreatePostTest extends BaseTest {
     final String TITLE = "TC1_Kostiushko" + Util.getDateAndTimeFormatted();
 
-
-    @Test
+    @Before
     public void createNewPost() {
+
 
         homePage
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
                 .chekIsRedirectToCreatePostPage()
                 .enterTextInInputTitle(TITLE)
-//            .selecttextInDropDownRole("Приватне повідомлення")
-//            .selectValueInDropDownRole("One Person")
                 .selectTextInDropDownByUI("Групове повідомлення")
                 .enterTextInTextAreaBodyContent("Text for body")
                 .clikSaveNewPostButton()
@@ -27,17 +26,34 @@ public class CreatePostTest extends BaseTest {
                 .checkTextInAllert("New post successfully created.")
                 .getHeaderElement().clickOnMyProfileButton()
                 .chekIsRedirectTomyProfilePage()
-                .chekPostWasCreated(TITLE)
+                .chekPostWasCreated(TITLE);
+    }
+
+    @Test
+    public void changePostTitle() {
+
+        homePage
+                .openHomePage()
+                .getHeaderElement().clickOnMyProfileButton()
+                .chekIsRedirectTomyProfilePage()
+                .findOldPostWithTitle(TITLE).clickOnButtonTitlePost(TITLE)
+                .clickOnEditButton()
+                .chekIsRedirectToOldPostPage()
+                .enterTextInInputTitle("NEW "+TITLE)
+                .clikSaveUpdatesPostButton()
+
+
+
+
         ;
     }
 
-    @After
-    public void deletePosts(){
-        homePage.openHomePage()
-                .getHeaderElement().clickOnMyProfileButton()
-                .chekIsRedirectTomyProfilePage()
-                .deletePostsWithTitleTillPresent(TITLE);
-
-    }
-
+//    @After
+////    public void deletePosts() {
+////        homePage.openHomePage()
+////                .getHeaderElement().clickOnMyProfileButton()
+////                .chekIsRedirectTomyProfilePage()
+////                .deletePostsWithTitleTillPresent(TITLE);
+////
+////    }
 }

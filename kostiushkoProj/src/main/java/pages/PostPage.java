@@ -15,6 +15,8 @@ public class PostPage extends ParentPage {
     private WebElement alertSuccess;
     @FindBy(xpath = ".//button[@data-original-title='Delete']")
     private WebElement buttonDelete;
+    @FindBy(xpath = ".//* [@class = 'svg-inline--fa fa-edit fa-w-18']")
+    private WebElement editButton;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -45,4 +47,8 @@ public class PostPage extends ParentPage {
     }
 
 
+    public CreatePostPage clickOnEditButton() {
+        clicOnElement(editButton);
+    return new CreatePostPage(webDriver);
+    }
 }
