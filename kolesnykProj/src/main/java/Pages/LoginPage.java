@@ -202,9 +202,15 @@ public class LoginPage extends ParentPage {
         Assert.assertTrue("Border-color is different",isElementActive(element,attributeName,expectedAttributeValue));
     }
 
-    public void checkPasswordRegisterActive(){
-        String cssValue = "border-top-color";
-        String color = "rgb(128, 189, 255)";
-        Assert.assertTrue("",isElementActive(inputUserPasswordRegister,cssValue,color));
+//    public void checkPasswordRegisterActive(){
+//        String cssValue = "border-top-color";
+//        String color = "rgb(128, 189, 255)";
+//        Assert.assertTrue("",isElementActive(inputUserPasswordRegister,cssValue,color));
+//    }
+
+    public LoginPage checkPasswordRegisterActive(){
+        String color = "rgb(206, 212, 218)";
+        Assert.assertEquals( color, inputUserPasswordRegister.getCssValue("border-color"));
+        return this;
     }
 }
