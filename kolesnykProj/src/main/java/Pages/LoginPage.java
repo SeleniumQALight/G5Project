@@ -193,14 +193,14 @@ public class LoginPage extends ParentPage {
         usersPressesKeyEnterTime(1);
     }
 
-    public void checkPasswordHeaderActive(){
-        String attributeName = "placeholder";
-        String expectedAttributeValue = "Password";
-//        String attributeName1 = "border-top-color";
-//        String expectedAttributeValue2 = "rgb(128, 189, 255)";
-        WebElement element = driver.findElement(By.xpath("//input[@placeholder='Password']"));
-        Assert.assertTrue("Border-color is different",isElementActive(element,attributeName,expectedAttributeValue));
-    }
+//    public void checkPasswordHeaderActive(){
+//        String attributeName = "placeholder";
+//        String expectedAttributeValue = "Password";
+////        String attributeName1 = "border-top-color";
+////        String expectedAttributeValue2 = "rgb(128, 189, 255)";
+//        WebElement element = driver.findElement(By.xpath("//input[@placeholder='Password']"));
+//        Assert.assertTrue("Border-color is different",isElementActive(element,attributeName,expectedAttributeValue));
+//    }
 
 //    public void checkPasswordRegisterActive(){
 //        String cssValue = "border-top-color";
