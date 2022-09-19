@@ -17,6 +17,11 @@ public class CreatePostPage extends ParentPage {
     @FindBy(xpath = ".//form[@action='/create-post']//button")
     private WebElement buttonSavedPost;
 
+    @FindBy(xpath = ".//*[@class='alert alert-success text-center']")
+    private WebElement textPostIsCreated;
+
+    @FindBy(xpath =" .//input[@type='checkbox']")
+    private WebElement checkBox;
     @FindBy(xpath = ".//option[text()='Групове повідомлення']")
     private WebElement groupMessage;
 
@@ -36,8 +41,15 @@ public class CreatePostPage extends ParentPage {
         return this;
     }
 
+
     public CreatePostPage enterTextInInputTitle(String title) {
         enterTextIntoElement(inputTitle, title);
+        return this;
+    }
+
+
+    public CreatePostPage checkBoxIsClicked (String state){
+        checkboxStates(checkBox, state);
         return this;
     }
 
@@ -69,4 +81,6 @@ public class CreatePostPage extends ParentPage {
         clickOnElement(buttonSavedPost);
         return new PostPage(webDriver);
     }
+
+
 }
