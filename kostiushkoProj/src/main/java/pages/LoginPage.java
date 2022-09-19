@@ -1,6 +1,8 @@
 package pages;
 
 
+import com.google.common.base.Verify;
+import com.google.common.base.VerifyException;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertionError;
@@ -172,16 +174,22 @@ public class LoginPage extends  ParentPage {
     }
 
     public void checkMessageEquals(String text, int numberOfElements) {
+        boolean isMessageFound = false;
         List<WebElement> list = createListWithElements(alerValidateMessage, numberOfElements);
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getText().equals(text)) {
                logger.info("Message '"+text+"' wos displayed");
+                isMessageFound = true;
                 break;
-            } else {
-                Assert.assertNotEquals("123213123", text,list.get(i).getText());
             }
         }
+        Assert.assertTrue("Message not found", isMessageFound );
     }
+
+
+
+
+
 public int countingTheNumberOfMessage (){
     int   numberElements =  countingTheNumberOfElements(alerValidateMessage);
 return numberElements;
