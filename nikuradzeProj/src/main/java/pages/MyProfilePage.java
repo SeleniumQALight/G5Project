@@ -23,7 +23,7 @@ public class MyProfilePage extends ParentPage{
 
     @Override
     String getRelativeUrl() {
-        return "/profile/";
+        return "/profile/.*";
     }
 
     public MyProfilePage checkIsRedirectToMyProfilePage(){

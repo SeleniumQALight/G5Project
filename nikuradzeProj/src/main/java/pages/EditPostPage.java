@@ -20,7 +20,7 @@ public class EditPostPage extends ParentPage{
 
     @Override
     String getRelativeUrl() {
-        return "/post/";
+        return "/post/" + ".*" + "/edit";
     }
 
     public HeaderElement getHeaderElement() {
