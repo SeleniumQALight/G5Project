@@ -5,7 +5,7 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
+/**@RunWith дозволяє ранити тести з різними параметрами**/
 @RunWith(JUnitParamsRunner.class)
 
 public class RegistrationTest extends BaseTest {
@@ -30,7 +30,6 @@ public class RegistrationTest extends BaseTest {
                 .enterEmailIntoRegistrationForm(email)
                 .enterPasswordIntoRegistrationForm(password)
                 .checkErrorsMessage(expectedErrors)
-
         ;
 
 
