@@ -64,4 +64,15 @@ public class MyProfilePage extends ParentPage {
     private List<WebElement> getPostsListWithTitle(String title) {
         return webDriver.findElements(By.xpath(String.format(postTitleLocator, title)));
     }
+
+    public PostPage findAndClickOnPostByTitle(String title) {
+        try {
+            clickOnElement(String.format(postTitleLocator, title));
+            logger.info("Post with title " + title + " was opened");
+        } catch (Exception e) {
+            logger.error("There are no posts with title " + title);
+            Assert.fail("There are no posts with title " + title);
+        }
+        return new PostPage(webDriver);
+    }
 }
