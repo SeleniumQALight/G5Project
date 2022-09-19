@@ -28,7 +28,7 @@ public class PostPage extends ParentPage {
 
     @Override
     protected String getRelativeUrl() {
-        return "/post/";
+        return "/post/.*";
     }
 
     public HeaderElement getHeaderElement() {
