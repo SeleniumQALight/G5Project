@@ -50,10 +50,16 @@ public class LoginTestWithPageObject extends BaseTest {
     public void validLoginWithButtons(){
         loginPage
                 .openLoginPage()
+                .usersPressesKeyTabTime(2);
+        loginPage
                 .enterUserNameIntoLoginInputWithButtons(TestData.VALID_LOGIN)
+                .usersPressesKeyTabTime(1);
+        loginPage
                 .enterPasswordIntoInputPasswordWithButtons(TestData.VALID_PASSWORD)
-                .clickOnButtonLogInWithEnter()
-        ;
+                .usersPressesKeyTabTime(1);
+        loginPage
+                .usersPressesKeyEnterTime(1);
+
         Assert.assertTrue("Button Sign Out is not displayed", homePage.getHeaderElement().isButtonSignOutDisplayed());
 
     }

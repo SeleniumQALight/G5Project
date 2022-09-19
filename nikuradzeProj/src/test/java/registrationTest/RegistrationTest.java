@@ -49,10 +49,15 @@ public class RegistrationTest extends BaseTest {
     public void registrationErrorsWithButtons(String userName, String email, String password, String expectedErrors){
         loginPage
                 .openLoginPage()
+                .usersPressesKeyTabTime(5);
+        loginPage
                 .enterUserNameIntoRegistrationInputWithButtons(userName)
+                .usersPressesKeyTabTime(1);
+        loginPage
                 .enterEmailIntoRegistrationInputWithButtons(email)
+                .usersPressesKeyTabTime(1);
+        loginPage
                 .enterPasswordIntoRegistrationInputWithButtons(password)
-                .checkErrorsMessages(expectedErrors)
-        ;
+                .checkErrorsMessages(expectedErrors);
     }
 }

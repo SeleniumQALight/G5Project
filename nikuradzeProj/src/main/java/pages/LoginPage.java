@@ -74,15 +74,7 @@ public class LoginPage extends ParentPage{
         return this;
     }
     public LoginPage enterUserNameIntoLoginInputWithButtons(String userName){
-        try {
-            usersPressesKeyTabTime(2);
-            webDriver.switchTo().activeElement().clear();
-            webDriver.switchTo().activeElement().sendKeys(userName);
-            logger.info("'" + userName + "' was inputted into '" + webDriver.switchTo().activeElement().getAccessibleName() + "'");
-        }catch (Exception e){
-            logger.error("Can not work with element " + e);
-            Assert.fail("Can not work with element " + e);
-        }
+        enterTextIntoActiveElement(userName);
         return this;
     }
 
@@ -101,15 +93,7 @@ public class LoginPage extends ParentPage{
         return this;
     }
     public LoginPage enterPasswordIntoInputPasswordWithButtons(String password){
-        try {
-            usersPressesKeyTabTime(1);
-            webDriver.switchTo().activeElement().clear();
-            webDriver.switchTo().activeElement().sendKeys(password);
-            logger.info("'" + password + "' was inputted into '" + webDriver.switchTo().activeElement().getAccessibleName() + "'");
-        }catch (Exception e){
-            logger.error("Can not work with element " + e);
-            Assert.fail("Can not work with element " + e);
-        }
+        enterTextIntoActiveElement(password);
         return this;
     }
 
@@ -122,16 +106,6 @@ public class LoginPage extends ParentPage{
             printErrorAndStopTest(e);
         }*/
         clickOnElement(buttonSignIn);
-        return this;
-    }
-    public LoginPage clickOnButtonLogInWithEnter(){
-        try {
-            usersPressesKeyTabTime(1);
-            usersPressesKeyEnterTime(1);
-        }catch (Exception e){
-            logger.error("Can not work with element " + e);
-            Assert.fail("Can not work with element " + e);
-        }
         return this;
     }
 
@@ -165,15 +139,7 @@ public class LoginPage extends ParentPage{
         return this;
     }
     public LoginPage enterUserNameIntoRegistrationInputWithButtons(String userName) {
-        try {
-            usersPressesKeyTabTime(5);
-            webDriver.switchTo().activeElement().clear();
-            webDriver.switchTo().activeElement().sendKeys(userName);
-            logger.info("'" + userName + "' was inputted into '" + webDriver.switchTo().activeElement().getAccessibleName() + "'");
-        }catch (Exception e){
-            logger.error("Can not work with element " + e);
-            Assert.fail("Can not work with element " + e);
-        }
+        enterTextIntoActiveElement(userName);
         return this;
     }
 
@@ -182,15 +148,7 @@ public class LoginPage extends ParentPage{
         return this;
     }
     public LoginPage enterEmailIntoRegistrationInputWithButtons(String email) {
-        try {
-            usersPressesKeyTabTime(1);
-            webDriver.switchTo().activeElement().clear();
-            webDriver.switchTo().activeElement().sendKeys(email);
-            logger.info("'" + email + "' was inputted into '" + webDriver.switchTo().activeElement().getAccessibleName() + "'");
-        }catch (Exception e){
-            logger.error("Can not work with element " + e);
-            Assert.fail("Can not work with element " + e);
-        }
+        enterTextIntoActiveElement(email);
         return this;
     }
 
@@ -199,15 +157,7 @@ public class LoginPage extends ParentPage{
         return this;
     }
     public LoginPage enterPasswordIntoRegistrationInputWithButtons(String password) {
-        try {
-            usersPressesKeyTabTime(1);
-            webDriver.switchTo().activeElement().clear();
-            webDriver.switchTo().activeElement().sendKeys(password);
-            logger.info("'" + password + "' was inputted into '" + webDriver.switchTo().activeElement().getAccessibleName() + "'");
-        }catch (Exception e){
-            logger.error("Can not work with element " + e);
-            Assert.fail("Can not work with element " + e);
-        }
+        enterTextIntoActiveElement(password);
         return this;
     }
     public LoginPage logOutInBothTabs(){
