@@ -1,10 +1,8 @@
 package pages;
 
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -14,7 +12,8 @@ abstract class ParentPage extends CommonActionsWithElements {
 
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
-        baseUrl = "https://qa-complex-app-for-testing.herokuapp.com";
+        baseUrl = configProperties.base_url()
+                .replace("[env]", System.getProperty("env", "qa"));
     }
 
     abstract String getRelativeUrl();
@@ -32,7 +31,7 @@ abstract class ParentPage extends CommonActionsWithElements {
     }
 
     protected void waitChatToBeHidden() {
-        webDriverWait10.withMessage("Chatbis not closed")
+        webDriverWaitLow.withMessage("Chatbis not closed")
                 .until(ExpectedConditions
                         .invisibilityOfElementLocated(By.xpath(".//*[@id='chat-wrapper']")));
     }

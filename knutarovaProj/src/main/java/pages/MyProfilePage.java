@@ -43,7 +43,7 @@ public class MyProfilePage extends ParentPage{
         List<WebElement> listPost = getPostsListsWithTitle(title);
         int counter = 0;
         while (!listPost.isEmpty() && counter<100){
-            clickOnElement(webDriver.findElement(By.xpath(String.format(postTitleLocator,title))));
+            clickOnElement((String.format(postTitleLocator,title)));
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
                     .clickOnDeleteButton()
