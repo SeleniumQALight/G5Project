@@ -177,6 +177,8 @@ public class LoginPage extends  ParentPage {
             if (list.get(i).getText().equals(text)) {
                logger.info("Message '"+text+"' wos displayed");
                 break;
+            } else {
+                Assert.assertNotEquals("123213123", text,list.get(i).getText());
             }
         }
     }
