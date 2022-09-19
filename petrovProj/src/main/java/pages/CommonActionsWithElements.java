@@ -1,5 +1,7 @@
 package pages;
 
+import libs.ConfigProperties;
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -11,36 +13,54 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     protected Logger logger = Logger.getLogger(getClass());
-    protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected WebDriverWait webDriverWaitLow, webDriverWaitHight;
+
+    public static ConfigProperties configProperties = ConfigFactory.create(ConfigProperties.class);
 
     public CommonActionsWithElements(WebDriver webDriver){
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWaitLow = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWaitHight = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_HIGHT()));
     }
 
     protected void enterTextIntoElement(WebElement webElement, String text){
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info("'" + text + "' was inputted into '" + webElement.getAccessibleName() + "'");
+            logger.info("'" + text + "' was inputted into '" + getElementName(webElement) + "'");
         }catch (Exception e){
             printErrorAndStopTest(e);
         }
     }
 
+    private String getElementName(WebElement webElement){
+        try {
+            return webElement.getAccessibleName();
+        }catch (Exception e){
+            return "";
+        }
+    }
+
     protected void clickOnElement(WebElement webElement) {
         try {
-            webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
-            String name = webElement.getAccessibleName();
+            webDriverWaitHight.until(ExpectedConditions.elementToBeClickable(webElement));
+            String name = getElementName(webElement);
             webElement.click();
             logger.info("'" + name + "' was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void clickOnElement(String xpathLocator){
+        try {
+            WebElement element = webDriver.findElement(By.xpath(xpathLocator));
+            clickOnElement(element);
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -110,7 +130,6 @@ public class CommonActionsWithElements {
         try {
             clickOnElement(webDriver.findElement(By.xpath(".//option[text()='Загальнодоступне']")));
             clickOnElement(webDriver.findElement(By.xpath(".//option[text()='Групове повідомлення']")));
-
 
         }catch (Exception e){
             printErrorAndStopTest(e);
