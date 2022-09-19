@@ -1,5 +1,7 @@
 package Pages;
 
+import libs.ConfigProperties;
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -16,20 +18,21 @@ public class CommonActionsWithElements {
 
     protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
-    protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected WebDriverWait webDriverWaitLow, webDriverWaitHigh;
+    public static ConfigProperties configProperties = ConfigFactory.create(ConfigProperties.class);
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWaitLow = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWaitHigh = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_HIGH()));
     }
 
     protected void enterTextIntoElement(WebElement webElement, String text) {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(" ' " + text + " ' was input into  '" + webElement.getAccessibleName() + " ' ");
+            logger.info(" ' " + text + " ' was input into  '" + getElementName(webElement) + " ' ");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -37,14 +40,24 @@ public class CommonActionsWithElements {
 
     protected void clickOnElement(WebElement webElement) {
         try {
-            webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
-            String name = webElement.getAccessibleName();
+            webDriverWaitHigh.until(ExpectedConditions.elementToBeClickable(webElement));
+            String name = getElementName(webElement);
             webElement.click();
             logger.info("'" + name + "' was clicked");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
+    protected void clickOnElement(String xPathLocator){
+        try {
+            WebElement element = webDriver.findElement(By.xpath(xPathLocator));
+            clickOnElement(element);
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+
+        }
+    }
+
 
     /**
      * Метод поверне тру - якщо елемент показаний
@@ -109,12 +122,15 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
+
+
     public void usersPressesKeyEnterTime(int numberOfTimes) {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
             actions.sendKeys(Keys.ENTER).build().perform();
         }
     }
+
     public void usersPressesKeyTabTime(int numberOfTimes) {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
@@ -122,9 +138,10 @@ public class CommonActionsWithElements {
         }
 
     }
+
     public void userOpensNewTab() {
-        ((JavascriptExecutor)webDriver).executeScript("window.open()");
-        ArrayList<String> tabs = new ArrayList<> (webDriver.getWindowHandles());
+        ((JavascriptExecutor) webDriver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
     }
 //    метод moveToElement (аналог скрола )
@@ -149,6 +166,18 @@ public class CommonActionsWithElements {
 //
 //            webElement = driver.findElement(By.xpath("bla-bla-bla"));
 //((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
+
+
+    private String getElementName(WebElement webElement) {
+
+        try {
+
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            return "";
+        }
+
+    }
 
     protected void checkboxStates (WebElement checkbox, String state){
         if (checkbox.isSelected() && state.equalsIgnoreCase("Checked")) {
