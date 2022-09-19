@@ -93,6 +93,24 @@ protected void selectTextInDropDown(WebElement dropDown,String text){
             printErrorAndStopTest(e);
         }
 
+
+    }
+    /** метод домашка 3 **/
+
+    protected  void selectDropdownElementsUI(WebElement dropDown,WebElement optionDropDown){
+        try {
+
+            clickOnElement(dropDown);
+            logger.info(dropDown+"was ckicked");
+            clickOnElement(optionDropDown);
+            logger.info(optionDropDown+"was ckicked");
+
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+
+
+
     }
     public void usersPressesKeyEnterTime(int numberOfTimes) {
         Actions actions = new Actions(webDriver);
