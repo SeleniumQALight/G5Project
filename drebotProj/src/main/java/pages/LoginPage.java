@@ -103,7 +103,7 @@ public class LoginPage extends ParentPage {
     public LoginPage enterLoginIntoLoginInputUsingKeyTab(String login) {
 
         Actions actions = new Actions(webDriver);
-        //webDriverWait10.until(ExpectedConditions.elementToBeClickable(inputUserNameHeader));
+        webDriverWaitLow.until(ExpectedConditions.elementToBeClickable(inputUserNameHeader));
 
         actions.moveToElement(inputUserNameHeader).click().build().perform();
 
