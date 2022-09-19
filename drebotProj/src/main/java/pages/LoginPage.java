@@ -102,21 +102,17 @@ public class LoginPage extends ParentPage {
 
     public LoginPage enterLoginIntoLoginInputUsingKeyTab(String login) {
 
-        Actions actions = new Actions(webDriver);
-        webDriverWaitLow.until(ExpectedConditions.elementToBeClickable(inputUserNameHeader));
-
-        actions.moveToElement(inputUserNameHeader).click().build().perform();
-
-        logger.info("Move to element '" + inputUserNameHeader.getAccessibleName() + "'");
-
-        usersSendTextAndPressTabTime(1, login);
+        moveToElement(inputUserNameHeader);
+        usersSendTextByActionTime(1, login);
+        usersPressesKeyTabTime(1);
 
         return this;
     }
 
     public LoginPage enterPasswordIntoPasswordInputUsingKeyTab(String password) {
 
-        usersSendTextAndPressTabTime(1, password);
+        usersSendTextByActionTime(1, password);
+        usersPressesKeyTabTime(1);
 
         return this;
     }
@@ -128,6 +124,33 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
 
     }
+
+    public LoginPage enterUserNameIntoRegistrationUsingKey(String userName) {
+
+        moveToElement(inputUserNameRegistration);
+        usersSendTextByActionTime(1, userName);
+        usersPressesKeyTabTime(1);
+
+        return this;
+    }
+
+    public LoginPage enterEmailIntoRegistrationUsingKey(String email) {
+
+        moveToElement(inputEmailRegistration);
+        usersSendTextByActionTime(1, email);
+        usersPressesKeyTabTime(1);
+
+        return this;
+    }
+
+    public LoginPage enterPasswordIntoRegistrationUsingKey(String password) {
+
+        moveToElement(inputPasswordRegistration);
+        usersSendTextByActionTime(1, password);
+
+        return this;
+    }
+
 
     public boolean isMessageInvalidUserPassword() {
 //        try {

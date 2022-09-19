@@ -18,7 +18,7 @@ public class CommonActionsWithElements {
     protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
     protected WebDriverWait webDriverWaitLow, webDriverWaitHight;
-    public static ConfigProperties configProperties= ConfigFactory.create(ConfigProperties.class);
+    public static ConfigProperties configProperties = ConfigFactory.create(ConfigProperties.class);
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -48,11 +48,11 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected void clickOnElement(String xpathLocator){
-        try{
-            WebElement element=webDriver.findElement(By.xpath((xpathLocator)));
+    protected void clickOnElement(String xpathLocator) {
+        try {
+            WebElement element = webDriver.findElement(By.xpath((xpathLocator)));
             clickOnElement(element);
-        }catch(Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
 
         }
@@ -139,15 +139,15 @@ public class CommonActionsWithElements {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
             actions.sendKeys(Keys.TAB).build().perform();
+            logger.info("'TAB' was pressed ");
         }
     }
 
-    public void usersSendTextAndPressTabTime(int numberOfTimes, String text) {
+    public void usersSendTextByActionTime(int numberOfTimes, String text) {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
             actions.sendKeys(text).build().perform();
-            actions.sendKeys(Keys.TAB).build().perform();
-            logger.info("value '" + text + "' was send and pressed 'TAB'");
+            logger.info("value '" + text + "' was send'");
         }
     }
 
@@ -156,6 +156,15 @@ public class CommonActionsWithElements {
         ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
         logger.info("open and switch new window");
+    }
+
+    public void moveToElement(WebElement webElement) {
+        Actions actions = new Actions(webDriver);
+        webDriverWaitLow.until(ExpectedConditions.elementToBeClickable(webElement));
+
+        actions.moveToElement(webElement).click().build().perform();
+
+        logger.info("Move to element '" + webElement.getAccessibleName() + "'");
     }
 
 //    метод moveToElement (аналог скрола )
@@ -182,10 +191,10 @@ public class CommonActionsWithElements {
 //            webElement = driver.findElement(By.xpath("bla-bla-bla"));
 //((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
 
-    private String getElementName(WebElement webElement){
-        try{
+    private String getElementName(WebElement webElement) {
+        try {
             return webElement.getAccessibleName();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
     }

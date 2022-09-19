@@ -19,7 +19,7 @@ public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = ".//a[@class='mr-2']")
     private WebElement buttonMyProfile;
     @FindBy(xpath = ".//span[@class='text-white mr-2']")
-    private WebElement userNameInfo;
+    private WebElement userNameInHeader;
 
 
     public HeaderElement(WebDriver webDriver) {
@@ -37,8 +37,8 @@ public class HeaderElement extends CommonActionsWithElements {
 
     public void checkUserNameInHeader(String userName) {
 
-        Assert.assertTrue("", isElementDisplayed(userNameInfo));
-        Assert.assertEquals("", userName, userNameInfo.getText());
+        Assert.assertTrue("", isElementDisplayed(userNameInHeader));
+        Assert.assertEquals("", userName, userNameInHeader.getText());
 
     }
 

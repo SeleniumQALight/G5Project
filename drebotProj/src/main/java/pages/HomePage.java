@@ -50,23 +50,28 @@ public class HomePage extends ParentPage {
     public HomePage openTheSameNewWindow() {
         String currentUrl = webDriver.getCurrentUrl();
         userOpensNewTab();
-        Util.waitABit(2);
-        webDriver.get(currentUrl);
-        Util.waitABit(3);
+        try {
+            webDriver.get(currentUrl);
+            logger.info("in new window load url '" + currentUrl + "'");
+        } catch (Exception e) {
+            logger.info("can't load url '" + currentUrl + "'");
+            Assert.fail("Can't work with url");
+        }
         return this;
     }
 
     public void checkLogOutInWindow() {
         ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+
         webDriver.switchTo().window(tabs.get(0));
         logger.info("switch to first window");
-        Util.waitABit(2);
+
         getHeaderElement().clickOnButtonSignOut().checkIsRedirectToLoginPage();
-        Util.waitABit(2);
+
         webDriver.switchTo().window(tabs.get(1));
-        Util.waitABit(2);
+
         ((JavascriptExecutor) webDriver).executeScript("history.go(0)");
-        Util.waitABit(2);
+
         Assert.assertFalse("login page wasn't loaded", getHeaderElement().isButtonSignOutDisplayed());
 
     }
