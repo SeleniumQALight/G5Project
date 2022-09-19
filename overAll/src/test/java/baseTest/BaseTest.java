@@ -18,7 +18,7 @@ import pages.HomePage;
 import pages.LoginPage;
 
 public class BaseTest {
-    WebDriver webDriver;
+    protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
     protected LoginPage loginPage;
     protected HomePage homePage;
