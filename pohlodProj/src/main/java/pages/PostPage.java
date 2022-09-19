@@ -59,7 +59,7 @@ public class PostPage extends ParentPage{
         String post = postUnique.getText();
         if(state.equalsIgnoreCase("check")){
             Assert.assertEquals("Post is unique","Is this post unique? : yes",post);
-            logger.info("Post in unique");
+            logger.info("Post is unique");
         } else if (state.equalsIgnoreCase("uncheck")){
         Assert.assertEquals("Post is not unique","Is this post unique? : no",post);
             logger.info("Post in Not unique");

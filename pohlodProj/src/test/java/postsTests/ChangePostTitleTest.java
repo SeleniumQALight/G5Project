@@ -5,12 +5,11 @@ import libs.Util;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pages.MyProfilePage;
 
-public class changePostTitleTest extends BaseTest {
+public class ChangePostTitleTest extends BaseTest {
     final String TITLE = "pohlod-post" + Util.getDateAndTimeFormatted();
     final String NEWTITLE = "NEW TITLE " + Util.getDateAndTimeFormatted();
-    final String STATE = "check";
+
 
     @Before
     public void createNewPost() {
@@ -22,7 +21,7 @@ public class changePostTitleTest extends BaseTest {
                 .enterTextIntoTheInputBodyContent("pohlod-body-content")
                 .selectValueInDropDownRole("One Person")
                 .clickOnTheSaveNewPostButton()
-              //  .checkIsRedirectToPostPage()
+                .checkIsRedirectToPostPage()
                 .checkTextInAlert("New post successfully created.")
                 .getHeaderElement().clickOnButtonProfile()
                 .checkIsRedirectToMyProfilePage()
@@ -36,7 +35,7 @@ public class changePostTitleTest extends BaseTest {
                 .openHomePage()
                 .getHeaderElement()
                 .clickOnButtonProfile()
-               // .checkPostWasCreated(TITLE)
+                .checkPostWasCreated(TITLE)
                 .clickOnThePost(TITLE)
                 .checkIsRedirectToPostPage()
                 .clickOnTheEditButton()
