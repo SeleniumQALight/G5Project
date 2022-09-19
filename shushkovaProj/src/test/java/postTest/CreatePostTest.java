@@ -13,7 +13,7 @@ public class CreatePostTest extends BaseTest {
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
-                .selectTextInDropDownRole("Загальнодоступне")
+                .selectDropdownElementsUI()
                 .enterTextInInputTitle(TITLE)
                 .enterTextInInputBody("text")
                 .clickOnSavePostButton()
