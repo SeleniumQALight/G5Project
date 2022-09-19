@@ -27,8 +27,8 @@ public class BaseTest {
     public void setUp() {
         logger.info("------" +testName.getMethodName() + " was started -------");
         webDriver=initDriver();
-        WebDriverManager.chromedriver().setup();
-        webDriver = new ChromeDriver();
+//        WebDriverManager.chromedriver().setup();
+//        webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(
                 Duration.ofSeconds(CommonActionsWithElements.configProperties.TIME_FOR_DEFAULT_WAIT()));

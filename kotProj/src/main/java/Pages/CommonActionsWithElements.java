@@ -178,11 +178,6 @@ public class CommonActionsWithElements {
         }
 
     }
-        private void printErrorAndStopTest (Exception e){
-            logger.info("Can not work with element " + e);
-            Assert.fail("Can not work with element " + e);
-        }
-    }
 
     protected void checkboxStates (WebElement checkbox, String state){
         if (checkbox.isSelected() && state.equalsIgnoreCase("Checked")) {

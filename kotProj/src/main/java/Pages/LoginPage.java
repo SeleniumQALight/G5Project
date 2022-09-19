@@ -107,7 +107,7 @@ public LoginPage(WebDriver webDriver) {
     }
 
     public LoginPage checkNumberOfErrorMessages(int errorMessages){
-        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath
+        webDriverWaitLow.until(ExpectedConditions.numberOfElementsToBe(By.xpath
                         (".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
                 , errorMessages));
         Assert.assertEquals("Incorrect number of alerts are displayed", errorMessages, listOfErrors.size());
@@ -117,7 +117,7 @@ public LoginPage(WebDriver webDriver) {
 
 
     public LoginPage checkTextInErrorMessages() {
-        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"),
+        webDriverWaitLow.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[contains(@class, 'liveValidateMessage--visible')]"),
                 3));
         Assert.assertEquals("Username must be at least 3 characters.", listOfErrors.get(0).getText());
         logger.info("Username error message: " + listOfErrors.get(0).getText());
@@ -152,6 +152,13 @@ public LoginPage(WebDriver webDriver) {
 
         softAssertions.assertAll();
         return this;
+    }
+
+    public HomePage loginWithValidCredWithoutOpeningPage() {
+        enterUsernameIntoLoginInput(TestData.VALID_LOGIN);
+        enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
+        clickOnButtonLogIn();
+        return new HomePage(webDriver);
     }
 
 //    private void printErrorAndStopTest(Exception e) {
