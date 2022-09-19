@@ -54,10 +54,16 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
     public LoginPage openLoginPage() {
         try {
-            webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
+            webDriver.get(baseUrl);
             logger.info("Login Page is opened");
+            logger.info(baseUrl);
         } catch (Exception e) {
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
@@ -123,9 +129,7 @@ public class LoginPage extends ParentPage {
 
     public HomePage loginWithValidCred() {
         openLoginPage();
-        enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
-        enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
-        clickOnButtonLogin();
+        loginWithValidCredWithoutOpenPage();
         return new HomePage(webDriver);
     }
 
@@ -149,7 +153,7 @@ public class LoginPage extends ParentPage {
     }
 
     public LoginPage validateErrorMessagesCountOnLoginPage(int countOfErrorMessages) {
-        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe
+        webDriverWaitLow.until(ExpectedConditions.numberOfElementsToBe
                 (By.xpath("//div[contains (@class, 'alert')]"), countOfErrorMessages));
         Assert.assertEquals("Not all error messages are displayed", countOfErrorMessages, validationErrorMessage.size());
         logger.info("Error messages count on sign up form is " + validationErrorMessage.size());
@@ -158,7 +162,7 @@ public class LoginPage extends ParentPage {
 
 
     public void validateErrorMessagesTextOnSignUp() {
-        webDriverWait10.until(ExpectedConditions.visibilityOf(validationErrorMessagePassword));
+        webDriverWaitLow.until(ExpectedConditions.visibilityOf(validationErrorMessagePassword));
         Assert.assertEquals("Username must be at least 3 characters."
                 , validationErrorMessage.get(0).getText());
         logger.info("Text for username error message is validated: "
@@ -177,7 +181,7 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkErrorMessages(String expectedErrors) {
         String[] expectedErrorsArray = expectedErrors.split(";");
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of messages should be " + expectedErrorsArray.length)
                 .until(
                         ExpectedConditions.numberOfElementsToBe(
@@ -197,5 +201,12 @@ public class LoginPage extends ParentPage {
         }
         softAssertions.assertAll();
         return this;
+    }
+
+    public HomePage loginWithValidCredWithoutOpenPage() {
+        enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
+        enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
+        clickOnButtonLogin();
+        return new HomePage(webDriver);
     }
 }

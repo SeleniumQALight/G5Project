@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class MyProfilePage extends PostPage{
+public class MyProfilePage extends ParentPage{
     @FindBy(xpath = ".//img[@class='avatar-small']")
     private WebElement avatarOnProfilePage;
 
@@ -22,9 +22,16 @@ public class MyProfilePage extends PostPage{
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/profile/";
+    }
+
+
+
     public MyProfilePage checkIsRedirectToMyProfilePage(){
-        //TODO check url
         waitChatToBeHide();
+        checkUrlWithPattern();
         Assert.assertTrue(" MyProfilePage is not loaded", isElementDisplayed(avatarOnProfilePage));
         return  this;
     }
@@ -40,7 +47,7 @@ public class MyProfilePage extends PostPage{
         List<WebElement> listPost = getPostListWithTitle(title);
         int counter = 0;
         while (!listPost.isEmpty() && counter<100){
-            clickOnElement(webDriver.findElement(By.xpath(String.format(postTitleLocators, title))));
+            clickOnElement(String.format(postTitleLocators, title));
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
                     .clickOnDeleteButton()

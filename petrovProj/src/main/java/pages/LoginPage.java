@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,28 +42,38 @@ public class LoginPage extends ParentPage {
     private List<WebElement> listOfErrors;
 
 
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement authInValidError;
+
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
     public LoginPage openLoginPage() {
         try {
-            webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
+            webDriver.get(baseUrl);
             logger.info("Login page was opened");
+            logger.info(baseUrl);
         } catch (Exception e) {
-            logger.error("Can not work with site");
-            Assert.fail("Can not work with site");
-
+            assertFailedLogger("Can not work with site" + e);
         }
         return this;
     }
 
-    public void enterUserNameIntoLoginInput(String userName) {
+    public LoginPage enterUserNameIntoLoginInput(String userName) {
        enterTextIntoElement(inputUserNameHeader, userName);
+       return this;
     }
 
-    public void enterPasswordIntoInputPassword(String password) {
+    public LoginPage enterPasswordIntoInputPassword(String password) {
        enterTextIntoElement(inputPasswordHeader, password);
+       return this;
     }
 
     public void clickOnButtonLogin() {
@@ -98,17 +107,22 @@ public class LoginPage extends ParentPage {
 
     public HomePage loginWithValidCred() {
         openLoginPage();
+        loginWithValidCredWithOutOpenPage();
+        return new HomePage(webDriver);
+    }
+
+
+    public HomePage loginWithValidCredWithOutOpenPage() {
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonLogin();
-
         return new HomePage(webDriver);
     }
 
 
     public LoginPage checkErrorsMessage(String expectedErrors) {
         String[] expectedErrorsArray = expectedErrors.split(";");
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of message should be "+ expectedErrors.length())
                 .until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfErrorsLocator), expectedErrorsArray.length));
 
@@ -129,4 +143,19 @@ public class LoginPage extends ParentPage {
 
         return this;
     }
+
+
+
+    public void checkAuthErrorsMessage(String expectedErrorText) {
+        isElementDisplayed(authInValidError);
+        Assert.assertEquals(expectedErrorText, authInValidError.getText());
+    }
+
+
+    private void assertFailedLogger(String textForPrint){
+        logger.error(textForPrint);
+        Assert.fail(textForPrint);
+    }
+
+
 }

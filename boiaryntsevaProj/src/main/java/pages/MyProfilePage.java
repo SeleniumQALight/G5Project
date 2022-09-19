@@ -13,6 +13,11 @@ public class MyProfilePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/profile/";
+    }
+
     @FindBy(xpath = ".//img[@class='avatar-small']")
     private WebElement avatar;
 
@@ -24,6 +29,7 @@ public class MyProfilePage extends ParentPage {
 
     public MyProfilePage checkIsRedirectToMyProfilePage() {
         waitChatToBeHidden();
+        checkUrlWithPatterns();
         Assert.assertTrue("My profile page is not there", isElementDisplayed(avatar));
         return this;
     }
@@ -39,8 +45,7 @@ public class MyProfilePage extends ParentPage {
         List<WebElement> listPost = getPostIstWithTitle(title);
         int counter = 0;
         while (!listPost.isEmpty() && counter < 100) {
-            clickOnElement(webDriver.findElement(
-                    By.xpath(String.format(postTitleLocator, title))));
+            clickOnElement(String.format(postTitleLocator, title));
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
                     .clickOnDeleteButton()

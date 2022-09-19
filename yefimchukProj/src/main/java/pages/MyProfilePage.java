@@ -23,6 +23,11 @@ public class MyProfilePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeURL() {
+        return "/profile/";
+    }
+
     public MyProfilePage checkIsRedirectToMyProfilePage() {
         waitChatToBeHide();
         Assert.assertTrue("My profile page is not loaded", isElementDisplayed(avatar));
@@ -39,7 +44,7 @@ public class MyProfilePage extends ParentPage {
         List<WebElement> listPost = getPostListWithTitle(title);
         int counter = 0;
         while (!listPost.isEmpty() && counter < 100) {
-            clickOnElement(webDriver.findElement(By.xpath(String.format(postTitleLocator, title))));
+            clickOnElement(String.format(postTitleLocator, title));
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
                     .clickOnDeleteButton()

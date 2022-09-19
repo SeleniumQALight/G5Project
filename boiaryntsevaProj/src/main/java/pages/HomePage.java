@@ -16,6 +16,11 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
 
     public HomePage checkIsRedirectToHomePage() {
         //TODO checkURL
@@ -25,9 +30,11 @@ public class HomePage extends ParentPage {
 
     public HomePage openHomePage() {
         //Login page
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
         if (!getHeaderElement().isButtonSignedOutDisplayed()) {
-            LoginPage loginPage = new LoginPage(webDriver);
-            loginPage.loginWithValidCred();
+
+            loginPage.loginWithValidCredWithoutOpenPage();
         }
         checkIsRedirectToHomePage();
         return this;
