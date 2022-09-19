@@ -1,8 +1,6 @@
 package baseTest;
 
-import Pages.CommonActionWithElements;
-import Pages.HomePage;
-import Pages.LoginPage;
+import Pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -22,6 +20,8 @@ public class BaseTest {
     Logger log = Logger.getLogger(getClass());
     protected LoginPage loginPage;
     protected HomePage homePage;
+    protected PostPage postPage;
+    protected MyProfilePage myProfilePage;
 
     @Before
     public void setUp() {
@@ -33,6 +33,8 @@ public class BaseTest {
         log.info("Browser is opened");
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
+        postPage = new PostPage(driver);
+        myProfilePage = new MyProfilePage(driver);
     }
 
     @After
