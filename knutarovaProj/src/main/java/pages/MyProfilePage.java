@@ -12,10 +12,11 @@ public class MyProfilePage extends ParentPage{
     // \" - екранування подвійних лапок в String
     @FindBy(xpath = ".//img[@class=\"avatar-small\"]")
     private WebElement avatar;
-
     private String postTitleLocator = ".//*[text()='%s']";
     @FindBy(xpath = ".//*[text()='Post successfully deleted']")
     private WebElement successDeletePostMessage;
+    @FindBy(xpath = ".//button[@class='btn btn-sm btn-secondary']")
+    private WebElement buttonSignOut;
 
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
@@ -63,5 +64,25 @@ public class MyProfilePage extends ParentPage{
 
     private List<WebElement> getPostsListsWithTitle(String title){
         return webDriver.findElements(By.xpath(String.format(postTitleLocator,title)));
+    }
+
+    public PostPage clickOnPost(String text) {
+        try{
+            clickOnElement((String.format(postTitleLocator,text)));
+            return new PostPage(webDriver);
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+        return null;
+    }
+
+    public HomePage clickOnButtonSignOut() {
+        try{
+            clickOnElement(buttonSignOut);
+            return new HomePage(webDriver);
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+        return null;
     }
 }

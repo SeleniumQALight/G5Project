@@ -3,6 +3,7 @@ package pages;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -33,6 +34,10 @@ public class LoginPage extends ParentPage {
     private List<WebElement> listOfErrors;
     @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
     private WebElement errorHeaderMessage;
+    @FindBy(xpath = ".//a[text()='Create Post']")
+    private WebElement buttonCreatePost;
+    @FindBy(xpath = ".//*[@data-original-title='My Profile']")
+    private WebElement buttonMyProfile;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -98,7 +103,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    private void printErrorAndStopTest(Exception e) {
+    public void printErrorAndStopTest(Exception e) {
         logger.error("Can't work with element " + e);
         Assert.fail("Can't work with element " + e);
     }
@@ -181,5 +186,25 @@ public class LoginPage extends ParentPage {
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
         return new HomePage(webDriver);
+    }
+
+    public CreatePostPage clickOnButtonCreatePost() {
+        try{
+            clickOnElement(buttonCreatePost);
+            return new CreatePostPage(webDriver);
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+        return null;
+    }
+
+    public MyProfilePage clickOnMyProfileButton() {
+        try{
+            clickOnElement(buttonMyProfile);
+            return new MyProfilePage(webDriver);
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+        return null;
     }
 }

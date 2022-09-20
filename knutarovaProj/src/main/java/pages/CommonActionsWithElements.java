@@ -159,7 +159,7 @@ public class CommonActionsWithElements {
         }
     }
 
-    private void printErrorAndStopTest(Exception e) {
+    public void printErrorAndStopTest(Exception e) {
         logger.error("Can't work with element " + e);
         Assert.fail("Can't work with element " + e);
     }
