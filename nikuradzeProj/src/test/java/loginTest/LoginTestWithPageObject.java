@@ -46,5 +46,33 @@ public class LoginTestWithPageObject extends BaseTest {
                 .checkInvalidLogin()
         ;
     }
+    @Test
+    public void validLoginWithButtons(){
+        loginPage
+                .openLoginPage()
+                .usersPressesKeyTabTime(2);
+        loginPage
+                .enterUserNameIntoLoginInputWithButtons(TestData.VALID_LOGIN)
+                .usersPressesKeyTabTime(1);
+        loginPage
+                .enterPasswordIntoInputPasswordWithButtons(TestData.VALID_PASSWORD)
+                .usersPressesKeyTabTime(1);
+        loginPage
+                .usersPressesKeyEnterTime(1);
+
+        Assert.assertTrue("Button Sign Out is not displayed", homePage.getHeaderElement().isButtonSignOutDisplayed());
+
+    }
+    @Test
+    public void userIsLoggedInNewTab(){
+        homePage
+                .openHomePage()
+                .checkHomePageUserLoggedInNewTab()
+                .getHeaderElement().clickOnSignOutButton()
+                .logOutInBothTabs()
+        ;
+        Assert.assertTrue("Button Sign Out is not displayed", loginPage.isButtonSignInDisplayed());
+
+    }
 
 }

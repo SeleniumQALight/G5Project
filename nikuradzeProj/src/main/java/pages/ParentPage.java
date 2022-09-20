@@ -13,7 +13,6 @@ abstract class ParentPage extends CommonActionsWithElements{
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
         baseUrl = configProperties.base_url().replace("[env]", System.getProperty("env", "qa"));
-
     }
 
     abstract String getRelativeUrl();
@@ -22,7 +21,9 @@ abstract class ParentPage extends CommonActionsWithElements{
     }
     protected void checkUrlWithPattern(){
         logger.debug(webDriver.getCurrentUrl());
-        Assert.assertThat("Invalid page ", webDriver.getCurrentUrl(), containsString(baseUrl + getRelativeUrl()));
+    //  Assert.assertThat("Invalid page ", webDriver.getCurrentUrl(), containsString(baseUrl + getRelativeUrl()));
+        String actualURL = webDriver.getCurrentUrl();
+        Assert.assertTrue("ActualURL " + actualURL + "ExpectedURL pattern " + baseUrl + getRelativeUrl(), actualURL.matches(baseUrl + getRelativeUrl()));
     }
 
     protected void waitChatToBeHide(){

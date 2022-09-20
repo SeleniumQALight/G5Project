@@ -47,6 +47,12 @@ public class HomePage extends ParentPage{
         checkIsRedirectToHomePage();
         return this;
     }
+    public HomePage checkHomePageUserLoggedInNewTab(){
+        userOpensNewTab();
+        webDriver.get(baseUrl);
+        Assert.assertTrue("Button Sign Out is not displayed", getHeaderElement().isButtonSignOutDisplayed());
+        return this;
+    }
 
     /**
      * виддае приватний елемент Header

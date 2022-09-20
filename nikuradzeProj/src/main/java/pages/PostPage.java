@@ -23,7 +23,7 @@ public class PostPage extends ParentPage{
 
     @Override
     String getRelativeUrl() {
-        return "/post/";
+        return "/post/.*";
     }
 
     public HeaderElement getHeaderElement() {
@@ -55,5 +55,10 @@ public class PostPage extends ParentPage{
             logger.info("Post is not unique");
         }
         return this;
+    }
+
+    public EditPostPage clickOnEditPostButton() {
+        clickOnElement(buttonEdit);
+        return new EditPostPage(webDriver);
     }
 }
