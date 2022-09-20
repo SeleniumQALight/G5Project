@@ -13,7 +13,7 @@ public class EditPostPage extends ParentPage{
 
     @Override
     String getRelativeUrl() {
-        return null;
+        return "/edit/";
     }
 
     @FindBy(xpath = ".//a[@data-original-title='Edit']")
@@ -29,7 +29,7 @@ public class EditPostPage extends ParentPage{
 
     public EditPostPage checkIsRedirectToEditPostPage(){
         checkUrlWithPattern();
-        Assert.assertTrue("Page Post is not loaded", isElementWasDisplayed(buttonEdit));
+        Assert.assertTrue("Edit Page Post is not loaded", isElementWasDisplayed(inputTitle));
         return  this;
     }
 

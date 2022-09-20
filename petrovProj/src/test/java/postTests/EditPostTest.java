@@ -39,6 +39,7 @@ public class EditPostTest extends BaseTest {
                 .clickOnMyProfileButton()
                 .clickOnSelectPostByTitle(TITLE)
                 .clickOnEditButton()
+              //.checkIsRedirectToEditPostPage()
                 .editEnterTextInInputTitle(TitleAfterEdit)
                 .clickOnSaveUpdateButton()
                 .checkIsMessageSuccess()

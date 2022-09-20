@@ -26,7 +26,7 @@ public class PostPage extends ParentPage{
 
     @Override
     String getRelativeUrl() {
-        return "/post/";
+        return "/post/.*";
     }
 
     public PostPage checkIsRedirectToPostPage(){
