@@ -30,7 +30,12 @@ abstract class ParentPage extends CommonActionsWithElements {
     protected void checkURLWithPattern() {
         logger.debug(webDriver.getCurrentUrl()); // info is changed to debug in file: log4j.properties
         Assert.assertThat("Invalid page", webDriver.getCurrentUrl(), containsString(baseURL + getRelativeURL()));
+        String actualURL = webDriver.getCurrentUrl();
+        Assert.assertTrue("\n ActualURL " + actualURL + "\n "
+                        + "ExpectedURL pattern" + baseURL + getRelativeURL() + " \n "
+                , actualURL.matches(baseURL + getRelativeURL()));
     }
+//"/post/[a-zA-Z0-9]*/edit";
 
     protected void waitChatToBeHide() {
         webDriverWaitLow.withMessage("Chat is not closed")
