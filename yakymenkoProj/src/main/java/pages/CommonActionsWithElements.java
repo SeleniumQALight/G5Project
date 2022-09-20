@@ -66,6 +66,24 @@ public class CommonActionsWithElements { // загальні дії з елем�
         }
     }
 
+    protected void setCheckboxWithStatus(WebElement checkBox, String state) {
+        if (state.equalsIgnoreCase("check") || state.equalsIgnoreCase("uncheck")) {
+            if (checkBox.isSelected() && state.equals("check")) {
+                logger.info("CheckBox is already selected");
+            } else if (!checkBox.isSelected() && state.equalsIgnoreCase("check")) {
+                checkBox.click();
+                logger.info("CheckBox is selected");
+            } else if (checkBox.isSelected() && state.equalsIgnoreCase("uncheck")) {
+                checkBox.click();
+                logger.info("CheckBox is unselected");
+            } else if (!checkBox.isSelected() && state.equalsIgnoreCase("uncheck")) {
+                logger.info("CheckBox is not already selected");
+            }
+        } else {
+            Assert.fail("Inputted state for checkBox is not valid");
+        }
+    }
+
     /**
      * Метод поверне true якщо елемент показаний
      * або поверне false якщо елемент не показаний або його взагалі немає
@@ -86,6 +104,16 @@ public class CommonActionsWithElements { // загальні дії з елем�
             return state;
         } catch (Exception e) {
             logger.info("Element is Not displayed");
+            return false;
+        }
+    }
+
+    protected boolean isElementContainsText(WebElement webElement, String text) {
+        try {
+            String webElementText = webElement.getText();
+            return webElementText.equals(text);
+        } catch (Exception e) {
+            logger.error(e);
             return false;
         }
     }
