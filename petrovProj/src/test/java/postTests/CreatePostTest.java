@@ -8,6 +8,9 @@ import org.junit.Test;
 
 public class CreatePostTest extends BaseTest {
     final String TITLE = "petrov-TC1_"+ Util.getDateAndTimeFormatted();
+    String contentText = "Text into tag textArea on page create post";
+    String checkBoxAction = "check";
+    String role = "One Person";
 
     @Test
     public void TC1_createNewPost(){
@@ -15,11 +18,7 @@ public class CreatePostTest extends BaseTest {
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
              .checkIsRedirectToCreatePostPage()
-                .enterTextInInputTitle(TITLE)
-                .enterTextInInputBodyContent("Text into tag textArea on page create post")
-                .actionsWithCheckBox("check")
-                .selectOptionInDropDownByUI()
-                .selectValueInDropDownRole("One Person")
+            .fillInputCreatePostForm(TITLE, contentText, checkBoxAction, role)
                 .clickOnCreatePostButton()
              .checkIsRedirectToPostPage()
                 .checkIsAppliedCheckBox(TestData.PP_CHECK_MESSAGE)
@@ -33,6 +32,7 @@ public class CreatePostTest extends BaseTest {
 //                .selectTextInDropDownRole("Приватне повідомлення")
         ;
     }
+
 
     @After
     public void DeletePosts(){
