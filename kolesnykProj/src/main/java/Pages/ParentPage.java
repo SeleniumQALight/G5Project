@@ -28,6 +28,7 @@ abstract class ParentPage extends CommonActionWithElements{
         Assert.assertThat("Invalid page"
                 ,driver.getCurrentUrl()
                 , containsString(baseUrl + getRelativeUrl()));
+        //"/post/"+"[a-zA-Z0-9]*"+"/edit";
     }
     protected void waitChatToBeHide(){
         webDriverWaitLow.withMessage("Chat is not closed")
