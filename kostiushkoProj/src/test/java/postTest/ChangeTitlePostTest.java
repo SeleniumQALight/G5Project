@@ -38,7 +38,7 @@ public class ChangeTitlePostTest extends BaseTest {
                 .chekIsRedirectTomyProfilePage()
                 .findOldPostWithTitle(TITLE).clickOnButtonTitlePost(TITLE)
                 .clickOnEditButton()
-                .chekIsRedirectToOldPostPage()
+//                .chekIsRedirectToOldPostPage()
                 .enterTextInInputTitle("NEW "+TITLE)
                 .clikSaveUpdatesPostButton()
 
