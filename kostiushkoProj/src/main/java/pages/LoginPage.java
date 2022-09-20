@@ -1,6 +1,8 @@
 package pages;
 
 
+import com.google.common.base.Verify;
+import com.google.common.base.VerifyException;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertionError;
@@ -15,7 +17,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.List;
+
 public class LoginPage extends  ParentPage {
+
     @FindBy (xpath = ".//input[@name='username' and @placeholder='Username']")
     private WebElement inputUserNameHeader;
 
@@ -36,6 +41,15 @@ public class LoginPage extends  ParentPage {
     private  String listOfErrorsLocator = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy (xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
     private List<WebElement> listOfErrors;
+    @FindBy(xpath = ".//input [@id='username-register']")
+    private WebElement inputRegistationUserName;
+    @FindBy (xpath = ".//input [@id='email-register']")
+    private WebElement inputRegistationEmail;
+    @FindBy (xpath = ".//input [@id='password-register']")
+    private WebElement inputRegistationPassword;
+
+    private String alerValidateMessage = ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -78,6 +92,8 @@ public class LoginPage extends  ParentPage {
 //        }
         enterTextIntoElement(inputPasswordNameHeader, password);
     }
+
+
 
     public void clickOnButtonLogIn(){
 //        try {buttonSignIn.click();
@@ -145,6 +161,39 @@ public class LoginPage extends  ParentPage {
     }
 
 
+
+    public void enterUserNameIntoRegistrationUserNameField (String userName){
+        enterTextIntoElement(inputRegistationUserName, userName);
+    }
+    public void enterEmailIntoRegistrationEmailField(String email) {
+        enterTextIntoElement(inputRegistationEmail, email);
+    }
+
+    public void enterPasswordIntoRegistrationPasswordField(String password) {
+    enterTextIntoElement(inputRegistationPassword, password );
+    }
+
+    public void checkMessageEquals(String text, int numberOfElements) {
+        boolean isMessageFound = false;
+        List<WebElement> list = createListWithElements(alerValidateMessage, numberOfElements);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getText().equals(text)) {
+               logger.info("Message '"+text+"' wos displayed");
+                isMessageFound = true;
+                break;
+            }
+        }
+        Assert.assertTrue("Message not found", isMessageFound );
+    }
+
+
+
+
+
+public int countingTheNumberOfMessage (){
+    int   numberElements =  countingTheNumberOfElements(alerValidateMessage);
+return numberElements;
+    }
 //    private void prinErrorAndStopTest(Exception e) {
 //        logger.error("Can not work with element " + e);
 //        Assert.fail("Can not work with element " + e);
