@@ -14,6 +14,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import pages.CommonActionsWithElements;
 import pages.HomePage;
 import pages.LoginPage;
+import postTests.CreatePostTest;
 
 import java.time.Duration;
 
@@ -23,6 +24,7 @@ public class BaseTest {
     Logger logger = Logger.getLogger(getClass());
     protected LoginPage loginPage;
     protected HomePage homePage;
+
 
     @Before
     public void setUp() {
