@@ -42,6 +42,14 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
+    protected void enterTextIntoPrefilledElement(WebElement webElement, String text) {
+        try {
+            webElement.sendKeys(text);
+            logger.info("'" + text + "' was entered into" + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
 
     protected void clickOnElement(WebElement webElement) {
         try {

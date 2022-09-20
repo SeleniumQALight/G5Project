@@ -51,6 +51,7 @@ public class LoginPage extends ParentPage {
         try {
             webDriver.get(baseUrl);
             logger.info("Login page was opened");
+            logger.info(baseUrl);
         } catch (Exception e) {
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
@@ -104,7 +105,7 @@ public class LoginPage extends ParentPage {
     public LoginPage checkErrorsMessages(String expectedErrors) {
         // test;test1 -> array[0] = test , array[1] = test1
         String[] expectedErrorsArray = expectedErrors.split(";");
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of messages should be " + expectedErrorsArray.length)
                 .until(ExpectedConditions.numberOfElementsToBe(
                         By.xpath(listOfErrorsLocator), expectedErrorsArray.length));

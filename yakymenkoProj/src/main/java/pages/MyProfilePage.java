@@ -44,7 +44,7 @@ public class MyProfilePage extends ParentPage {
         // якщо б ми пройшли якусь кількість ітерацій і зациклились то пройди 100 разів
         int counter = 0;
         while (!listPost.isEmpty() && counter < 100) { // виконуй поки наш listPost не пустий
-            clickOnElement(webDriver.findElement(By.xpath(String.format(postTitleLocator, title))));
+            clickOnElement(String.format(postTitleLocator, title));
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
                     .clickOnDeleteButton()

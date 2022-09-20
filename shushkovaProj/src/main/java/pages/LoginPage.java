@@ -121,11 +121,13 @@ public class LoginPage extends ParentPage {
              {
                  actualTextFromErrors.add(element.getText());
         }
+        /** Накоплює перевірки доки ми не скажемо**/
         SoftAssertions softAssertions=new SoftAssertions();
         for (int i = 0; i < expectedErrorsArray.length; i++) {
             softAssertions.assertThat(expectedErrorsArray[i]).isIn(actualTextFromErrors);
 
         }
+        /**якщо щось не співпало, джава зупинить тест і помітить його червоним**/
         softAssertions.assertAll();
 
         return this;
