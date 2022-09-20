@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.elements.HeaderElement;
 
-import static org.hamcrest.CoreMatchers.containsString;
 
 abstract class ParentPage extends CommonActionsWithElements{
     private HeaderElement headerElement = new HeaderElement(webDriver);
