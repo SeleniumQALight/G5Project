@@ -87,7 +87,6 @@ public class CreatePostPage extends ParentPage{
         enterTextInInputTitle(title)
                 .enterTextInInputBodyContent(contentText)
                 .actionsWithCheckBox(checkBoxAction)
-                .selectOptionInDropDownByUI()
                 .selectValueInDropDownRole(role);
         return this;
     }

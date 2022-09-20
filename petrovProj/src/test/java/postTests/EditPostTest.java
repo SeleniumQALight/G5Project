@@ -39,7 +39,7 @@ public class EditPostTest extends BaseTest {
                 .clickOnMyProfileButton()
                 .clickOnSelectPostByTitle(TITLE)
                 .clickOnEditButton()
-              //.checkIsRedirectToEditPostPage()
+              .checkIsRedirectToEditPostPage()
                 .editEnterTextInInputTitle(TitleAfterEdit)
                 .clickOnSaveUpdateButton()
                 .checkIsMessageSuccess()
@@ -54,6 +54,7 @@ public class EditPostTest extends BaseTest {
                     .openHomePage()
                     .getHeaderElement().clickOnMyProfileButton()
                     .checkIsRedirectToMyProfilePage()
-                    .deletePostWithTitleTillPresent(TitleAfterEdit);
+                    .deletePostWithTitleTillPresent(TitleAfterEdit)
+                    .deletePostWithTitleTillPresent(TITLE);
     }
 }

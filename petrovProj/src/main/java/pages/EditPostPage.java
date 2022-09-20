@@ -13,7 +13,7 @@ public class EditPostPage extends ParentPage{
 
     @Override
     String getRelativeUrl() {
-        return "/edit/";
+        return "/post/"+"[a-zA-Z0-9]*"+"/edit";
     }
 
     @FindBy(xpath = ".//a[@data-original-title='Edit']")
