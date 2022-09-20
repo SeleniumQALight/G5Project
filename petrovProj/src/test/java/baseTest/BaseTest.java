@@ -28,7 +28,7 @@ public class BaseTest {
 
     @Before
     public void setUp() {
-        logger.info("\n--- "+testName.getMethodName()+" was started ---");
+        logger.info("--- "+testName.getMethodName()+" was started ---");
         webDriver = initDriver();
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(
@@ -43,7 +43,7 @@ public class BaseTest {
     public void tearDown() {
         webDriver.quit();
         logger.info("Browser was closed");
-        logger.info("\n--- "+testName.getMethodName()+" was ended ---\n");
+        logger.info("--- "+testName.getMethodName()+" was ended ---\n");
     }
 
 
