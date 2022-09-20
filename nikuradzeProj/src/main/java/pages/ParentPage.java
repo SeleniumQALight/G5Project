@@ -22,8 +22,9 @@ abstract class ParentPage extends CommonActionsWithElements{
     protected void checkUrlWithPattern(){
         logger.debug(webDriver.getCurrentUrl());
     //  Assert.assertThat("Invalid page ", webDriver.getCurrentUrl(), containsString(baseUrl + getRelativeUrl()));
+    //  "/post/[a-zA-Z0-9]*/edit";
         String actualURL = webDriver.getCurrentUrl();
-        Assert.assertTrue("ActualURL " + actualURL + "ExpectedURL pattern " + baseUrl + getRelativeUrl(), actualURL.matches(baseUrl + getRelativeUrl()));
+        Assert.assertTrue("\n ActualURL " + actualURL + "\n " + "ExpectedURL pattern " + baseUrl + getRelativeUrl() + " \n ", actualURL.matches(baseUrl + getRelativeUrl()));
     }
 
     protected void waitChatToBeHide(){
