@@ -6,6 +6,6 @@ import org.openqa.selenium.support.PageFactory;
 public class ParentPage extends CommonActionWithElement{
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
-        PageFactory.initElements(webDriver,this);
+
     }
 }
