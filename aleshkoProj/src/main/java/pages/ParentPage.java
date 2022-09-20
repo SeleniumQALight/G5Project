@@ -5,8 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static org.hamcrest.CoreMatchers.containsString;
-
 abstract class ParentPage extends CommonActionsWithElements {
     protected String baseUrl;
 
@@ -23,12 +21,8 @@ abstract class ParentPage extends CommonActionsWithElements {
     }
 
     protected void checkUrlWithPattern() {
-//        Assert.assertThat("Invalid page "
-//                , webDriver.getCurrentUrl()
-//                , containsString(baseUrl + getRelativeUrl()));
         String actualURL = webDriver.getCurrentUrl();
-        Assert.assertTrue("\n ActualURL " + actualURL +  "\n "
-                        + "ExpectedURL pattern" +  baseUrl + getRelativeUrl() + " \n "
+        Assert.assertTrue("\n ActualURL " + actualURL +  "\n " + "ExpectedURL pattern" +  baseUrl + getRelativeUrl() + " \n "
                 , actualURL.matches(baseUrl + getRelativeUrl()));
     }
 

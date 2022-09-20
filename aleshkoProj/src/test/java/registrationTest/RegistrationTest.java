@@ -19,8 +19,6 @@ public class RegistrationTest extends BaseTest {
     final static String COMMA = ",";
     final static String SHORT_USER_NAME = "tr";
 
-//    String expectedErrors = ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD;
-
     @Test
     public void invalidRegistrationData() {
         loginPage
@@ -46,7 +44,6 @@ public class RegistrationTest extends BaseTest {
                 .enterUsernameIntoRegistrationInput(userName)
                 .enterEmailIntoRegistrationInput(email)
                 .enterPasswordIntoRegistrationInput(password)
-                .checkErrorsMessagesOnRegistrationForm(expectedErrors)
-        ;
+                .checkErrorsMessagesOnRegistrationForm(expectedErrors);
     }
 }

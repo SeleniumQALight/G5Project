@@ -22,7 +22,7 @@ public class EditPostPage extends ParentPage {
 
     @Override
     protected String getRelativeUrl() {
-        return "/post/.*/edit";
+        return "/post/[a-zA-Z0-9]*/edit";
     }
 
     public EditPostPage checkIsRedirectToEditPostPage() {
