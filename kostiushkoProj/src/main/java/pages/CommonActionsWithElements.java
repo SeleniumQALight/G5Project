@@ -1,6 +1,8 @@
 package pages;
 
 import libs.Util;
+import libs.ConfigProperties;
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -17,13 +19,14 @@ import java.util.List;
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
-    protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected WebDriverWait webDriverWaitLow, webDriverWaitHight;
+    public static ConfigProperties configProperties = ConfigFactory.create(ConfigProperties.class);
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWaitLow = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWaitHight = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_HIGHT()));
     }
 
 
@@ -31,7 +34,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info("'" + text + "'was input into " + webElement.getAccessibleName() + "'");
+            logger.info("'" + text + "'was input into " + getElementName(webElement) + "'");
         } catch (Exception e) {
             prinErrorAndStopTest(e);
         }
@@ -39,8 +42,8 @@ public class CommonActionsWithElements {
 
     protected void clicOnElement(WebElement webElement) {
         try {
-            webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
-            String name = webElement.getAccessibleName();
+            webDriverWaitHight.until(ExpectedConditions.elementToBeClickable(webElement));
+            String name = getElementName(webElement);
             webElement.click();
             logger.info("'" + name + " ' was clicked");
         } catch (Exception e) {
@@ -48,6 +51,16 @@ public class CommonActionsWithElements {
         }
 
     }
+    protected void clicOnElement(String xpathLocator) {
+        try {
+           WebElement element = webDriver.findElement(By.xpath(xpathLocator));
+           clicOnElement(element);
+        } catch (Exception e) {
+            prinErrorAndStopTest(e);
+        }
+
+    }
+
 
     /**
      * Метод вернет тру если елемент есть
@@ -177,5 +190,13 @@ public class CommonActionsWithElements {
 //            webElement = driver.findElement(By.xpath("bla-bla-bla"));
 //((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
 
+
+    private String getElementName (WebElement webElement){
+        try {return webElement.getAccessibleName();
+
+        }catch (Exception e){
+            return "";
+        }
+    }
 
 }
