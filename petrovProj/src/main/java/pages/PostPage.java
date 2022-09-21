@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.elements.HeaderElement;
 
 public class PostPage extends ParentPage{
-    private HeaderElement headerElement = new HeaderElement(webDriver);
+
 
     @FindBy(xpath = ".//*[@class='alert alert-success text-center']")
     private WebElement AlertMessageSuccessfully;
@@ -26,11 +26,7 @@ public class PostPage extends ParentPage{
 
     @Override
     String getRelativeUrl() {
-        return "/post/";
-    }
-
-    public HeaderElement getHeaderElement() {
-        return headerElement;
+        return "/post/.*";
     }
 
     public PostPage checkIsRedirectToPostPage(){
@@ -53,4 +49,8 @@ public class PostPage extends ParentPage{
         Assert.assertTrue("Check value is not applied", isElementDisplayed(webDriver.findElement(By.xpath(checkMessage))));
         return this;
     }
+
+
+
+
 }

@@ -18,11 +18,17 @@ public class CreatePostPage extends ParentPage{
     @FindBy(xpath = ".//form[@action='/create-post']//button")
     private WebElement createPostButton;
 
+    @FindBy(xpath = ".//button[text()='Save Updates']")
+    private WebElement saveUpdatePostButton;
+
     @FindBy(xpath = ".//option[text()='Групове повідомлення']")
     private WebElement optionGroupMessage;
 
     @FindBy(xpath = ".//input[@name='uniquePost']")
     private WebElement check;
+
+    @FindBy(xpath = ".//div[text()='Post successfully updated.']")
+    private WebElement successGreenMessage;
 
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
@@ -74,6 +80,14 @@ public class CreatePostPage extends ParentPage{
 
     public CreatePostPage actionsWithCheckBox(String checkCondition){
         selectedCheckBox(check, checkCondition);
+        return this;
+    }
+
+    public CreatePostPage fillInputCreatePostForm(String title, String contentText, String checkBoxAction, String role){
+        enterTextInInputTitle(title)
+                .enterTextInInputBodyContent(contentText)
+                .actionsWithCheckBox(checkBoxAction)
+                .selectValueInDropDownRole(role);
         return this;
     }
 

@@ -36,8 +36,7 @@ public class CreatePostTest extends BaseTest {
                 .checkPostContentAfterNewPostCreation(TITLE, "Aleshko_New_BodyText", "no")
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
-                .checkPostWasCreated(TITLE)
-        ;
+                .checkPostWasCreated(TITLE);
     }
 
     @After

@@ -23,7 +23,7 @@ public class MyProfilePage extends ParentPage{
 
     @Override
     String getRelativeUrl() {
-        return "/profile/";
+        return "/profile/.*";
     }
 
     public MyProfilePage checkIsRedirectToMyProfilePage(){
@@ -55,6 +55,11 @@ public class MyProfilePage extends ParentPage{
         }
         logger.info("All posts were deleted with title " + title);
         return this;
+    }
+
+    public PostPage clickOnPost(String title){
+        clickOnElement(String.format(postTitleLocator, title));
+        return new PostPage(webDriver);
     }
 
     private MyProfilePage checkIsSuccessDeletePostMessagePresent() {
