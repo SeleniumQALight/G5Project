@@ -98,6 +98,20 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public LoginPage registerNewUserViaTab(String name, String email, String password){
+        openLoginPage()
+                .fillInUserNameRegister(name);
+
+        usersPressesKeyTabTime(1);
+        driver.switchTo().activeElement().sendKeys(email);
+
+        usersPressesKeyTabTime(1);
+        driver.switchTo().activeElement().sendKeys(password);
+
+        usersPressesKeyEnterTime(1);
+        return this;
+    }
+
     public LoginPage fillInUserNameRegister(String text){
         enterTextIntoElement(inputUserNameRegister, text);
         return this;
@@ -211,6 +225,14 @@ public class LoginPage extends ParentPage {
     public LoginPage checkPasswordRegisterActive(){
         String color = "rgb(206, 212, 218)";
         Assert.assertEquals( color, inputUserPasswordRegister.getCssValue("border-color"));
+        return this;
+    }
+
+    public LoginPage checkPasswordFieldIsActive(){
+        String color = "rgb(206, 212, 218)";
+        String attributeName = "border-color";
+        //Assert.assertEquals( color, inputPasswordHeader.getCssValue("border-color"));
+        Assert.assertEquals(color,getElementCssValue(inputUserPasswordRegister,attributeName));
         return this;
     }
 }

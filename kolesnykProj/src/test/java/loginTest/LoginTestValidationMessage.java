@@ -17,4 +17,17 @@ public class LoginTestValidationMessage extends BaseTest {
 
 
     }
+
+    @Test
+    public void checkValidationMessageOnLoginPageViaTab(){
+
+        loginPage
+                .registerNewUserViaTab("ro", "fakeEmail", "fakePass")
+                .checkAmountOfAlertDuringRegistration()
+                .checkAlertsText("Username must be at least 3 characters.")
+                .checkAlertsText("You must provide a valid email address.")
+                .checkAlertsText("Password must be at least 12 characters.");
+
+
+    }
 }
