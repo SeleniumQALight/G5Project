@@ -27,12 +27,11 @@ abstract String getRelatedUrl();
                 webDriver.getCurrentUrl());
 
     }
-
+//"/post/[a-zA-Z0-9]*/edit";
     protected void checkUrlWithPattern(){
         logger.debug(webDriver.getCurrentUrl());
         Assert.assertThat("Invalid Page",
-                webDriver.getCurrentUrl(),
-                containsString(baseUrl + getRelatedUrl() ));
+                containsString(baseUrl + getRelatedUrl()));
 
     }
 protected void waitChatToBeHide(){

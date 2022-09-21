@@ -25,7 +25,7 @@ public class BaseTest {
 
     @Before
     public void setUp() {
-        log.info("----> STARTED : "+ testName.getMethodName() + " ---->");
+        log.info("STARTED : "+ testName.getMethodName() + " ---->");
         initDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration
@@ -41,7 +41,7 @@ public class BaseTest {
     public void tearDown() {
         driver.quit();
         log.info("Browser is closed");
-        log.info("----> CLOSED : " + testName.getMethodName() + " ----<\n");
+        log.info("CLOSED : " + testName.getMethodName() + " ----<\n");
 
     }
 

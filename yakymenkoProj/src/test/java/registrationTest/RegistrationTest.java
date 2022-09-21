@@ -34,9 +34,6 @@ public class RegistrationTest extends BaseTest {
                 .enterEmailIntoRegistrationForm(email)
                 .enterPasswordIntoRegistrationForm(password)
                 .checkErrorsMessages(expectedErrors)
-
-
         ;
-
     }
 }
