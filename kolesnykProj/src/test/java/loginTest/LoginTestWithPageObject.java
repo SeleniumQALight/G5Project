@@ -1,12 +1,19 @@
 package loginTest;
 
+import Pages.CommonActionWithElements;
 import baseTest.BaseTest;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import junitparams.naming.TestCaseName;
+import libs.ExcelDriver;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.io.IOException;
+import java.util.Map;
+
+import static Pages.CommonActionWithElements.configProperties;
 
 @RunWith(JUnitParamsRunner.class)
 public class LoginTestWithPageObject extends BaseTest {
@@ -40,5 +47,16 @@ public class LoginTestWithPageObject extends BaseTest {
         loginPage.enterPasswordIntoInputPassword(password);
         loginPage.clickOnLoginButton();
         Assert.assertTrue("User is logged in with incorrect password", loginPage.isButtonSignInDisplayed());
+    }
+
+    @Test
+    public void validLoginWithExcel() throws IOException {
+        Map<String, String> dataForValidLogin = ExcelDriver.getData(
+                configProperties.DATA_FILE(), "validLogOn");
+        loginPage.openLoginPage();
+        loginPage.enterUserNameIntoLoginInput(dataForValidLogin.get("login"));//"rosko48"
+        loginPage.enterPasswordIntoInputPassword(dataForValidLogin.get("pass"));//"12345678912345"
+        loginPage.clickOnLoginButton();
+        Assert.assertTrue("Button 'Sign Out' is not displayed", homePage.getHeaderElements().isButtonSignOutDisplayed());
     }
 }

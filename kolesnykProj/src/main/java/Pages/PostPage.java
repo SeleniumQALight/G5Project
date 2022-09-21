@@ -12,6 +12,16 @@ public class PostPage extends ParentPage{
     @FindBy(xpath = "//button[@data-original-title='Delete']")
     private WebElement buttonDelete;
 
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
+    WebElement buttonEdit;
+
+    @FindBy(xpath = "//*[@class='alert alert-success text-center']")
+    WebElement alertSuccess;
+
+    @FindBy(xpath = "//div[@class='body-content']/following-sibling::div[1]/p")
+    private WebElement uniqueCheckboxResult;
+
+
     public PostPage(WebDriver driver) {
         super(driver);
     }
@@ -25,14 +35,7 @@ public class PostPage extends ParentPage{
         return headerElements;
     }
 
-    @FindBy(xpath = "//a[@data-original-title='Edit']")
-    WebElement buttonEdit;
 
-    @FindBy(xpath = "//*[@class='alert alert-success text-center']")
-    WebElement alertSuccess;
-
-    @FindBy(xpath = "//div[@class='body-content']/following-sibling::div[1]/p")
-    private WebElement uniqueCheckboxResult;
 
 
     public PostPage checkIsRedirectToPostPage() {
@@ -49,6 +52,11 @@ public class PostPage extends ParentPage{
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDelete);
         return new MyProfilePage(driver);
+    }
+
+    public CreatePostPage clickOnEditButton(){
+        clickOnElement(buttonEdit);
+        return new CreatePostPage(driver);
     }
 
     public PostPage checkIsPostMarkedUnique(){

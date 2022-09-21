@@ -24,7 +24,7 @@ public class MyProfilePage extends ParentPage{
 
     @Override
     String getRelativeUrl() {
-        return "/profile/";
+        return "/profile/.*";
     }
 
 
@@ -68,5 +68,22 @@ public class MyProfilePage extends ParentPage{
 
     private List<WebElement> getPostListWithTitle (String title){
         return webDriver.findElements(By.xpath(String.format(postTitleLocators, title)));
+    }
+
+
+
+    public EditPostPage clickOnSelectPostByTitle(String title) {
+        clickOnElement(element(title));
+        return new EditPostPage(webDriver);
+    }
+
+    public MyProfilePage checkIsNewTitle(String titleAfterEdit) {
+        isElementDisplayed((element(titleAfterEdit)));
+        return this;
+    }
+
+    public WebElement element(String text){
+        return webDriver.findElement(By.xpath(".//div[@class='list-group']/a/strong[contains(text()," +
+                " '"+text+"')]"));
     }
 }

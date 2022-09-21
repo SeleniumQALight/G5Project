@@ -37,7 +37,27 @@ public class RegistrationTest extends BaseTest {
                 .enterPasswordIntoRegistrationInput(password)
                 .checkErrorsMessages(expectedErrors)
         ;
+    }
+    @Test
+    @Parameters({
+            SHORT_USER_NAME       +COMMA+"test.com"    +COMMA + "123"+COMMA + (ERROR_USERNAME+SEMICOLON+ERROR_EMAIL+SEMICOLON+ERROR_PASSWORD)
+            , TestData.VALID_LOGIN+COMMA+"qqq"         +COMMA + "123"+COMMA + ERROR_ALREADY_EXIST+SEMICOLON+ERROR_EMAIL+SEMICOLON+ERROR_PASSWORD
+            , SHORT_USER_NAME     +COMMA+"test@tex.com"+COMMA + "456"+COMMA + ERROR_USERNAME+SEMICOLON+ERROR_PASSWORD
 
-
+    })
+    @TestCaseName("registrationErrorsWithButtons : login = {0}, email = {1}, password = {2}")
+    public void registrationErrorsWithButtons(String userName, String email, String password, String expectedErrors){
+        loginPage
+                .openLoginPage()
+                .usersPressesKeyTabTime(5);
+        loginPage
+                .enterUserNameIntoRegistrationInputWithButtons(userName)
+                .usersPressesKeyTabTime(1);
+        loginPage
+                .enterEmailIntoRegistrationInputWithButtons(email)
+                .usersPressesKeyTabTime(1);
+        loginPage
+                .enterPasswordIntoRegistrationInputWithButtons(password)
+                .checkErrorsMessages(expectedErrors);
     }
 }

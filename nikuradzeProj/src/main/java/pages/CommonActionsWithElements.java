@@ -35,6 +35,15 @@ public class CommonActionsWithElements {
            printErrorAndStopTest(e);
         }
     }
+    protected void enterTextIntoActiveElement(String text){
+        try {
+            webDriver.switchTo().activeElement().clear();
+            webDriver.switchTo().activeElement().sendKeys(text);
+            logger.info("'" + text + "' was inputted into '" + webDriver.switchTo().activeElement().getAccessibleName() + "'");
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
 
     protected void clickOnElement(WebElement webElement){
         try {

@@ -14,19 +14,21 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import pages.CommonActionsWithElements;
 import pages.HomePage;
 import pages.LoginPage;
+import postTests.CreatePostTest;
 
 import java.time.Duration;
 
 public class BaseTest {
 
-    WebDriver webDriver;
+    protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
     protected LoginPage loginPage;
     protected HomePage homePage;
 
+
     @Before
     public void setUp() {
-        logger.info("\n--- "+testName.getMethodName()+" was started ---");
+        logger.info("--- "+testName.getMethodName()+" was started ---");
         webDriver = initDriver();
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(
@@ -41,7 +43,7 @@ public class BaseTest {
     public void tearDown() {
         webDriver.quit();
         logger.info("Browser was closed");
-        logger.info("\n--- "+testName.getMethodName()+" was ended ---\n");
+        logger.info("--- "+testName.getMethodName()+" was ended ---\n");
     }
 
 

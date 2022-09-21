@@ -73,6 +73,10 @@ public class LoginPage extends ParentPage{
         enterTextIntoElement(inputUserNameHeader, userName);
         return this;
     }
+    public LoginPage enterUserNameIntoLoginInputWithButtons(String userName){
+        enterTextIntoActiveElement(userName);
+        return this;
+    }
 
     public LoginPage enterPasswordIntoInputPassword(String password){
        /* try{
@@ -86,6 +90,10 @@ public class LoginPage extends ParentPage{
             printErrorAndStopTest(e);
         }*/
         enterTextIntoElement(inputPasswordHeader, password);
+        return this;
+    }
+    public LoginPage enterPasswordIntoInputPasswordWithButtons(String password){
+        enterTextIntoActiveElement(password);
         return this;
     }
 
@@ -130,14 +138,34 @@ public class LoginPage extends ParentPage{
         enterTextIntoElement(inputUserNameSignUp, userName);
         return this;
     }
+    public LoginPage enterUserNameIntoRegistrationInputWithButtons(String userName) {
+        enterTextIntoActiveElement(userName);
+        return this;
+    }
 
     public LoginPage enterEmailIntoRegistrationInput(String email) {
         enterTextIntoElement(inputEmailSignUp, email);
         return this;
     }
+    public LoginPage enterEmailIntoRegistrationInputWithButtons(String email) {
+        enterTextIntoActiveElement(email);
+        return this;
+    }
 
     public LoginPage enterPasswordIntoRegistrationInput(String password) {
         enterTextIntoElement(inputPasswordSignUp, password);
+        return this;
+    }
+    public LoginPage enterPasswordIntoRegistrationInputWithButtons(String password) {
+        enterTextIntoActiveElement(password);
+        return this;
+    }
+    public LoginPage logOutInBothTabs(){
+        isElementDisplayed(buttonSignIn);
+        ArrayList<String> tabs = new ArrayList<> (webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(0));
+        webDriver.navigate().refresh();
+        isElementDisplayed(buttonSignIn);
         return this;
     }
     public void checkValidationMessagesNumber(int numberOfAlerts){
