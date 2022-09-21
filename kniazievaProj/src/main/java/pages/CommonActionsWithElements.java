@@ -111,6 +111,14 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected boolean isCheckCheckBox(WebElement webElement){
+        if (webElement.isSelected()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 
     private void printErrorAndStopTest(Exception e) {
