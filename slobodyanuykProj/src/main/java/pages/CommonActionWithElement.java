@@ -68,7 +68,7 @@ public class CommonActionWithElement {
     }
 
     /**
-     * Выьираем значение в DropDown по видимому тексту
+     * Выбираем значение в DropDown по видимому тексту
      * @param DropDown
      * @param text
      */
@@ -83,7 +83,7 @@ public class CommonActionWithElement {
 
     }
     /**
-     * Выьираем значение в DropDown по Value
+     * Выбираем значение в DropDown по Value
      * @param DropDown
      * @param value - value
      */
@@ -96,5 +96,15 @@ public class CommonActionWithElement {
             printErrorAndStopTest(e);
         }
 
+    }
+    protected void selectDropDownElementUi (WebElement dropDown, WebElement optionElementUi ) {
+                  try {
+                      clickOnElement(dropDown);
+                      logger.info("" + dropDown + " was clicked");
+                      clickOnElement(optionElementUi);
+                      logger.info(optionElementUi + " was clicked");
+                  }catch (Exception e) {
+                      printErrorAndStopTest(e);
+                  }
     }
 }
