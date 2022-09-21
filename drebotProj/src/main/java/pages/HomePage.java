@@ -70,6 +70,7 @@ public class HomePage extends ParentPage {
 
         webDriver.switchTo().window(tabs.get(1));
 
+        //webDriver.navigate().refresh();
         ((JavascriptExecutor) webDriver).executeScript("history.go(0)");
 
         Assert.assertFalse("login page wasn't loaded", getHeaderElement().isButtonSignOutDisplayed());

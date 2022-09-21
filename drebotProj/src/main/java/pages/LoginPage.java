@@ -5,7 +5,6 @@ import libs.Util;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -104,25 +103,13 @@ public class LoginPage extends ParentPage {
 
         moveToElement(inputUserNameHeader);
         usersSendTextByActionTime(1, login);
-        usersPressesKeyTabTime(1);
-
         return this;
     }
 
     public LoginPage enterPasswordIntoPasswordInputUsingKeyTab(String password) {
 
         usersSendTextByActionTime(1, password);
-        usersPressesKeyTabTime(1);
-
         return this;
-    }
-
-    public HomePage clickOnButtonLogInUsingKey() {
-
-        usersPressesKeyEnterTime(1);
-
-        return new HomePage(webDriver);
-
     }
 
     public LoginPage enterUserNameIntoRegistrationUsingKey(String userName) {

@@ -44,6 +44,7 @@ public class WorkWithPost extends BaseTest {
         homePage.openHomePage()
                 .getHeaderElement().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
-                .deletePostsWithTitleTillPresent(TITLE_NEW);
+                .deletePostsWithTitleTillPresent(TITLE_NEW)
+                .deletePostsWithTitleTillPresent(TITLE);
     }
 }

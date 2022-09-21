@@ -143,11 +143,11 @@ public class CommonActionsWithElements {
         }
     }
 
-    public void usersSendTextByActionTime(int numberOfTimes, String text) {
+    protected void usersSendTextByActionTime(int numberOfTimes, String text) {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
             actions.sendKeys(text).build().perform();
-            logger.info("value '" + text + "' was send'");
+            logger.info("value '" + text + "' was send");
         }
     }
 
@@ -158,7 +158,7 @@ public class CommonActionsWithElements {
         logger.info("open and switch new window");
     }
 
-    public void moveToElement(WebElement webElement) {
+    protected void moveToElement(WebElement webElement) {
         Actions actions = new Actions(webDriver);
         webDriverWaitLow.until(ExpectedConditions.elementToBeClickable(webElement));
 

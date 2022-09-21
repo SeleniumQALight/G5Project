@@ -8,9 +8,11 @@ import libs.TestData;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import pages.CommonActionsWithElements;
 
 @RunWith(JUnitParamsRunner.class)
 public class LoginTestWithPageObject extends BaseTest {
+
 
     final String[] alertTextArray = {"Username must be at least 3 characters.",
             "You must provide a valid email address.",
@@ -86,10 +88,15 @@ public class LoginTestWithPageObject extends BaseTest {
     public void validLoginUsingKeysTabEnter() {
         loginPage.openLoginPage()
                 .enterLoginIntoLoginInputUsingKeyTab(TestData.VALID_LOGIN)
-                .enterPasswordIntoPasswordInputUsingKeyTab(TestData.VALID_PASSWORD)
-                .clickOnButtonLogInUsingKey()
-                .getHeaderElement().checkUserNameInHeader(TestData.VALID_LOGIN)
-        ;
+                .usersPressesKeyTabTime(1);
+
+        loginPage.enterPasswordIntoPasswordInputUsingKeyTab(TestData.VALID_PASSWORD)
+                .usersPressesKeyTabTime(1);
+
+        loginPage.usersPressesKeyEnterTime(1);
+
+        homePage.getHeaderElement().checkUserNameInHeader(TestData.VALID_LOGIN);
+
         Assert.assertTrue("Button SignOut is Displayed", homePage.getHeaderElement().isButtonSignOutDisplayed());
 
     }
