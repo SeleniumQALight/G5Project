@@ -146,6 +146,7 @@ public class CommonActionsWithElements {
         ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
     }
+
     public void userSwitchesToParentWindow() {
         List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         System.out.println(tabs.size());
@@ -158,13 +159,24 @@ public class CommonActionsWithElements {
         webDriver.switchTo().window(tabs.get(1));
     }
 
-    public void refreshPage(){
+    public void isElementActive(WebElement elementThatShouldBeActive) {
+        WebElement activeElement = webDriver.switchTo().activeElement();
+        if (activeElement.equals(elementThatShouldBeActive)) {
+            logger.info("Active element is " + webDriver.switchTo().activeElement().getAccessibleName());
+        } else {
+            logger.info("Active element doesn't match " + elementThatShouldBeActive.getAccessibleName());
+        }
+
+    }
+
+    public void refreshPage() {
         webDriver.navigate().refresh();
     }
-    private String getElementName(WebElement webElement){
+
+    private String getElementName(WebElement webElement) {
         try {
             return webElement.getAccessibleName();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
     }

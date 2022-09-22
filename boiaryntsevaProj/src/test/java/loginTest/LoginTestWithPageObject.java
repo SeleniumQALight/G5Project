@@ -15,6 +15,7 @@ import java.time.chrono.JapaneseChronology;
 @RunWith(JUnitParamsRunner.class)
 public class LoginTestWithPageObject extends BaseTest {
     final static String COMMA = ",";
+
     @Test
     public void validLogin() {
         loginPage.openLoginPage();
@@ -27,10 +28,11 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
-    public void validLoginUsingKeyboard(){
+    public void validLoginUsingKeyboard() {
         loginPage.openLoginPage();
         loginPage.enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         loginPage.usersPressesKeyTabTime(1);
+        loginPage.isPasswordActive();
         loginPage.enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
         loginPage.usersPressesKeyEnterTime(1);
 
@@ -41,9 +43,9 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     @Parameters
             ({
-                    TestData.VALID_LOGIN+COMMA+"123"
-                    ,"tr"+COMMA+TestData.VALID_PASSWORD
-                    ,"tr"+COMMA+"123"
+                    TestData.VALID_LOGIN + COMMA + "123"
+                    , "tr" + COMMA + TestData.VALID_PASSWORD
+                    , "tr" + COMMA + "123"
             })
     @TestCaseName("login errors: login{0}, password{1}")
     public void invalidLogin(String username, String password) {
@@ -56,7 +58,6 @@ public class LoginTestWithPageObject extends BaseTest {
         Assert.assertTrue("Invalid login message is not visible", loginPage.isInvalidLoginMsgVisible());
 
     }
-
 
 
 }
