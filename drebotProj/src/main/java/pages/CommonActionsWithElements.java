@@ -1,6 +1,7 @@
 package pages;
 
 import libs.ConfigProperties;
+import libs.Util;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -161,10 +162,24 @@ public class CommonActionsWithElements {
     protected void moveToElement(WebElement webElement) {
         Actions actions = new Actions(webDriver);
         webDriverWaitLow.until(ExpectedConditions.elementToBeClickable(webElement));
+        try {
+            actions.moveToElement(webElement).click().build().perform();
+        } catch (Exception e) {
+            logger.info("Move to element '" + webElement.getAccessibleName() + "' wasn't perform");
+        }
 
-        actions.moveToElement(webElement).click().build().perform();
+        //actions.moveToElement(webElement).click().build().perform();
+        //logger.info("Move to element '" + webElement.getAccessibleName() + "'");
+    }
 
-        logger.info("Move to element '" + webElement.getAccessibleName() + "'");
+    protected boolean isElementIsActive(WebElement webElement) {
+        if (webElement.equals(webDriver.switchTo().activeElement())) {
+            logger.info("element '" + webElement.getAccessibleName() + "' is focused");
+            return true;
+        }
+
+        logger.info("element '" + webElement.getAccessibleName() + "' wasn't focus");
+        return false;
     }
 
 //    метод moveToElement (аналог скрола )

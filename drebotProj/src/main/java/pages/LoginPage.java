@@ -102,39 +102,63 @@ public class LoginPage extends ParentPage {
     public LoginPage enterLoginIntoLoginInputUsingKeyTab(String login) {
 
         moveToElement(inputUserNameHeader);
-        usersSendTextByActionTime(1, login);
+        if (isElementIsActive(inputUserNameHeader)) {
+            usersSendTextByActionTime(1, login);
+        } else {
+            logger.info("login '" + login + "' can't be inputted");
+        }
+
         return this;
     }
 
     public LoginPage enterPasswordIntoPasswordInputUsingKeyTab(String password) {
 
-        usersSendTextByActionTime(1, password);
+        if (isElementIsActive(inputPasswordHeader)) {
+            usersSendTextByActionTime(1, password);
+        } else {
+            logger.info("password '" + password + "' can't be inputted");
+        }
         return this;
+    }
+
+    public HomePage clickOnButtonLogInUsingKey() {
+        if (isElementIsActive(buttonSignIn)) {
+            usersPressesKeyEnterTime(1);
+        } else {
+            logger.info("can't press ENTER");
+        }
+        return new HomePage(webDriver);
     }
 
     public LoginPage enterUserNameIntoRegistrationUsingKey(String userName) {
 
         moveToElement(inputUserNameRegistration);
-        usersSendTextByActionTime(1, userName);
-        usersPressesKeyTabTime(1);
-
+        if (isElementIsActive(inputUserNameRegistration)) {
+            usersSendTextByActionTime(1, userName);
+        } else {
+            logger.info("userName '" + userName + "' can't be inputted");
+        }
         return this;
     }
 
     public LoginPage enterEmailIntoRegistrationUsingKey(String email) {
 
-        moveToElement(inputEmailRegistration);
-        usersSendTextByActionTime(1, email);
-        usersPressesKeyTabTime(1);
+        if (isElementIsActive(inputEmailRegistration)) {
+            usersSendTextByActionTime(1, email);
+        } else {
+            logger.info("email '" + email + "' can't be inputted");
+        }
 
         return this;
     }
 
     public LoginPage enterPasswordIntoRegistrationUsingKey(String password) {
 
-        moveToElement(inputPasswordRegistration);
-        usersSendTextByActionTime(1, password);
-
+        if (isElementIsActive(inputPasswordRegistration)) {
+            usersSendTextByActionTime(1, password);
+        } else {
+            logger.info("password '" + password + "' can't be inputted");
+        }
         return this;
     }
 

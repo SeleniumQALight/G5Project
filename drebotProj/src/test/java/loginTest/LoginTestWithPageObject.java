@@ -93,7 +93,8 @@ public class LoginTestWithPageObject extends BaseTest {
         loginPage.enterPasswordIntoPasswordInputUsingKeyTab(TestData.VALID_PASSWORD)
                 .usersPressesKeyTabTime(1);
 
-        loginPage.usersPressesKeyEnterTime(1);
+        //loginPage.usersPressesKeyEnterTime(1);
+        loginPage.clickOnButtonLogInUsingKey();
 
         homePage.getHeaderElement().checkUserNameInHeader(TestData.VALID_LOGIN);
 
