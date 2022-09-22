@@ -10,6 +10,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(JUnitParamsRunner.class)
 public class RegistrationTest extends BaseTest {
+    final String[] alertTextArray = {"Username must be at least 3 characters.",
+            "You must provide a valid email address.",
+            "Password must be at least 12 characters."};
     final static String ERROR_USERNAME = "Username must be at least 3 characters.";
     final static String ERROR_EMAIL = "You must provide a valid email address.";
     final static String ERROR_PASSWORD = "Password must be at least 12 characters.";
@@ -38,5 +41,17 @@ public class RegistrationTest extends BaseTest {
                 .enterPasswordIntoRegistration(password)
                 .checkErrorMessages(expectedErrors)
         ;
+    }
+
+    @Test
+    public void registrationErrorsUsingTab() {
+        loginPage.openLoginPage().enterUserNameIntoRegistrationUsingKey("tr")
+                .usersPressesKeyTabTime(1);
+        loginPage.enterEmailIntoRegistrationUsingKey("test.com")
+                .usersPressesKeyTabTime(1);
+        loginPage.enterPasswordIntoRegistrationUsingKey("123");
+
+        loginPage.checkCountAlertMessage(alertTextArray);
+        loginPage.checkAlertText(alertTextArray);
     }
 }

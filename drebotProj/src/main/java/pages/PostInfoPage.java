@@ -48,7 +48,6 @@ public class PostInfoPage extends ParentPage {
     }
 
 
-
     public PostInfoPage checkTextInCheckBox(String check) {
         if (check.equalsIgnoreCase(TestData.CHECK)) {
             Assert.assertEquals("CheckBox doesn't work", "Is this post unique? : yes", checkBoxText.getText());
@@ -64,5 +63,10 @@ public class PostInfoPage extends ParentPage {
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDelete);
         return new MyProfilePage(webDriver);
+    }
+
+    public EditPostPage clickEditButton() {
+        clickOnElement(buttonEdit);
+        return new EditPostPage(webDriver);
     }
 }
