@@ -67,22 +67,12 @@ public class MyProfilePage extends ParentPage{
     }
 
     public PostPage clickOnPost(String text) {
-        try{
             clickOnElement((String.format(postTitleLocator,text)));
             return new PostPage(webDriver);
-        }catch (Exception e){
-            printErrorAndStopTest(e);
-        }
-        return null;
     }
 
     public HomePage clickOnButtonSignOut() {
-        try{
             clickOnElement(buttonSignOut);
             return new HomePage(webDriver);
-        }catch (Exception e){
-            printErrorAndStopTest(e);
-        }
-        return null;
     }
 }

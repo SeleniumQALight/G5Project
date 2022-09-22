@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,11 +104,6 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public void printErrorAndStopTest(Exception e) {
-        logger.error("Can't work with element " + e);
-        Assert.fail("Can't work with element " + e);
-    }
-
     public HomePage loginWithValidCred() {
         openLoginPage();
         loginWithValidCredWithOutOpenPage();
@@ -161,7 +157,6 @@ public class LoginPage extends ParentPage {
                         (By.xpath(validationMessagesLocator), expectedErrorsArray.length));
         Util.waitABit(1);
         Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
-
         ArrayList<String> actualTextFromErrors = new ArrayList<>();
         for (WebElement element : listOfErrors) {
             actualTextFromErrors.add(element.getText());
@@ -170,9 +165,7 @@ public class LoginPage extends ParentPage {
         for (int i = 0; i < expectedErrorsArray.length; i++) {
             softAssertions.assertThat(expectedErrorsArray[i]).isIn(actualTextFromErrors);
         }
-
         softAssertions.assertAll();
-
         return this;
     }
 
@@ -189,22 +182,12 @@ public class LoginPage extends ParentPage {
     }
 
     public CreatePostPage clickOnButtonCreatePost() {
-        try{
-            clickOnElement(buttonCreatePost);
-            return new CreatePostPage(webDriver);
-        }catch (Exception e){
-            printErrorAndStopTest(e);
-        }
-        return null;
+        clickOnElement(buttonCreatePost);
+        return new CreatePostPage(webDriver);
     }
 
     public MyProfilePage clickOnMyProfileButton() {
-        try{
-            clickOnElement(buttonMyProfile);
-            return new MyProfilePage(webDriver);
-        }catch (Exception e){
-            printErrorAndStopTest(e);
-        }
-        return null;
+        clickOnElement(buttonMyProfile);
+        return new MyProfilePage(webDriver);
     }
 }

@@ -51,6 +51,7 @@ public class ReplacementTitleOfPost extends BaseTest {
                 .clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
                 .deletePostsWithTitleTillPresent(TITLE)
+                .deletePostsWithTitleTillPresent(TITLE2)
         ;
     }
 }

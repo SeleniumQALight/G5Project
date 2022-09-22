@@ -30,20 +30,13 @@ public class EditPostPage extends ParentPage{
     }
 
     public EditPostPage editTitle(String text) {
-
-//        clickOnElement((String.format(postTitleLocator,text)));
         enterTextIntoElement(inputTitle,text);
         return this;
     }
 
     public EditPostPage clickOnButtonSaveUpdates() {
-        try{
             clickOnElement(buttonSaveUpdates);
             return this;
-        }catch (Exception e){
-            printErrorAndStopTest(e);
-        }
-        return null;
     }
 
     public EditPostPage checkMessagePostUpdated() {

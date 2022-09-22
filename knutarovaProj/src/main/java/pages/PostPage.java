@@ -60,13 +60,8 @@ public class PostPage extends ParentPage{
     }
 
     public EditPostPage clickOnButtonEdit() {
-        try{
             clickOnElement(buttonEdit);
             return new EditPostPage(webDriver);
-        }catch (Exception e){
-            printErrorAndStopTest(e);
-        }
-        return null;
     }
 
     public MyProfilePage checkTitleWasEdited(String title) {
