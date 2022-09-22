@@ -29,9 +29,6 @@ public class RegistrationTest extends BaseTest {
             , TestData.VALID_LOGIN + COMMA + "qqq" + COMMA + "123" + COMMA + ERROR_ALREADY_EXIST + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
             , "q  a" + COMMA + "text@test.com" + COMMA + "123" + COMMA + ERROR_USERNAME + SEMICOLON + ERROR_PASSWORD
             , " " + COMMA + " " + COMMA + " " + COMMA + ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
-            , "\n" + COMMA + "\n" + COMMA + "\n" + COMMA + ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
-            , "" + COMMA + "" + COMMA + "" + COMMA + ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
-            , " , , ," + ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
     })
     @TestCaseName("registrationErrors : login ={0}, email = {1}, password = {2}")
     public void registrationErrors(String userName, String email, String password, String expectedErrors) {
