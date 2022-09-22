@@ -1,24 +1,41 @@
 package loginTest;
 
 import baseTest.BaseTest;
-import org.junit.Assert;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+
+@RunWith(JUnitParamsRunner.class)
 public class LoginTestWithPageObject extends BaseTest {
+    final static String VALIDLOGIN = "qaauto";
+    final  static String NOVALIDLOGIN = "login";
+    final  static String VALIDPASSWORD = "123456qwerty";
+    final  static String NOVALIDPASSWORD = "password";
+    final static String COMMA = ",";
+
     @Test
     public void validLogin(){
         loginPage.openLoginPage();
-        loginPage.enterUserNameIntoLogininInput("qaauto");
-        loginPage.enterPasswordIntoInputPassword("123456qwerty");
+        loginPage.enterUserNameIntoLogininInput(VALIDLOGIN);
+        loginPage.enterPasswordIntoInputPassword(VALIDPASSWORD);
         loginPage.clickOnButtonLogIn();
         homePage.isButtonSignOutDisplayed();
 
     }
+
+
     @Test
-    public void noValidLogin(){
+    @Parameters({ VALIDLOGIN+ COMMA +NOVALIDPASSWORD
+            ,   NOVALIDLOGIN+ COMMA +VALIDPASSWORD
+            ,   NOVALIDLOGIN+ COMMA +NOVALIDPASSWORD
+
+    })
+    public void noValidLogin(String login, String password){
         loginPage.openLoginPage();
-        loginPage.enterUserNameIntoLogininInput("qaauto");
-        loginPage.enterPasswordIntoInputPassword("NoValidPassword");
+        loginPage.enterUserNameIntoLogininInput(login);
+        loginPage.enterPasswordIntoInputPassword(password);
         loginPage.clickOnButtonLogIn();
         loginPage.isTextNoLogginDisplayed();
 

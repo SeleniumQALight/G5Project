@@ -16,6 +16,9 @@ public class CreatePostPage extends ParentPage {
     @FindBy(xpath = ".//button[@class='btn btn-primary']")
     private WebElement buttonSaveNewPost;
 
+    @FindBy (xpath = ".//* [@name='uniquePost']")
+    private WebElement checkBoxOnCreatePostPage;
+
 
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
@@ -63,8 +66,28 @@ public class CreatePostPage extends ParentPage {
      *
      * @return
      */
-    public PostPage clikSaveNewPostButton() {
+    public PostPage clickSaveNewPostButton() {
         clicOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
     }
+
+    public CreatePostPage checkCheckBoxAndClick(String check) {
+    String lowerCheck = check.toLowerCase();
+        Assert.assertTrue("Invalid checkbox state", lowerCheck.equals("check") || lowerCheck.equals("uncheck"));
+        if (lowerCheck.equals("check")) {
+            if (!checkBoxOnCreatePostPage.isSelected()) {
+                checkBoxOnCreatePostPage.click();
+                logger.info("Checkbox was click");
+            } else logger.info("The checkbox was not clicked");
+            return this;
+        } else if (lowerCheck.equals("uncheck")) {
+            if (checkBoxOnCreatePostPage.isSelected()) {
+                checkBoxOnCreatePostPage.click();
+                logger.info("Checkbox was click");
+            } else logger.info("The checkbox was not clicked");
+            return this;
+        }return this;
+    }
 }
+
+

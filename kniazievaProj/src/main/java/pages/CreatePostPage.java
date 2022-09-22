@@ -23,6 +23,9 @@ public class CreatePostPage extends ParentPage{
     @FindBy (xpath = ".//button[text() = 'Save New Post']")
     private WebElement saveButton;
 
+    @FindBy(xpath = ".//input[@name = \"uniquePost\"]")
+    private WebElement checkBoxUniquePost;
+
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -57,6 +60,28 @@ public class CreatePostPage extends ParentPage{
 
     public  CreatePostPage enterTextInInputBodyContent(String text){
         enterTextIntoElement(inputBody, text);
+        return this;
+    }
+
+    public CreatePostPage stateOfCheckBox( String state){
+        if (state.equalsIgnoreCase("check")){
+            if(!isCheckCheckBox(checkBoxUniquePost)){
+                checkBoxUniquePost.click();
+                logger.info("CheckBox state is checked");
+            }
+            else {
+                logger.info("Status didn't change, checkbox was checked before");
+            }
+        }
+        else if(state.equalsIgnoreCase("uncheck")){
+            if(isCheckCheckBox(checkBoxUniquePost)){
+                checkBoxUniquePost.click();
+                logger.info("CheckBox state is unchecked");
+            }
+            else{
+                logger.info("Status didn't change, checkbox was unchecked before");
+            }
+        }
         return this;
     }
 

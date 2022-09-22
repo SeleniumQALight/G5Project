@@ -4,11 +4,14 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.elements.HeaderElement;
 
-import static org.hamcrest.CoreMatchers.containsString;
 
 abstract class ParentPage extends CommonActionsWithElements{
-
+    private HeaderElement headerElement = new HeaderElement(webDriver);
+    public HeaderElement getHeaderElement() {
+        return headerElement;
+    }
 
         protected String baseUrl;
 
@@ -29,10 +32,17 @@ abstract class ParentPage extends CommonActionsWithElements{
     }
 
     protected void checkUrlWithPattern(){
-        Assert.assertThat("Invalid Page"
-                ,webDriver.getCurrentUrl()
-                , containsString(baseUrl + getRelativeUrl())   );
+       // Assert.assertThat("Invalid Page"
+        //        ,webDriver.getCurrentUrl()
+        //        , containsString(baseUrl + getRelativeUrl())   );
+
+        String actualURL = webDriver.getCurrentUrl();
+        Assert.assertTrue("\n ActualURL " + actualURL +  "\n"
+                        + "ExpectedURL " +  baseUrl + getRelativeUrl() + "\n"
+                , actualURL.matches(baseUrl + getRelativeUrl()));
+
     }
+
 
 
     protected void waitChatToBeHide(){

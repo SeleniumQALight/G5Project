@@ -20,6 +20,7 @@ abstract class ParentPage extends CommonActionsWithElements {
         Assert.assertEquals("Invalid page ",baseUrl + getRelativeUrl(),webDriver.getCurrentUrl());
     }
 
+    // "/post/[a-zA-Z0-9]*/edit";
     protected void checkUrlWithPattern(){
         //logger.debug(webDriver.getCurrentUrl());
         Assert.assertThat("Invalid page ",webDriver.getCurrentUrl(),containsString(baseUrl + getRelativeUrl()));

@@ -32,77 +32,78 @@ public class CommonActionWithElements {
         webDriverWaitHight = new WebDriverWait(driver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_HIGHT()));
     }
 
-    protected void enterTextIntoElement(WebElement element,String text){
+    protected void enterTextIntoElement(WebElement element, String text) {
         try {
             element.clear();
             element.sendKeys(text);
             log.info("'" + text + "' was entered into '" + getElementName(element) + "'");
-        }catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
 
-    protected void clickOnElement(WebElement element){
+    protected void clickOnElement(WebElement element) {
         try {
             webDriverWaitHight.until(ExpectedConditions.elementToBeClickable(element));
             String name = getElementName(element);
             element.click();
             log.info("'" + name + "' was clicked");
-        }catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
 
-    protected void clickOnElement(String xPathLocator){
+    protected void clickOnElement(String xPathLocator) {
         try {
             WebElement element = driver.findElement(By.xpath(xPathLocator));
             clickOnElement(element);
-        }catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
 
         }
     }
-    protected boolean isElementDisplayed(WebElement element){
+
+    protected boolean isElementDisplayed(WebElement element) {
         try {
             boolean state = element.isDisplayed();
-            String message ;
+            String message;
             if (state) message = "Element is displayed";
             else message = "Element is not displayed";
             log.info(message);
             return state;
-        }catch (Exception e){
+        } catch (Exception e) {
             log.info("Element is not displayed");
             return false;
         }
     }
 
-    protected void selectTextInDropDown(WebElement dropdown, String text){
+    protected void selectTextInDropDown(WebElement dropdown, String text) {
         try {
             Select select = new Select(dropdown);
             select.selectByVisibleText(text);
             log.info("'" + text + "' was selected in Dropdown");
-        }catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
 
-    protected void selectValueInDropDown(WebElement dropdown, String value){
+    protected void selectValueInDropDown(WebElement dropdown, String value) {
         try {
             Select select = new Select(dropdown);
             select.selectByValue(value);
             log.info("'" + value + "' was selected in Dropdown");
-        }catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
 
-    protected void selectDropDownByText(WebElement element, String text){
+    protected void selectDropDownByText(WebElement element, String text) {
         clickOnElement(element);
         findElementByText(text).click();
     }
 
     protected WebElement findElementByText(String text) {
-        WebElement element = driver.findElement(By.xpath("//*[text()='"+text+"']"));
+        WebElement element = driver.findElement(By.xpath("//*[text()='" + text + "']"));
         return element;
     }
 
@@ -113,29 +114,27 @@ public class CommonActionWithElements {
     }
 
 
-
-
-    protected void actionWithCheckBox(WebElement element, String action){
+    protected void actionWithCheckBox(WebElement element, String action) {
         try {
-            if(!element.isSelected()){
-                if(action.equalsIgnoreCase("Check")){
+            if (!element.isSelected()) {
+                if (action.equalsIgnoreCase("Check")) {
                     clickOnElement(element);
                     checkboxSelected = true;
                 }
-            }else{
-                if (action.equals("Uncheck")){
+            } else {
+                if (action.equals("Uncheck")) {
                     clickOnElement(element);
                     checkboxSelected = false;
-                }else {
+                } else {
                     log.info("Checkbox is already selected");
                 }
 
             }
-            if (!action.equalsIgnoreCase("Check") && !action.equalsIgnoreCase("Uncheck")){
+            if (!action.equalsIgnoreCase("Check") && !action.equalsIgnoreCase("Uncheck")) {
                 log.error("Cannot work with element : checkbox");
                 fail("Cannot work with element : checkbox");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
@@ -155,18 +154,32 @@ public class CommonActionWithElements {
     }
 
     public void userOpensNewTab() {
-        ((JavascriptExecutor)driver).executeScript("window.open()");
-        ArrayList<String> tabs = new ArrayList<> (driver.getWindowHandles());
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
     }
 
-    private String getElementName(WebElement webElement){
+    private String getElementName(WebElement webElement) {
         try {
             return webElement.getAccessibleName();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
 
     }
+
+    public boolean isElementActive(WebElement element,String attributeName ,String expectedAttributeValue) {
+        try {
+            if (driver.switchTo().activeElement().getAttribute(attributeName).equals(expectedAttributeValue)){
+                log.info("Element found and active");
+                return true;
+            }
+            else return false;
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+            return false;
+        }
+    }
+
 
 }
