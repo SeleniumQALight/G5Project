@@ -6,6 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class LoginPage extends ParentPage {
 
@@ -20,6 +23,19 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = ".//div[text() = 'Invalid username / pasword']")
     private WebElement invalidUsernameOrPassword;
+
+    @FindBy(xpath = ".//*[@class = 'alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
+    private List<WebElement> alertMessage;
+
+    @FindBy(xpath = ".//input[@id = 'username-register']")
+    private WebElement inputUsernameRegistered;
+    @FindBy(xpath = ".//input[@id = 'email-register']")
+    private WebElement inputEmailRegistered;
+    @FindBy(xpath = ".//input[@id = 'password-register']")
+    private WebElement inputPasswordRegister;
+    @FindBy(xpath = ".//button[@class = 'py-3 mt-4 btn btn-lg btn-success btn-block']")
+    private WebElement signUpForOurApp;
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -63,4 +79,33 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
 
     }
+
+    public void checkNumberOfMessageInRegistrationForm(int numberOfMessage){
+        webDriverWait15.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[@class = 'alert alert-danger small liveValidateMessage liveValidateMessage--visible']"), numberOfMessage));
+    }
+
+
+    public void checkMessageDisplayedWithText(String text){
+        try{
+            WebElement tempElement = webDriver.findElement(By.xpath(".//*[text() = '"+text+"']"));
+            Assert.assertTrue(isElementDisplayed(tempElement));
+
+        }catch (Exception e){
+            Assert.fail("Can not find element with text " + text);
+        }
+
+    }
+
+    public void enterUsernameInRegistrationForm(String text){
+        enterTextIntoElement(inputUsernameRegistered, text);
+    }
+
+    public void enterEmailInRegistrationForm(String text){
+        enterTextIntoElement(inputEmailRegistered, text);
+    }
+
+    public void enterPasswordInRegistrationForm(String text){
+        enterTextIntoElement(inputPasswordRegister, text);
+    }
+
 }
