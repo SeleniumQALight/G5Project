@@ -79,6 +79,23 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public LoginPage isRegisterPasswordActive() {
+        isElementActive(inputPasswordRegister);
+        inputPassword.getCssValue("form-control");
+        return this;
+    }
+
+    public LoginPage isPasswordActive() {
+        isElementActive(inputPassword);
+        inputPassword.getCssValue("form-control");
+        return this;
+    }
+
+    public LoginPage isSignUpButtonActive() {
+        isElementActive(buttonSignUp);
+        return this;
+    }
+
     public void enterUserNameIntoLoginInput(String username) {
 //        try {
 ////            WebElement webElement = webDriver.
@@ -198,8 +215,8 @@ public class LoginPage extends ParentPage {
         Util.waitABit(1);
         Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
 
-        ArrayList<String>  actualTextFromErrors = new ArrayList<>();
-        for (WebElement element: listOfErrors) {
+        ArrayList<String> actualTextFromErrors = new ArrayList<>();
+        for (WebElement element : listOfErrors) {
             actualTextFromErrors.add(element.getText());
         } // po vsih weblementah 'element' zi spisky list of errors
 
@@ -216,5 +233,9 @@ public class LoginPage extends ParentPage {
         enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
         clickOnButtonLogin();
         return new HomePage(webDriver);
+    }
+
+    public void clickOnButtonSignUp() {
+        clickOnElement(buttonSignUp);
     }
 }

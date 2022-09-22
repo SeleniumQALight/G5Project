@@ -9,8 +9,9 @@ import org.junit.Test;
 
 public class LoginLogoutThroughNewTab extends BaseTest {
 
-    @Before
-    public void validLogin() {
+
+    @Test
+    public void loggedInUserRemainsLoggedInInNewTab() {
         loginPage.openLoginPage();
         loginPage.enterUserNameIntoLoginInput("qaauto");
         loginPage.enterPasswordIntoPasswordInput("123456qwerty");
@@ -18,11 +19,6 @@ public class LoginLogoutThroughNewTab extends BaseTest {
 
         Assert.assertTrue("Sign out button is not displayed", headerElement.isButtonSignedOutDisplayed());
 
-    }
-
-
-    @Test
-    public void loggedInUserRemainsLoggedInInNewTab(){
         loginPage.userOpensNewTab();
         loginPage.openLoginPage();
 
@@ -32,7 +28,14 @@ public class LoginLogoutThroughNewTab extends BaseTest {
     }
 
     @Test
-    public void loggedOutUserRemainsLoggedOutIneNewTab(){
+    public void loggedOutUserRemainsLoggedOutIneNewTab() {
+        loginPage.openLoginPage();
+        loginPage.enterUserNameIntoLoginInput("qaauto");
+        loginPage.enterPasswordIntoPasswordInput("123456qwerty");
+        loginPage.clickOnButtonLogin();
+
+        Assert.assertTrue("Sign out button is not displayed", headerElement.isButtonSignedOutDisplayed());
+
         homePage.userOpensNewTab();
         loginPage.openLoginPage();
         loginPage.userSwitchesToParentWindow();
