@@ -50,8 +50,9 @@ public class LoginPage extends ParentPage {
 
     public LoginPage openLoginPage() {
         try {
-            webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
+            webDriver.get(baseUrl);
             logger.info("Login page was opened");
+            logger.info(baseUrl);
         } catch (Exception e) {
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
@@ -110,7 +111,7 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkErrorsMessage(String expectedErrors) {
         String[] expectedErrorsArray=expectedErrors.split(";");
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of Messages")
                 .until(ExpectedConditions.numberOfElementsToBe(
                         By.xpath(listOfErrorsLocator),expectedErrorsArray.length));
