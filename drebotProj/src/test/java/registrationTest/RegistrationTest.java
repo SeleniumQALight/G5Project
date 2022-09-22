@@ -10,6 +10,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(JUnitParamsRunner.class)
 public class RegistrationTest extends BaseTest {
+    final String[] alertTextArray = {"Username must be at least 3 characters.",
+            "You must provide a valid email address.",
+            "Password must be at least 12 characters."};
     final static String ERROR_USERNAME = "Username must be at least 3 characters.";
     final static String ERROR_EMAIL = "You must provide a valid email address.";
     final static String ERROR_PASSWORD = "Password must be at least 12 characters.";
@@ -26,9 +29,6 @@ public class RegistrationTest extends BaseTest {
             , TestData.VALID_LOGIN + COMMA + "qqq" + COMMA + "123" + COMMA + ERROR_ALREADY_EXIST + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
             , "q  a" + COMMA + "text@test.com" + COMMA + "123" + COMMA + ERROR_USERNAME + SEMICOLON + ERROR_PASSWORD
             , " " + COMMA + " " + COMMA + " " + COMMA + ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
-            , "\n" + COMMA + "\n" + COMMA + "\n" + COMMA + ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
-            , "" + COMMA + "" + COMMA + "" + COMMA + ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
-            , " , , ," + ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD
     })
     @TestCaseName("registrationErrors : login ={0}, email = {1}, password = {2}")
     public void registrationErrors(String userName, String email, String password, String expectedErrors) {
@@ -38,5 +38,17 @@ public class RegistrationTest extends BaseTest {
                 .enterPasswordIntoRegistration(password)
                 .checkErrorMessages(expectedErrors)
         ;
+    }
+
+    @Test
+    public void registrationErrorsUsingTab() {
+        loginPage.openLoginPage().enterUserNameIntoRegistrationUsingKey("tr")
+                .usersPressesKeyTabTime(1);
+        loginPage.enterEmailIntoRegistrationUsingKey("test.com")
+                .usersPressesKeyTabTime(1);
+        loginPage.enterPasswordIntoRegistrationUsingKey("123");
+
+        loginPage.checkCountAlertMessage(alertTextArray);
+        loginPage.checkAlertText(alertTextArray);
     }
 }

@@ -99,6 +99,70 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignIn);
     }
 
+    public LoginPage enterLoginIntoLoginInputUsingKeyTab(String login) {
+
+        moveToElement(inputUserNameHeader);
+        if (isElementIsActive(inputUserNameHeader)) {
+            usersSendTextByActionTime(1, login);
+        } else {
+            logger.info("login '" + login + "' can't be inputted");
+        }
+
+        return this;
+    }
+
+    public LoginPage enterPasswordIntoPasswordInputUsingKeyTab(String password) {
+
+        if (isElementIsActive(inputPasswordHeader)) {
+            usersSendTextByActionTime(1, password);
+        } else {
+            logger.info("password '" + password + "' can't be inputted");
+        }
+        return this;
+    }
+
+    public HomePage clickOnButtonLogInUsingKey() {
+        if (isElementIsActive(buttonSignIn)) {
+            usersPressesKeyEnterTime(1);
+        } else {
+            logger.info("can't press ENTER");
+        }
+        return new HomePage(webDriver);
+    }
+
+    public LoginPage enterUserNameIntoRegistrationUsingKey(String userName) {
+
+        moveToElement(inputUserNameRegistration);
+        if (isElementIsActive(inputUserNameRegistration)) {
+            usersSendTextByActionTime(1, userName);
+        } else {
+            logger.info("userName '" + userName + "' can't be inputted");
+        }
+        return this;
+    }
+
+    public LoginPage enterEmailIntoRegistrationUsingKey(String email) {
+
+        if (isElementIsActive(inputEmailRegistration)) {
+            usersSendTextByActionTime(1, email);
+        } else {
+            logger.info("email '" + email + "' can't be inputted");
+        }
+
+        return this;
+    }
+
+    public LoginPage enterPasswordIntoRegistrationUsingKey(String password) {
+
+        if (isElementIsActive(inputPasswordRegistration)) {
+            usersSendTextByActionTime(1, password);
+        } else {
+            logger.info("password '" + password + "' can't be inputted");
+        }
+        return this;
+    }
+
+
     public boolean isMessageInvalidUserPassword() {
 //        try {
 //            WebElement messageInvalidUserPassword = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center']"));
@@ -116,12 +180,19 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
-    public HomePage loginWithValidCredentialWithOutOpenPage(){
+
+    public HomePage loginWithValidCredentialWithOutOpenPage() {
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
 
         return new HomePage(webDriver);
+    }
+
+    public LoginPage checkIsRedirectToLoginPage() {
+        checkUrl();
+        Assert.assertTrue("LoginPage doesn't loaded", isElementDisplayed(buttonSignIn));
+        return this;
     }
 
     public LoginPage enterUserNameIntoRegistration(String userName) {

@@ -1,6 +1,7 @@
 package pages;
 
 import libs.ConfigProperties;
+import libs.Util;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -18,7 +19,7 @@ public class CommonActionsWithElements {
     protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
     protected WebDriverWait webDriverWaitLow, webDriverWaitHight;
-    public static ConfigProperties configProperties= ConfigFactory.create(ConfigProperties.class);
+    public static ConfigProperties configProperties = ConfigFactory.create(ConfigProperties.class);
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -48,11 +49,11 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected void clickOnElement(String xpathLocator){
-        try{
-            WebElement element=webDriver.findElement(By.xpath((xpathLocator)));
+    protected void clickOnElement(String xpathLocator) {
+        try {
+            WebElement element = webDriver.findElement(By.xpath((xpathLocator)));
             clickOnElement(element);
-        }catch(Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
 
         }
@@ -126,10 +127,12 @@ public class CommonActionsWithElements {
             return false;
         }
     }
+
     public void usersPressesKeyEnterTime(int numberOfTimes) {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
             actions.sendKeys(Keys.ENTER).build().perform();
+            logger.info("'ENTER' was pressed ");
         }
     }
 
@@ -137,20 +140,54 @@ public class CommonActionsWithElements {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
             actions.sendKeys(Keys.TAB).build().perform();
+            logger.info("'TAB' was pressed ");
         }
+    }
 
+    protected void usersSendTextByActionTime(int numberOfTimes, String text) {
+        Actions actions = new Actions(webDriver);
+        for (int i = 0; i < numberOfTimes; i++) {
+            actions.sendKeys(text).build().perform();
+            logger.info("value '" + text + "' was send");
+        }
     }
 
     public void userOpensNewTab() {
-        ((JavascriptExecutor)webDriver).executeScript("window.open()");
-        ArrayList<String> tabs = new ArrayList<> (webDriver.getWindowHandles());
+        ((JavascriptExecutor) webDriver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
+        logger.info("open and switch new window");
     }
 
+    protected void moveToElement(WebElement webElement) {
+        Actions actions = new Actions(webDriver);
+        webDriverWaitLow.until(ExpectedConditions.elementToBeClickable(webElement));
+        try {
+            actions.moveToElement(webElement).click().build().perform();
+        } catch (Exception e) {
+            logger.info("Move to element '" + webElement.getAccessibleName() + "' wasn't perform");
+        }
+
+        //actions.moveToElement(webElement).click().build().perform();
+        //logger.info("Move to element '" + webElement.getAccessibleName() + "'");
+    }
+
+    protected boolean isElementIsActive(WebElement webElement) {
+        if (webElement.equals(webDriver.switchTo().activeElement())) {
+            logger.info("element '" + webElement.getAccessibleName() + "' is focused");
+            return true;
+        }
+
+        logger.info("element '" + webElement.getAccessibleName() + "' wasn't focus");
+        return false;
+    }
+
+//    метод moveToElement (аналог скрола )
+//
 //    WebElement element = driver.findElement(By.id("my-id"));
 //    Actions actions = new Actions(driver);
-//actions.moveToElement(element);
-//actions.perform();
+//    actions.moveToElement(element);
+//    actions.perform();
 //
 //—————————-
 //    метод скрола з використанням javaScript
@@ -169,10 +206,10 @@ public class CommonActionsWithElements {
 //            webElement = driver.findElement(By.xpath("bla-bla-bla"));
 //((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
 
-    private String getElementName(WebElement webElement){
-        try{
+    private String getElementName(WebElement webElement) {
+        try {
             return webElement.getAccessibleName();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
     }
