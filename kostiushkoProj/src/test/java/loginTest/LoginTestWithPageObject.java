@@ -3,8 +3,15 @@ package loginTest;
 import baseTest.BaseTest;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import libs.ExcelDriver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import pages.CommonActionsWithElements;
+
+import java.io.IOException;
+import java.util.Map;
+
+import static pages.CommonActionsWithElements.configProperties;
 
 
 @RunWith(JUnitParamsRunner.class)
@@ -38,6 +45,19 @@ public class LoginTestWithPageObject extends BaseTest {
         loginPage.enterPasswordIntoInputPassword(password);
         loginPage.clickOnButtonLogIn();
         loginPage.isTextNoLogginDisplayed();
+
+    }
+
+
+    @Test
+    public void validLoginWithExel() throws IOException {
+        Map< String, String> dataForValidLogin = ExcelDriver.getData(
+                configProperties.DATA_FILE(),"validLogOn");
+        loginPage.openLoginPage();
+        loginPage.enterUserNameIntoLogininInput(dataForValidLogin.get("login"));
+        loginPage.enterPasswordIntoInputPassword(dataForValidLogin.get("pass"));
+        loginPage.clickOnButtonLogIn();
+        homePage.isButtonSignOutDisplayed();
 
     }
 
