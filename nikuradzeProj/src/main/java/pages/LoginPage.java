@@ -1,5 +1,6 @@
 package pages;
 
+import libs.DB_Util_HW;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -211,6 +213,13 @@ public class LoginPage extends ParentPage{
     public HomePage loginWithValidCredWithoutOpenPage() {
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
+        clickOnButtonLogIn();
+        return new HomePage(webDriver);
+    }
+    public HomePage loginWithValidCredWithoutOpenPageWithDataFromDB() throws SQLException, ClassNotFoundException {
+        DB_Util_HW db_util_hw = new DB_Util_HW();
+        enterUserNameIntoLoginInput("newqaauto");
+        enterPasswordIntoInputPassword(db_util_hw.getPass("newqaauto"));
         clickOnButtonLogIn();
         return new HomePage(webDriver);
     }

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+
 public class CreatePostPage extends ParentPage{
     // .//*[@name='title']
     @FindBy(name = "title")
