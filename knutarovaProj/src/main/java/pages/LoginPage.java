@@ -3,12 +3,14 @@ package pages;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,10 @@ public class LoginPage extends ParentPage {
     private List<WebElement> listOfErrors;
     @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
     private WebElement errorHeaderMessage;
+    @FindBy(xpath = ".//a[text()='Create Post']")
+    private WebElement buttonCreatePost;
+    @FindBy(xpath = ".//*[@data-original-title='My Profile']")
+    private WebElement buttonMyProfile;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -98,11 +104,6 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    private void printErrorAndStopTest(Exception e) {
-        logger.error("Can't work with element " + e);
-        Assert.fail("Can't work with element " + e);
-    }
-
     public HomePage loginWithValidCred() {
         openLoginPage();
         loginWithValidCredWithOutOpenPage();
@@ -156,7 +157,6 @@ public class LoginPage extends ParentPage {
                         (By.xpath(validationMessagesLocator), expectedErrorsArray.length));
         Util.waitABit(1);
         Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
-
         ArrayList<String> actualTextFromErrors = new ArrayList<>();
         for (WebElement element : listOfErrors) {
             actualTextFromErrors.add(element.getText());
@@ -165,9 +165,7 @@ public class LoginPage extends ParentPage {
         for (int i = 0; i < expectedErrorsArray.length; i++) {
             softAssertions.assertThat(expectedErrorsArray[i]).isIn(actualTextFromErrors);
         }
-
         softAssertions.assertAll();
-
         return this;
     }
 
@@ -181,5 +179,15 @@ public class LoginPage extends ParentPage {
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
         return new HomePage(webDriver);
+    }
+
+    public CreatePostPage clickOnButtonCreatePost() {
+        clickOnElement(buttonCreatePost);
+        return new CreatePostPage(webDriver);
+    }
+
+    public MyProfilePage clickOnMyProfileButton() {
+        clickOnElement(buttonMyProfile);
+        return new MyProfilePage(webDriver);
     }
 }
