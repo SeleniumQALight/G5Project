@@ -1,12 +1,12 @@
 package registrationTest;
 
-import baseTest.BaseTest;
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
-import junitparams.naming.TestCaseName;
-import libs.TestData;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+        import baseTest.BaseTest;
+        import junitparams.JUnitParamsRunner;
+        import junitparams.Parameters;
+        import junitparams.naming.TestCaseName;
+        import libs.TestData;
+        import org.junit.Test;
+        import org.junit.runner.RunWith;
 
 @RunWith (JUnitParamsRunner.class)
 public class RegistrationTest extends BaseTest {
@@ -36,4 +36,8 @@ public class RegistrationTest extends BaseTest {
   ;
 
     }
+
+
+
+
 }
