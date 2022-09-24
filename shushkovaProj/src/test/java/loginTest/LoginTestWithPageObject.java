@@ -1,9 +1,13 @@
 package loginTest;
 
+import libs.ExcelDriver;
 import org.junit.Assert;
 import org.junit.Test;
 
 import baseTest.BaseTest;
+
+import java.io.IOException;
+import java.util.Map;
 
 public class LoginTestWithPageObject extends BaseTest {
     @Test
@@ -26,4 +30,15 @@ public class LoginTestWithPageObject extends BaseTest {
                 , loginPage.isMessageInvalidCredsDisplayed());
 
     }
+        @Test
+        public void validLoginWithExel() throws IOException {
+            Map<String ,String>  dataForValidLogin= ExcelDriver.getData(".//src//main//java//data//testData.xls","validLogOn");
+            loginPage.openLoginPage();
+            loginPage.enterUserNameIntoLoginInput(dataForValidLogin.get("login"));
+            loginPage.enterPasswordIntoLoginInput(dataForValidLogin.get("pass"));
+            loginPage.clickOnButtonSignIn();
+            Assert.assertTrue("Button SinOut is not Displayed"
+                    , homePage.getHeaderElement().isButtonSingOutDisplayed());
+
+        }
 }

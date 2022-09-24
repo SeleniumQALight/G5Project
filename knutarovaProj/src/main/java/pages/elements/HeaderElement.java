@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.CommonActionsWithElements;
 import pages.CreatePostPage;
+import pages.EditPostPage;
 import pages.MyProfilePage;
 
 public class HeaderElement extends CommonActionsWithElements {

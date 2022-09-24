@@ -36,8 +36,7 @@ abstract String getRelatedUrl();
     }
 protected void waitChatToBeHide(){
       webDriverWaitLow.withMessage("Chat is not closed").
-              until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(
-              ".//*[@id='chat-wrapper']")));
+              until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(".//*[@id='chat-wrapper']")));
 }
 
 }
