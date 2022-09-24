@@ -53,8 +53,8 @@ public class CreatePostPage extends ParentPage{
              enterTextIntoElement(inputBody,textBody);
         return this;
     }
-    public CreatePostPage clickOnButtonSaveNewPost () {
+    public PostPage clickOnButtonSaveNewPost () {
         clickOnElement(buttonSaveNewPost);
-        return  this;
+        return  new PostPage(webDriver);
     }
 }
