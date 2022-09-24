@@ -19,7 +19,6 @@ public class CreatePostWithDBAndExcelTest extends BaseTest {
 
     @Test
     public void createPostDBWithExcel() throws SQLException, ClassNotFoundException {
-
         homePage
                 .openHomePageWithDataFromDB()
                 .getHeaderElement().clickOnButtonCreatePost()
