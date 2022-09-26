@@ -80,14 +80,17 @@ public class LoginPage extends ParentPage {
     }
 
     public LoginPage isRegisterPasswordActive() {
+        Util.waitABit(1);
         isElementActive(inputPasswordRegister);
-        inputPassword.getCssValue("form-control");
+        String borderColor = inputPasswordRegister.getCssValue("border-color");
+        if (borderColor.contains("128, 189, 255")){
+            logger.info("The element is highlighted");
+        }
         return this;
     }
 
     public LoginPage isPasswordActive() {
         isElementActive(inputPassword);
-        inputPassword.getCssValue("form-control");
         return this;
     }
 
