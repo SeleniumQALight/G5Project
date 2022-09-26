@@ -15,6 +15,7 @@ import pages.CommonActionsWithElements;
 import pages.HomePage;
 import pages.LoginPage;
 
+import java.sql.SQLException;
 import java.time.Duration;
 
 public class BaseTest {
@@ -24,7 +25,7 @@ public class BaseTest {
     protected HomePage homePage;
 
     @Before
-    public void setUp(){
+    public void setUp() throws SQLException, ClassNotFoundException {
         logger.info("------"+testName.getMethodName()+"was started ---------");
         webDriver = initDriver();
         webDriver.manage().window().maximize();
@@ -35,7 +36,7 @@ public class BaseTest {
         homePage = new HomePage(webDriver);
     }
     @After
-    public void tearDown(){
+    public void tearDown() throws SQLException {
         webDriver.quit();
         logger.info("Browser was closed");
         logger.info("-------"+testName.getMethodName()+" was ended ---------\n");
