@@ -30,7 +30,6 @@ public class HomePage extends ParentPage{
      * @return
      */
     public HomePage checkIsRedirectToHomePage(){
-        //TODO checkURL
         checkUrl();
         Assert.assertTrue("HomePage did not load", getHeaderElement().isButtonSignOutDisplayed());
         return this;
