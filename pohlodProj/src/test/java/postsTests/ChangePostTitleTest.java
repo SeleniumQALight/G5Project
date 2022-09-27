@@ -53,7 +53,8 @@ public class ChangePostTitleTest extends BaseTest {
                 .getHeaderElement()
                 .clickOnButtonProfile()
                 .checkIsRedirectToMyProfilePage()
-                .deletePostWithTitleTillPresent(NEWTITLE);
+                .deletePostWithTitleTillPresent(NEWTITLE)
+                .deletePostWithTitleTillPresent(TITLE);
 
     }
 

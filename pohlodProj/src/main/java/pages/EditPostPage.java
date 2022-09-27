@@ -19,12 +19,11 @@ public class EditPostPage extends ParentPage {
 
     @Override
     String getRelativeUrl() {
-        return null;
+        return "/post/";
     }
 
 
     public EditPostPage editTitle(String newTitle) {
-        inputTitle.clear();
         enterTextIntoElement(inputTitle, newTitle);
         return this;
     }
