@@ -71,7 +71,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public void enterUserNameIntoLoginInput(String username) {
+    public LoginPage enterUserNameIntoLoginInput(String username) {
 //        try {
 ////            WebElement webElement = webDriver.
 ////                    findElement(By.xpath(".//input[@name='username' and @placeholder='Username']"));
@@ -82,6 +82,7 @@ public class LoginPage extends ParentPage {
 //            printErrorAndStopTest(e);
 //        }
         enterTextIntoElement(inputUserNameHeader, username);
+        return this;
     }
 
     public LoginPage enterUserNameIntoRegistrationInput(String username) {
@@ -89,7 +90,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public void enterPasswordIntoPasswordInput(String password) {
+    public LoginPage enterPasswordIntoPasswordInput(String password) {
 //        try {
 ////            WebElement webElement = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
 //            inputPassword.clear();
@@ -99,9 +100,10 @@ public class LoginPage extends ParentPage {
 //            printErrorAndStopTest(e);
 //        }
         enterTextIntoElement(inputPassword, password);
+        return this;
     }
 
-    public void clickOnButtonLogin() {
+    public HomePage clickOnButtonLogin() {
 //        try {
 ////            webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click();
 //            buttonSingIn.click();
@@ -110,6 +112,7 @@ public class LoginPage extends ParentPage {
 //            printErrorAndStopTest(e);
 //        }
         clickOnElement(buttonSingIn);
+        return new HomePage(webDriver);
     }
 
 //    private void printErrorAndStopTest(Exception e) {
