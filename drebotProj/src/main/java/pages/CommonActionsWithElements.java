@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import libs.ConfigProperties;
 import libs.Util;
 import org.aeonbits.owner.ConfigFactory;
@@ -136,6 +137,7 @@ public class CommonActionsWithElements {
         }
     }
 
+    @Step
     public void usersPressesKeyTabTime(int numberOfTimes) {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
