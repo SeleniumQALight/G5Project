@@ -2,6 +2,7 @@ package loginTest;
 
 import baseTest.BaseTest;
 import catagories.SmokeTestFilter;
+import io.qameta.allure.*;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import libs.ExcelDriver;
@@ -18,12 +19,22 @@ import static pages.CommonActionsWithElements.configProperties;
 
 @RunWith(JUnitParamsRunner.class)
 @Category(SmokeTestFilter.class)
+@Epic("Allure examples")
+@Feature("Junit 4 support")
 public class LoginTestWithPageObject extends BaseTest {
     final static String VALIDLOGIN = "qaauto";
     final  static String NOVALIDLOGIN = "login";
     final  static String VALIDPASSWORD = "123456qwerty";
     final  static String NOVALIDPASSWORD = "password";
     final static String COMMA = ",";
+
+    @Description("Some detailed test description")
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @Issue("123")
+    @Issue("432")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Base support for bdd annotations")
 
     @Test
     public void validLogin(){
