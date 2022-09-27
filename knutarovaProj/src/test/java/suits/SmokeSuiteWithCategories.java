@@ -2,12 +2,15 @@ package suits;
 
 import categories.SmokeTestFilter;
 import loginTest.LoginTestWithPageObject;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Categories;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import postsTest.CreatePostTest;
 import registrationFormTest.RegistrationTest;
 
+
+//@Ignore
 @RunWith(Categories.class)
 @Categories.IncludeCategory(SmokeTestFilter.class)
 @Suite.SuiteClasses({
