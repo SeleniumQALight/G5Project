@@ -13,14 +13,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import pages.EditPage;
 import pages.HomePage;
 import pages.LoginPage;
+import pages.MyProfilePage;
 
 public class BaseTest {
     WebDriver webDriver;
     Logger  logger = Logger.getLogger(getClass());
+    /**объявляю змінні**/
     protected LoginPage loginPage;
     protected HomePage homePage;
+    protected MyProfilePage myProfilePage;
+    protected EditPage editPage;
 
     @Before
     public void setUp(){
@@ -31,6 +36,8 @@ public class BaseTest {
         logger.info("Browser was opened");
         loginPage = new LoginPage(webDriver);
         homePage= new HomePage(webDriver);
+        myProfilePage=new MyProfilePage(webDriver);
+        editPage=new EditPage(webDriver);
     }
     @After
     public void tearDown(){

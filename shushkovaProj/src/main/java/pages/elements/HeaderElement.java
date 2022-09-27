@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.CommonActionsWithElements;
 import pages.CreatePostPage;
+import pages.EditPage;
 import pages.MyProfilePage;
 
 public class HeaderElement extends CommonActionsWithElements {
@@ -38,6 +39,13 @@ public class HeaderElement extends CommonActionsWithElements {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
         }
+    public EditPage clickOnMyProfileButtonOnEditPage(){
+        clickOnElement(buttonMyProfile);
+        return new EditPage(webDriver);
+    }
+
+
+
     }
 
 
