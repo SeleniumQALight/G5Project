@@ -88,7 +88,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public void clickOnButtonLogIn() {
+    public HomePage clickOnButtonLogIn() {
 //        try {
 //            //webDriver.findElement(By.xpath(".//button[@class='btn btn-primary btn-sm']")).click();
 //            buttonSignIn.click();
@@ -97,6 +97,7 @@ public class LoginPage extends ParentPage {
 //            printErrorAndStopTest(e);
 //        }
         clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
     }
 
     public LoginPage enterLoginIntoLoginInputUsingKeyTab(String login) {
