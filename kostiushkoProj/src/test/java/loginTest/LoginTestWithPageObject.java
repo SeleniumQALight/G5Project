@@ -1,10 +1,12 @@
 package loginTest;
 
 import baseTest.BaseTest;
+import catagories.SmokeTestFilter;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import libs.ExcelDriver;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import pages.CommonActionsWithElements;
 
@@ -15,6 +17,7 @@ import static pages.CommonActionsWithElements.configProperties;
 
 
 @RunWith(JUnitParamsRunner.class)
+@Category(SmokeTestFilter.class)
 public class LoginTestWithPageObject extends BaseTest {
     final static String VALIDLOGIN = "qaauto";
     final  static String NOVALIDLOGIN = "login";
