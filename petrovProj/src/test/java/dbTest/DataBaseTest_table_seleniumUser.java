@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class DataBaseTest_V2 {
+public class DataBaseTest_table_seleniumUser {
     private Database mySglDB;
 
     @Before
