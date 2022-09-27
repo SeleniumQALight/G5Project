@@ -169,12 +169,7 @@ public class CommonActionsWithElements {
 
     public void isElementActive(WebElement elementThatShouldBeActive) {
         WebElement activeElement = webDriver.switchTo().activeElement();
-        if (activeElement.equals(elementThatShouldBeActive)) {
-            logger.info("Active element is " + webDriver.switchTo().activeElement().getAccessibleName());
-        } else {
-            logger.info("Active element doesn't match " + elementThatShouldBeActive.getAccessibleName());
-        }
-
+            Assert.assertEquals("Active element doesn't match ", elementThatShouldBeActive, activeElement);
     }
 
     public void refreshPage() {
