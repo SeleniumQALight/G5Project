@@ -1,13 +1,13 @@
 package postTests;
 
 import baseTest.BaseTest;
-import libs.ExcelDriver;
-import libs.Util;
+import libs.*;
 import org.junit.After;
 import org.junit.Test;
 import pages.CommonActionsWithElements;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Map;
 
 public class CreatePostWithExcelAndDBTest extends BaseTest {
@@ -17,11 +17,34 @@ public class CreatePostWithExcelAndDBTest extends BaseTest {
     public CreatePostWithExcelAndDBTest() throws IOException {
     }
 
+//    private Database mysqlDB;
+//    final String LOGIN = "newqaauto";
+//
+//    @Before
+//    public void setUp() throws SQLException, ClassNotFoundException {
+//        //mysqlDB = MySQL_Database.getDataBase();
+//    }
+
     @Test
-    public void createPostWithExcelAndDB() {
+    public void createPostWithExcelAndDB() throws SQLException, ClassNotFoundException {
+        //mysqlDB = MySQL_Database.getDataBase();
+
+//        List<Map<String, String>> dataFromSeleniumTable = mysqlDB.selectTableAsMap(
+//                String.format("Select * from seleniumUsers where login='%s'", LOGIN));
+//        System.out.println(dataFromSeleniumTable);
+//        System.out.println(dataFromSeleniumTable.get(0).get("login"));
+//        System.out.println(dataFromSeleniumTable.get(0).get("password"));
+        //mysqlDB.quit();
+
+        DB_Util db_util = new DB_Util();
 
         loginPage.openLoginPage()
-                .loginWithValidCredential()
+                //.enterUserNameIntoLoginInput(dataFromSeleniumTable.get(0).get("login"))
+                //.enterPasswordIntoPasswordInput(dataFromSeleniumTable.get(0).get("password"))
+                .enterUserNameIntoLoginInput("newqaauto")
+                .enterPasswordIntoPasswordInput(db_util.getPassForLogin("newqaauto"))
+                .clickOnButtonLogIn()
+                //.loginWithValidCredential()
                 .checkIsRedirectToHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
@@ -43,5 +66,8 @@ public class CreatePostWithExcelAndDBTest extends BaseTest {
                 .getHeaderElement().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
                 .deletePostsWithTitleTillPresent(TITLE);
+
+        //mysqlDB.quit();
+
     }
 }

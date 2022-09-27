@@ -13,7 +13,7 @@ public class DB_Util {
         logger.info("--- Connected to DB -------");
 
         String pass = mySQL_DataBase.selectValue(
-                String.format("select passWord from seleniumTable where login = '%s'", login)
+                String.format("select passWord from seleniumUsers where login = '%s'", login)
         );
         mySQL_DataBase.quit();
         return pass;
