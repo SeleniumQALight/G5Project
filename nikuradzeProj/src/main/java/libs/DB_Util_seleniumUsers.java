@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 
-public class DB_Util_HW {
+public class DB_Util_seleniumUsers {
     private Database mySQL_DB;
     Logger logger = Logger.getLogger(getClass());
 

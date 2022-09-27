@@ -13,6 +13,7 @@ import static pages.CommonActionsWithElements.configProperties;
 
 public class CreatePostWithDBAndExcelTest extends BaseTest {
     Map<String, String> testDataForPostPage = ExcelDriver.getData(configProperties.DATA_FILE(), "postData");
+    private String titleFromExcel = testDataForPostPage.get("title");
 
     public CreatePostWithDBAndExcelTest() throws IOException {
     }
@@ -23,7 +24,7 @@ public class CreatePostWithDBAndExcelTest extends BaseTest {
                 .openHomePageWithDataFromDB()
                 .getHeaderElement().clickOnButtonCreatePost()
               .checkIsRedirectToCreatePostPage()
-                .enterTextInInputTitle(testDataForPostPage.get("title"))
+                .enterTextInInputTitle(titleFromExcel)
                 .enterTextInInputBody(testDataForPostPage.get("body"))
                 .setCheckboxValue(testDataForPostPage.get("checkbox"))
                 .selectTextInDropdownRole(testDataForPostPage.get("dropdown"))
@@ -33,15 +34,15 @@ public class CreatePostWithDBAndExcelTest extends BaseTest {
                 .checkPostUniqueness()
                 .getHeaderElement().clickOnMyProfileButton()
               .checkIsRedirectToMyProfilePage()
-                .checkPostWasCreated(testDataForPostPage.get("title"))
+                .checkPostWasCreated(titleFromExcel)
         ;
     }
     @After
-    public void deletePosts(){
+    public void deletePosts() throws SQLException, ClassNotFoundException {
         homePage
-                .openHomePage()
+                .openHomePageWithDataFromDB()
                 .getHeaderElement().clickOnMyProfileButton()
              .checkIsRedirectToMyProfilePage()
-                .deletePostsWithTitleTillPresent(testDataForPostPage.get("title"));
+                .deletePostsWithTitleTillPresent(titleFromExcel);
     }
 }
