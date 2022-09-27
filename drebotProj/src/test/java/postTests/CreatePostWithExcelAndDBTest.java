@@ -18,7 +18,7 @@ public class CreatePostWithExcelAndDBTest extends BaseTest {
     }
 
 //    private Database mysqlDB;
-//    final String LOGIN = "newqaauto";
+    final String LOGIN = "newqaauto";
 //
 //    @Before
 //    public void setUp() throws SQLException, ClassNotFoundException {
@@ -36,15 +36,14 @@ public class CreatePostWithExcelAndDBTest extends BaseTest {
 //        System.out.println(dataFromSeleniumTable.get(0).get("password"));
         //mysqlDB.quit();
 
-        DB_Util db_util = new DB_Util();
+        DB_Util_seleniumUsers db_util = new DB_Util_seleniumUsers();
 
         loginPage.openLoginPage()
                 //.enterUserNameIntoLoginInput(dataFromSeleniumTable.get(0).get("login"))
                 //.enterPasswordIntoPasswordInput(dataFromSeleniumTable.get(0).get("password"))
-                .enterUserNameIntoLoginInput("newqaauto")
-                .enterPasswordIntoPasswordInput(db_util.getPassForLogin("newqaauto"))
+                .enterUserNameIntoLoginInput(LOGIN)
+                .enterPasswordIntoPasswordInput(db_util.getPassForLogin(LOGIN))
                 .clickOnButtonLogIn()
-                //.loginWithValidCredential()
                 .checkIsRedirectToHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
