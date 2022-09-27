@@ -1,5 +1,6 @@
 package pages.elements;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,6 +33,7 @@ public class HeaderElement extends CommonActionsWithElements {
         return new CreatePostPage(webDriver);
 
     }
+    @Step
     public boolean isButtonSingOutDisplayed(){
             return isElementDisplayed(buttonSingOut);
         }
