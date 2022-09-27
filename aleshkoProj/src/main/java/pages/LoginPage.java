@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -51,58 +52,69 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+//    @Step
     public LoginPage openLoginPage() {
         openPage(baseUrl);
         return this;
     }
 
+//    @Step
     public LoginPage enterUsernameIntoLoginInput(String userName) {
         enterTextIntoElement(inputUsernameHeader, userName);
         return this;
     }
 
+//    @Step
     public LoginPage enterPasswordIntoPasswordInput(String password) {
         enterTextIntoElement(inputPasswordHeader, password);
         return this;
     }
 
+//    @Step
     public HomePage clickOnSignInButton() {
         clickOnElement(buttonSignIn);
         return new HomePage(webDriver);
     }
 
+//    @Step
     public LoginPage enterUsernameIntoRegistrationInput(String userName) {
         enterTextIntoElement(inputRegisterUsername, userName);
         return this;
     }
 
+//    @Step
     public LoginPage enterEmailIntoRegistrationInput(String email) {
         enterTextIntoElement(inputRegisterEmail, email);
         return this;
     }
 
+//    @Step
     public LoginPage enterPasswordIntoRegistrationInput(String password) {
         enterTextIntoElement(inputRegisterPassword, password);
         return this;
     }
 
+//    @Step
     public HomePage clickOnSignUpButton() {
         clickOnElement(buttonSignUp);
         return new HomePage(webDriver);
     }
 
+//    @Step
     public LoginPage checkInlavidLoginAction() {
         Assert.assertTrue("Alert about wrong username/password is not visible", isElementDisplayed(alertInvalidLoginOrPassword));
         Assert.assertTrue("Button ''Sign In' is not visible", isElementDisplayed(buttonSignIn));
         return this;
     }
 
+//    @Step
     public HomePage loginWithValidCred() {
         openLoginPage();
         loginWithValidCredWithoutOpenPage();
         return new HomePage(webDriver);
     }
 
+//    @Step
     public LoginPage checkAlertAboutUsernameOnSignUpForm(String text) {
         webDriverWaitLow.until(ExpectedConditions.visibilityOf(alertUsernameSignUp));
         Assert.assertTrue("Alert is not displayed", isElementDisplayed(alertUsernameSignUp));
@@ -110,6 +122,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+//    @Step
     public LoginPage checkAlertAboutEmailOnSignUpForm(String text) {
         webDriverWaitLow.until(ExpectedConditions.visibilityOf(alertEmailSignUp));
         Assert.assertTrue("Alert is not displayed", isElementDisplayed(alertEmailSignUp));
@@ -117,6 +130,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+//    @Step
     public LoginPage checkAlertAboutPasswordOnSignUpForm(String text) {
         webDriverWaitLow.until(ExpectedConditions.visibilityOf(alertPasswordSignUp));
         Assert.assertTrue("Alert is not displayed", isElementDisplayed(alertPasswordSignUp));
@@ -124,6 +138,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+//    @Step
     public LoginPage checkErrorsMessagesOnRegistrationForm(String expectedErrors) {
         String[] expectedErrorArray = expectedErrors.split(";");
         webDriverWaitLow
@@ -147,6 +162,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+//    @Step
     public HomePage loginWithValidCredWithoutOpenPage() {
         enterUsernameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
