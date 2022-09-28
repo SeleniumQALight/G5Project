@@ -229,10 +229,11 @@ public class LoginPage extends ParentPage {
     }
 
     public LoginPage checkPasswordFieldIsActive(){
-        String color = "rgb(206, 212, 218)";
-        String attributeName = "border-color";
-        //Assert.assertEquals( color, inputPasswordHeader.getCssValue("border-color"));
-        Assert.assertEquals(color,getElementCssValue(inputUserPasswordRegister,attributeName));
+        String color = "rgb(128, 189, 255)";
+        //add enum
+        String attributeName = "border-top-color";
+        Util.waitABit(1);
+        Assert.assertEquals(color,getElementCssValue(inputPasswordHeader,"border-color"));
         return this;
     }
 }

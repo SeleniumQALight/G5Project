@@ -2,6 +2,7 @@ package loginTest;
 
 import baseTest.BaseTest;
 import libs.TestData;
+import libs.Util;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,7 +16,6 @@ public class LoginValidWithTabButtonTest extends BaseTest {
                 .usersPressesKeyTabTime(1);
 
         loginPage.checkPasswordFieldIsActive();
-        //loginPage.checkPasswordRegisterActive();
         loginPage.fillInPasswordField(TestData.VALID_PASSWORD)
                 .pressEnterToSubmit();
         Assert.assertTrue("User is not logged in", homePage.getHeaderElements().isButtonSignOutDisplayed());
