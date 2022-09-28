@@ -1,21 +1,19 @@
-package postTest;
+package editPostTest;
 
 import baseTest.BaseTest;
-import categories.SmokeTestFilter;
 import libs.Util;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.openqa.selenium.WebDriver;
+import pages.MyProfilePage;
+import pages.PostPage;
 
-import java.util.Locale;
-
-public class CreatePostTest extends BaseTest {
-    final String TITLE ="TC_1_shushkova-post1"+ Util.getDateAndTimeFormatted();
-
-    @Test
-
-    @Category(SmokeTestFilter.class)
-    public void TC_1_createNewPost(){
+public class EditPostTest extends BaseTest {
+    final String TITLE ="TC_2_shushkova-post1"+ Util.getDateAndTimeFormatted();
+    final String NEWTITLE="TC_2_shushkova-postEdit"+Util.getDateAndTimeFormatted();
+    @Before
+    public void TC_2_createNewPostAndEdit(){
         homePage
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
@@ -28,8 +26,19 @@ public class CreatePostTest extends BaseTest {
                 .checkTextInAlert("New post successfully created.")
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
-                .checkPostWasCreated(TITLE)
-                ;
+                .checkPostWasCreated(TITLE);
+    }
+    @Test
+    public void TC_2_findPostAndEdit(){
+        myProfilePage
+                .clickOnPostWithTitle(TITLE)
+      //          .checkToRedirectToEditPage()
+                .clickOnEditButton()
+                .enterTextInInputTitle(NEWTITLE)
+                .clickOnButtonSaveUpdates()
+                .checkThatAlertOfSuccessEditIsDisplayed();
+
+
     }
     @After
     public void deletePosts(){
@@ -37,7 +46,7 @@ public class CreatePostTest extends BaseTest {
                 .openHomePage()
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
-                .deletePostWithTitleTillPresence(TITLE);
+                .deletePostWithTitleTillPresence(NEWTITLE);
 
     }
 }
