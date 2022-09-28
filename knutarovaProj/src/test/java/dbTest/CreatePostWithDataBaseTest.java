@@ -1,10 +1,7 @@
 package dbTest;
 
 import baseTest.BaseTest;
-import libs.DB_Util;
-import libs.Database;
-import libs.ExcelDriver;
-import libs.MySQL_Database;
+import libs.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +14,7 @@ import static pages.CommonActionsWithElements.configProperties;
 
 public class CreatePostWithDataBaseTest extends BaseTest {
     private Database mysqlDB;
-    DB_Util db_util = new DB_Util();
+    DB_Util_SeleniumUser_Table db_util_seleniumUser_table = new DB_Util_SeleniumUser_Table();
     Map<String, String> dataForHWTest = ExcelDriver.getData(configProperties.DATA_FILE(), "validDataForHW");
     final String TITLE = dataForHWTest.get("title");
 
@@ -34,7 +31,7 @@ public class CreatePostWithDataBaseTest extends BaseTest {
         loginPage
                 .openLoginPage()
                 .enterUsernameIntoLoginInput("newqaauto")
-                .enterPasswordIntoInputPassword(db_util.getPasswordForLogin("newqaauto"))
+                .enterPasswordIntoInputPassword(db_util_seleniumUser_table.getPasswordForLogin("newqaauto"))
                 .clickOnButtonLogIn()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePotsPage()

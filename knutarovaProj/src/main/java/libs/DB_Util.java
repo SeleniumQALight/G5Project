@@ -19,14 +19,4 @@ public class DB_Util {
         return pass;
     }
 
-    public String getPasswordForLogin(String login) throws SQLException, ClassNotFoundException {
-        mySQL_DataBase = MySQL_Database.getDataBase();
-        logger.info("--- Connected to DB -------");
-
-        String password = mySQL_DataBase.selectValue(
-                String.format("select password from seleniumUsers where login = 'newqaauto'", login)
-        );
-        mySQL_DataBase.quit();
-        return password;
-    }
 }
