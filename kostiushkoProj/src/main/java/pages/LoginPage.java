@@ -1,8 +1,8 @@
 package pages;
 
 
-import com.google.common.base.Verify;
-import com.google.common.base.VerifyException;
+
+import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;

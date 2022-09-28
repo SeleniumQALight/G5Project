@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -62,6 +63,7 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage(){
         try{
             webDriver.get(baseUrl);
@@ -74,6 +76,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public void enterUserNameIntoLoginInput(String userName){
         /*try{
             WebElement webElement = webDriver.findElement(By.xpath(".//input[@name='username' and @placeholder='Username']")); // deleted
@@ -85,11 +88,11 @@ public class LoginPage extends ParentPage {
         }*/
         enterTextIntoElement(inputUserNameHeader, userName);
     }
-
+    @Step
     public void enterPasswordIntoInputPassword(String password){
         enterTextIntoElement(inputPasswordHeader, password);
     }
-
+    @Step
     public void clickOnButtonLogIn(){
         /*try{
             webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click(); // deleted
@@ -100,33 +103,33 @@ public class LoginPage extends ParentPage {
         }*/
         clickOnElement(buttonSignIn);
     }
-
+    @Step
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
     }
-
+    @Step
     public HomePage loginWithValidCred() {
         openLoginPage();
         loginWithValidCredWithoutOpenPage();
         return new HomePage(webDriver);
     }
-
+    @Step
     public LoginPage enterUserNameIntoTheRegisterForm (String username){
         enterTextIntoElement(inputUserNameRegistration, username);
         return this;
     }
-
+    @Step
     public LoginPage enterEmailIntoTheRegisterForm (String email){
         enterTextIntoElement(inputUserEmailRegistration, email);
         return this;
     }
-
+    @Step
     public LoginPage enterPasswordIntoTheRegisterForm (String password){
         enterTextIntoElement(inputPasswordRegistration, password);
         return this;
     }
-
+    @Step
     public LoginPage clickOnTheSignUpButton (){
         clickOnElement(getButtonSignUp);
         return this;
