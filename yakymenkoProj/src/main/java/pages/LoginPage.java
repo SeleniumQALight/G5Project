@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -56,6 +57,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
     /**
      * Метод, який буде відкривати LoginPage
      */
+    @Step
     public LoginPage openLoginPage() {
         try {
             webDriver.get(baseUrl);
@@ -67,48 +69,48 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
         }
         return this;
     }
-
+    @Step
     public LoginPage enterUserNameIntoLoginInput(String userName) {
         enterTextIntoElement(inputUserNameHeader, userName); // ↑ замінили на виклик метода
         return this;
     }
-
+    @Step
     public LoginPage enterPasswordIntoPasswordInput(String password) {
         enterTextIntoElement(inputPasswordHeader, password);
         return this;
     }
-
+    @Step
     public LoginPage clickOnButtonLogIn() {
         clickOnElement(buttonSignIn);
         return this;
     }
-
+    @Step
     public boolean isAlertDisplayed() {
         return isElementDisplayed(alertInvalidUsernamePassword);
     }
-
+    @Step
     public boolean isButtonSignInDisplayed() {
         return isElementDisplayed(buttonSignIn);
     }
-
+    @Step
     public HomePage loginWithValidCred() {
         openLoginPage();
         loginWithValidCredWithOutOpenPage();
         return new HomePage(webDriver);
     }
-
+    @Step
     public void enterUsernameIntoUsernameRegisterInput(String userName) {
         enterTextIntoElement(inputUsernameRegister, userName);
     }
-
+    @Step
     public void enterEmailIntoEmailRegisterInput(String email) {
         enterTextIntoElement(inputEmailRegister, email);
     }
-
+    @Step
     public void enterPasswordIntoPasswordRegisterInput(String password) {
         enterTextIntoElement(inputPasswordRegister, password);
     }
-
+    @Step
     public void checkValidationAlertNumber() {
 //        Util.waitABit(3);
         webDriverWaitLow.withMessage("Alerts are not shown")
@@ -117,7 +119,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
         Assert.assertEquals("Incorrect number of alerts in Register form", 3, visibleAlert.size());
         logger.info("Number of alerts in Register form: " + visibleAlert.size());
     }
-
+    @Step
     public void checkValidationAlertText() {
 //        Util.waitABit(3);
         webDriverWaitLow.until(ExpectedConditions.visibilityOfAllElements(visibleAlert));
@@ -128,22 +130,22 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
         Assert.assertEquals("Password must be at least 12 characters.", visibleAlert.get(2).getText());
         logger.info("Visible alert in PasswordRegister: " + visibleAlert.get(2).getText());
     }
-
+    @Step
     public LoginPage enterUsernameIntoRegistrationForm(String userName) {
         enterTextIntoElement(inputLoginRegistration, userName);
         return this;
     }
-
+    @Step
     public LoginPage enterEmailIntoRegistrationForm(String email) {
         enterTextIntoElement(inputEmailRegistration, email);
         return this;
     }
-
+    @Step
     public LoginPage enterPasswordIntoRegistrationForm(String password) {
         enterTextIntoElement(inputPasswordRegistration, password);
         return this;
     }
-
+    @Step
     public LoginPage checkErrorsMessages(String expectedErrors) {
         // test;test1 → array[0] = test , array[1] = test1
         String[] expectedErrorsArray = expectedErrors.split(";");// пройдеться і розіб'є на частини у масив
@@ -165,14 +167,14 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
         softAssertions.assertAll();
         return this;
     }
-
+    @Step
     public HomePage loginWithValidCredWithOutOpenPage() {
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
         return new HomePage(webDriver);
     }
-
+    @Step
     public LoginPage checkInvalidLoginMessage() {
         Assert.assertTrue("Button 'Sign In' and alert massage are not visible", isButtonSignInDisplayed() & isAlertDisplayed());
         return this;
