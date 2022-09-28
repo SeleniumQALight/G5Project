@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -47,6 +48,7 @@ public class LoginPage extends ParentPage{
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage(){
         try{
             webDriver.get(baseUrl);
@@ -58,7 +60,7 @@ public class LoginPage extends ParentPage{
         }
         return this;
     }
-
+    @Step
     public LoginPage enterUserNameIntoLoginInput(String userName){
 /*        try{
         //    WebElement webElement = webDriver.findElement(By.xpath(".//input[@name='username' and @placeholder='Username']"));
@@ -73,11 +75,12 @@ public class LoginPage extends ParentPage{
         enterTextIntoElement(inputUserNameHeader, userName);
         return this;
     }
+    @Step
     public LoginPage enterUserNameIntoLoginInputWithButtons(String userName){
         enterTextIntoActiveElement(userName);
         return this;
     }
-
+    @Step
     public LoginPage enterPasswordIntoInputPassword(String password){
        /* try{
         //    WebElement webElement = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
@@ -92,11 +95,12 @@ public class LoginPage extends ParentPage{
         enterTextIntoElement(inputPasswordHeader, password);
         return this;
     }
+    @Step
     public LoginPage enterPasswordIntoInputPasswordWithButtons(String password){
         enterTextIntoActiveElement(password);
         return this;
     }
-
+    @Step
     public LoginPage clickOnButtonLogIn(){
     /*    try{
         //    webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click();
@@ -113,7 +117,7 @@ public class LoginPage extends ParentPage{
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
     }*/
-
+    @Step
     public boolean isButtonSignInDisplayed(){
   /*      try{
             WebElement buttonSignIn = webDriver.findElement(By.xpath(".//button[text()='Sign In']"));
@@ -124,20 +128,22 @@ public class LoginPage extends ParentPage{
         }*/
         return isElementDisplayed(buttonSignIn);
     }
+    @Step
     public boolean isAlertInvalidLoginDisplayed(){
         return isElementDisplayed(alertInvalidLogin);
     }
-
+    @Step
     public HomePage loginWithValidCred() {
         openLoginPage();
         loginWithValidCredWithoutOpenPage();
         return new HomePage(webDriver);
     }
-
+    @Step
     public LoginPage enterUserNameIntoRegistrationInput(String userName) {
         enterTextIntoElement(inputUserNameSignUp, userName);
         return this;
     }
+    @Step
     public LoginPage enterUserNameIntoRegistrationInputWithButtons(String userName) {
         enterTextIntoActiveElement(userName);
         return this;
