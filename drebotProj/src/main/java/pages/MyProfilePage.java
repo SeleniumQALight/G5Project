@@ -42,7 +42,7 @@ public class MyProfilePage extends ParentPage {
         List<WebElement> listPost = getPostsListWithTitle(title);
         int counter = 0;
         while (!listPost.isEmpty() && counter < 100) {
-            clickOnElement(String.format(postTitleLocator,title));//webDriver.findElement(By.xpath(String.format(postTitleLocator, title))));
+            clickOnElement(String.format(postTitleLocator, title));//webDriver.findElement(By.xpath(String.format(postTitleLocator, title))));
             new PostInfoPage(webDriver)
                     .checkIsRedirectToPostInfoPage()
                     .clickOnDeleteButton()
@@ -56,7 +56,7 @@ public class MyProfilePage extends ParentPage {
         return this;
     }
 
-    private MyProfilePage checkIsSuccessDeletedPostMessagePresent() {
+    public MyProfilePage checkIsSuccessDeletedPostMessagePresent() {
         Assert.assertTrue("successDeletedPostMessage is not displayed", isElementDisplayed(successDeletedPostMessage));
         return this;
     }
@@ -64,4 +64,32 @@ public class MyProfilePage extends ParentPage {
     private List<WebElement> getPostsListWithTitle(String title) {
         return webDriver.findElements(By.xpath(String.format(postTitleLocator, title)));
     }
+
+    public EditPostPage editPost(String title, String titleNEW) {
+        List<WebElement> webElementList = getPostsListWithTitle(title);
+
+        if (!webElementList.isEmpty()) {
+            clickOnElement(webElementList.get(0));
+            new PostInfoPage(webDriver).checkIsRedirectToPostInfoPage()
+                    .clickEditButton()
+                    .checkIsRedirectToEditPostPage()
+                    .enterNewTextEditTitle(titleNEW)
+                    .clickOnButtonSaveUpdates()
+                    .checkTextInAlert("Post successfully updated.");
+            //logger.info("Title '" + title + "' was edited to '" + titleNEW + "'");
+        } else {
+            logger.info("post with title '" + title + "' wasn't find");
+        }
+
+
+        return new EditPostPage(webDriver);
+    }
+
+    public MyProfilePage checkPostNotExist(String title) {
+        List<WebElement> webElementList = getPostsListWithTitle(title);
+        Assert.assertEquals("Number of posts with title '" + title + "'", 0, webElementList.size());
+        return this;
+    }
+
+
 }

@@ -68,8 +68,24 @@ public class CreatePostPage extends ParentPage{
         return new PostPage(driver);
     }
 
+    public PostPage clickOnButtonSaveUpdates(){
+        clickOnElement(buttonSaveNewPost);
+        return new PostPage(driver);
+    }
+
     public CreatePostPage checkBoxSelectValue(String action){
         actionWithCheckBox(checkBoxUniquePost, action);
         return this;
+    }
+
+    public CreatePostPage editPostTitle(String newTitle){
+        String title = getTitleText();
+        inputTitle.clear();
+        inputTitle.sendKeys(String.format(title + newTitle));
+        return this;
+    }
+
+    private String getTitleText(){
+        return inputTitle.getAttribute("value");
     }
 }

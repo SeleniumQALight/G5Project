@@ -1,19 +1,20 @@
 package postTest;
 
 import baseTest.BaseTest;
+import catagories.SmokeTestFilter;
 import libs.Util;
 import org.junit.After;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import pages.CreatePostPage;
+import org.junit.experimental.categories.Category;
 
-import java.util.concurrent.TimeUnit;
 
 public class CreatePostTest extends BaseTest {
     final String TITLE = "TC1_Kostiushko" + Util.getDateAndTimeFormatted();
+    static String checkBox = "check";
 
 
     @Test
+    @Category(SmokeTestFilter.class)
     public void createNewPost() {
 
         homePage
@@ -25,8 +26,10 @@ public class CreatePostTest extends BaseTest {
 //            .selectValueInDropDownRole("One Person")
                 .selectTextInDropDownByUI("Групове повідомлення")
                 .enterTextInTextAreaBodyContent("Text for body")
-                .clikSaveNewPostButton()
+                .checkCheckBoxAndClick(checkBox)
+                .clickSaveNewPostButton()
                 .chekIsRedirectToPostPage()
+                .checkTextInPostUnique(checkBox)
                 .checkTextInAllert("New post successfully created.")
                 .getHeaderElement().clickOnMyProfileButton()
                 .chekIsRedirectTomyProfilePage()

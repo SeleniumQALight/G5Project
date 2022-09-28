@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 
@@ -47,10 +48,12 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         try {
             webDriver.get(baseUrl);
             logger.info("Login page was opened");
+            logger.info(baseUrl);
         } catch (Exception e) {
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
@@ -58,6 +61,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public void enterUserNameIntoLoginInput(String userName) {
 //        try {
 ////            WebElement webElement = webDriver
@@ -72,39 +76,42 @@ public class LoginPage extends ParentPage {
         enterTextIntoElement(inputUserNameHeader, userName);
     }
 
+    @Step
     public void enterPasswordIntoInputPassword(String password) {
         enterTextIntoElement(inputPasswordHeader, password);
     }
-
+    @Step
     public void clickOnButtonLogIn() {
         clickOnElement(buttonSingIn);
     }
-
+    @Step
     public HomePage loginWithValidCred() {
         openLoginPage();
         loginWithValidCredWithOutOpenPage();
         return new HomePage(webDriver);
     }
-
+    @Step
     public LoginPage enterUserNameIntoRegistrationForm(String userName) {
         enterTextIntoElement(inputLoginRegistration, userName);
         return this;
     }
-
+    @Step
     public LoginPage enterEmailIntoRegistrationFrom(String email) {
         enterTextIntoElement(inputEmailRegistration, email);
         return this;
     }
 
+    @Step
     public LoginPage enterPasswordIntoRegistrationForm(String password) {
        enterTextIntoElement(inputPasswordRegistration, password);
         return this;
     }
 
+    @Step
     public LoginPage checkErrorsMessages(String expectedErrors) {
         // test;test1 -> array[0] = test , array[1] = test1
         String[] expectedErrorsArray = expectedErrors.split(";");
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of messages should be " + expectedErrorsArray.length)
                 .until(ExpectedConditions.numberOfElementsToBe(
                         By.xpath(listOfErrorsLocator), expectedErrorsArray.length));
@@ -124,6 +131,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public HomePage loginWithValidCredWithOutOpenPage() {
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);

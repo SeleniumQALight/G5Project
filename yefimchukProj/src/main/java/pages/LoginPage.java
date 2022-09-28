@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//input[@name='username' and @placeholder='Username']")
@@ -40,7 +42,7 @@ public class LoginPage extends ParentPage {
     String getRelativeURL() {
         return "/";
     }
-
+@Step
     public LoginPage openLoginPage() {
         try {
             webDriver.get(baseURL);
@@ -52,7 +54,7 @@ public class LoginPage extends ParentPage {
         }
         return this;
     }
-
+@Step
     public void enterUserNameIntoLoginInput(String userName) {
 //        try {
 ////            WebElement webElement = webDriver.findElement(By.xpath(".//input[@name='username' and @placeholder='Username']"));
@@ -64,7 +66,7 @@ public class LoginPage extends ParentPage {
 //        }
         enterTextIntoElement(inputUserNameHeader, userName);
     }
-
+@Step
     public void enterPasswordIntoInputPassword(String password) {
 //        try {
 ////            WebElement webElement = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
@@ -77,7 +79,7 @@ public class LoginPage extends ParentPage {
 //        }
         enterTextIntoElement(inputPasswordHeader, password);
     }
-
+@Step
     public void clickOnButtonLogIn() {
 //        try {
 ////            webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click();
@@ -88,7 +90,7 @@ public class LoginPage extends ParentPage {
 //        }
         clickOnElement(buttonSignIn);
     }
-
+@Step
     public HomePage loginWithValidCred() {
         openLoginPage();
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
@@ -97,22 +99,22 @@ public class LoginPage extends ParentPage {
 
         return new HomePage(webDriver);
     }
-
+@Step
     public LoginPage enterUserNameIntoRegistrationForm(String userName) {
         enterTextIntoElement(inputLoginRegistration, userName);
         return this;
     }
-
+@Step
     public LoginPage enterEmailIntoRegistrationForm(String email) {
         enterTextIntoElement(inputEmailRegistration, email);
         return this;
     }
-
+@Step
     public LoginPage enterPasswordIntoRegistrationForm(String password) {
         enterTextIntoElement(inputPasswordRegistration, password);
         return this;
     }
-
+@Step
     public LoginPage checkErrorsMessages(String expectedErrors) {
         // test;test1 -> array[0] = test, array[1] = test1
         String[] expectedErrorsArray = expectedErrors.split(";");
@@ -133,7 +135,7 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
         return this;
     }
-
+@Step
     public HomePage loginWithValidCredWithoutOpenPage() {
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);

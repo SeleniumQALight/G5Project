@@ -1,14 +1,17 @@
 package postTest;
 
 import baseTest.BaseTest;
+import categories.SmokeTestFilter;
 import libs.Util;
 import org.junit.After;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 public class CreatePostTest extends BaseTest {
 
     final String TITLE = "TC1_Kot " + Util.getDateAndTimeFormatted();
     @Test
+    @Category(SmokeTestFilter.class)
     public void TC1_createNewPost (){
 
     homePage
@@ -27,6 +30,29 @@ public class CreatePostTest extends BaseTest {
             .checkIsRedirectToMyProfilePage()
             .checkPostWasCreated(TITLE)
     ;
+
+    }
+
+    @Test
+    public void TC2_CreateUniquePost(){
+        homePage.openHomePage()
+        .getHeaderElement().clickOnButtonCreatePOst()
+                .checkIsRedirectToCreatePostPage()
+                .enterTextInInputTitle(TITLE)
+                .enterTextInInputBody("Unique")
+                .checkBoxIsClicked("Checked")
+                .selectValueInDropDownUI()
+                .clickOnSavePostButton()
+                .checkIsRedirectedToPostPage()
+                .checkTextInAlert("New post successfully created.")
+                .checkPostIsUnique()
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+                .checkPostWasCreated(TITLE)
+                ;
+
+
+
 
     }
 @After

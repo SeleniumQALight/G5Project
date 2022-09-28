@@ -1,6 +1,7 @@
 package pages;
 
 
+import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -47,28 +48,29 @@ public class LoginPage extends ParentPage {
     String getRelativeUrl() {
         return "/";
     }
-
+    @Step
     public LoginPage openLoginPage() {
         try {
-            webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
+            webDriver.get(baseUrl);
             logger.info("Login page was opened");
+            logger.info(baseUrl);
         } catch (Exception e) {
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
         }
         return this;
     }
-
+    @Step
     public void enterUserNameIntoLoginInput(String userName) {
 
         enterTextIntoElement(inputUserNameHeader,userName);
     }
-
+    @Step
     public void enterPasswordIntoLoginInput(String password) {
 
         enterTextIntoElement(inputUserPasswordHeader,password);
     }
-
+    @Step
     public void clickOnButtonSignIn() {
        clickOnElement(buttonSingIn);
     }
@@ -92,25 +94,25 @@ public class LoginPage extends ParentPage {
         loginWithValidCredWithoutOpenPage();
         return new HomePage(webDriver);
     }
-
+    @Step
     public LoginPage enterUsernameIntoRegistrationForm(String userName) {
         enterTextIntoElement(inputLoginRegistration,userName);
         return this;
     }
-
+    @Step
     public LoginPage enterEmailIntoRegistrationForm(String email) {
         enterTextIntoElement(inputEmailRegistration,email);
         return this;
     }
-
+    @Step
     public LoginPage enterPasswordIntoRegistrationForm(String password) {
         enterTextIntoElement(inputPasswordRegistration,password);
         return this;
     }
-
+    @Step
     public LoginPage checkErrorsMessage(String expectedErrors) {
         String[] expectedErrorsArray=expectedErrors.split(";");
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of Messages")
                 .until(ExpectedConditions.numberOfElementsToBe(
                         By.xpath(listOfErrorsLocator),expectedErrorsArray.length));
@@ -121,17 +123,19 @@ public class LoginPage extends ParentPage {
              {
                  actualTextFromErrors.add(element.getText());
         }
+        /** Накоплює перевірки доки ми не скажемо**/
         SoftAssertions softAssertions=new SoftAssertions();
         for (int i = 0; i < expectedErrorsArray.length; i++) {
             softAssertions.assertThat(expectedErrorsArray[i]).isIn(actualTextFromErrors);
 
         }
+        /**якщо щось не співпало, джава зупинить тест і помітить його червоним**/
         softAssertions.assertAll();
 
         return this;
     }
 
-
+    @Step
     public HomePage loginWithValidCredWithoutOpenPage() {
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoLoginInput(TestData.VALID_PASSWORD);

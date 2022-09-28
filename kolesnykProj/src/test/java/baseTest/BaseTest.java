@@ -1,8 +1,6 @@
 package baseTest;
 
-import Pages.CommonActionWithElements;
-import Pages.HomePage;
-import Pages.LoginPage;
+import Pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -22,10 +20,12 @@ public class BaseTest {
     Logger log = Logger.getLogger(getClass());
     protected LoginPage loginPage;
     protected HomePage homePage;
+    protected PostPage postPage;
+    protected MyProfilePage myProfilePage;
 
     @Before
     public void setUp() {
-        log.info("----> STARTED : "+ testName.getMethodName() + " ---->");
+        log.info("STARTED : "+ testName.getMethodName() + " ---->");
         initDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration
@@ -33,13 +33,15 @@ public class BaseTest {
         log.info("Browser is opened");
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
+        postPage = new PostPage(driver);
+        myProfilePage = new MyProfilePage(driver);
     }
 
     @After
     public void tearDown() {
         driver.quit();
         log.info("Browser is closed");
-        log.info("----> CLOSED : " + testName.getMethodName() + " ----<\n");
+        log.info("CLOSED : " + testName.getMethodName() + " ----<\n");
 
     }
 

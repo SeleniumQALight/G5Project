@@ -1,25 +1,27 @@
 package postTests;
 
 import baseTest.BaseTest;
+import categories.SmokeTestFilter;
 import libs.TestData;
 import libs.Util;
 import org.junit.After;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 public class CreatePostTest extends BaseTest {
     final String TITLE = "petrov-TC1_"+ Util.getDateAndTimeFormatted();
+    String contentText = "Text into tag textArea on page create post";
+    String checkBoxAction = "check";
+    String role = "One Person";
 
     @Test
+    @Category(SmokeTestFilter.class)
     public void TC1_createNewPost(){
         homePage
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
              .checkIsRedirectToCreatePostPage()
-                .enterTextInInputTitle(TITLE)
-                .enterTextInInputBodyContent("Text into tag textArea on page create post")
-                .actionsWithCheckBox("check")
-                .selectOptionInDropDownByUI()
-                .selectValueInDropDownRole("One Person")
+            .fillInputCreatePostForm(TITLE, contentText, checkBoxAction, role)
                 .clickOnCreatePostButton()
              .checkIsRedirectToPostPage()
                 .checkIsAppliedCheckBox(TestData.PP_CHECK_MESSAGE)
@@ -33,6 +35,7 @@ public class CreatePostTest extends BaseTest {
 //                .selectTextInDropDownRole("Приватне повідомлення")
         ;
     }
+
 
     @After
     public void DeletePosts(){

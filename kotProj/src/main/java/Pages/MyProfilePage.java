@@ -25,14 +25,15 @@ public class MyProfilePage extends ParentPage {
 
     @Override
     String getRelatedUrl() {
-        return "/profile/";
+        return "/profile/.*";
     }
 
+
     //метод перевірки чи потрапили ми на потрібну сторінку через ассерт
-    public MyProfilePage checkIsRedirectToMyProfilePage() {
-        waitChatToBeHide();   //перевірка, що чат зник, а потім вже, що сторінка загрузилась
+    public MyProfilePage checkIsRedirectToMyProfilePage(){
+        waitChatToBeHide();
         checkUrlWithPattern();
-        Assert.assertTrue("My Profile page is not loaded", isElementDisplayed(avatar));
+        Assert.assertTrue("My profile page is not loaded", isElementDisplayed(avatar));
         return this;
     }
     //шукаємо всі пости з заданим тайтлом, Elements (not Element) щоб не впав, якщо знайде декілька
@@ -45,23 +46,23 @@ public class MyProfilePage extends ParentPage {
     }
 
     public MyProfilePage deletePostsWithTitleTillPresent(String title) {
-        List <WebElement> listPost = getPostWithTitle(title);
-        int counter =0;
-        while (!listPost.isEmpty() && counter<100) {                    //(&& означає "і" умова ) виконуй поки список не пустий
-            clickOnElement(webDriver.findElement(By.xpath(String.format(postTitleLocator,title))));
+        List<WebElement> listPost = getPostWithTitle(title);
+        int counter = 0;
+        while (!listPost.isEmpty() && counter < 100){
+            clickOnElement(String.format(postTitleLocator,title));
             new PostPage(webDriver)
                     .checkIsRedirectedToPostPage()
                     .clickOnDeleteButton()
                     .checkIsRedirectToMyProfilePage()
                     .checkIsSuccessDeletedPostMessagePresent();
-            logger.info("Post was deleted with title "+title);
+            logger.info("Post was deleted with title " + title);
             listPost = getPostWithTitle(title);
-            counter++;
+            counter++; //counter = counter + 1
         }
-        logger.info("All posts was deleted with title "+title);
+        logger.info("All posts were deleted with title " + title);
         return this;
-
     }
+
 
     public MyProfilePage checkIsSuccessDeletedPostMessagePresent() {
         Assert.assertTrue("Message about post deletion is not displayed ", isElementDisplayed(successDeletePostMessage));
@@ -73,4 +74,9 @@ public class MyProfilePage extends ParentPage {
                 (By.xpath(String.format(postTitleLocator, title))) ;
 
     }
+
+    public PostPage clickOnCreatedPost(String title) {
+      clickOnElement(String.format(postTitleLocator, title));
+        return new PostPage(webDriver);
+}
 }
