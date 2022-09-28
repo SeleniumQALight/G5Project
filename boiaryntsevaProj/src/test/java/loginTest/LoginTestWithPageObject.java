@@ -57,19 +57,6 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
-    public void validLoginUsingKeyboard() {
-        loginPage.openLoginPage();
-        loginPage.enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
-        loginPage.usersPressesKeyTabTime(1);
-        loginPage.isPasswordActive();
-        loginPage.enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
-        loginPage.usersPressesKeyEnterTime(1);
-
-        Assert.assertTrue("Sign out button is not displayed", headerElement.isButtonSignedOutDisplayed());
-
-    }
-
-    @Test
     public void validLoginWithExcel() throws IOException {
         Map<String, String> dataForValidLogin = ExcelDriver.getData
                 (CommonActionsWithElements.configProperties.DATA_FILE(),"validLogOn");
