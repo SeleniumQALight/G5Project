@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,10 +31,12 @@ public class PostPage extends ParentPage {
         return "/post/";
     }
 
+    @Step
     public HeaderElement getHeaderElement() {
         return headerElement;
     }
 
+    @Step
     public PostPage checkIsRedirectToPostPage() {
         checkUrlWithPattern();
         waitChatToBeHide();
@@ -41,16 +44,19 @@ public class PostPage extends ParentPage {
         return this;
     }
 
+    @Step
     public PostPage checkTextInAlert(String text) {
         Assert.assertEquals("Text in Alert", text, alertSuccess.getText());
         return this;
     }
 
+    @Step
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDelete);// викликаємо
         return new MyProfilePage(webDriver);
     }
 
+    @Step
     public PostPage checkPostContentAfterCreatedNewPost(String titleText, String bodyText, String postIsUnique) {
         Assert.assertTrue("The post title is different from already created", isElementContainsText(titleContent, titleText));
         Assert.assertTrue("The post body is different from already created", isElementContainsText(bodyContent, bodyText));
@@ -58,6 +64,7 @@ public class PostPage extends ParentPage {
         return this;
     }
 
+    @Step
     private boolean isPostUniqueCondition(String postIsUnique) {
         if (postIsUnique.equalsIgnoreCase("yes") || postIsUnique.equalsIgnoreCase("no")) {
             if (postIsUnique.equalsIgnoreCase("yes") && textPostIsUnique.getText().equals("Is this post unique? : yes")) {

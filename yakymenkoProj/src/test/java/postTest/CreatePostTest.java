@@ -4,12 +4,19 @@ import baseTest.BaseTest;
 import categories.SmokeTestFilter;
 import libs.Util;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 public class CreatePostTest extends BaseTest {
-    final String TITLE = "TC1_yakymenko-post" + Util.getDateAndTimeFormatted(); // унікальність
-    final String BODY = "TC2_yakymenko-bodyContent" + Util.getDateAndTimeFormatted();
+    String TITLE;
+    String BODY;
+
+    @Before
+    public void setUpTestName() {
+        TITLE = testName1 + "-yakymenko-" + Util.getDateAndTimeFormatted();
+        BODY = testName1 + "-yakymenko-" + Util.getDateAndTimeFormatted();
+    }
 
     @Test
     @Category(SmokeTestFilter.class)

@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -26,6 +27,7 @@ public class MyProfilePage extends ParentPage {
         return "/profile/";
     }
 
+    @Step
     public MyProfilePage checkIsRedirectToMyProfilePage() {
         waitChatToBeHide();
         checkUrlWithPattern();
@@ -33,12 +35,14 @@ public class MyProfilePage extends ParentPage {
         return this;
     }
 
+    @Step
     public MyProfilePage checkPostWasCreated(String title) {
         List<WebElement> postList = getPostListWithTitle(title);
         Assert.assertEquals("Number of posts with title " + title, 1, postList.size());
         return this;
     }
 
+    @Step
     public MyProfilePage deletePostsWithTitleTillPresents(String title) {
         List<WebElement> listPost = getPostListWithTitle(title);
         // якщо б ми пройшли якусь кількість ітерацій і зациклились то пройди 100 разів
@@ -58,11 +62,13 @@ public class MyProfilePage extends ParentPage {
         return this;
     }
 
+    @Step
     private MyProfilePage checkIsSuccessDeletedPostMessagePresent() {
         Assert.assertTrue("successDeletePostMessage Element is not displayed", isElementDisplayed(successDeletePostMessage));
         return this;
     }
 
+    @Step
     private List<WebElement> getPostListWithTitle(String title) {
         return webDriver.findElements(
                 By.xpath(String.format(postTitleLocator, title)));
