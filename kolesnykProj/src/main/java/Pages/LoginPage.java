@@ -1,6 +1,5 @@
 package Pages;
 
-import libs.Color;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -54,6 +53,7 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         try {
             driver.get(baseUrl);
@@ -67,15 +67,18 @@ public class LoginPage extends ParentPage {
         }
     }
 
+    @Step
     public LoginPage enterUserNameIntoLoginInput(String username) {
         enterTextIntoElement(inputUserNameHeader, username);
         return this;
     }
 
+    @Step
     public void enterPasswordIntoInputPassword(String password) {
         enterTextIntoElement(inputPasswordHeader, password);
     }
 
+    @Step
     public void clickOnLoginButton() {
         clickOnElement(buttonSingIn);
     }
