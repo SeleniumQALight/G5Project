@@ -27,10 +27,12 @@ public class BaseTest {
     Logger logger = Logger.getLogger(getClass());
     protected LoginPage loginPage;
     protected HomePage homePage;
+    protected String testName1;
 
     @Before
     public void setUp() {
         logger.info("----- " + testName.getMethodName() + " was started -----");
+        testName1 = testName.getMethodName();
         WebDriverManager.chromedriver().setup();// перед кожним тестом перевіряємо чи встановлений екзешнік
         webDriver = initDriver();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(CommonActionsWithElements.configProperties.TIME_FOR_DFFAULT_WAIT()));
@@ -74,10 +76,12 @@ public class BaseTest {
         protected void failed(Throwable e, Description description) {
             screenshot();
         }
+
         @Attachment(value = "Page screenshot", type = "image/png")
         public byte[] saveScreenshot(byte[] screenShot) {
             return screenShot;
         }
+
         public void screenshot() {
             if (webDriver == null) {
                 logger.info("Driver for screenshot not found");
@@ -85,6 +89,7 @@ public class BaseTest {
             }
             saveScreenshot(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES));
         }
+
         @Override
         protected void finished(Description description) {
             logger.info(String.format("Finished test: %s::%s", description.getClassName(), description.getMethodName()));
