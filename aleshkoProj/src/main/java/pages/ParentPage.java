@@ -22,7 +22,7 @@ abstract class ParentPage extends CommonActionsWithElements {
 
     protected void checkUrlWithPattern() {
         String actualURL = webDriver.getCurrentUrl();
-        Assert.assertTrue("\n ActualURL " + actualURL +  "\n " + "ExpectedURL pattern" +  baseUrl + getRelativeUrl() + " \n "
+        Assert.assertTrue("\n ActualURL: " + actualURL +  "\n " + "ExpectedURL: " +  baseUrl + getRelativeUrl() + " \n "
                 , actualURL.matches(baseUrl + getRelativeUrl()));
     }
 
