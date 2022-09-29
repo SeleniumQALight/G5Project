@@ -1,5 +1,6 @@
 package Pages;
 
+import libs.Color;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -229,11 +230,9 @@ public class LoginPage extends ParentPage {
     }
 
     public LoginPage checkPasswordFieldIsActive(){
-        String color = "rgb(128, 189, 255)";
-        //add enum
         String attributeName = "border-top-color";
         Util.waitABit(1);
-        Assert.assertEquals(color,getElementCssValue(inputPasswordHeader,"border-color"));
+        Assert.assertEquals(Color.BLUE.toString(),getElementCssValue(inputPasswordHeader,"border-color"));
         return this;
     }
 }
