@@ -2,6 +2,7 @@ package Pages;
 
 
 
+import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -51,7 +52,7 @@ public LoginPage(WebDriver webDriver) {
 //@FindBy(xpath = ".//button[@type='submit']")
 //private WebElement buttonSignUp;
 
-
+@Step
     public LoginPage openLoginPage() {
         try {
             webDriver.get(baseUrl);
@@ -63,7 +64,7 @@ public LoginPage(WebDriver webDriver) {
         }
         return this;
     }
-
+@Step
     public LoginPage enterUsernameIntoLoginInput(String userName) {
 //        try {
 ////            WebElement webElement = webDriver.
@@ -79,7 +80,7 @@ public LoginPage(WebDriver webDriver) {
         enterTextIntoElement(inputUserNameHeader, userName);
         return this;
     }
-
+@Step
     public LoginPage enterPasswordIntoPasswordInput(String password) {
         enterTextIntoElement(inputUserPasswordHeader, password);
         return this;

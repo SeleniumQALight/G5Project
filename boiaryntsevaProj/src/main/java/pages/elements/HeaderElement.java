@@ -1,5 +1,6 @@
 package pages.elements;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,16 +24,18 @@ public class HeaderElement extends CommonActionsWithElements {
         super(webDriver);
     }
 
+    @Step
     public CreatePostPage clickOnCreatePostButton() {
         clickOnElement(buttonCreatePost);
         return new CreatePostPage(webDriver);
     }
 
+    @Step
     public MyProfilePage clickOnMyProfileButton() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
     }
-
+    @Step
     public boolean isButtonSignedOutDisplayed() {
 //        try {
 //            WebElement buttonSignOut = webDriver.findElement(By.xpath(".//button[text()='Sign Out']"));

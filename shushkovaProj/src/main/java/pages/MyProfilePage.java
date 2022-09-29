@@ -13,6 +13,9 @@ public class MyProfilePage extends ParentPage{
     @FindBy(xpath=".//img[@class=\"avatar-small\"]")
     private WebElement avatar;
 
+    @FindBy(name ="title")
+    private WebElement inputTitle;
+
     private String postTitleLocator=".//*[text()='%s']";
     
     @FindBy(xpath = ".//*[text()='Post successfully deleted']")
@@ -72,6 +75,11 @@ public class MyProfilePage extends ParentPage{
         return webDriver.findElements(
                 By.xpath(String.format(postTitleLocator,title)));
 
+    }
+
+    public EditPage clickOnPostWithTitle(String title) {
+        clickOnElement(String.format(postTitleLocator,title));
+        return new EditPage(webDriver);
     }
 
 

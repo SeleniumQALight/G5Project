@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -49,6 +50,7 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         try {
             webDriver.get(baseUrl);
@@ -61,6 +63,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage enterUsernameIntoLoginInput(String userName) {
         //       try {
         //           WebElement webElement = webDriver.findElement(By.xpath(".//input[@name='username' and " +
@@ -77,6 +80,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage enterPasswordIntoInputPassword(String password) {
         //       try{
         //           WebElement webElement = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
@@ -92,6 +96,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage clickOnButtonLogIn() {
         //       try{
         //           webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click();
@@ -104,27 +109,32 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public HomePage loginWithValidCred() {
         openLoginPage();
         loginWithValidCredWithOutOpenPage();
         return new HomePage(webDriver);
     }
 
+    @Step
     public LoginPage enterTextInInputUsername(String text) {
         enterTextIntoElement(inputUsername, text);
         return this;
     }
 
+    @Step
     public LoginPage enterTextInInputEmail(String text) {
         enterTextIntoElement(inputEmail, text);
         return this;
     }
 
+    @Step
     public LoginPage enterTextInInputPassword(String text) {
         enterTextIntoElement(inputPassword, text);
         return this;
     }
 
+    @Step
     public LoginPage checkWeSeeValidationMessagesInRegistrationForm(int number) {
         List<WebElement> registrationValidationMessagesList = getListWithRegistrationValidationMessages();
         Assert.assertEquals("There are not enough validation messages", number,
@@ -132,6 +142,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public List<WebElement> getListWithRegistrationValidationMessages() {
         webDriverWaitLow.withMessage("Validation messages is not on display")
                 .until(ExpectedConditions
@@ -139,6 +150,7 @@ public class LoginPage extends ParentPage {
         return webDriver.findElements(By.xpath(validationMessagesLocator));
     }
 
+    @Step
     public LoginPage checkErrorMessageDisplayed(String text) {
         try {
             WebElement errorMessage = webDriver.findElement(By.xpath(String.format(errorMessageLocator, text)));
@@ -150,6 +162,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage checkErrorsMessages(String expectedErrors) {
         String[] expectedErrorsArray = expectedErrors.split(";");
         webDriverWaitLow.withMessage("Number of messages should be " + expectedErrors.length())
@@ -169,11 +182,13 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage checkErrorMessageForInvalidHeaderUsernamePassword() {
         Assert.assertTrue(isElementDisplayed(errorHeaderMessage));
         return this;
     }
 
+    @Step
     public HomePage loginWithValidCredWithOutOpenPage() {
         enterUsernameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
@@ -181,11 +196,13 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
     public CreatePostPage clickOnButtonCreatePost() {
         clickOnElement(buttonCreatePost);
         return new CreatePostPage(webDriver);
     }
 
+    @Step
     public MyProfilePage clickOnMyProfileButton() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);

@@ -1,15 +1,18 @@
 package postsTest;
 
 import baseTest.BaseTest;
+import categories.SmokeTestFilter;
 import libs.Util;
 import org.junit.After;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 public class CreatePostTest extends BaseTest {
     final String TITLE = "boiaryntseva-post1" + Util.getDateAndTimeFormatted();
    // final String STATE = "check";
 // TODO   enum checkBoxValue {check, uncheck}
     @Test
+    @Category(SmokeTestFilter.class)
     public void createNewPost() {
         //TODO body input, select from dropdown
         homePage

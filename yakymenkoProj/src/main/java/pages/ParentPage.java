@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,12 +20,14 @@ abstract class ParentPage extends CommonActionsWithElements { // Alt+Enter → c
 
     abstract String getRelativeUrl();
 
+    @Step
     protected void checkUrl() {
         Assert.assertEquals("Invalid page "
                 , baseUrl + getRelativeUrl()
                 , webDriver.getCurrentUrl());
     }
 
+    @Step
     protected void checkUrlWithPattern() {
         logger.debug(webDriver.getCurrentUrl());
         Assert.assertThat("Invalid page"
@@ -32,6 +35,7 @@ abstract class ParentPage extends CommonActionsWithElements { // Alt+Enter → c
                 , containsString(baseUrl + getRelativeUrl())); // Alt+Enter - import
     }
 
+    @Step
     protected void waitChatToBeHide() {
         webDriverWaitLow.withMessage("Chat is not closed")
                 .until(ExpectedConditions
