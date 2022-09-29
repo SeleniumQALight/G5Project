@@ -4,10 +4,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.CommonActionWithElement;
 import pages.CreatePostPage;
+import pages.MyProfilePage;
 
 public class HeaderElement extends CommonActionWithElement {
     @FindBy(xpath = ".//a[text()='Create Post']")
     private WebElement buttonCreatePost;
+    @FindBy(xpath = ".//a//img[@data-original-title='My Profile']")
+    WebElement buttonMyProfile;
 
 
     public HeaderElement(WebDriver webDriver) {
@@ -20,5 +23,9 @@ public class HeaderElement extends CommonActionWithElement {
     public CreatePostPage clickOnButtonCreatePost () {
         clickOnElement(buttonCreatePost);
         return new CreatePostPage(webDriver);
+    }
+    public MyProfilePage clickOnMyProfileButton() {
+        clickOnElement(buttonMyProfile);
+        return new MyProfilePage(webDriver);
     }
 }

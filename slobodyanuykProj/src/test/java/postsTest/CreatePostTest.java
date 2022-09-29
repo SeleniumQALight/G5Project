@@ -15,7 +15,15 @@ public class CreatePostTest extends BaseTest {
                 .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
                 .enterTextInInputTitle("Slobodyanuyk-post")
+                .enterTextInInputBody("Slobodyanuyk-Body")
+                .selectTextInDropDownUi("Групове поввідомлення")
+                .clickOnButtonSaveNewPost()
                 //.selectTextInDropDownRole("Приватне повідомлення")
-                .selectValueInDropDownRole("One Person");
+                //.selectValueInDropDownRole("One Person")
+        .checkIsRedirectToPostPage()
+                .checkTestInAlert("New post successfully created.")
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+        ;
     }
 }

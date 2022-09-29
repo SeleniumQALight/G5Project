@@ -11,6 +11,12 @@ public class CreatePostPage extends ParentPage{
     private WebElement inputTitle;
     @FindBy(tagName = "select")
     private WebElement dropDownRole;
+    @FindBy (xpath = ".//option[text()='Приватне повідомлення']")
+    private WebElement optionElement;
+    @FindBy (xpath =".//textarea[@id='post-body']")
+    private WebElement inputBody;
+    @FindBy (xpath =".//button[text()='Save New Post']")
+    private WebElement buttonSaveNewPost;
 
     public CreatePostPage(WebDriver webDriver) {
         super(webDriver);
@@ -25,13 +31,30 @@ public class CreatePostPage extends ParentPage{
         return this;
     }
 
-    public CreatePostPage selectTextInDropDown(String textForSelect) {
-        selectTextDropDown(dropDownRole, textForSelect);
-        return this;
-    }
+//    public CreatePostPage selectTextInDropDown(String textForSelect) {
+//        selectTextDropDown(dropDownRole, textForSelect);
+//        return this;
+//    }
 
     public CreatePostPage selectValueInDropDownRole(String valueForSelect) {
         selectValueDropDown(dropDownRole,valueForSelect);
         return this;
+    }
+    public CreatePostPage selectTextInDropDown () {
+        return this;
+    }
+
+    public CreatePostPage selectTextInDropDownUi(String textUi) {
+        selectDropDownElementUi(dropDownRole,optionElement);
+        return this;
+    }
+
+    public CreatePostPage enterTextInInputBody(String textBody) {
+             enterTextIntoElement(inputBody,textBody);
+        return this;
+    }
+    public PostPage clickOnButtonSaveNewPost () {
+        clickOnElement(buttonSaveNewPost);
+        return  new PostPage(webDriver);
     }
 }

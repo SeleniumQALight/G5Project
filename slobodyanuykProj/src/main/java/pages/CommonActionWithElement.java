@@ -5,15 +5,23 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CommonActionWithElement {
     protected WebDriver webDriver;
+    protected WebDriverWait webDriverWait10,webDriverWait15;
     Logger logger = Logger.getLogger(getClass());
+
 
     public CommonActionWithElement(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        webDriverWait15 = new WebDriverWait(webDriver,Duration.ofSeconds(15));
     }
     protected void enterTextIntoElement (WebElement webElement, String text) {
         try {
@@ -26,6 +34,7 @@ public class CommonActionWithElement {
     }
     protected void clickOnElement (WebElement webElement) {
         try {
+            webDriverWait15.until(ExpectedConditions.elementToBeClickable(webElement));
             String name = webElement.getAccessibleName();
              webElement.click();
              logger.info("' " + name + "' was clicked" );
@@ -68,7 +77,7 @@ public class CommonActionWithElement {
     }
 
     /**
-     * Выьираем значение в DropDown по видимому тексту
+     * Выбираем значение в DropDown по видимому тексту
      * @param DropDown
      * @param text
      */
@@ -83,7 +92,7 @@ public class CommonActionWithElement {
 
     }
     /**
-     * Выьираем значение в DropDown по Value
+     * Выбираем значение в DropDown по Value
      * @param DropDown
      * @param value - value
      */
@@ -96,5 +105,13 @@ public class CommonActionWithElement {
             printErrorAndStopTest(e);
         }
 
+    }
+    protected void selectDropDownElementUi (WebElement dropDown, WebElement optionElementUi ) {
+                  try {
+                      clickOnElement(dropDown);
+                      clickOnElement(optionElementUi);
+                  }catch (Exception e) {
+                      printErrorAndStopTest(e);
+                  }
     }
 }

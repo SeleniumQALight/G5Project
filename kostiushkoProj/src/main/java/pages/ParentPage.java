@@ -30,6 +30,12 @@ abstract class ParentPage extends CommonActionsWithElements {
         Assert.assertThat("Invalid page"
                 ,webDriver.getCurrentUrl()
                 ,containsString(baseUrl+getRelateUrl()));
+        //"/post/"+"[a-zA-Z0-9]*"+"/edit";
+//        String actualURL = webDriver.getCurrentUrl();
+//        Assert.assertTrue("\n ActualURL " + actualURL +  "\n "
+//                        + "ExpectedURL pattern" +  baseUrl + getRelativeUrl() + " \n "
+//                , actualURL.matches(baseUrl + getRelativeUrl()));
+
     }
 
 
