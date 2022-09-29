@@ -35,7 +35,7 @@ public class LoginTestWithPageObject extends BaseTest {
         loginPage
                 .openLoginPage()
                 .enterUsernameIntoLoginInput("qaauto")
-                .enterPasswordIntoPasswordInput("123456qwert")
+                .enterPasswordIntoPasswordInput("123456qwerty")
                 .clickOnSignInButton()
                 .checkIsRedirectToHomePage();
     }

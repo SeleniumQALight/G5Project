@@ -52,69 +52,69 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
-//    @Step
+    @Step
     public LoginPage openLoginPage() {
         openPage(baseUrl);
         return this;
     }
 
-//    @Step
+    @Step
     public LoginPage enterUsernameIntoLoginInput(String userName) {
         enterTextIntoElement(inputUsernameHeader, userName);
         return this;
     }
 
-//    @Step
+    @Step
     public LoginPage enterPasswordIntoPasswordInput(String password) {
         enterTextIntoElement(inputPasswordHeader, password);
         return this;
     }
 
-//    @Step
+    @Step
     public HomePage clickOnSignInButton() {
         clickOnElement(buttonSignIn);
         return new HomePage(webDriver);
     }
 
-//    @Step
+    @Step
     public LoginPage enterUsernameIntoRegistrationInput(String userName) {
         enterTextIntoElement(inputRegisterUsername, userName);
         return this;
     }
 
-//    @Step
+    @Step
     public LoginPage enterEmailIntoRegistrationInput(String email) {
         enterTextIntoElement(inputRegisterEmail, email);
         return this;
     }
 
-//    @Step
+    @Step
     public LoginPage enterPasswordIntoRegistrationInput(String password) {
         enterTextIntoElement(inputRegisterPassword, password);
         return this;
     }
 
-//    @Step
+    @Step
     public HomePage clickOnSignUpButton() {
         clickOnElement(buttonSignUp);
         return new HomePage(webDriver);
     }
 
-//    @Step
+    @Step
     public LoginPage checkInlavidLoginAction() {
         Assert.assertTrue("Alert about wrong username/password is not visible", isElementDisplayed(alertInvalidLoginOrPassword));
         Assert.assertTrue("Button ''Sign In' is not visible", isElementDisplayed(buttonSignIn));
         return this;
     }
 
-//    @Step
+    @Step
     public HomePage loginWithValidCred() {
         openLoginPage();
         loginWithValidCredWithoutOpenPage();
         return new HomePage(webDriver);
     }
 
-//    @Step
+    @Step
     public LoginPage checkAlertAboutUsernameOnSignUpForm(String text) {
         webDriverWaitLow.until(ExpectedConditions.visibilityOf(alertUsernameSignUp));
         Assert.assertTrue("Alert is not displayed", isElementDisplayed(alertUsernameSignUp));
@@ -122,7 +122,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-//    @Step
+    @Step
     public LoginPage checkAlertAboutEmailOnSignUpForm(String text) {
         webDriverWaitLow.until(ExpectedConditions.visibilityOf(alertEmailSignUp));
         Assert.assertTrue("Alert is not displayed", isElementDisplayed(alertEmailSignUp));
@@ -130,7 +130,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-//    @Step
+    @Step
     public LoginPage checkAlertAboutPasswordOnSignUpForm(String text) {
         webDriverWaitLow.until(ExpectedConditions.visibilityOf(alertPasswordSignUp));
         Assert.assertTrue("Alert is not displayed", isElementDisplayed(alertPasswordSignUp));
@@ -138,7 +138,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-//    @Step
+    @Step
     public LoginPage checkErrorsMessagesOnRegistrationForm(String expectedErrors) {
         String[] expectedErrorArray = expectedErrors.split(";");
         webDriverWaitLow
@@ -162,7 +162,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-//    @Step
+    @Step
     public HomePage loginWithValidCredWithoutOpenPage() {
         enterUsernameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
