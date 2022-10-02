@@ -2,11 +2,16 @@ package baseTest;
 
 import Pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Attachment;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -25,7 +30,7 @@ public class BaseTest {
 
     @Before
     public void setUp() {
-        log.info("----> STARTED : "+ testName.getMethodName() + " ---->");
+        log.info("STARTED : "+ testName.getMethodName() + " ---->");
         initDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration
@@ -37,16 +42,45 @@ public class BaseTest {
         myProfilePage = new MyProfilePage(driver);
     }
 
-    @After
-    public void tearDown() {
-        driver.quit();
-        log.info("Browser is closed");
-        log.info("----> CLOSED : " + testName.getMethodName() + " ----<\n");
-
-    }
+//    @After
+//    public void tearDown() {
+//        driver.quit();
+//        log.info("Browser is closed");
+//        log.info("CLOSED : " + testName.getMethodName() + " ----<\n");
+//
+//    }
 
     @Rule
     public TestName testName = new TestName();
+
+    @Rule
+    public TestWatcher watchman = new TestWatcher() {
+        @Override
+        protected void failed(Throwable e, Description description) {
+            screenshot();
+        }
+        @Attachment(value = "Page screenshot", type = "image/png")
+        public byte[] saveScreenshot(byte[] screenShot) {
+            return screenShot;
+        }
+        public void screenshot() {
+            if (driver == null) {
+                log.info("Driver for screenshot not found");
+                return;
+            }
+            saveScreenshot(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
+        }
+        @Override
+        protected void finished(Description description) {
+            log.info(String.format("Finished test: %s::%s", description.getClassName(), description.getMethodName()));
+            try {
+                driver.quit();
+                log.info("Browser was closed");
+            } catch (Exception e) {
+                log.error(e);
+            }
+        }
+    };
 
     private WebDriver initDriver(){
         String browser = System.getProperty("browser");

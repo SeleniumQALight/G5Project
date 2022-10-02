@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.elements.HeaderElement;
 
+import java.awt.*;
+
 
 public class PostPage extends ParentPage {
     private HeaderElement headerElement = new HeaderElement(webDriver);
@@ -15,6 +17,8 @@ public class PostPage extends ParentPage {
     private WebElement alertSuccess;
     @FindBy(xpath = ".//button[@data-original-title='Delete']")
     private WebElement buttonDelete;
+    @FindBy(xpath = ".//* [contains(text(), 'Is this post unique?')]")
+    private WebElement textCheckBox;
     @FindBy(xpath = ".//* [@class = 'svg-inline--fa fa-edit fa-w-18']")
     private WebElement editButton;
 
@@ -33,8 +37,21 @@ public class PostPage extends ParentPage {
         return this;
     }
 
+
+
+
     public PostPage checkTextInAllert(String text) {
         Assert.assertEquals("Text in Alert", text, alertSuccess.getText());
+        return this;
+    }
+
+    public PostPage checkTextInPostUnique(String text) {
+        if (text.equalsIgnoreCase("check")){
+            Assert.assertEquals("Text does not match", "Is this post unique? : yes", textCheckBox.getText());
+        } else if (text.equalsIgnoreCase("uncheck")) {
+            Assert.assertEquals("Text does not match", "Is this post unique? : no", textCheckBox.getText());
+        }
+
         return this;
     }
 

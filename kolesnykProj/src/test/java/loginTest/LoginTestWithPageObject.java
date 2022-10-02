@@ -1,14 +1,25 @@
 package loginTest;
 
+import categories.SmokeTestFilter;
 import baseTest.BaseTest;
+import io.qameta.allure.*;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import junitparams.naming.TestCaseName;
+import libs.ExcelDriver;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
+import java.util.Map;
+
+import static Pages.CommonActionWithElements.configProperties;
+
 @RunWith(JUnitParamsRunner.class)
+@Epic("Allure examples")
+@Feature("Junit 4 support")
 public class LoginTestWithPageObject extends BaseTest {
 
     final static String VALID_USERNAME = "rosko48";
@@ -18,7 +29,15 @@ public class LoginTestWithPageObject extends BaseTest {
     final static String COMMA = ",";
 
 
+    @Description("Some detailed test description")
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @Issue("123")
+    @Issue("432")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Base support for bdd annotations")
     @Test
+    //@Category(SmokeTestFilter.class)
     public void validLogin() {
         loginPage.openLoginPage();
         loginPage.enterUserNameIntoLoginInput("rosko48");
@@ -40,5 +59,16 @@ public class LoginTestWithPageObject extends BaseTest {
         loginPage.enterPasswordIntoInputPassword(password);
         loginPage.clickOnLoginButton();
         Assert.assertTrue("User is logged in with incorrect password", loginPage.isButtonSignInDisplayed());
+    }
+
+    @Test
+    public void validLoginWithExcel() throws IOException {
+        Map<String, String> dataForValidLogin = ExcelDriver.getData(
+                configProperties.DATA_FILE(), "validLogOn");
+        loginPage.openLoginPage();
+        loginPage.enterUserNameIntoLoginInput(dataForValidLogin.get("login"));//"rosko48"
+        loginPage.enterPasswordIntoInputPassword(dataForValidLogin.get("pass"));//"12345678912345"
+        loginPage.clickOnLoginButton();
+        Assert.assertTrue("Button 'Sign Out' is not displayed", homePage.getHeaderElements().isButtonSignOutDisplayed());
     }
 }

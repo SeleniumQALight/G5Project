@@ -19,14 +19,10 @@ public class PostPage extends ParentPage {
     private WebElement postIsUnique;
 
 
-    public PostPage(WebDriver webDriver) {
-        super(webDriver);
-    }
+    public PostPage(WebDriver webDriver) {super(webDriver);}
 
     @Override
-    String getRelatedUrl() {
-        return "/post/";
-    }
+    String getRelatedUrl() {return "/post/.*";}
 
     public PostPage checkIsRedirectedToPostPage() {
         checkUrlWithPattern();
@@ -59,4 +55,11 @@ public class PostPage extends ParentPage {
         clickOnElement(buttonDeletePost);
         return new MyProfilePage(webDriver);
     }
+
+
+    public EditPostPage clickOnEditPostButton() {
+        clickOnElement(buttonEdit);
+        return new EditPostPage(webDriver);
+    }
 }
+

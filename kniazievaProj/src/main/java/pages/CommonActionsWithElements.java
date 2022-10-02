@@ -111,6 +111,16 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected boolean isCheckCheckBox(WebElement webElement){
+        if (webElement.isSelected()){
+            logger.info("CheckBox is checked now");
+            return true;
+        }
+        else {
+            logger.info("CheckBox is unchecked now");
+            return false;
+        }
+    }
 
 
     private void printErrorAndStopTest(Exception e) {
