@@ -15,8 +15,9 @@ public class CreatePostPage extends ParentPage {
     private WebElement postBody;
     @FindBy(xpath = ".//button[@class='btn btn-primary']")
     private WebElement buttonSaveNewPost;
-    @FindBy(xpath = ".//* [@class = 'btn btn-primary']")
-    private WebElement buttonSaveUpdatesPost;
+
+
+
 
     @FindBy (xpath = ".//* [@name='uniquePost']")
     private WebElement checkBoxOnCreatePostPage;
@@ -91,16 +92,12 @@ public class CreatePostPage extends ParentPage {
         }return this;
     }
 
-    public CreatePostPage clikSaveUpdatesPostButton() {
-    clicOnElement(buttonSaveUpdatesPost);
-        return this;
-    }
-
-    public CreatePostPage chekIsRedirectToOldPostPage() {
+    public CreatePostPage checkIsRedirectToOldPostPage() {
         checkUrlwithPattern();
         Assert.assertTrue("Page CreatePost is not loaded", isElementDisplayed(inputTitle));
         return this;
     }
+
 
 }
 

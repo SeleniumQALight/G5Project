@@ -21,7 +21,7 @@ public class ChangeTitlePostTest extends BaseTest {
                 .enterTextInInputTitle(TITLE)
                 .selectTextInDropDownByUI("Групове повідомлення")
                 .enterTextInTextAreaBodyContent("Text for body")
-                .clikSaveNewPostButton()
+                .clickSaveNewPostButton()
                 .chekIsRedirectToPostPage()
                 .checkTextInAllert("New post successfully created.")
                 .getHeaderElement().clickOnMyProfileButton()
@@ -38,22 +38,23 @@ public class ChangeTitlePostTest extends BaseTest {
                 .chekIsRedirectTomyProfilePage()
                 .findOldPostWithTitle(TITLE).clickOnButtonTitlePost(TITLE)
                 .clickOnEditButton()
-//                .chekIsRedirectToOldPostPage()
-                .enterTextInInputTitle("NEW "+TITLE)
+                .checkIsRedirectToOldPostPage()
+                .enterNewTextInInputTitle("NEW "+TITLE)
                 .clikSaveUpdatesPostButton()
-
-
-
+                .checkSuccessfulMessage()
+                .getHeaderElement().clickOnMyProfileButton()
+                .chekIsRedirectTomyProfilePage()
+                .chekPostWasCreated("NEW "+TITLE);
 
         ;
     }
 
-//    @After
-////    public void deletePosts() {
-////        homePage.openHomePage()
-////                .getHeaderElement().clickOnMyProfileButton()
-////                .chekIsRedirectTomyProfilePage()
-////                .deletePostsWithTitleTillPresent(TITLE);
-////
-////    }
+    @After
+    public void deletePosts() {
+        homePage.openHomePage()
+                .getHeaderElement().clickOnMyProfileButton()
+                .chekIsRedirectTomyProfilePage()
+                .deletePostsWithTitleTillPresent(TITLE)
+                .deletePostsWithTitleTillPresent("NEW "+TITLE);
+    }
 }

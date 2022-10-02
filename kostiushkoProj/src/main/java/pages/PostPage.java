@@ -13,6 +13,12 @@ public class PostPage extends ParentPage {
     private HeaderElement headerElement = new HeaderElement(webDriver);
     @FindBy(xpath = ".//a[@data-original-title='Edit']")
     private WebElement buttonEdit;
+    @FindBy (xpath = ".//*[@class='alert alert-success text-center' and contains(text(), 'Post successfully updated.')]")
+    private WebElement successfulMessage;
+    @FindBy(xpath = ".//* [@class = 'btn btn-primary']")
+    private WebElement buttonSaveUpdatesPost;
+    @FindBy(name = "title")
+    private WebElement inputTitle;
     @FindBy(xpath = ".//*[@class='alert alert-success text-center']")
     private WebElement alertSuccess;
     @FindBy(xpath = ".//button[@data-original-title='Delete']")
@@ -36,6 +42,8 @@ public class PostPage extends ParentPage {
         Assert.assertTrue("post Page is not loaded", isElementDisplayed(buttonEdit));
         return this;
     }
+
+
 
 
 
@@ -64,8 +72,29 @@ public class PostPage extends ParentPage {
     }
 
 
-    public CreatePostPage clickOnEditButton() {
+    public PostPage clickOnEditButton() {
         clicOnElement(editButton);
-    return new CreatePostPage(webDriver);
+    return this;
     }
+
+    public PostPage checkIsRedirectToOldPostPage() {
+        checkUrlwithPattern();
+        Assert.assertTrue("Page CreatePost is not loaded", isElementDisplayed(inputTitle));
+        return this;
+    }
+
+    public PostPage enterNewTextInInputTitle(String title) {
+        enterTextIntoElement(inputTitle, title);
+        return this;
+    }
+    public PostPage clikSaveUpdatesPostButton() {
+        clicOnElement(buttonSaveUpdatesPost);
+        return this;
+    }
+    public PostPage checkSuccessfulMessage() {
+        Assert.assertTrue("Text not display", isElementDisplayed(successfulMessage));
+        logger.info("Successful Message display");
+        return this;
+    }
+
 }
