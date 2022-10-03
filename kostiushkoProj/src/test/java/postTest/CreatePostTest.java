@@ -1,9 +1,11 @@
 package postTest;
 
 import baseTest.BaseTest;
+import catagories.SmokeTestFilter;
 import libs.Util;
 import org.junit.After;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 
 public class CreatePostTest extends BaseTest {
@@ -12,6 +14,7 @@ public class CreatePostTest extends BaseTest {
 
 
     @Test
+    @Category(SmokeTestFilter.class)
     public void createNewPost() {
 
         homePage

@@ -1,8 +1,10 @@
 package loginTest;
 
+import categories.SmokeTestFilter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class LoginTest {
     WebDriver webDriver;
     @Test
+    @Category(SmokeTestFilter.class)
     public void validLogin(){
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();

@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import pages.elements.HeaderElement;
@@ -16,7 +17,7 @@ public class HomePage extends ParentPage { // Alt + Insert → create constructo
         return "/";
     }
 
-
+    @Step
     /**
      * Перевірка чи дійсно завантажилась HomePage
      *
@@ -28,6 +29,7 @@ public class HomePage extends ParentPage { // Alt + Insert → create constructo
         return this;
     }
 
+    @Step
     /**
      * Метод який відкриває Home Page і перевіряє що саме вона відкрилась
      *
@@ -45,7 +47,7 @@ public class HomePage extends ParentPage { // Alt + Insert → create constructo
         return this;
     }
 
-
+    @Step
     /**
      * Віддає приватний елемент Header
      *

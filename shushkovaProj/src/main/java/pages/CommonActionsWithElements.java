@@ -142,6 +142,13 @@ protected void selectTextInDropDown(WebElement dropDown,String text){
         ArrayList<String> tabs = new ArrayList<> (webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
     }
+    public void scrollToElement(WebElement buttonSaveUpdates){
+        WebElement element = webDriver.findElement(By.id("my-id"));
+        Actions actions = new Actions(webDriver);
+        actions.moveToElement(element);
+        actions.perform();
+
+    }
     /**метод moveToElement (аналог скрола )
 
      WebElement element = driver.findElement(By.id("my-id"));

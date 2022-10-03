@@ -2,14 +2,17 @@ package postsTests;
 
 import org.junit.After;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import baseTest.BaseTest;
+import categories.SmokeTestFilter;
 import libs.Util;
 
 public class CreatePostTest extends BaseTest {
     final String TITLE = "TC1_radulenko" + Util.getDateAndTimeFormatted();
 
     @Test
+    @Category(SmokeTestFilter.class)
     public void TC1_createNewPost(){
         homePage
                 .openHomePage()

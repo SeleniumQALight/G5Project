@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import io.qameta.allure.Step;
 import pages.CommonActionsWithElements;
 import pages.CreatePostPage;
 import pages.MyProfilePage;
@@ -22,19 +23,23 @@ public class HeaderElement extends CommonActionsWithElements {
         super(webDriver);
     }
 
+
     /**
      * клік на кнопку "створення поста"
      * і повертаємо пейджу Створення поста
      */
+    @Step
     public CreatePostPage clickOnButtonCreatePost(){
         clickOnElement(buttonCreatePost);
         return new CreatePostPage(webDriver);
     }
 
+    @Step
     public boolean isButtonSighOutDisplayed() {
         return isElementDisplayed(buttonSignOut);
     }
 
+    @Step
     public MyProfilePage clickOnMyProfileButton(){
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);

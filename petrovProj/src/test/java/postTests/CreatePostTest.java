@@ -1,10 +1,12 @@
 package postTests;
 
 import baseTest.BaseTest;
+import categories.SmokeTestFilter;
 import libs.TestData;
 import libs.Util;
 import org.junit.After;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 public class CreatePostTest extends BaseTest {
     final String TITLE = "petrov-TC1_"+ Util.getDateAndTimeFormatted();
@@ -13,6 +15,7 @@ public class CreatePostTest extends BaseTest {
     String role = "One Person";
 
     @Test
+    @Category(SmokeTestFilter.class)
     public void TC1_createNewPost(){
         homePage
                 .openHomePage()
