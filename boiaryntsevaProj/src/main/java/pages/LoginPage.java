@@ -25,7 +25,7 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//button[text()='Sign In']")
     private WebElement buttonSingIn;
 
-    @FindBy(xpath = ".//div[contains(text(), 'Invalid')]")
+    @FindBy(xpath = ".//div[contains(text(), 'Invalid username / password')]")
     private WebElement invalidLoginMessage;
 
     @FindBy(id = "username-register")

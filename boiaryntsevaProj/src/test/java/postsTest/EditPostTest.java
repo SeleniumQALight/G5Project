@@ -19,7 +19,7 @@ public class EditPostTest extends BaseTest {
                 .enterTextInputTitle(TITLE)
                 .enterTextInputBody("Text entered into body")
                 .selectValueForCheckBox("check")
-                .selectValueInDropDown()
+                .selectValueInDropDownRole("One Person")
                 .savePost()
                 .getHeaderElement()
                 .clickOnMyProfileButton()

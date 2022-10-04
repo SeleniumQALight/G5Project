@@ -39,6 +39,7 @@ public class CreatePostTest extends BaseTest {
 
     @After
     public void deletePost() {
+        webDriver.quit();
         homePage
                 .openHomePage()
                 .getHeaderElement()

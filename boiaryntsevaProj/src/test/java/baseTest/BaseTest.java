@@ -23,7 +23,7 @@ import pages.elements.HeaderElement;
 import java.time.Duration;
 
 public class BaseTest {
-    WebDriver webDriver;
+    protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
     protected LoginPage loginPage;
     protected HomePage homePage;

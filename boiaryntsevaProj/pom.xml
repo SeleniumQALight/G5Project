@@ -105,7 +105,7 @@
                             <parallel>all</parallel>
                             <argLine>-Xmx512m</argLine>
                             <argLine>-XX:MaxPermSize=256m</argLine>
-                            <threadCount>3</threadCount>
+                            <threadCount>1</threadCount>
                             <!-- <parallel>methods</parallel>-->
                             <!--              <parallel>classes</parallel>-->
                             <testFailureIgnore>true</testFailureIgnore>
