@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+import io.qameta.allure.Step;
+
 public class MyProfilePage extends ParentPage {
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
@@ -27,6 +29,7 @@ public class MyProfilePage extends ParentPage {
 
     private String postTitleLocator = ".//*[text()='%s']";
 
+    @Step
     public MyProfilePage checkIsRedirectToMyProfilePage() {
         waitChatToBeHidden();
         checkUrlWithPatterns();
@@ -34,12 +37,14 @@ public class MyProfilePage extends ParentPage {
         return this;
     }
 
+    @Step
     public MyProfilePage checkPostWasCreated(String title) {
         List<WebElement> postList = getPostsWithTitle(title);
         Assert.assertEquals("Number of posts with title " + title, 1, postList.size());
         return this;
     }
 
+    @Step
     public MyProfilePage deletePostWithTitleTillPresent(String title) {
 
         List<WebElement> listPost = getPostsWithTitle(title);
@@ -58,17 +63,20 @@ public class MyProfilePage extends ParentPage {
         return this;
     }
 
+    @Step
     private MyProfilePage checkIsSuccessDeletedPostMessagePresent() {
         Assert.assertTrue("Element is not displayed",
                 isElementDisplayed(successDeletePostMessage));
         return this;
     }
 
+    @Step
     private List<WebElement> getPostsWithTitle(String title) {
         return webDriver.findElements(
                 By.xpath(String.format(postTitleLocator, title)));
     }
 
+    @Step
     public PostPage clickOnPostWithTitle(String title){
         if (getPostsWithTitle(title).size() > 1 || getPostsWithTitle(title).size() == 0 ){
             logger.info("There is no post with provided title");

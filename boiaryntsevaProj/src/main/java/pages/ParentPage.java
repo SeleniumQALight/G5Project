@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.hamcrest.CoreMatchers.containsString;
 
+import io.qameta.allure.Step;
+
 abstract class ParentPage extends CommonActionsWithElements {
     protected String baseUrl;
 
@@ -24,6 +26,7 @@ abstract class ParentPage extends CommonActionsWithElements {
                 , webDriver.getCurrentUrl());
     }
 
+    @Step
     protected void checkUrlWithPatterns(){
         logger.debug(webDriver.getCurrentUrl());
 //        Assert.assertThat("Invalid page"

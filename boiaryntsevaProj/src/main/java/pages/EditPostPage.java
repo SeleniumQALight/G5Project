@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import io.qameta.allure.Step;
 import pages.elements.HeaderElement;
 
 public class EditPostPage extends ParentPage{
@@ -27,25 +29,30 @@ public class EditPostPage extends ParentPage{
 
     private HeaderElement headerElement = new HeaderElement(webDriver);
 
+    @Step
     public HeaderElement getHeaderElement() {
         return headerElement;
     }
 
+    @Step
     public EditPostPage checkRedirectToEditPage(){
         checkUrlWithPatterns();
         return this;
     }
 
+    @Step
     public EditPostPage enterTextIntoTitleWithoutClearingInput(String title) {
         enterTextIntoPrefilledElement(inputTitle, title);
         return this;
     }
 
+    @Step
     public EditPostPage saveEditedPost(){
         clickOnElement(buttonSaveUpdates);
         return this;
     }
 
+    @Step
     public EditPostPage checkTextInAlert(String text) {
         Assert.assertEquals("Text in alert", text, alertSuccess.getText());
         return this;

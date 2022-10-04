@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import io.qameta.allure.Step;
 import pages.elements.HeaderElement;
 
 public class PostPage extends ParentPage {
@@ -38,27 +40,32 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = ".//div//div[4]//p")
     private WebElement textWeatherPostIsUnique;
 
+    @Step
     public PostPage checkIsRedirectToPostPage() {
         checkUrlWithPatterns();
         Assert.assertTrue("Post page is not loaded", isElementDisplayed(buttonEdit));
         return this;
     }
 
+    @Step
     public PostPage checkTextInAlert(String text) {
         Assert.assertEquals("Text in alert", text, alertSuccess.getText());
         return this;
     }
 
+    @Step
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDelete);
         return new MyProfilePage(webDriver);
     }
 
+    @Step
     public EditPostPage clickOnEditButton(){
         clickOnElement(buttonEdit);
         return new EditPostPage(webDriver);
     }
 
+    @Step
     public PostPage validateCheckBoxStateOnPost(String checkBoxValue){
         if ((!checkBoxValue.equalsIgnoreCase("check")) && (!checkBoxValue.equalsIgnoreCase("uncheck"))) {
             logger.info("Invalid value for checkbox was entered - Validation");
