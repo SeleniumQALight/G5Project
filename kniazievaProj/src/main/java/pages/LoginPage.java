@@ -55,6 +55,7 @@ public class LoginPage extends ParentPage {
         try {
             webDriver.get(baseUrl);
             logger.info("Login page was opened");
+            logger.info(baseUrl);
         } catch (Exception e) {
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
@@ -90,7 +91,7 @@ public class LoginPage extends ParentPage {
     }
 
     public void checkNumberOfMessageInRegistrationForm(int numberOfMessage){
-        webDriverWait15.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[@class = 'alert alert-danger small liveValidateMessage liveValidateMessage--visible']"), numberOfMessage));
+        webDriverWaitHigh.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[@class = 'alert alert-danger small liveValidateMessage liveValidateMessage--visible']"), numberOfMessage));
     }
 
 
@@ -122,7 +123,7 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkErrorMessages(String expectedErrors) {
         String[] expectedErrorsArray = expectedErrors.split(";");
-        webDriverWait10
+        webDriverWaitLow
                 .withMessage("Number of messages should be " + expectedErrorsArray.length)
                 .until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfErrorsLocator),expectedErrorsArray.length ));
 
