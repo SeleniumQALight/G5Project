@@ -1,6 +1,7 @@
 package Pages;
 
 import io.qameta.allure.Step;
+import libs.Color;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -100,6 +101,20 @@ public class LoginPage extends ParentPage {
                 .fillInUserEmailRegister(email)
                 .fillInUserPasswordRegister(password);
 
+        return this;
+    }
+
+    public LoginPage registerNewUserViaTab(String name, String email, String password){
+        openLoginPage()
+                .fillInUserNameRegister(name);
+
+        usersPressesKeyTabTime(1);
+        driver.switchTo().activeElement().sendKeys(email);
+
+        usersPressesKeyTabTime(1);
+        driver.switchTo().activeElement().sendKeys(password);
+
+        usersPressesKeyEnterTime(1);
         return this;
     }
 
@@ -216,6 +231,13 @@ public class LoginPage extends ParentPage {
     public LoginPage checkPasswordRegisterActive(){
         String color = "rgb(206, 212, 218)";
         Assert.assertEquals( color, inputUserPasswordRegister.getCssValue("border-color"));
+        return this;
+    }
+
+    public LoginPage checkPasswordFieldIsActive(){
+        String attributeName = "border-top-color";
+        Util.waitABit(1);
+        Assert.assertEquals(Color.BLUE.toString(),getElementCssValue(inputPasswordHeader,"border-color"));
         return this;
     }
 }
