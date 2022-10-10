@@ -1,11 +1,16 @@
 package baseTest; // Батько для всіх тестів
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Attachment;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -22,10 +27,12 @@ public class BaseTest {
     Logger logger = Logger.getLogger(getClass());
     protected LoginPage loginPage;
     protected HomePage homePage;
+    protected String testName1;
 
     @Before
     public void setUp() {
         logger.info("----- " + testName.getMethodName() + " was started -----");
+        testName1 = testName.getMethodName();
         WebDriverManager.chromedriver().setup();// перед кожним тестом перевіряємо чи встановлений екзешнік
         webDriver = initDriver();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(CommonActionsWithElements.configProperties.TIME_FOR_DFFAULT_WAIT()));
@@ -34,12 +41,12 @@ public class BaseTest {
         homePage = new HomePage(webDriver); // Місце де ми створюємо кожну пейджу
     }
 
-    @After
-    public void tearDown() {
-        webDriver.quit();
-        logger.info("Browser was closed");
-        logger.info("----- " + testName.getMethodName() + " was ended ------ \n");
-    }
+//    @After
+//    public void tearDown() {
+//        webDriver.quit();
+//        logger.info("Browser was closed");
+//        logger.info("----- " + testName.getMethodName() + " was ended ------ \n");
+//    }
 
     // створили змінну в яку джиюніт покладе ...
     @Rule
@@ -62,4 +69,36 @@ public class BaseTest {
 
         return webDriver;
     }
+
+    @Rule
+    public TestWatcher watchman = new TestWatcher() {
+        @Override
+        protected void failed(Throwable e, Description description) {
+            screenshot();
+        }
+
+        @Attachment(value = "Page screenshot", type = "image/png")
+        public byte[] saveScreenshot(byte[] screenShot) {
+            return screenShot;
+        }
+
+        public void screenshot() {
+            if (webDriver == null) {
+                logger.info("Driver for screenshot not found");
+                return;
+            }
+            saveScreenshot(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES));
+        }
+
+        @Override
+        protected void finished(Description description) {
+            logger.info(String.format("Finished test: %s::%s", description.getClassName(), description.getMethodName()));
+            try {
+                webDriver.quit();
+                logger.info("Browser was closed");
+            } catch (Exception e) {
+                logger.error(e);
+            }
+        }
+    };
 }

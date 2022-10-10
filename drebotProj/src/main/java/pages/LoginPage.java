@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -31,7 +32,7 @@ public class LoginPage extends ParentPage {
     @FindBy(id = "email-register")
     private WebElement inputEmailRegistration;
 
-    @FindBy(id = "password-register")
+    @FindBy(id = "password-register1")//
     private WebElement inputPasswordRegistration;
 
     @FindBy(xpath = ".//button[@class='py-3 mt-4 btn btn-lg btn-success btn-block']")
@@ -50,6 +51,7 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         try {
             webDriver.get(baseUrl);
@@ -88,7 +90,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public void clickOnButtonLogIn() {
+    public HomePage clickOnButtonLogIn() {
 //        try {
 //            //webDriver.findElement(By.xpath(".//button[@class='btn btn-primary btn-sm']")).click();
 //            buttonSignIn.click();
@@ -97,6 +99,7 @@ public class LoginPage extends ParentPage {
 //            printErrorAndStopTest(e);
 //        }
         clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
     }
 
     public LoginPage enterLoginIntoLoginInputUsingKeyTab(String login) {
@@ -130,6 +133,7 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
     public LoginPage enterUserNameIntoRegistrationUsingKey(String userName) {
 
         moveToElement(inputUserNameRegistration);
@@ -141,6 +145,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage enterEmailIntoRegistrationUsingKey(String email) {
 
         if (isElementIsActive(inputEmailRegistration)) {
@@ -152,6 +157,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage enterPasswordIntoRegistrationUsingKey(String password) {
 
         if (isElementIsActive(inputPasswordRegistration)) {
@@ -195,21 +201,25 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage enterUserNameIntoRegistration(String userName) {
         enterTextIntoElement(inputUserNameRegistration, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterEmailIntoRegistration(String email) {
         enterTextIntoElement(inputEmailRegistration, email);
         return this;
     }
 
+    @Step
     public LoginPage enterPasswordIntoRegistration(String password) {
         enterTextIntoElement(inputPasswordRegistration, password);
         return this;
     }
 
+    @Step
     public void checkAlertText(String[] text) {
         for (int i = 0; i < text.length; i++) {
 
@@ -223,6 +233,7 @@ public class LoginPage extends ParentPage {
         }
     }
 
+    @Step
     public void checkCountAlertMessage(String[] text) {
         webDriverWaitLow.until(ExpectedConditions.numberOfElementsToBe(By.xpath(String.format(alertTextLocator, "")), text.length));
 
@@ -230,6 +241,7 @@ public class LoginPage extends ParentPage {
         logger.info("'" + listOfError.size() + "' alert are displayed");
     }
 
+    @Step
     public LoginPage checkErrorMessages(String expectedErrors) {
         String[] expectedErrorsArray = expectedErrors.split(";");
         webDriverWaitLow.withMessage("Number of messages ").until(ExpectedConditions.numberOfElementsToBe(By.xpath(String.format(alertTextLocator, "")), expectedErrorsArray.length));

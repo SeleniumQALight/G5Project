@@ -19,7 +19,11 @@ public class CreatePostTest extends BaseTest {
                 .selectTextInDropDownUi("Групове поввідомлення")
                 .clickOnButtonSaveNewPost()
                 //.selectTextInDropDownRole("Приватне повідомлення")
-                //.selectValueInDropDownRole("One Person");
+                //.selectValueInDropDownRole("One Person")
+        .checkIsRedirectToPostPage()
+                .checkTestInAlert("New post successfully created.")
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
         ;
     }
 }

@@ -26,6 +26,7 @@ public class EditPostPage extends ParentPage {
 
     @Override
     String getRelativeUrl() {
+        //return "/post/" + "[a-zA-z0-9]*/edit";
         return "/post" + ".+/edit";
     }
 
