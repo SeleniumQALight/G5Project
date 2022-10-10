@@ -14,8 +14,9 @@ public class DB_Util {
 
         String pass = mySQL_DataBase.selectValue(
                 String.format("select passWord from seleniumTable where login = '%s'", login)
-                                                );
+        );
         mySQL_DataBase.quit();
         return pass;
     }
+
 }
