@@ -19,6 +19,5 @@ public class ApiTest {
                 .statusCode(200)
                 .log().all()
                 ;
-
     }
 }
