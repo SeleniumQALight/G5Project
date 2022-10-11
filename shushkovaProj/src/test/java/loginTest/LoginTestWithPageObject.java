@@ -28,7 +28,7 @@ public class LoginTestWithPageObject extends BaseTest {
     public void validLogin(){
         loginPage.openLoginPage();
         loginPage.enterUserNameIntoLoginInput("qaauto");
-        loginPage.enterPasswordIntoLoginInput("123456qwert");
+        loginPage.enterPasswordIntoLoginInput("123456qwerty");
         loginPage.clickOnButtonSignIn();
         Assert.assertTrue("Button SinOut is not Displayed"
                 , homePage.getHeaderElement().isButtonSingOutDisplayed());
