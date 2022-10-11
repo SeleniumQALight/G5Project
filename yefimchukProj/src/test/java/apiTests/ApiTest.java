@@ -17,7 +17,8 @@ public class ApiTest {
                 .get(EndPoints.POST_BY_USER, user_name)
                 .then()
                 .statusCode(200)
-                .log().all()
+                .log()
+                .all()
                 ;
     }
 }
