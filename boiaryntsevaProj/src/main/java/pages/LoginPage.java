@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginPage extends ParentPage {
+
+    @FindBy(xpath = ".//div//span[2]")
+    private WebElement textLoggedInUserName;
+
     @FindBy(xpath = ".//input[@name='username' and @placeholder='Username']")
     private WebElement inputUserNameHeader;
 
@@ -43,7 +47,7 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//div[@class='form-group'][3]//div")
     private WebElement validationErrorMessagePassword;
 
-    @FindBys(@FindBy(xpath = "//div[contains (@class, 'alert')]"))
+    @FindBys(@FindBy(xpath = "//div[contains (@class, 'visible')]"))
     private List<WebElement> validationErrorMessage;
 
     @FindBy(xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
@@ -60,6 +64,10 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    public String getTextLoggedInUserNameAsString() {
+        return textLoggedInUserName.getText();
+    }
+
     @Step
     public LoginPage openLoginPage() {
         try {
@@ -70,6 +78,25 @@ public class LoginPage extends ParentPage {
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
         }
+        return this;
+    }
+    public LoginPage isRegisterPasswordActive() {
+        Util.waitABit(1);
+        isElementActive(inputPasswordRegister);
+        String borderColor = inputPasswordRegister.getCssValue("border-color");
+        if (borderColor.contains("128, 189, 255")){
+            logger.info("The element is highlighted");
+        }
+        return this;
+    }
+
+    public LoginPage isPasswordActive() {
+        isElementActive(inputPassword);
+        return this;
+    }
+
+    public LoginPage isSignUpButtonActive() {
+        isElementActive(buttonSignUp);
         return this;
     }
 
@@ -163,7 +190,7 @@ public class LoginPage extends ParentPage {
     @Step
     public LoginPage validateErrorMessagesCountOnLoginPage(int countOfErrorMessages) {
         webDriverWaitLow.until(ExpectedConditions.numberOfElementsToBe
-                (By.xpath("//div[contains (@class, 'alert')]"), countOfErrorMessages));
+                (By.xpath(".//div[contains (@class, 'visible')]"), countOfErrorMessages));
         Assert.assertEquals("Not all error messages are displayed", countOfErrorMessages, validationErrorMessage.size());
         logger.info("Error messages count on sign up form is " + validationErrorMessage.size());
         return this;
@@ -217,5 +244,9 @@ public class LoginPage extends ParentPage {
         enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
         clickOnButtonLogin();
         return new HomePage(webDriver);
+    }
+
+    public void clickOnButtonSignUp() {
+        clickOnElement(buttonSignUp);
     }
 }
