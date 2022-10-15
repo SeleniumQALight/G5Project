@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CommonActionsWithElements {
 
@@ -153,11 +154,32 @@ public class CommonActionsWithElements {
         ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
     }
-    
-    private String getElementName(WebElement webElement){
+
+    public void userSwitchesToParentWindow() {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        System.out.println(tabs.size());
+        webDriver.switchTo().window(tabs.get(0));
+    }
+
+    public void userSwitchesToNextWindowTab() {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        System.out.println(tabs.size());
+        webDriver.switchTo().window(tabs.get(1));
+    }
+
+    public void isElementActive(WebElement elementThatShouldBeActive) {
+        WebElement activeElement = webDriver.switchTo().activeElement();
+            Assert.assertEquals("Active element doesn't match ", elementThatShouldBeActive, activeElement);
+    }
+
+    public void refreshPage() {
+        webDriver.navigate().refresh();
+    }
+
+    private String getElementName(WebElement webElement) {
         try {
             return webElement.getAccessibleName();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
     }

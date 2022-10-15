@@ -1,5 +1,6 @@
 package loginTest;
 
+
 import baseTest.BaseTest;
 import categories.SmokeTestFilter;
 import io.qameta.allure.*;
@@ -9,6 +10,7 @@ import junitparams.naming.TestCaseName;
 import libs.ExcelDriver;
 import libs.TestData;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -40,6 +42,20 @@ public class LoginTestWithPageObject extends BaseTest {
         Assert.assertTrue("Sign out button is not displayed", headerElement.isButtonSignedOutDisplayed());
 
     }
+
+    @Test
+    public void validLoginUsingKeyboard() {
+        loginPage.openLoginPage();
+        loginPage.enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
+        loginPage.usersPressesKeyTabTime(1);
+        loginPage.isPasswordActive();
+        loginPage.enterPasswordIntoPasswordInput(TestData.VALID_PASSWORD);
+        loginPage.usersPressesKeyEnterTime(1);
+
+        Assert.assertTrue("Sign out button is not displayed", headerElement.isButtonSignedOutDisplayed());
+
+    }
+
     @Test
     public void validLoginWithExcel() throws IOException {
         Map<String, String> dataForValidLogin = ExcelDriver.getData
