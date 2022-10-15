@@ -48,11 +48,10 @@ public class ApiTests {
 
         for (int i = 0; i < expectedResult.length; i++) {
             softAssertions.assertThat(responseBody[i])
-                    .isEqualToIgnoringGivenFields(expectedResult[i], "id", "createdDate", "author");
-//            softAssertions.assertThat(responseBody[i].getAuthor())
-//                    .isEqualToIgnoringGivenFields(expectedResult[i].getAuthor(), "avatar");
-
-            softAssertions.assertAll();
+                    .isEqualToIgnoringGivenFields(expectedResult[i],"id", "createdDate", "author");
+            softAssertions.assertThat(responseBody[i].getAuthor())
+                    .isEqualToIgnoringGivenFields(expectedResult[i].getAuthor(),"avatar");
         }
+        softAssertions.assertAll();
     }
 }
