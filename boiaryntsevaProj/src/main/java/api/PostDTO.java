@@ -17,7 +17,14 @@ public class PostDTO {
     public PostDTO() {
     }
 
-    public PostDTO(String test, String test_body, String all_users, String no, AuthorDTO autoapi, boolean b) {
+    public PostDTO(String title, String body, String select1, String uniquePost, AuthorDTO author,
+                   Boolean isVisitorOwner) {
+        this.title = title;
+        this.body = body;
+        this.select1 = select1;
+        this.uniquePost = uniquePost;
+        this.author = author;
+        this.isVisitorOwner = isVisitorOwner;
     }
 
     public String getId() {
