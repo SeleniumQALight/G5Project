@@ -1,5 +1,7 @@
 package Pages;
 
+import io.qameta.allure.Step;
+import libs.Color;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -53,6 +55,7 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         try {
             driver.get(baseUrl);
@@ -66,15 +69,18 @@ public class LoginPage extends ParentPage {
         }
     }
 
+    @Step
     public LoginPage enterUserNameIntoLoginInput(String username) {
         enterTextIntoElement(inputUserNameHeader, username);
         return this;
     }
 
+    @Step
     public void enterPasswordIntoInputPassword(String password) {
         enterTextIntoElement(inputPasswordHeader, password);
     }
 
+    @Step
     public void clickOnLoginButton() {
         clickOnElement(buttonSingIn);
     }
@@ -95,6 +101,20 @@ public class LoginPage extends ParentPage {
                 .fillInUserEmailRegister(email)
                 .fillInUserPasswordRegister(password);
 
+        return this;
+    }
+
+    public LoginPage registerNewUserViaTab(String name, String email, String password){
+        openLoginPage()
+                .fillInUserNameRegister(name);
+
+        usersPressesKeyTabTime(1);
+        driver.switchTo().activeElement().sendKeys(email);
+
+        usersPressesKeyTabTime(1);
+        driver.switchTo().activeElement().sendKeys(password);
+
+        usersPressesKeyEnterTime(1);
         return this;
     }
 
@@ -211,6 +231,13 @@ public class LoginPage extends ParentPage {
     public LoginPage checkPasswordRegisterActive(){
         String color = "rgb(206, 212, 218)";
         Assert.assertEquals( color, inputUserPasswordRegister.getCssValue("border-color"));
+        return this;
+    }
+
+    public LoginPage checkPasswordFieldIsActive(){
+        String attributeName = "border-top-color";
+        Util.waitABit(1);
+        Assert.assertEquals(Color.BLUE.toString(),getElementCssValue(inputPasswordHeader,"border-color"));
         return this;
     }
 }

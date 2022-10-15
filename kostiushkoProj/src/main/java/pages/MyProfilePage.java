@@ -66,4 +66,16 @@ Assert.assertTrue("SuccessDeletePostMessage element is not displayed", isElement
         return webDriver.findElements(By.xpath(String.format(postTitleLocator,title)));
     }
 
+    public MyProfilePage findOldPostWithTitle(String title) {
+       List<WebElement> post =  webDriver.findElements(By.xpath(".//*[contains(text(),'"+title+"')]"));
+       logger.info("Found post by title");
+       Assert.assertEquals("Wrong number of posts", 1, post.size());
+        return this;
+    }
+
+    public PostPage clickOnButtonTitlePost(String title) {
+        List<WebElement> post =  webDriver.findElements(By.xpath(".//*[contains(text(),'"+title+"')]"));
+        clicOnElement(post.get(0));
+        return new PostPage(webDriver);
+    }
 }

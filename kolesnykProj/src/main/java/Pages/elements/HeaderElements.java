@@ -3,6 +3,7 @@ package Pages.elements;
 import Pages.CommonActionWithElements;
 import Pages.CreatePostPage;
 import Pages.MyProfilePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,11 +26,13 @@ public class HeaderElements extends CommonActionWithElements {
         super(driver);
     }
 
+    @Step
     public CreatePostPage clickOnButtonCreatePost(){
         clickOnElement(buttonCreatePost);
         return new CreatePostPage(driver);
     }
 
+    @Step
     public MyProfilePage clickOnButtonMyProfile(){
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(driver);
@@ -39,6 +42,7 @@ public class HeaderElements extends CommonActionWithElements {
         return isElementDisplayed(buttonSingIn);
     }
 
+    @Step
     public boolean isButtonSignOutDisplayed(){
         return isElementDisplayed(singOutButton);
     }

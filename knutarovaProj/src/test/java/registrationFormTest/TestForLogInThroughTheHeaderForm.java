@@ -16,10 +16,10 @@ public class TestForLogInThroughTheHeaderForm extends BaseTest {
     @Test
     @Parameters({
             TestData.VALID_LOGIN + COMMA + "000",
-            "QA"                 + COMMA + TestData.VALID_PASSWORD
+            "QA" + COMMA + TestData.VALID_PASSWORD
     })
     @TestCaseName("registrationErrors: login={0}, password={1}")
-public void enterHeaderErrors(String username, String password){
+    public void enterHeaderErrors(String username, String password) {
         loginPage
                 .openLoginPage()
                 .enterUsernameIntoLoginInput(username)
