@@ -1,14 +1,10 @@
 package pages.elements;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.CommonActionsWithElements;
-import pages.CreatePostPage;
-import pages.EditPage;
-import pages.MyProfilePage;
+import pages.*;
 
 public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = ".//*[@data-original-title='My Profile']")
@@ -16,6 +12,9 @@ public class HeaderElement extends CommonActionsWithElements {
 
     @FindBy(xpath = ".//a[text()='Create Post']")
     private WebElement buttonCreatePost;
+
+    @FindBy(xpath = ".//button[text()='Sign In']")
+    private WebElement buttonSingIn;
 
     @FindBy(xpath = ".//button[text()='Sign Out']")
     private WebElement buttonSingOut;
@@ -44,6 +43,15 @@ public class HeaderElement extends CommonActionsWithElements {
     public EditPage clickOnMyProfileButtonOnEditPage(){
         clickOnElement(buttonMyProfile);
         return new EditPage(webDriver);
+    }
+
+    public HomePage clickOnButtonSingOut(){
+        clickOnElement(buttonSingOut);
+        return new HomePage(webDriver);
+    }
+
+    public boolean isButtonSingInDisplayed(){
+        return isElementDisplayed(buttonSingIn);
     }
 
 

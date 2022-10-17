@@ -11,11 +11,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.elements.HeaderElement;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LoginPage extends ParentPage {
+    private HeaderElement headerElement= new HeaderElement(webDriver);
+
 
     @FindBy(xpath = ".//input[@name='username' and @placeholder='Username']")
     private WebElement inputUserNameHeader;
@@ -25,6 +28,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = ".//button[text()='Sign In']")
     private WebElement buttonSingIn;
+
+    @FindBy(xpath = ".//button[text()='Sign Out']")
+    private WebElement buttonSingOut;
 
     @FindBy(id="username-register")
     private WebElement inputLoginRegistration;
@@ -61,19 +67,22 @@ public class LoginPage extends ParentPage {
         return this;
     }
     @Step
-    public void enterUserNameIntoLoginInput(String userName) {
+    public LoginPage enterUserNameIntoLoginInput(String userName) {
 
         enterTextIntoElement(inputUserNameHeader,userName);
+        return new LoginPage(webDriver);
     }
     @Step
-    public void enterPasswordIntoLoginInput(String password) {
+    public LoginPage enterPasswordIntoLoginInput(String password) {
 
         enterTextIntoElement(inputUserPasswordHeader,password);
+        return new LoginPage(webDriver);
     }
     @Step
     public void clickOnButtonSignIn() {
        clickOnElement(buttonSingIn);
     }
+
     public boolean isMessageInvalidCredsDisplayed(){
         try {
             WebElement messageInvalidCreds = webDriver.findElement(By.xpath(".//div[@class='alert alert-danger text-center' and contains(text(),'Invalid username / pasword')]"));
@@ -141,6 +150,9 @@ public class LoginPage extends ParentPage {
         enterPasswordIntoLoginInput(TestData.VALID_PASSWORD);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+    public boolean isButtonSingInDisplayed(){
+        return isElementDisplayed(buttonSingIn);
     }
 }
 
