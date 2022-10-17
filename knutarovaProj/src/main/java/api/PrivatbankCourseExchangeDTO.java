@@ -13,8 +13,6 @@ public class PrivatbankCourseExchangeDTO {
     public PrivatbankCourseExchangeDTO(String ccy, String base_ccy){
         this.ccy = ccy;
         this.base_ccy = base_ccy;
-        this.buy = buy;
-        this.sale = sale;
     }
 
     public String getCcy() {

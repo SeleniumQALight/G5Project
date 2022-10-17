@@ -30,10 +30,9 @@ public class ApiTestsForPrivatbank {
                     .response().as(PrivatbankCourseExchangeDTO[].class)
             ;
             logger.info("Number of currency = " + responseBody.length);
-            logger.info("ccy: " + responseBody[0].getCcy() + "; " + "base_ccy: " + responseBody[0].getBase_ccy());
-            logger.info("ccy: " + responseBody[1].getCcy() + "; " + "base_ccy: " + responseBody[1].getBase_ccy());
-            logger.info("ccy: " + responseBody[2].getCcy() + "; " + "base_ccy: " + responseBody[2].getBase_ccy());
-            logger.info("ccy: " + responseBody[3].getCcy() + "; " + "base_ccy: " + responseBody[3].getBase_ccy());
+            for (int i = 0; i < responseBody.length; i++) {
+                logger.info("ccy: " + responseBody[i].getCcy() + "; " + "base_ccy: " + responseBody[i].getBase_ccy());
+            }
 
             PrivatbankCourseExchangeDTO[] expectedResult = {
                   new PrivatbankCourseExchangeDTO("USD", "UAH"),
