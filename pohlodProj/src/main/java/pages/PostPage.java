@@ -19,6 +19,10 @@ public class PostPage extends ParentPage{
     @FindBy(xpath = ".//button[@data-original-title='Delete']")
     private WebElement  buttonDelete;
 
+    @FindBy (xpath = ".//*[contains(text(),'Is this post unique?')]")
+    private WebElement postUnique;
+
+
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -49,14 +53,13 @@ public class PostPage extends ParentPage{
         return new MyProfilePage (webDriver);
     }
 
-    @FindBy (xpath = ".//*[contains(text(),'Is this post unique?')]")
-    private WebElement postUnique;
+
 
     public PostPage checkIsPostUnique(String state){
         String post = postUnique.getText();
         if(state.equalsIgnoreCase("check")){
             Assert.assertEquals("Post is unique","Is this post unique? : yes",post);
-            logger.info("Post in unique");
+            logger.info("Post is unique");
         } else if (state.equalsIgnoreCase("uncheck")){
         Assert.assertEquals("Post is not unique","Is this post unique? : no",post);
             logger.info("Post in Not unique");
@@ -67,5 +70,9 @@ public class PostPage extends ParentPage{
         return this;
     }
 
+    public EditPostPage clickOnTheEditButton() {
+        clickOnElement(editButton);
+        return new EditPostPage(webDriver);
+    }
 
 }
