@@ -23,6 +23,7 @@ public class CreatePostTest extends BaseTest {
                 .selectDropdownElementsUI()
                 .enterTextInInputTitle(TITLE)
                 .enterTextInInputBody("text")
+                .selectValueInDropDownRole("One Person")
                 .clickOnSavePostButton()
                 .checkIsRedirectToPostPage()
                 .checkTextInAlert("New post successfully created.")

@@ -16,6 +16,11 @@ public class MyProfilePage extends ParentPage{
     @FindBy(xpath = ".//*[text()='Post successfully deleted']")
     WebElement successDeletedPostMessage;
 
+    private String postTitleLocator = ".//*[text()='%s']";
+
+
+
+
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -32,7 +37,6 @@ public class MyProfilePage extends ParentPage{
         return this;
     }
 
-    private String postTitleLocator = ".//*[text()='%s']";
 
     public MyProfilePage checkPostWasCreated(String title) {
         List<WebElement> postsList = getPostsListWithTitle(title);
@@ -68,4 +72,8 @@ public class MyProfilePage extends ParentPage{
     }
 
 
+    public PostPage clickOnThePost(String title) {
+        clickOnElement(String.format(postTitleLocator, title));
+        return new PostPage(webDriver);
+    }
 }
