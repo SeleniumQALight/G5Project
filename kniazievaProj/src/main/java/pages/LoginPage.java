@@ -1,6 +1,8 @@
 package pages;
 
 import libs.TestData;
+import libs.Util;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoginPage extends ParentPage {
@@ -24,8 +27,8 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//div[text() = 'Invalid username / pasword']")
     private WebElement invalidUsernameOrPassword;
 
-    @FindBy(xpath = ".//*[@class = 'alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
-    private List<WebElement> alertMessage;
+    private String listOfErrorsLocator = ".//*[@class = 'alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+
 
     @FindBy(xpath = ".//input[@id = 'username-register']")
     private WebElement inputUsernameRegistered;
@@ -35,20 +38,29 @@ public class LoginPage extends ParentPage {
     private WebElement inputPasswordRegister;
     @FindBy(xpath = ".//button[@class = 'py-3 mt-4 btn btn-lg btn-success btn-block']")
     private WebElement signUpForOurApp;
+    @FindBy(xpath = ".//*[@class = 'alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
+    private List<WebElement> listOfErrors;
 
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void openLoginPage() {
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
+    public LoginPage openLoginPage() {
         try {
-            webDriver.get("https://qa-complex-app-for-testing.herokuapp.com/");
+            webDriver.get(baseUrl);
             logger.info("Login page was opened");
+            logger.info(baseUrl);
         } catch (Exception e) {
             logger.error("Can not work with site");
             Assert.fail("Can not work with site");
         }
+        return this;
     }
 
     public void enterUserNameIntoLoginInput(String userName) {
@@ -73,15 +85,13 @@ public class LoginPage extends ParentPage {
 
     public HomePage loginWithValidCred() {
         openLoginPage();
-        enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
-        enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
-        clickOnButtonLogIn();
+        loginWithValidCredWithoutOpenPage();
         return new HomePage(webDriver);
 
     }
 
     public void checkNumberOfMessageInRegistrationForm(int numberOfMessage){
-        webDriverWait15.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[@class = 'alert alert-danger small liveValidateMessage liveValidateMessage--visible']"), numberOfMessage));
+        webDriverWaitHigh.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[@class = 'alert alert-danger small liveValidateMessage liveValidateMessage--visible']"), numberOfMessage));
     }
 
 
@@ -96,16 +106,49 @@ public class LoginPage extends ParentPage {
 
     }
 
-    public void enterUsernameInRegistrationForm(String text){
-        enterTextIntoElement(inputUsernameRegistered, text);
+    public LoginPage enterUsernameInRegistrationForm(String userName){
+        enterTextIntoElement(inputUsernameRegistered, userName);
+        return this;
     }
 
-    public void enterEmailInRegistrationForm(String text){
-        enterTextIntoElement(inputEmailRegistered, text);
+    public LoginPage enterEmailInRegistrationForm(String email){
+        enterTextIntoElement(inputEmailRegistered, email);
+        return this;
     }
 
-    public void enterPasswordInRegistrationForm(String text){
-        enterTextIntoElement(inputPasswordRegister, text);
+    public LoginPage enterPasswordInRegistrationForm(String password){
+        enterTextIntoElement(inputPasswordRegister, password);
+        return this;
     }
 
+    public LoginPage checkErrorMessages(String expectedErrors) {
+        String[] expectedErrorsArray = expectedErrors.split(";");
+        webDriverWaitLow
+                .withMessage("Number of messages should be " + expectedErrorsArray.length)
+                .until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfErrorsLocator),expectedErrorsArray.length ));
+
+        Util.waitABit(1);
+        Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
+
+        ArrayList<String> actualTextFromErrors = new ArrayList<>();
+        for (WebElement element: listOfErrors){
+            actualTextFromErrors.add(element.getText());
+        }
+        SoftAssertions softAssertions = new SoftAssertions();
+        for (int i = 0; i < expectedErrorsArray.length; i++) {
+            softAssertions.assertThat(expectedErrorsArray[i]).isIn(actualTextFromErrors);
+        }
+
+        softAssertions.assertAll();
+
+
+        return this;
+    }
+
+    public HomePage loginWithValidCredWithoutOpenPage() {
+        enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
+        enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
+        clickOnButtonLogIn();
+        return new HomePage(webDriver);
+    }
 }

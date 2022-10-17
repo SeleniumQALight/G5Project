@@ -19,7 +19,7 @@ public class CommonActionsWithElements {
     Logger logger = Logger.getLogger(getClass());
     protected WebDriverWait webDriverWaitLow, webDriverWaitHigh;
 
-    public static ConfigProperties configProperties= ConfigFactory.create(ConfigProperties.class);
+    public static ConfigProperties configProperties = ConfigFactory.create(ConfigProperties.class);
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -49,12 +49,13 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
-    protected void clickOnElement(String xpathLocator){
-        try{
-            WebElement element= webDriver.findElement(By.xpath(xpathLocator));
+
+    protected void clickOnElement(String xpathLocator) {
+        try {
+            WebElement element = webDriver.findElement(By.xpath(xpathLocator));
             clickOnElement(element);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
@@ -76,52 +77,60 @@ public class CommonActionsWithElements {
         }
 
     }
-    /** Вибираємо значення в дропдауні по видимому тексту
+
+    /**
+     * Вибираємо значення в дропдауні по видимому тексту
+     *
      * @param dropDown
-     * @param text **/
+     * @param text
+     **/
 
-protected void selectTextInDropDown(WebElement dropDown,String text){
+    protected void selectTextInDropDown(WebElement dropDown, String text) {
         try {
-            Select select=new Select(dropDown);
+            Select select = new Select(dropDown);
             select.selectByVisibleText(text);
-            logger.info("'"+text+"' was selected in DropDown");
+            logger.info("'" + text + "' was selected in DropDown");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
-    /** Вибираємо значення в дропдауні по value
-     * @param dropDown
-     * @param value **/
-}
-    protected void selectValueInDropDown(WebElement dropDown,String value){
-        try {
-            Select select=new Select(dropDown);
-            select.selectByValue(value);
-            logger.info("'"+value+"' was selected in DropDown");
+        /** Вибираємо значення в дропдауні по value
+         * @param dropDown
+         * @param value **/
+    }
 
-        }catch (Exception e){
+    protected void selectValueInDropDown(WebElement dropDown, String value) {
+        try {
+            Select select = new Select(dropDown);
+            select.selectByValue(value);
+            logger.info("'" + value + "' was selected in DropDown");
+
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
 
 
     }
-    /** метод домашка 3 **/
 
-    protected  void selectDropdownElementsUI(WebElement dropDown,WebElement optionDropDown){
+    /**
+     * метод домашка 3
+     **/
+
+    protected void selectDropdownElementsUI(WebElement dropDown, WebElement optionDropDown) {
         try {
 
             clickOnElement(dropDown);
-            logger.info(dropDown+"was ckicked");
+            logger.info(dropDown + "was ckicked");
             clickOnElement(optionDropDown);
-            logger.info(optionDropDown+"was ckicked");
+            logger.info(optionDropDown + "was ckicked");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
 
 
-
     }
+
     public void usersPressesKeyEnterTime(int numberOfTimes) {
         Actions actions = new Actions(webDriver);
         for (int i = 0; i < numberOfTimes; i++) {
@@ -137,39 +146,58 @@ protected void selectTextInDropDown(WebElement dropDown,String text){
 
     }
 
+    public void usersPressesKeyF5(int numberOfTimes) {
+        Actions actions = new Actions(webDriver);
+        for (int i = 0; i < numberOfTimes; i++) {
+            actions.sendKeys(Keys.F5).build().perform();
+        }
+
+    }
+
+
     public void userOpensNewTab() {
-        ((JavascriptExecutor)webDriver).executeScript("window.open()");
-        ArrayList<String> tabs = new ArrayList<> (webDriver.getWindowHandles());
+        ((JavascriptExecutor) webDriver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
     }
-    /**метод moveToElement (аналог скрола )
 
-     WebElement element = driver.findElement(By.id("my-id"));
-     Actions actions = new Actions(driver);
-     actions.moveToElement(element);
-     actions.perform();
+    public void scrollToElement(WebElement buttonSaveUpdates) {
+        WebElement element = webDriver.findElement(By.id("my-id"));
+        Actions actions = new Actions(webDriver);
+        actions.moveToElement(element);
+        actions.perform();
 
-     —————————-
-     метод скрола з використанням javaScript
+    }
 
-     JavascriptExecutor js = (JavascriptExecutor) driver;
-     js.executeScript("javascript:window.scrollBy(250,350)");
-
-     —————————-
-     Емуляція натискання PageDown
-
-     WebElement.sendKeys(Keys.DOWN);
-
-     —————————-
-     скрол до елемента з javaScript
-
-     webElement = driver.findElement(By.xpath("bla-bla-bla"));
-     ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
-      **/
-    private String getElementName(WebElement webElement){
-        try{
+    /**
+     * метод moveToElement (аналог скрола )
+     * <p>
+     * WebElement element = driver.findElement(By.id("my-id"));
+     * Actions actions = new Actions(driver);
+     * actions.moveToElement(element);
+     * actions.perform();
+     * <p>
+     * —————————-
+     * метод скрола з використанням javaScript
+     * <p>
+     * JavascriptExecutor js = (JavascriptExecutor) driver;
+     * js.executeScript("javascript:window.scrollBy(250,350)");
+     * <p>
+     * —————————-
+     * Емуляція натискання PageDown
+     * <p>
+     * WebElement.sendKeys(Keys.DOWN);
+     * <p>
+     * —————————-
+     * скрол до елемента з javaScript
+     * <p>
+     * webElement = driver.findElement(By.xpath("bla-bla-bla"));
+     * ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
+     **/
+    private String getElementName(WebElement webElement) {
+        try {
             return webElement.getAccessibleName();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
 
@@ -180,7 +208,6 @@ protected void selectTextInDropDown(WebElement dropDown,String text){
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
     }
-
 
 
 }

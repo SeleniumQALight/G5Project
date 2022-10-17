@@ -10,7 +10,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         RegistrationNewUserTest.class,
         LoginTestWithPageObject.class,
-        LoginTest.class
+
 })
 public class SmokeSuite {
 }

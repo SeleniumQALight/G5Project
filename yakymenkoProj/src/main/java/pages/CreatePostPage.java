@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,6 +33,7 @@ public class CreatePostPage extends ParentPage { // alt+enter → constructor
         return "/create-post";
     }
 
+    @Step
     public CreatePostPage checkIsRedirectToCreatePostPage() {
         checkUrl();
         waitChatToBeHide();
@@ -39,37 +41,44 @@ public class CreatePostPage extends ParentPage { // alt+enter → constructor
         return this;
     }
 
+    @Step
     // Метод який заповнить тайтл
     public CreatePostPage enterTextInInputTitle(String title) {
         enterTextIntoElement(inputTitle, title);
         return this;
     }
 
+    @Step
     public CreatePostPage selectValueInDropDownRole(String valueForSelect) {
         selectValueInDropDown(dropDownRole, valueForSelect);
         return this;
     }
 
+    @Step
     public CreatePostPage enterTextInInputBodyContent(String bodyContent) {
         enterTextIntoElement(inputBodyContent, bodyContent);
         return this;
     }
 
+    @Step
     public CreatePostPage selectValueInDropDownRoleUI(String groupMessageValueInDropDown) {
         selectTextInDropDownUI(dropDownRole, groupMessageValueInDropDown);
         return this;
     }
 
+    @Step
     public CreatePostPage enterTextInInputBody(String text) {
         enterTextIntoElement(inputBody, text);
         return this;
     }
 
+    @Step
     public PostPage clickOnSavePostButton() {
         clickOnElement(buttonSavePost);
         return new PostPage(webDriver);
     }
 
+    @Step
     public CreatePostPage setCheckBoxWithValue(String stateValue) {
         setCheckboxWithStatus(checkBoxPostUnique, stateValue);
         return this;

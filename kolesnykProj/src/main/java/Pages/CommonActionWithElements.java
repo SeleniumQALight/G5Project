@@ -168,18 +168,7 @@ public class CommonActionWithElements {
 
     }
 
-    public boolean isElementActive(WebElement element,String attributeName ,String expectedAttributeValue) {
-        try {
-            if (driver.switchTo().activeElement().getAttribute(attributeName).equals(expectedAttributeValue)){
-                log.info("Element found and active");
-                return true;
-            }
-            else return false;
-        } catch (Exception e) {
-            printErrorAndStopTest(e);
-            return false;
-        }
+    public String getElementCssValue(WebElement element,String attributeName) {
+        return element.getCssValue(attributeName);
     }
-
-
 }

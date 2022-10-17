@@ -1,8 +1,9 @@
 package pages;
 
 
-import com.google.common.base.Verify;
-import com.google.common.base.VerifyException;
+
+import io.qameta.allure.Step;
+import libs.DB_Util_seleniumUsers;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -13,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -194,8 +196,17 @@ public int countingTheNumberOfMessage (){
     int   numberElements =  countingTheNumberOfElements(alerValidateMessage);
 return numberElements;
     }
+
+    public HomePage loginWithWalidCreduseBD() throws ClassNotFoundException, SQLException {
+            DB_Util_seleniumUsers db_util_seleniumUsers = new DB_Util_seleniumUsers();
+            enterUserNameIntoLogininInput("newqaauto");
+            enterPasswordIntoInputPassword(db_util_seleniumUsers.getPassword("newqaauto"));
+            clickOnButtonLogIn();
+            return new HomePage(webDriver);
+        }
+    }
 //    private void prinErrorAndStopTest(Exception e) {
 //        logger.error("Can not work with element " + e);
 //        Assert.fail("Can not work with element " + e);
 //    }
-}
+

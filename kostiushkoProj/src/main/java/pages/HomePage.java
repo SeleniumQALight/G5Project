@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.elements.HeaderElement;
 
+import java.sql.SQLException;
+
 public class HomePage extends ParentPage{
     @FindBy (xpath = ".//button[text()='Sign Out']")
     private WebElement buttonSingOut;
@@ -70,5 +72,14 @@ public class HomePage extends ParentPage{
      */
     public HeaderElement getHeaderElement() {
         return headerElement;
+    }
+
+
+    public HomePage openHomePageWithDataFromDB() throws SQLException, ClassNotFoundException {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        if(!headerElement.isElementDisplayed(buttonSingOut)){
+            loginPage.loginWithWalidCreduseBD();}
+    return this;
     }
 }
