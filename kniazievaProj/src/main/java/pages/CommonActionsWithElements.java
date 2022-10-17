@@ -185,6 +185,11 @@ public class CommonActionsWithElements {
 //            webElement = driver.findElement(By.xpath("bla-bla-bla"));
 //((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
 
+    public void scroll(WebElement webElement){
+        ((JavascriptExecutor)webDriver).executeScript("arguments[0].scrollIntoView();", webElement);
+    }
+
+
     private String getElementName(WebElement webElement){
         try{
             return webElement.getAccessibleName();
