@@ -67,12 +67,12 @@ public class BaseTest {
             }
         }
     };
-    @After
-    public void testDown() {
-        webDriver.quit();
-        logger.info("Browser was closed");
-        logger.info("----- " + testName.getMethodName() + " was closed -----");
-    }
+//    @After
+//    public void testDown() {
+//        webDriver.quit();
+//        logger.info("Browser was closed");
+//        logger.info("----- " + testName.getMethodName() + " was closed -----");
+//    }
 
     @Rule
     public TestName testName = new TestName();
