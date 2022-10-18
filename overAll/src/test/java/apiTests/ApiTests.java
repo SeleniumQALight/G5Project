@@ -1,6 +1,7 @@
 package apiTests;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 import java.util.List;
 import java.util.Map;
@@ -120,7 +121,19 @@ public class ApiTests {
 
     }
 
-
+    @Test
+    public void getAllPostsByUserSchema(){
+        given()
+                .contentType(ContentType.JSON)
+                .log().all()
+        .when()
+                .get(EndPoints.POST_BY_USER, user_name)
+        .then()
+                .statusCode(200)
+                .log().all()
+                .assertThat().body(matchesJsonSchemaInClasspath("response.json"))
+        ;
+    }
 
 
 
