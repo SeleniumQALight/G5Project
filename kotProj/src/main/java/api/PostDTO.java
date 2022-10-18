@@ -1,7 +1,13 @@
 package api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.restassured.http.ContentType;
 import lombok.*;
+import org.junit.Assert;
+import org.junit.Test;
+
+import static io.restassured.RestAssured.given;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +26,7 @@ public class PostDTO {
     String createdDate;
     AuthorDTO author;
     Boolean isVisitorOwner;
-}
+
 
 //    public PostDTO (){
 //
@@ -113,3 +119,18 @@ public class PostDTO {
 //                '}';
 //    }
 
+    @Test
+    public void getAllPostsByUserNegative(){
+        String actualResponse =
+              given()
+                        .contentType(ContentType.JSON)
+                        .log().all()
+                        .when()
+                        .get(EndPoints.POST_BY_USER, "notValidUser")
+                        .then()
+                        .statusCode(200)
+                        .log().all()
+                        .extract().response().getBody().asString();
+        Assert.assertEquals("Message in response ","\"Sorry, invalid user requested.undefined\"", actualResponse);
+    }
+}
