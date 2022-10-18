@@ -1,9 +1,11 @@
 package apiTests;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 import api.AuthorDTO;
 import api.PostDTO;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -127,5 +129,20 @@ List<Map> actualAutorList = actualeResponse.jsonPath().getList("author",Map.clas
 softAssertions.assertAll();
 
     }
+@Test
+    public void getAllPostsByUserSchema(){
+        given()
+                .contentType(ContentType.JSON)
+                .log().all()
+                .when()
+                .get(EndPoints.POST_BY_USER,user_name)
+                .then()
+                .statusCode(200)
+                .log().all()
+                .assertThat().body(matchesJsonSchemaInClasspath("response.json"));
+
+
+}
+
 
 }
