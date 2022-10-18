@@ -26,80 +26,87 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
+            <groupId>junit</groupId>                <!-- junit -->
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
+            <groupId>org.seleniumhq.selenium</groupId>  <!-- selenium-java -->
             <artifactId>selenium-java</artifactId>
             <version>4.4.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
         <dependency>
-            <groupId>io.github.bonigarcia</groupId>
+            <groupId>io.github.bonigarcia</groupId> <!-- webdrivermanager -->
             <artifactId>webdrivermanager</artifactId>
             <version>5.3.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/log4j/log4j -->
         <dependency>
-            <groupId>log4j</groupId>
+            <groupId>log4j</groupId>                <!-- Логгер -->
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <dependency>
-            <groupId>org.assertj</groupId>
+            <groupId>org.assertj</groupId>          <!-- SoftAssertion -->
             <artifactId>assertj-core</artifactId>
             <version>3.23.1</version>
         </dependency>
         <dependency>
-            <groupId>pl.pragmatists</groupId>
+            <groupId>pl.pragmatists</groupId>       <!-- Параметризація тестів -->
             <artifactId>JUnitParams</artifactId>
             <version>1.1.1</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
         <dependency>
-            <groupId>org.apache.poi</groupId>
+            <groupId>org.apache.poi</groupId>       <!-- Бібліотека для роботи з файлами типу [Excel] -->
             <artifactId>poi</artifactId>
             <version>3.14</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.aeonbits.owner/owner -->
         <dependency>
-            <groupId>org.aeonbits.owner</groupId>
+            <groupId>org.aeonbits.owner</groupId>   <!-- Використання конфіг-файлів у проєкті -->
             <artifactId>owner</artifactId>
             <version>1.0.12</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
-            <groupId>mysql</groupId>
+            <groupId>mysql</groupId>                <!-- Бібліотека для роботи з MySQL_DB -->
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.30</version>
         </dependency>
         <dependency>
-            <groupId>io.qameta.allure</groupId>
+            <groupId>io.qameta.allure</groupId>     <!-- Створення інфографіків та репортів тест-ранів -->
             <artifactId>allure-junit4</artifactId>
             <version>2.8.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
         <dependency>
-            <groupId>io.rest-assured</groupId>
+            <groupId>io.rest-assured</groupId>      <!-- Бібліотека для створення API тестів -->
             <artifactId>rest-assured</artifactId>
             <version>5.1.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
-            <groupId>org.json</groupId>
+            <groupId>org.json</groupId>             <!-- Парсер json респонсу -->
             <artifactId>json</artifactId>
             <version>20220320</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
-            <groupId>com.google.code.gson</groupId>
+            <groupId>com.google.code.gson</groupId> <!-- Парсер gson респонсу -->
             <artifactId>gson</artifactId>
             <version>2.8.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>    <!-- Скорочення написання класів DTO/API -->
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

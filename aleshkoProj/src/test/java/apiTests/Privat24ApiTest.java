@@ -31,10 +31,14 @@ public class Privat24ApiTest {
                         .response().as(PrivatApiDTO[].class);
 
         PrivatApiDTO[] expectedResult = {
-                new PrivatApiDTO("USD", "UAH"),
-                new PrivatApiDTO("EUR", "UAH"),
-                new PrivatApiDTO("RUR", "UAH"),
-                new PrivatApiDTO("BTC", "USD")
+//                new PrivatApiDTO("USD", "UAH"),
+//                new PrivatApiDTO("EUR", "UAH"),
+//                new PrivatApiDTO("RUR", "UAH"),
+//                new PrivatApiDTO("BTC", "USD")
+                PrivatApiDTO.builder().ccy("USD").base_ccy("UAH").build(),
+                PrivatApiDTO.builder().ccy("EUR").base_ccy("UAH").build(),
+                PrivatApiDTO.builder().ccy("RUR").base_ccy("UAH").build(),
+                PrivatApiDTO.builder().ccy("BTC").base_ccy("USD").build(),
         };
 
         Assert.assertEquals("Number of curses ", expectedResult.length, responseBody.length);
