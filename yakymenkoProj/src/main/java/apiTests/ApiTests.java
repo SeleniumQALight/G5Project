@@ -61,4 +61,23 @@ public class ApiTests {
 
 //        https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11
     }
+
+    @Test
+    public void getAllPostsByUserNegative(){
+        String actualResponse =
+                given()
+                        .contentType(ContentType.JSON)
+                        .log().all()
+                .when()
+                        .get(EndPoints.POST_BY_USER, "notValidUser")
+                .then()
+                        .statusCode(200)
+                        .log().all()
+                        .extract().response().getBody().asString(); // представ нам змінну у вигляді Стрінги
+
+        Assert.assertEquals("Message in response ", "\"Sorry, invalid user requested.undefined\"", actualResponse); // ↔ або так або так ↓
+        Assert.assertEquals("Message in response ", "Sorry, invalid user requested.undefined", actualResponse.replace("\"", ""));
+
+    }
+
 }
