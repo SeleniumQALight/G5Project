@@ -19,7 +19,7 @@ public class ApiTest {
     public void getAllPostsByUser() {
         PostDTO[] responseBody = given()
                 .contentType(ContentType.JSON)
-   //             .queryParam("exchange")
+                //             .queryParam("exchange")
                 .log().all()
                 .when()
                 .get(EndPoints.POST_BY_USER, user_name)
@@ -56,6 +56,25 @@ public class ApiTest {
 
         softAssertions.assertAll();
     }
+
+    @Test
+    public void getAllPostsByUserNegative() {
+        String actualResponse =
+                given()
+                        .contentType(ContentType.JSON)
+                        .log().all()
+                        .when()
+                        .get(EndPoints.POST_BY_USER, "notValidUser")
+                        .then()
+                        .statusCode(200)
+                        .log().all()
+                        .extract().response().getBody().asString();
+
+        Assert.assertEquals("Message in response ", "\"Sorry, invalid user requested.undefined\"", actualResponse);
+        Assert.assertEquals("Message in response ", "Sorry, invalid user requested.undefined", actualResponse.replace("\"", ""));
+    }
+
+
 }
 
 // https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11
