@@ -12,6 +12,8 @@ import org.junit.Test;
 import api.EndPoints;
 import io.restassured.http.ContentType;
 
+import java.util.Collections;
+
 public class ApiTests {
     String user_name = "autoapi";
     Logger logger = Logger.getLogger(getClass());
@@ -38,8 +40,14 @@ public class ApiTests {
         }
 
         PostDTO[] expectedResult = {
-                new PostDTO("test", "test body", "All Users", "no",new AuthorDTO("autoapi"), false),
-                new PostDTO("test2", "test body2", "All Users", "no",new AuthorDTO("autoapi"), false)
+//                new PostDTO("test", "test body", "All Users", "no",new AuthorDTO("autoapi"), false),
+//                new PostDTO("test2", "test body2", "All Users", "no",new AuthorDTO("autoapi"), false)
+                PostDTO.builder().title("test").body("test body").select1("All Users").uniquePost("no")
+                        .author(AuthorDTO.builder().username("autoapi").build()).isVisitorOwner(false)
+                        .build(),
+                PostDTO.builder().title("test2").body("test body2").select1("All Users").uniquePost("no")
+                        .author(AuthorDTO.builder().username("autoapi").build()).isVisitorOwner(false)
+                        .build(),
         };
 
         Assert.assertEquals("Number of posts ", expectedResult.length, responseBody.length);
@@ -52,9 +60,23 @@ public class ApiTests {
             softAssertions.assertThat(responseBody[i].getAuthor())
                     .isEqualToIgnoringGivenFields(expectedResult[i].getAuthor(),"avatar");
         }
-
         softAssertions.assertAll();
-
-
     }
+
+    @Test
+    public void getAllPostByUserNegative(){
+        String actualResponce =
+                given()
+                        .contentType(ContentType.JSON)
+                        .log().all()
+                .when()
+                        .get(EndPoints.POST_BY_USER, "NotValidUser")
+                .then()
+                        .statusCode(200)
+                        .log().all()
+                        .extract().response().getBody().asString();
+        Assert.assertEquals("Message in response ","\"Sorry, invalid user requested.undefined\"", actualResponce);
+        Assert.assertEquals("Message in response ","Sorry, invalid user requested.undefined", actualResponce.replace("\"",""));
+    }
+
 }
