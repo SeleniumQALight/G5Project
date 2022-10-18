@@ -1,37 +1,45 @@
 package api;
 
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder
 public class AuthorDTO {
     String username;
     String avatar;
 
-    public AuthorDTO() {
-    }
+//    public AuthorDTO() { //@NoArgsConstructor
+//    }
 
-    public AuthorDTO(String username) {
-        this.username = username;
-    }
+//    public AuthorDTO(String username) { //@AllArgsConstructor
+//        this.username = username;
+//    }
 
-    public String getUsername() {
-        return username;
-    }
+//    public String getUsername() { //@Getter
+//        return username;
+//    }
+//
+//    public void setUsername(String username) { //@Setter
+//        this.username = username;
+//    }
+//
+//    public String getAvatar() { //@Getter
+//        return avatar;
+//    }
+//
+//    public void setAvatar(String avatar) { //@Setter
+//        this.avatar = avatar;
+//    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    @Override
-    public String toString() {
-        return "AuthorDTO{" +
-                "username='" + username + '\'' +
-                ", avatar='" + avatar + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() { //@ToString
+//        return "AuthorDTO{" +
+//                "username='" + username + '\'' +
+//                ", avatar='" + avatar + '\'' +
+//                '}';
+//    }
 }
