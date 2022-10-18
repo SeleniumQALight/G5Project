@@ -1,13 +1,23 @@
 package api;
 
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder
+
+
 public class AuthorDTO {
     String username;
     String avatar;
 
-    public AuthorDTO() {
-    }
+/*    public AuthorDTO() {
+    }*/
 
-    public AuthorDTO(String username) {
+   /* public AuthorDTO(String username) {
         this.username = username;
     }
 
@@ -26,14 +36,14 @@ public class AuthorDTO {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
-
-    @Override
+*/
+   /* @Override
     public String toString() {
         return "AuthorDTO{" +
                 "username='" + username + '\'' +
                 ", avatar='" + avatar + '\'' +
                 '}';
-    }
+    }*/
 
 
 }
