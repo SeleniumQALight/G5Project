@@ -57,6 +57,12 @@ public class MyProfilePage extends ParentPage{
         return this;
     }
 
+    public PostPage clickOnPostForChangeTitle(String title){
+        clickOnElement(String.format(postTitleLocator, title));
+        return new PostPage(webDriver);
+    }
+
+
     private MyProfilePage checkIsSuccessDeletePostMessagePresent() {
         Assert.assertTrue("successDeletedPostMessage is not displayed", isElementDisplayed(successDeletedPostMessage));
         return this;
@@ -65,4 +71,6 @@ public class MyProfilePage extends ParentPage{
     private  List<WebElement> getPostsListWithTitle(String title){
        return webDriver.findElements(By.xpath(String.format(postTitleLocator, title)));
     }
+
+
 }
