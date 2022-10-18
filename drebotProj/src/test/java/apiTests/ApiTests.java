@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.support.ui.ISelect;
 
 import static io.restassured.RestAssured.given;
 
@@ -39,8 +40,14 @@ public class ApiTests {
         }
 
         PostDTO[] expectedResult = {
-                new PostDTO("test", "test body", "All Users", "no", new AuthorDTO("autoapi"), false),
-                new PostDTO("test2", "test body2", "All Users", "no", new AuthorDTO("autoapi"), false)
+//                new PostDTO("test", "test body", "All Users", "no", new AuthorDTO("autoapi"), false),
+//                new PostDTO("test2", "test body2", "All Users", "no", new AuthorDTO("autoapi"), false)
+                PostDTO.builder().title("test").body("test body").select1("All Users").uniquePost("no")
+                        .author(AuthorDTO.builder().username("autoapi").build()).isVisitorOwner(false)
+                        .build(),
+                PostDTO.builder().title("test2").body("test body2").select1("All Users").uniquePost("no")
+                        .author(AuthorDTO.builder().username("autoapi").build()).isVisitorOwner(false)
+                        .build(),
         };
 
         Assert.assertEquals("Number of post ",expectedResult.length, responseBody.length);
