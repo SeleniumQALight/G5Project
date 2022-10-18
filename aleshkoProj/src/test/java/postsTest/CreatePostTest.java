@@ -2,13 +2,26 @@ package postsTest;
 
 import baseTest.BaseTest;
 import categories.SmokeTestFilter;
+import libs.ExcelDriver;
 import libs.Util;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Map;
+
+import static pages.CommonActionsWithElements.configProperties;
+
 public class CreatePostTest extends BaseTest {
     final String TITLE = "Aleshko_Title_" + Util.getDateAndTimeFormatted();
+
+    Map<String, String> testDataForPostPage = ExcelDriver.getData(configProperties.DATA_FILE(), "postData");
+    private String titleFromExcel = testDataForPostPage.get("title");
+
+    public CreatePostTest() throws IOException {
+    }
 
     @Test
     public void TC1_createNewPost() {
@@ -42,12 +55,30 @@ public class CreatePostTest extends BaseTest {
                 .checkPostWasCreated(TITLE);
     }
 
+    @Test
+    public void createPostDBWithExcel() throws SQLException, ClassNotFoundException {
+        homePage
+                .openHomePageWithDataFromDB()
+                .getHeaderElement().clickOnCreatePostButton()
+                .checkIsRedirectToCreatePostPage()
+                .enterTextIntoTitleInput(titleFromExcel)
+                .enterTextIntoBodyInput(testDataForPostPage.get("body"))
+                .setCheckBoxWithValue(testDataForPostPage.get("checkbox"))
+                .selectTextInDropDownRole(testDataForPostPage.get("dropdown"))
+                .clickOnSaveNewPostButton()
+                .checkRedirectToPostPage()
+                .checkAlertAboutNewPostCreation("New post successfully created.")
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+                .checkPostWasCreated(titleFromExcel);
+    }
+
     @After
     public void deletePosts() {
         homePage
                 .openHomePage()
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
-                .deletePostWithTitleUntilPresent(TITLE);
+                .deletePostWithTitleUntilPresent(titleFromExcel);
     }
 }
