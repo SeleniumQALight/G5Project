@@ -50,17 +50,35 @@ public class ApiTests {
                         .build(),
         };
 
-        Assert.assertEquals("Number of post ",expectedResult.length, responseBody.length);
+        Assert.assertEquals("Number of post ", expectedResult.length, responseBody.length);
 
-        SoftAssertions softAssertions=new SoftAssertions();
+        SoftAssertions softAssertions = new SoftAssertions();
 
         for (int i = 0; i < expectedResult.length; i++) {
             softAssertions.assertThat(responseBody[i])
-                    .isEqualToIgnoringGivenFields(expectedResult[i],"id","createdDate","author");
+                    .isEqualToIgnoringGivenFields(expectedResult[i], "id", "createdDate", "author");
             softAssertions.assertThat(responseBody[i].getAuthor())
-                    .isEqualToIgnoringGivenFields(expectedResult[i].getAuthor(),"avatar");
+                    .isEqualToIgnoringGivenFields(expectedResult[i].getAuthor(), "avatar");
         }
 
         softAssertions.assertAll();
+    }
+
+    @Test
+    public void getAllPostsByUserNegative() {
+        String actualResponse =
+                given()
+                        .contentType(ContentType.JSON)
+                        .log().all()
+
+                        .when()
+                        .get(EndPoints.POST_BY_USER, "notValidUser")
+
+                        .then()
+                        .statusCode(200)
+                        .log().all()
+                        .extract().response().getBody().asString();
+        Assert.assertEquals("Message in response","\"Sorry, invalid user requested.undefined\"",actualResponse);
+        Assert.assertEquals("Message in response","Sorry, invalid user requested.undefined",actualResponse.replace("\"",""));
     }
 }
