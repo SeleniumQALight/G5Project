@@ -1,7 +1,7 @@
 package api.PrivatHW;
 
 public interface EndPointsExchangeCours {
-    String baseUrl = "https://api.privatbank.ua/p24api/pubinfo?";
-    String EXCHANGE = baseUrl + "exchange&json&coursid={0}";
+    String baseUrlPrivat24 = "https://api.privatbank.ua/p24api";
+    String EXCHANGE = baseUrlPrivat24 + "/pubinfo";
 
 }

@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 
 public class ApiTestsPrivatHW {
 
-    String coursId = "11";
+    //String coursId = "11";
 
     Logger logger = Logger.getLogger(getClass());
 
@@ -20,9 +20,12 @@ public class ApiTestsPrivatHW {
     public void getExchangeCoursByPrivat24() {
         ExchangeCoursResponseDTO[] responseBody = given()
                 .contentType(ContentType.JSON)
+                .queryParam("exchange")
+                .queryParam("json")
+                .queryParam("coursid",11)
                 .log().all()
                 .when()
-                .get(EndPointsExchangeCours.EXCHANGE, coursId)
+                .get(EndPointsExchangeCours.EXCHANGE)
                 .then()
                 .statusCode(200)
                 .log().all()
