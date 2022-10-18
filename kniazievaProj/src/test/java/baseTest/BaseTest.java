@@ -12,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.CommonActionsWithElements;
 import pages.HomePage;
 import pages.LoginPage;
+import pages.MyProfilePage;
 
 import java.time.Duration;
 
@@ -20,6 +21,7 @@ public class BaseTest {
     Logger logger = Logger.getLogger(getClass());
     protected LoginPage loginPage;
     protected HomePage homePage;
+    protected MyProfilePage myProfilePage;
 
     @Before
     public void setUp() {
@@ -30,6 +32,7 @@ public class BaseTest {
         logger.info("Browser was opened");
         loginPage = new LoginPage(webDriver);
         homePage = new HomePage(webDriver);
+        myProfilePage = new MyProfilePage(webDriver);
     }
 
     @After
