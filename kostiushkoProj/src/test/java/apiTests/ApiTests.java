@@ -54,4 +54,18 @@ PostDTO[] expectedResult = {
 
         softAssertions.assertAll();
     }
+
+    @Test
+    public void getAllPostByUserNegative(){
+        String actualResponse =
+                given().contentType(ContentType.JSON)
+                        .log().all()
+                        .when()
+                        .get(EndPoints.POST_BY_USER, "notValidUser")
+                        .then().statusCode(200)
+                        .log().all()
+                        .extract().response().getBody().asString();
+        Assert.assertEquals("Message in response ","\"Sorry, invalid user requested.undefined\"", actualResponse);
+        Assert.assertEquals("Message in response ","Sorry, invalid user requested.undefined", actualResponse.replace("\"",""));
+    }
 }
