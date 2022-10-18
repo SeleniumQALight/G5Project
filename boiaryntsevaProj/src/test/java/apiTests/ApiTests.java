@@ -15,6 +15,7 @@ import java.util.Map;
 
 import static api.EndPoints.POST_BY_USER;
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class ApiTests {
     String userName="autoapi";
@@ -108,6 +109,19 @@ public class ApiTests {
         }
         softAssertions.assertAll();
 
+    }
+
+    @Test
+    public void getAllPostsByUserSchema(){
+        given()
+                .contentType(ContentType.JSON)
+                .log().all()
+                .when()
+                .get(POST_BY_USER, userName)
+                .then()
+                .statusCode(200)
+                .log().all()
+                .assertThat().body(matchesJsonSchemaInClasspath("response.json"));
     }
 }
 
