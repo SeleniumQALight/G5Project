@@ -1,6 +1,7 @@
 package apiTests;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 import api.AuthorDTO;
 import api.PostDTO;
@@ -94,14 +95,26 @@ public class ApiTests {
         List<String> actualTitleList = actualResponse.jsonPath().getList("title", String.class);
         SoftAssertions softAssertions = new SoftAssertions();
         for (int i = 0; i < actualTitleList.size(); i++) {
-            softAssertions.assertThat(actualTitleList.get(i)).as("Item number " +i).contains("test");
+            softAssertions.assertThat(actualTitleList.get(i)).as("Item number " + i).contains("test");
         }
         List<Map> actualAuthorList = actualResponse.jsonPath().getList("author", Map.class);
         for (int i = 0; i < actualAuthorList.size(); i++) {
-            softAssertions.assertThat(actualAuthorList.get(i).get("username")).as("Item number "+ i).isEqualTo(user_name);
+            softAssertions.assertThat(actualAuthorList.get(i).get("username")).as("Item number " + i).isEqualTo(user_name);
         }
         softAssertions.assertAll();
+    }
 
+    @Test
+    public void getAllPostsByUserSchema() {
+        given()
+                .contentType(ContentType.JSON)
+                .log().all()
+                .when()
+                .get(EndPoints.POST_BY_USER, user_name)
+                .then()
+                .statusCode(200)
+                .log().all()
+                .assertThat().body(matchesJsonSchemaInClasspath("response.json"));
     }
 
 }
