@@ -149,6 +149,25 @@ protected void selectTextInDropDown(WebElement dropDown,String text){
         actions.perform();
 
     }
+    /** встановлення чекбоксу **/
+    protected void setCheckboxWithStatus(WebElement checkBox, String state) {
+        if (state.equalsIgnoreCase("check") || state.equalsIgnoreCase("uncheck")) {
+            if (checkBox.isSelected() && state.equals("check")) {
+                logger.info("CheckBox is already selected");
+            } else if (!checkBox.isSelected() && state.equalsIgnoreCase("check")) {
+                checkBox.click();
+                logger.info("CheckBox is selected");
+            } else if (checkBox.isSelected() && state.equalsIgnoreCase("uncheck")) {
+                checkBox.click();
+                logger.info("CheckBox is unselected");
+            } else if (!checkBox.isSelected() && state.equalsIgnoreCase("uncheck")) {
+                logger.info("CheckBox is not already selected");
+            }
+        } else {
+            Assert.fail("Inputted state for checkBox is not valid");
+        }
+    }
+
     /**метод moveToElement (аналог скрола )
 
      WebElement element = driver.findElement(By.id("my-id"));
