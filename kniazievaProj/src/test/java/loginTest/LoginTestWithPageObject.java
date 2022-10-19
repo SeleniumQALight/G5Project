@@ -3,29 +3,39 @@ package loginTest;
 import baseTest.BaseTest;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import libs.ExcelDriver;
 import libs.TestData;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+
+import java.io.IOException;
+import java.util.Map;
+
+import static pages.CommonActionsWithElements.configProperties;
 
 @RunWith(JUnitParamsRunner.class)
 public class LoginTestWithPageObject extends BaseTest {
 
     final static String COMMA = ",";
 
+
     @Test
-    @Parameters({
-            TestData.VALID_LOGIN+COMMA+TestData.VALID_PASSWORD
-    })
-    public void validLogin(String userName, String password){
+
+    public void validLoginWithExcel() throws IOException {
+        Map<String, String> dataForValidLogin = ExcelDriver.getData(
+                configProperties.DATA_FILE(),"validLogOn");
         loginPage.openLoginPage();
-        loginPage.enterUserNameIntoLoginInput(userName);
-        loginPage.enterPasswordIntoInputPassword(password);
+        loginPage.enterUserNameIntoLoginInput(dataForValidLogin.get("login"));
+        loginPage.enterPasswordIntoInputPassword(dataForValidLogin.get("pass"));
         loginPage.clickOnButtonLogIn();
 
-        Assert.assertTrue("Button Sign Out is not displayed", homePage.getHeaderElement().isButtonSignOutDisplayed());
+        Assert.assertTrue("Button Sign Out is not Displayed"
+                , homePage.getHeaderElement().isButtonSignOutDisplayed());
 
     }
+
 
     @Test
     @Parameters({
