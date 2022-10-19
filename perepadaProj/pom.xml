@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>perepadaProj</artifactId>
+    <artifactId>overAll</artifactId>
 
-    <name>perepadaProj</name>
+    <name>overAll</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -102,6 +102,19 @@
             <version>2.8.6</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>5.1.1</version>
+        </dependency>
 
     </dependencies>
     <profiles>
