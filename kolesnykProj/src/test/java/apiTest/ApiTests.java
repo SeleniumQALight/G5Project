@@ -64,4 +64,26 @@ public class ApiTests {
         }
         softAssertions.assertAll();
     }
+
+    @Test
+    public void getAllPostByUserNegative(){
+        String expectedResult = "Sorry, invalid user requested.undefined";
+        String actualResponse = 
+                given()
+                        .contentType(ContentType.JSON)
+                        .log().all()
+                .when()
+                        .get(EndPoints.POST_BY_USER, "invalidUser")
+                .then()
+                        .statusCode(HttpStatus.SC_OK)
+                        .log().all()
+                        .extract().response().getBody().asString();
+
+
+        //Assert.assertTrue("Message in response : ", actualResponse.contains(expectedResult));
+        Assert.assertEquals("Message in response ",expectedResult, actualResponse.replace("\"", ""));
+
+    }
+
+
 }
