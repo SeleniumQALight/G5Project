@@ -7,13 +7,17 @@ import io.restassured.http.ContentType;
 import io.restassured.response.ResponseBody;
 
 import io.restassured.specification.RequestSpecification;
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import org.junit.Assert;
 
 import static io.restassured.RestAssured.given;
 
 public class ApiHelper {
     public static final String USER_NAME = "katedr";
     private final String PASSWORD = "123456qwerty";
+
+    Logger logger = Logger.getLogger(getClass());
 
     RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
@@ -52,8 +56,10 @@ public class ApiHelper {
 
         return responseBody.asString().replace("\"", "");
     }
+
     /**
      * get posts for default user
+     *
      * @return
      */
     public PostDTO[] getAllPostsByUser() {
@@ -65,11 +71,48 @@ public class ApiHelper {
                 .spec(requestSpecification)
 
                 .when()
-                .get(EndPoints.POST_BY_USER,userName)
+                .get(EndPoints.POST_BY_USER, userName)
 
                 .then()
                 .statusCode(200)
                 .log().all()
                 .extract().response().as(PostDTO[].class);
+    }
+
+    public void deletePostsTillPresent() {
+        deletePostsTillPresent(USER_NAME, PASSWORD);
+    }
+
+    private void deletePostsTillPresent(String userName, String password) {
+        PostDTO[] listOfPosts = getAllPostsByUser(userName);
+        String token = getToken(userName, password);
+
+        for (int i = 0; i < listOfPosts.length; i++) {
+            deletePostById(token, listOfPosts[i].getId());
+            logger.info(String.format("Post with id %s and title %s was deleted",
+                    listOfPosts[i].getId(), listOfPosts[i].getTitle()));
+        }
+
+        Assert.assertEquals("number of post ", 0, getAllPostsByUser(userName).length);
+
+    }
+
+    private void deletePostById(String token, String id) {
+        JSONObject bodyParam = new JSONObject();
+        bodyParam.put("token", token);
+
+        String response = given()
+                .spec(requestSpecification)
+                .body(bodyParam.toMap())
+
+                .when()
+                .delete(EndPoints.DELETE_POST, id)
+
+                .then()
+                .statusCode(200)
+                .log().all()
+                .extract().response().getBody().asString();
+
+        Assert.assertEquals("message ", "\"Success\"", response);
     }
 }
