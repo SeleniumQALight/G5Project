@@ -7,6 +7,7 @@ import api.PostDTO;
 import io.restassured.http.ContentType;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -16,14 +17,19 @@ import static io.restassured.RestAssured.given;
 public class CreatePostByApi {
     ApiHelper apiHelper = new ApiHelper();
 
+    @Before
+    public void deleteAllPosts(){
+        apiHelper.deletePostsTillPresent();
+    }
+
     @Test
     public void createPostByApi() {
         String token = apiHelper.getToken();
 //        System.out.println("Token from test → " + token);
 
         HashMap<String, String> requestParams = new HashMap<>();
-        requestParams.put("title", "New post from Api Sanya");
-        requestParams.put("body", "post body Sanya");
+        requestParams.put("title", "New post from Api Sanya 1");
+        requestParams.put("body", "post body Sanya 1");
         requestParams.put("select1", "One Person");
         requestParams.put("uniquePost", "yes");
         requestParams.put("token", token);
