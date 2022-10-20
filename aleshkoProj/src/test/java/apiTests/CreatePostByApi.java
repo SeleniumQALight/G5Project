@@ -8,6 +8,7 @@ import io.restassured.http.ContentType;
 import libs.TestData;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -16,6 +17,11 @@ import static io.restassured.RestAssured.*;
 
 public class CreatePostByApi {
     ApiHelper apiHelper = new ApiHelper();
+
+    @Before
+    public void deletePostsTillPresent() {
+        apiHelper.deletePostsTillPresent();
+    }
 
     @Test
     public void createPostByApi() {
