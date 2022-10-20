@@ -32,7 +32,8 @@ public class ApiTests {
           .then()
                 .statusCode(200)
                 .log().all()
-                .extract().as(PostDTO[].class) // дістань та розбери масив
+                .extract()
+                .response().as(PostDTO[].class) // дістань той ріспонс та розбери його як написано в нашій ДТО як масив
                 ;
         logger.info("Number of posts = " + responseBody.length);
         logger.info("Post title post1 = " + responseBody[0].getTitle());
