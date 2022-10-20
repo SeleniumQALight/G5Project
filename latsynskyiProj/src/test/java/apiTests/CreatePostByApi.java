@@ -7,6 +7,7 @@ import api.PostDTO;
 import io.restassured.http.ContentType;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -15,6 +16,12 @@ import static io.restassured.RestAssured.given;
 
 public class CreatePostByApi {
     ApiHelper apiHelper = new ApiHelper();
+
+    @Before
+    public  void deleteAllPosts(){
+        apiHelper.deletePostTillPresent();
+    }
+
     @Test
     public void createPostByApi(){
         String token = apiHelper.getToken();
@@ -55,7 +62,7 @@ public class CreatePostByApi {
    };
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(actualPostDTO[0])
-                .isEqualToIgnoringGivenFields(expectedPostDTO[0],"id","createDate","autor");
+                .isEqualToIgnoringGivenFields(expectedPostDTO[0],"id","createdDate","author");
         softAssertions.assertThat(actualPostDTO[0].getAuthor())
                 .isEqualToIgnoringGivenFields(expectedPostDTO[0].getAuthor(),"avatar");
         softAssertions.assertAll();
