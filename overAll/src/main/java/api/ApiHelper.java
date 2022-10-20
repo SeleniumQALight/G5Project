@@ -2,7 +2,9 @@ package api;
 
 import static io.restassured.RestAssured.given;
 
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import org.junit.Assert;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -13,6 +15,7 @@ import io.restassured.specification.RequestSpecification;
 public class ApiHelper {
     public static final String USER_NAME = "autotaras";
     private final String PASSWORD = "123456qwerty";
+    Logger logger = Logger.getLogger(getClass());
 
 
     RequestSpecification requestSpecification = new RequestSpecBuilder()
@@ -68,5 +71,40 @@ public class ApiHelper {
                     .statusCode(200)
                     .log().all()
                 .extract().response().getBody().as(PostDTO[].class);
+    }
+
+    public void deletePostsTillPresent() {
+        deletePostsTillPresent(USER_NAME, PASSWORD);
+    }
+
+    private void deletePostsTillPresent(String userName, String password) {
+        PostDTO[] listOfPosts = getAllPostsByUser(userName);
+        String token = getToken(userName, password);
+
+        for (int i = 0; i < listOfPosts.length; i++) {
+            deletePostById(token, listOfPosts[i].getId());
+            logger.info(String.format("Post with id %s and title %s was deleted",listOfPosts[i].getId()
+                    , listOfPosts[i].getTitle()));
+        }
+
+        Assert.assertEquals("Number of posts ", 0, getAllPostsByUser(userName).length);
+
+    }
+
+    private void deletePostById(String token, String id) {
+        JSONObject bodyParams = new JSONObject();
+        bodyParams.put("token", token);
+
+        String response = given()
+                .spec(requestSpecification)
+                .body(bodyParams.toMap())
+        .when()
+                .delete(EndPoints.DELETE_POST, id)
+        .then()
+                .statusCode(200)
+                .log().all()
+                .extract().response().getBody().asString();
+
+        Assert.assertEquals("Message ", "\"Success\"", response);
     }
 }

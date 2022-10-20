@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import api.ApiHelper;
@@ -16,6 +17,11 @@ import io.restassured.http.ContentType;
 
 public class CreatePostByApi {
     ApiHelper apiHelper = new ApiHelper();
+
+    @Before
+    public void deleteAllPosts(){
+        apiHelper.deletePostsTillPresent();
+    }
 
     @Test
     public void createPostByApi(){
