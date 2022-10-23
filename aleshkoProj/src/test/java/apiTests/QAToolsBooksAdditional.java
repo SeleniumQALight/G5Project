@@ -13,13 +13,6 @@ import java.util.ArrayList;
 import static io.restassured.RestAssured.given;
 
 public class QAToolsBooksAdditional {
-    /*
-    Додаткове завдання :
-Зробити тест, який би додавав юзеру книжку, якої немає в його списку.
-Тобто отримати список всіх книжок у магазині і з нього вибрати книгу, якої немає ще у юзера і її додати.
-Перевірити що книжок стало на одну більше , і що книжка додана є в списку у юзера(можна по id книжки).
-І в after видалити додану книжку. В цьому тесті вже не потрібно в before всі видаляти як в попередньому
-     */
 
     private final String USER_NAME = "krill";
     private final String PASSWORD = "*Takeiteasy8";
