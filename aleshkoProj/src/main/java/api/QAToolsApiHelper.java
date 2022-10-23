@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
@@ -32,13 +33,29 @@ public class QAToolsApiHelper {
                 .statusCode(204)
                 .log().all();
 
-        QAToolsUsersBooks responseBody = getUsersListOfBooks(uuid, token);
+        QAToolsUsersBooksDTO responseBody = getUsersListOfBooks(uuid, token);
 
         Assert.assertTrue("Number of books in list is not 0", (responseBody.books.length == 0));
         logger.info("List of books was cleared");
     }
 
-    public QAToolsUsersBooks getUsersListOfBooks(String uuid, String token) {
+    public void deleteBookInUserListByIsbn(String uuid, String token, String isbn) {
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("isbn", isbn);
+        requestBody.put("userId", uuid);
+
+        given()
+                .spec(requestSpecification)
+                .auth().oauth2(token)
+                .body(requestBody.toMap())
+        .when()
+                .delete(BooksEndPoints.deleteBookFromUserList)
+        .then()
+                .statusCode(204)
+                .log().all();
+    }
+
+    public QAToolsUsersBooksDTO getUsersListOfBooks(String uuid, String token) {
         return given()
                     .spec(requestSpecification)
                     .auth().oauth2(token)
@@ -47,7 +64,7 @@ public class QAToolsApiHelper {
                .then()
                     .statusCode(200)
                     .log().all()
-                    .extract().response().getBody().as(QAToolsUsersBooks.class);
+                    .extract().response().getBody().as(QAToolsUsersBooksDTO.class);
     }
 
     public QAToolsBooksListDTO getAllBooksInStore() {
@@ -89,4 +106,12 @@ public class QAToolsApiHelper {
         logger.info(String.format("Book with isbn [%s] was added to user's list", isbn));
     }
 
+    public ArrayList<String> isbnParser(QAToolsBooksDTO[] bookList) {
+        ArrayList<String> listOfIsbn = new ArrayList<>();
+
+        for (int i = 0; i < bookList.length; i++) {
+            listOfIsbn.add(bookList[i].getIsbn());
+        }
+        return listOfIsbn;
+    }
 }

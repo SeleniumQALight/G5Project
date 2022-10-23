@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Builder
-public class QAToolsUsersBooks {
+public class QAToolsUsersBooksDTO {
     String userId;
     String username;
     QAToolsBooksDTO[] books;
