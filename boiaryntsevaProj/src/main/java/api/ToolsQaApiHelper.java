@@ -45,14 +45,27 @@ public class ToolsQaApiHelper {
         logger.info("Token and id were saved");
         return tokenAndId;
     }
-    public void deleteBooksByUserId(){
-        String userId = getTokenAndIdWhenOtherResponseFieldsArePresent().get("userId");
-        String token = getTokenAndIdWhenOtherResponseFieldsArePresent().get("token");
+//    public void deleteBooksByUserId(){
+//        String userId = getTokenAndIdWhenOtherResponseFieldsArePresent().get("userId");
+//        String token = getTokenAndIdWhenOtherResponseFieldsArePresent().get("token");
+//
+//        given()
+//                .spec(requestSpecification)
+//                .auth().oauth2(token)
+//                .queryParams("UserId", userId)
+//                .when()
+//                .delete(ToolsQABookEndpoints.BOOKS_LIST)
+//                .then()
+//                .statusCode(204)
+//                .log().all();
+//    }
+
+    public void deleteBooksByUserIdMapProvided(String token, String id){
 
         given()
                 .spec(requestSpecification)
                 .auth().oauth2(token)
-                .queryParams("UserId", userId)
+                .queryParams("UserId", id)
                 .when()
                 .delete(ToolsQABookEndpoints.BOOKS_LIST)
                 .then()

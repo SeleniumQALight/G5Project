@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,8 +19,10 @@ import static io.restassured.RestAssured.oauth2;
 
 public class ToolsQaAddBookToUserApiTest {
     ToolsQaApiHelper toolsQaApiHelper = new ToolsQaApiHelper();
-    String token = toolsQaApiHelper.getTokenAndIdWhenOtherResponseFieldsArePresent().get("token");
-    String userId = toolsQaApiHelper.getTokenAndIdWhenOtherResponseFieldsArePresent().get("userId");
+
+    HashMap<String,String> tokenAndId = toolsQaApiHelper.getTokenAndIdWhenOtherResponseFieldsArePresent();
+    String token = tokenAndId.get("token");
+    String userId = tokenAndId.get("userId");
 
     RequestSpecification requestSpecification =  new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
@@ -29,7 +32,7 @@ public class ToolsQaAddBookToUserApiTest {
 
     @Before
     public void deleteBooksByUserId(){
-        toolsQaApiHelper.deleteBooksByUserId();
+        toolsQaApiHelper.deleteBooksByUserIdMapProvided(token, userId);
     }
 
     @Test
