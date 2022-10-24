@@ -20,7 +20,7 @@ public class QAToolsBooks {
         String firstBookIsbn = booksList.getBooks()[0].getIsbn();
 
         apiHelper.addBooksToUserList(firstBookIsbn);
-        QAToolsUsersBooks usersList = apiHelper.getUsersListOfBooks();
+        QAToolsUsersBooksDTO usersList = apiHelper.getUsersListOfBooks();
 
         Assert.assertTrue("New book does not displays in user's book-list", (usersList.getBooks().length == 1));
         Assert.assertEquals("Added book contains different isbn", usersList.getBooks()[0].getIsbn(), firstBookIsbn);
