@@ -66,17 +66,17 @@ public class QAToolsApiHelper {
                 .statusCode(204)
                 .log().all();
 
-        QAToolsUsersBooks responseBody = getUsersListOfBooks(uuid, token);
+        QAToolsUsersBooksDTO responseBody = getUsersListOfBooks(uuid, token);
 
         Assert.assertNotEquals("Number of books in list is not 0", 1, responseBody.books.length);
         logger.info("List of books was cleared");
     }
 
-    public QAToolsUsersBooks getUsersListOfBooks() {
+    public QAToolsUsersBooksDTO getUsersListOfBooks() {
         return getUsersListOfBooks(uuid, token);
     }
 
-    public QAToolsUsersBooks getUsersListOfBooks(String uuid, String token) {
+    public QAToolsUsersBooksDTO getUsersListOfBooks(String uuid, String token) {
         return given()
                 .spec(requestSpecification)
                 .auth().oauth2(token)
@@ -85,7 +85,7 @@ public class QAToolsApiHelper {
                 .then()
                 .statusCode(200)
                 .log().all()
-                .extract().response().getBody().as(QAToolsUsersBooks.class);
+                .extract().response().getBody().as(QAToolsUsersBooksDTO.class);
     }
 
     public QAToolsBooksListDTO getAllBooksInStore() {
