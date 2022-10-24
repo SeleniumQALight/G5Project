@@ -25,8 +25,6 @@ public class ApiHelper {
     public static String userId ;
     public static String userToken;
 
-    private static String bookId;
-    public static String firstBookId = "";
     Logger logger = Logger.getLogger(getClass());
 
 
@@ -78,7 +76,7 @@ public class ApiHelper {
 
     }
 
-    public static void getFirstBookId(){
+    public static String  getFirstBookId(){
          JsonPath response = given()
                 .log().all()
                 .when()
@@ -90,19 +88,15 @@ public class ApiHelper {
 
     //have no idea how it works
         List<HashMap<String, Object>> books = response.getList("books");
-        firstBookId = (String) books.get(0).get("isbn");
-//        for (int i = 0; i < books.size(); i++) {
-//            firstBookId = (String) books.get(0).get("isbn");
-//        }
+        String firstBookId = (String) books.get(0).get("isbn");
+        return firstBookId;
     }
 
-    public static void addBook() {
+    public static void addBook(String bookId) {
         ArrayList<Map<String, String>> collectionOfIsbns = new ArrayList<>();
         Map<String ,String > isbn = new HashMap<>();
-        isbn.put("isbn", "9781449325862");
+        isbn.put("isbn", bookId);
         collectionOfIsbns.add(isbn);
-//        List<HashMap> rr = new ArrayList<>();
-//        rr.add(collectionOfIsbns);
 
         HashMap<String, Object> bodyParams = new HashMap<>();
         bodyParams.put("userId", userId);

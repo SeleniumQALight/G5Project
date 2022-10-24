@@ -15,6 +15,7 @@ import static io.restassured.RestAssured.given;
 
 
 public class AddUserBook {
+    String firstBookId = "9781449325862";
 
     @Before
     public void login() {
@@ -25,9 +26,7 @@ public class AddUserBook {
     @Test
     public void AddBookToUser(){
         String actualResult = "";
-
-        getFirstBookId();
-        addBook();
+        addBook(getFirstBookId());
 
         JsonPath response = given()
                 .auth().oauth2(userToken)
