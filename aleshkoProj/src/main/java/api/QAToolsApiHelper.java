@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
@@ -72,6 +73,22 @@ public class QAToolsApiHelper {
         logger.info("List of books was cleared");
     }
 
+    public void deleteBookInUserListByIsbn(String uuid, String token, String isbn) {
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("isbn", isbn);
+        requestBody.put("userId", uuid);
+
+        given()
+                .spec(requestSpecification)
+                .auth().oauth2(token)
+                .body(requestBody.toMap())
+                .when()
+                .delete(BooksEndPoints.deleteBookFromUserList)
+                .then()
+                .statusCode(204)
+                .log().all();
+    }
+
     public QAToolsUsersBooksDTO getUsersListOfBooks() {
         return getUsersListOfBooks(uuid, token);
     }
@@ -127,5 +144,14 @@ public class QAToolsApiHelper {
 
         Assert.assertTrue("Book was not added to list", responseBody.contains(isbn));
         logger.info(String.format("Book with isbn [%s] was added to user's list", isbn));
+    }
+
+    public ArrayList<String> isbnParser(QAToolsBooksDTO[] bookList) {
+        ArrayList<String> listOfIsbn = new ArrayList<>();
+
+        for (int i = 0; i < bookList.length; i++) {
+            listOfIsbn.add(bookList[i].getIsbn());
+        }
+        return listOfIsbn;
     }
 }
