@@ -23,7 +23,7 @@ public class AddBookToUserByApi {
 
         apiHelperBooks.addBooksToUser(firstBookIsbn);
 
-        Assert.assertTrue("Number of books added by user is ", (apiHelperBooks.getAllBooksByUser().getBooks().length==1)
+        Assert.assertTrue("Number of books added by user and their isbn numbers are ", (apiHelperBooks.getAllBooksByUser().getBooks().length==1)
                 && (apiHelperBooks.getAllBooksByUser().getBooks()[0].getIsbn().equals(firstBookIsbn)));
         logger.info(String.format("Book with isbn %s is placed in user's library", firstBookIsbn));
     }
