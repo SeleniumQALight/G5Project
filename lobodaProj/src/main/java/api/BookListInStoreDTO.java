@@ -8,6 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Builder
-public class BookListDTO {
+public class BookListInStoreDTO {
     private BookDTO[] books;
 }

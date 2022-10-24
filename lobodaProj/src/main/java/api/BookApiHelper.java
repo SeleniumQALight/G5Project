@@ -5,12 +5,8 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -18,8 +14,6 @@ public class BookApiHelper {
 
     public static final String USER_NAME = "testl321";
     private final String PASSWORD = "Test-!@#$%12345";
-
-    Logger logger = Logger.getLogger(getClass());
 
     RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
@@ -73,11 +67,11 @@ public class BookApiHelper {
 
     }
 
-    public String getIsbnForFirstBook(){
+    public String getIsbnForFirstBookInStore(){
         return getAllBooksInStore().getBooks()[0].getIsbn();
     }
 
-    public BookListDTO getAllBooksInStore() {
+    public BookListInStoreDTO getAllBooksInStore() {
         return given()
                 .spec(requestSpecification)
         .when()
@@ -85,31 +79,21 @@ public class BookApiHelper {
         .then()
                 .statusCode(200)
                 .log().all()
-                .extract().response().getBody().as(BookListDTO.class);
+                .extract().response().getBody().as(BookListInStoreDTO.class);
 
     }
 
-    public void addBookToUser(String token, String userId, String isbn){
-        JSONObject bodyMainParams = new JSONObject();
-        bodyMainParams.put("userId", userId);
-
-        JSONObject bodyIsbnParams = new JSONObject();
-        bodyIsbnParams.put("isbn", isbn);
-
-        List <JSONObject> listOfIsbns = new ArrayList<>();
-        listOfIsbns.add(bodyIsbnParams);
-        bodyMainParams.put("collectionOfIsbns", listOfIsbns);
-
-        given()
+    public BookListByUserDTO getAllBooksByUserId(String userId, String token) {
+         return given()
                 .spec(requestSpecification)
                 .auth()
                 .oauth2(token)
-                .body(bodyMainParams.toMap())
         .when()
-                .post(BookEndPoints.WORK_WITH_BOOKS)
+                .get(BookEndPoints.WORK_WITH_USER,userId)
         .then()
-                .statusCode(201)
-                .log().all();
+                .statusCode(200)
+                .log().all()
+                .extract().response().getBody().as(BookListByUserDTO.class);
 
     }
 
