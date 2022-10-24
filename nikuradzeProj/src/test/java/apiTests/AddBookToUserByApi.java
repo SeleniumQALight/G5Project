@@ -19,12 +19,9 @@ public class AddBookToUserByApi {
 
     @Test
     public void addBookToUser(){
-        apiHelperBooks.getAllBooksFromStore();
         String firstBookIsbn = apiHelperBooks.getAllBooksFromStore().getBooks()[0].getIsbn();
 
         apiHelperBooks.addBooksToUser(firstBookIsbn);
-
-        apiHelperBooks.getAllBooksByUser();
 
         Assert.assertTrue("Number of books added by user is ", (apiHelperBooks.getAllBooksByUser().getBooks().length==1)
                 && (apiHelperBooks.getAllBooksByUser().getBooks()[0].getIsbn().equals(firstBookIsbn)));
