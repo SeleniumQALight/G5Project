@@ -28,7 +28,7 @@ public class AddUserBook {
         String actualResult = "";
         addBook(getFirstBookId());
 
-        JsonPath response = given()
+        UserBooksDTO returnedUserBooks = given()
                 .auth().oauth2(userToken)
                 .contentType(ContentType.JSON)
                 .log().all()
@@ -37,10 +37,9 @@ public class AddUserBook {
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .log().all()
-                .extract().response().jsonPath();
+                .extract().response().as(UserBooksDTO.class);
 
-        List<HashMap<String, Object>> books = response.getList("books");
-        actualResult = (String) books.get(0).get("isbn");
+        actualResult = returnedUserBooks.books.get(0).getIsbn();
 
         Assert.assertEquals("Searched bookId :" + firstBookId + " not wound" , firstBookId, actualResult);
 

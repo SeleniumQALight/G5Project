@@ -1,6 +1,7 @@
 package apiHomeworkAddUserBook;
 
 import lombok.*;
+import org.openqa.selenium.devtools.v85.dom.model.ShadowRootType;
 
 import java.util.List;
 
@@ -10,9 +11,9 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Builder
+public class UserBooksDTO {
 
-public class AllBooksDTO {
-
+    String userId;
+    String username;
     List<BookDTO> books;
-
 }
