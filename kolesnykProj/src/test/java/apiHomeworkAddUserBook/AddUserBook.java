@@ -40,9 +40,7 @@ public class AddUserBook {
                 .extract().response().jsonPath();
 
         List<HashMap<String, Object>> books = response.getList("books");
-        for (int i = 0; i < books.size(); i++) {
-            actualResult = (String) books.get(0).get("isbn");
-        }
+        actualResult = (String) books.get(0).get("isbn");
 
         Assert.assertEquals("Searched bookId :" + firstBookId + " not wound" , firstBookId, actualResult);
 
