@@ -73,6 +73,10 @@ public class QAToolsApiHelper {
         logger.info("List of books was cleared");
     }
 
+    public void deleteBookInUserListByIsbn(String isbn) {
+        deleteBookInUserListByIsbn(uuid, token, isbn);
+    }
+
     public void deleteBookInUserListByIsbn(String uuid, String token, String isbn) {
         JSONObject requestBody = new JSONObject();
         requestBody.put("isbn", isbn);
