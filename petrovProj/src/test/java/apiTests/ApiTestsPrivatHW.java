@@ -12,8 +12,6 @@ import static io.restassured.RestAssured.given;
 
 public class ApiTestsPrivatHW {
 
-    //String coursId = "11";
-
     Logger logger = Logger.getLogger(getClass());
 
     @Test
