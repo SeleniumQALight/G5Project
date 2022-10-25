@@ -3,6 +3,7 @@ package apiTests;
 import api.AuthorDTO;
 import api.EndPoints;
 import api.PostDTO;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
@@ -26,6 +27,7 @@ public class ApiTests {
         PostDTO[] responseBody = given()
                 .contentType(ContentType.JSON)
 //                .queryParam("exchange")
+                .filter(new AllureRestAssured())
                 .log().all()
           .when()
                 .get(EndPoints.POST_BY_USER, user_name)
@@ -46,7 +48,7 @@ public class ApiTests {
         PostDTO[] expectedResult = {
 //                new PostDTO("test", "test body", "All Users", "no", new AuthorDTO("autoapi"), false),
 //                new PostDTO("test2", "test body2", "All Users", "no", new AuthorDTO("autoapi"), false)
-                PostDTO.builder().title("test").body("test body").select1("All Users").uniquePost("no").author(AuthorDTO.builder().username("autoapi").build()).isVisitorOwner(false)
+                PostDTO.builder().title("test1").body("test body").select1("All Users").uniquePost("no").author(AuthorDTO.builder().username("autoapi").build()).isVisitorOwner(false)
                         .build(),
                 PostDTO.builder().title("test2").body("test body2").select1("All Users").uniquePost("no").author(AuthorDTO.builder().username("autoapi").build()).isVisitorOwner(false)
                         .build()
