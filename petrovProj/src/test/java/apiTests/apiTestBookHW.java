@@ -24,7 +24,7 @@ public class apiTestBookHW {
         JSONObject requestParams = new JSONObject();
         requestParams.put("userId", apiHelperBooks.login().getUserId());
         String isbn_id = apiHelperBooks.getAllBooksFromSite().getBooks()[0].getIsbn();
-        String putBody = "collectionOfIsbns" + ": [{" + requestParams.put("isbn", isbn_id) + "}]";
+        requestParams.put("collectionOfIsbns" + ": [{" +  "isbn", isbn_id + "}]");
 
         System.out.println("user "+ apiHelperBooks.login().getUserId());
         System.out.println("isbn " + isbn_id);
