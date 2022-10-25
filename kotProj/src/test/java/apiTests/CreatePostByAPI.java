@@ -7,6 +7,7 @@ import api.PostDTO;
 import io.restassured.http.ContentType;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import java.util.HashMap;
 import static io.restassured.RestAssured.given;
@@ -14,6 +15,10 @@ import static io.restassured.RestAssured.given;
 public class CreatePostByAPI {
     ApiHelper apiHelper= new ApiHelper();
 
+@Before //deleting all posts
+public void deleteAllPosts (){
+    apiHelper.deletePostsBeforeCurrent();
+}
 
     @Test
     public void CreatePostByAPI(){

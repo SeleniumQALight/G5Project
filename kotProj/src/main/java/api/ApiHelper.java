@@ -6,6 +6,8 @@ import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import org.junit.Assert;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiHelper {   //методи для звязку з апі і повернення рез-ту
@@ -61,5 +63,39 @@ return getToken(USER_NAME,PASSWORD);
              .statusCode(200)
              .log().all()
              .extract().response().getBody().as(PostDTO[].class);
+    }
+
+    public void deletePostsBeforeCurrent() {
+        deletePostsBeforeCurrent(USER_NAME,PASSWORD);
+
+    }
+
+    private void deletePostsBeforeCurrent(String userName, String password) {
+        PostDTO[] listOfPosts = getAllPostsByUser(userName); //всі пости викликаємо
+        String token = getToken(userName, password);
+
+        for (int i = 0; i < listOfPosts.length; i++) {
+            deletePostsById(token, listOfPosts[i].getId());             //видалення постів по айді і токену із запроса по гет запиту
+            logger.info(String.format("post with id &s and title &s was deleted", listOfPosts[i].getId(), listOfPosts[i].getTitle()));
+
+        }
+        Assert.assertEquals("Number of posts ", 0, getAllPostsByUser(userName).length);
+
+    }
+    private void deletePostsById(String token, String id) {
+     JSONObject bodyParams = new JSONObject();
+        bodyParams.put("token", token);
+
+       String response = given()
+                .spec(requestSpecification)
+                .body(bodyParams.toMap())
+                .when()
+                .delete(EndPoints.DELETE_POST, id)
+                .then()
+                .statusCode(200)
+                .log().all()
+               .extract().response().getBody().asString();
+
+       Assert.assertEquals("Message " , "\"Success\"", response);
     }
 }
