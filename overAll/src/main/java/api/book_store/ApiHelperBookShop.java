@@ -14,18 +14,19 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
 public class ApiHelperBookShop {
-     static final String USER_NAME_DEFAULT = "test";
-     static final String PASSWORD_FOR_DEFAULT_USER = "123456QwErTy!";
+    static final String USER_NAME_DEFAULT = "test";
+    static final String PASSWORD_FOR_DEFAULT_USER = "123456QwErTy!";
 
     RequestSpecification requestSpecification = new RequestSpecBuilder()
+            .setBaseUri(EndPoints.BASE_URL)
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
 
-    public UserDTO loginByDefaultUser(){
-       return given().contentType(ContentType.JSON)
-                .body(Map.of("userName", USER_NAME_DEFAULT,"password", PASSWORD_FOR_DEFAULT_USER))
-                .log().all()
+    public UserDTO loginByDefaultUser() {
+        return given()
+                .spec(requestSpecification)
+                .body(Map.of("userName", USER_NAME_DEFAULT, "password", PASSWORD_FOR_DEFAULT_USER))
                 .when().post(EndPoints.LOGIN)
                 .then()
                 .statusCode(200).log().all()
@@ -33,9 +34,9 @@ public class ApiHelperBookShop {
     }
 
 
-    public void deleteAllPostsForUser(String token, String userId){
+    public void deleteAllPostsForUser(String token, String userId) {
         given()
-                .contentType(ContentType.JSON).log().all()
+                .spec(requestSpecification)
                 .auth().oauth2(token)
                 .queryParam("UserId", userId)
                 .when().delete(EndPoints.ALL_BOOKS_FOR_USER);
@@ -43,9 +44,8 @@ public class ApiHelperBookShop {
 
     public BooksByUserDTO getBooksByUser(String token, String userId) {
         return given()
-                .auth()
-                .oauth2(token)
-                .log().all()
+                .spec(requestSpecification)
+                .auth().oauth2(token)
                 .when()
                 .get(EndPoints.BOOKS_BY_USER, userId)
                 .then()
@@ -55,14 +55,15 @@ public class ApiHelperBookShop {
 
     public BookInStoreDTO getAllBooksInStore() {
         return given()
-                .contentType(ContentType.JSON).log().all()
+                .spec(requestSpecification)
                 .when().get(EndPoints.ALL_BOOKS_FOR_USER)
                 .then().statusCode(200)
                 .extract().response().getBody().as(BookInStoreDTO.class);
     }
 
     public void addBookToUserList(String token, String userId, String addedBookId) {
-        given().contentType(ContentType.JSON).log().all()
+        given()
+                .spec(requestSpecification)
                 .body(Map.of("userId", userId, "collectionOfIsbns", List.of(Map.of("isbn", addedBookId))))
                 .auth().oauth2(token)
                 .when()
@@ -72,9 +73,9 @@ public class ApiHelperBookShop {
 
     public void deleteBookFromUserList(String token, String addedBookId, String userId) {
         given()
+                .spec(requestSpecification)
                 .auth().oauth2(token)
-                .contentType(ContentType.JSON)
-                .body(Map.of("isbn", addedBookId , "userId", userId)).log().all()
+                .body(Map.of("isbn", addedBookId, "userId", userId))
                 .when().delete(EndPoints.BOOK_FOR_USER)
                 .then().statusCode(204);
     }
