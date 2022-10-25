@@ -6,6 +6,7 @@ import api.BookListByUserDTO;
 import io.restassured.http.ContentType;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,16 +16,20 @@ import static io.restassured.RestAssured.given;
 
 public class ApiBookStoreTest {
     BookApiHelper bookApiHelper = new BookApiHelper();
+    String userId;
+    String token;
+
+    @Before
+    public void loginAndDeleteAllBooksByUserId(){
+        JSONObject userIdAndToken = bookApiHelper.getUserIdAndToken();
+        userId = userIdAndToken.get("userId").toString();
+        token = userIdAndToken.get("token").toString();
+        bookApiHelper.deleteAllBooksByUserId(token,userId);
+    }
 
     @Test
     public void addBookToProfile(){
-        JSONObject userIdAndToken = bookApiHelper.getUserIdAndToken();
-        String userId = userIdAndToken.get("userId").toString();
-        String token = userIdAndToken.get("token").toString();
-
-        bookApiHelper.deleteAllBooksByUserId(token,userId);
         String isbn = bookApiHelper.getIsbnForFirstBookInStore();
-
 
         JSONObject bodyMainParams = new JSONObject();
         bodyMainParams.put("userId", userId);

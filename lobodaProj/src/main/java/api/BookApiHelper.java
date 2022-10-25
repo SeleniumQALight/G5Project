@@ -34,7 +34,7 @@ public class BookApiHelper {
         requestParams.put("userName", user_name);
         requestParams.put("password", password);
 
-        ResponseBody responseBody =
+        BookLoginDTO responseBody =
                 given()
                         .spec(requestSpecification)
                         .body(requestParams.toMap())
@@ -43,11 +43,11 @@ public class BookApiHelper {
                         .then()
                         .statusCode(200)
                         .log().all()
-                        .extract().response().getBody();
+                        .extract().response().getBody().as(BookLoginDTO.class);
 
         JSONObject usedIdAndToken = new JSONObject();
-        usedIdAndToken.put("userId", responseBody.as(BookLoginDTO.class).getUserId());
-        usedIdAndToken.put("token", responseBody.as(BookLoginDTO.class).getToken());
+        usedIdAndToken.put("userId", responseBody.getUserId());
+        usedIdAndToken.put("token", responseBody.getToken());
 
         return usedIdAndToken;
     }
