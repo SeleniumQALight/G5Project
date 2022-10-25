@@ -4,7 +4,6 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
-import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
@@ -23,13 +22,14 @@ public class ApiHelper {
     private static final String PASSWORD = "12345Love!";
 
     public static String userId ;
-    public static String userToken;
+    private static String userToken;
 
     Logger logger = Logger.getLogger(getClass());
 
 
-    public static void loginAsValidUser() {
-         loginAsValidUser(USER_NAME, PASSWORD);
+    public static UserDTO loginAsValidUser() {
+         return loginAsValidUser(USER_NAME, PASSWORD);
+
     }
 
     static RequestSpecification requestSpecification = new RequestSpecBuilder()
@@ -37,12 +37,12 @@ public class ApiHelper {
             .log(LogDetail.ALL)
             .build();
 
-    private static void loginAsValidUser(String user_name, String password) {
+    private static UserDTO loginAsValidUser(String user_name, String password) {
         JSONObject requestParams = new JSONObject();
         requestParams.put("userName", user_name);
         requestParams.put("password", password);
 
-        ResponseBody responseBody =
+        UserDTO responseBody =
                 given()
                         .spec(requestSpecification)
 //                        .contentType(ContentType.JSON)
@@ -53,9 +53,12 @@ public class ApiHelper {
                         .then()
                         .statusCode(HttpStatus.SC_OK)
                         .log().all()
-                        .extract().response().getBody();
-        userId = responseBody.jsonPath().getString("userId");
-        userToken = responseBody.jsonPath().getString("token");
+                        .extract().response().getBody().as(UserDTO.class);
+
+
+        userId = responseBody.getUserId();
+        userToken = responseBody.getToken();
+        return responseBody;
     }
 
     public static void deleteUserBooks(){
@@ -76,7 +79,7 @@ public class ApiHelper {
 
     }
 
-    public static String  getFirstBookId(){
+    public static String getBookId(int bookIndex){
          JsonPath response = given()
                 .log().all()
                 .when()
@@ -88,7 +91,7 @@ public class ApiHelper {
 
     //have no idea how it works
         List<HashMap<String, Object>> books = response.getList("books");
-        String firstBookId = (String) books.get(0).get("isbn");
+        String firstBookId = (String) books.get(bookIndex).get("isbn");
         return firstBookId;
     }
 
