@@ -13,21 +13,22 @@ import static io.restassured.RestAssured.given;
 
 public class ToolsQaApiHelper {
     public static final String USER_NAME = "boiaryntseva";
-    private final String PASSWORD_BOOKS="123Demo!";
-    Logger logger=Logger.getLogger(getClass());
+    private final String PASSWORD_BOOKS = "123Demo!";
+    Logger logger = Logger.getLogger(getClass());
 
     RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
 
-    public HashMap<String, String> getTokenAndIdWhenOtherResponseFieldsArePresent(){
+    public HashMap<String, String> getTokenAndIdWhenOtherResponseFieldsArePresent() {
         return getTokenAndIdWhenOtherResponseFieldsArePresent(USER_NAME, PASSWORD_BOOKS);
     }
-    public HashMap<String, String> getTokenAndIdWhenOtherResponseFieldsArePresent(String user_name, String password){
-        HashMap <String, String> requestParams= new HashMap<>();
-        requestParams.put("userName",user_name);
-        requestParams.put("password",password);
+
+    public HashMap<String, String> getTokenAndIdWhenOtherResponseFieldsArePresent(String user_name, String password) {
+        HashMap<String, String> requestParams = new HashMap<>();
+        requestParams.put("userName", user_name);
+        requestParams.put("password", password);
 
         Response actualResponse = given()
                 .spec(requestSpecification)
@@ -39,9 +40,9 @@ public class ToolsQaApiHelper {
                 .log().all()
                 .extract().response();
 
-        HashMap<String,String> tokenAndId = new HashMap<>();
-        tokenAndId.put("token",actualResponse.jsonPath().get("token"));
-        tokenAndId.put("userId",actualResponse.jsonPath().get("userId"));
+        HashMap<String, String> tokenAndId = new HashMap<>();
+        tokenAndId.put("token", actualResponse.jsonPath().get("token"));
+        tokenAndId.put("userId", actualResponse.jsonPath().get("userId"));
         logger.info("Token and id were saved");
         return tokenAndId;
     }
@@ -60,7 +61,7 @@ public class ToolsQaApiHelper {
 //                .log().all();
 //    }
 
-    public void deleteBooksByUserIdMapProvided(String token, String id){
+    public void deleteBooksByUserIdMapProvided(String token, String id) {
 
         given()
                 .spec(requestSpecification)
@@ -71,6 +72,31 @@ public class ToolsQaApiHelper {
                 .then()
                 .statusCode(204)
                 .log().all();
+    }
+
+    public ToolsQABookListDTO getAllAvailableBooks() {
+        ToolsQABookListDTO listOfAvailableBooks = given()
+                .spec(requestSpecification)
+                .when()
+                .get(ToolsQABookEndpoints.BOOKS_LIST)
+                .then()
+                .statusCode(200)
+                .log().all()
+                .extract().response().getBody().as(ToolsQABookListDTO.class);
+        return listOfAvailableBooks;
+    }
+
+    public ToolsQaUserBooksDTO getUserBooks(String token, String userId) {
+        ToolsQaUserBooksDTO listOfUserBooks = given()
+                .spec(requestSpecification)
+                .auth().oauth2(token)
+                .when()
+                .get(ToolsQABookEndpoints.USER_BOOKS, userId)
+                .then()
+                .statusCode(200)
+                .log().all()
+                .extract().response().as(ToolsQaUserBooksDTO.class);
+        return listOfUserBooks;
     }
 
 
