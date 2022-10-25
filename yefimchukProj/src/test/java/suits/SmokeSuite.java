@@ -1,5 +1,6 @@
 package suits;
 
+import apiTests.ApiTest;
 import categories.SmokeTestFilter;
 import loginTest.LoginTest;
 import loginTest.LoginTestWithPageObject;
@@ -15,7 +16,8 @@ import registrationTest.RegistrationTest;
         LoginTest.class,
         CreatePostTest.class,
         LoginTestWithPageObject.class,
-        RegistrationTest.class
+        RegistrationTest.class,
+        ApiTest.class
 })
 public class SmokeSuite {
 }
