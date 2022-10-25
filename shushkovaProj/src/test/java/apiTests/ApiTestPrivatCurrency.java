@@ -39,12 +39,11 @@ public class ApiTestPrivatCurrency {
 
         }
 
-        for (int i = 0; i < responseBody.length; i++) {
             Assert.assertEquals("currency doesn't match  with",Usd,responseBody[0].getCcy());
             Assert.assertEquals("currency doesn't match  with",Eur,responseBody[1].getCcy());
             Assert.assertEquals("currency doesn't match  with",rur,responseBody[2].getCcy());
             Assert.assertEquals("currency doesn't match  with",Btc,responseBody[3].getCcy());
-        }
+
         CurrencyDTO[] expectedResult = {
                 new CurrencyDTO("USD", "UAH"),
                 new CurrencyDTO("EUR", "UAH"),
