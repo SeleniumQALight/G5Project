@@ -48,7 +48,7 @@ public class ApiTests {
         PostDTO[] expectedResult = {
 //                new PostDTO("test", "test body", "All Users", "no", new AuthorDTO("autoapi"), false),
 //                new PostDTO("test2", "test body2", "All Users", "no", new AuthorDTO("autoapi"), false)
-                PostDTO.builder().title("test1").body("test body").select1("All Users").uniquePost("no").author(AuthorDTO.builder().username("autoapi").build()).isVisitorOwner(false)
+                PostDTO.builder().title("test").body("test body").select1("All Users").uniquePost("no").author(AuthorDTO.builder().username("autoapi").build()).isVisitorOwner(false)
                         .build(),
                 PostDTO.builder().title("test2").body("test body2").select1("All Users").uniquePost("no").author(AuthorDTO.builder().username("autoapi").build()).isVisitorOwner(false)
                         .build()
@@ -76,6 +76,7 @@ public class ApiTests {
         String actualResponse =
                 given()
                         .contentType(ContentType.JSON)
+                        .filter(new AllureRestAssured())
                         .log().all()
                 .when()
                         .get(EndPoints.POST_BY_USER, "notValidUser")
@@ -94,6 +95,7 @@ public class ApiTests {
         Response actualResponse =
                 given()
                         .contentType(ContentType.JSON)
+                        .filter(new AllureRestAssured())
                         .log().all()
                 .when()
                         .get(EndPoints.POST_BY_USER, user_name)
@@ -120,6 +122,7 @@ public class ApiTests {
     public void getAllPostsByUserSchema(){
         given()
                 .contentType(ContentType.JSON)
+                .filter(new AllureRestAssured())
                 .log().all()
         .when()
                 .get(EndPoints.POST_BY_USER, user_name)
