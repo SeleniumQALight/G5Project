@@ -22,15 +22,15 @@ public class ApiTests {
     Logger logger = Logger.getLogger(getClass());
 
     @Test
-    public void getAllPostsByUser(){
+    public void getAllPostsByUser() {
 
         PostDTO[] responseBody = given()
                 .contentType(ContentType.JSON)
 //                .queryParam("exchange")
                 .log().all()
-          .when()
+                .when()
                 .get(EndPoints.POST_BY_USER, user_name)
-          .then()
+                .then()
                 .statusCode(200)
                 .log().all()
                 .extract()
@@ -41,7 +41,7 @@ public class ApiTests {
         logger.info("User name post1 = " + responseBody[0].getAuthor().getUsername());
 
         for (int i = 0; i < responseBody.length; i++) {
-            Assert.assertEquals("Username is not matched " , user_name, responseBody[i].getAuthor().getUsername());
+            Assert.assertEquals("Username is not matched ", user_name, responseBody[i].getAuthor().getUsername());
         }
 
         PostDTO[] expectedResult = {
@@ -55,13 +55,13 @@ public class ApiTests {
                         .build()
         };
 
-        Assert.assertEquals("Number of posts ",expectedResult.length, responseBody.length);
+        Assert.assertEquals("Number of posts ", expectedResult.length, responseBody.length);
 
         SoftAssertions softAssertions = new SoftAssertions();
 
         for (int i = 0; i < expectedResult.length; i++) {
             softAssertions.assertThat(responseBody[i])
-                    .isEqualToIgnoringGivenFields(expectedResult[i],"id", "createdDate", "author");
+                    .isEqualToIgnoringGivenFields(expectedResult[i], "id", "createdDate", "author");
             softAssertions.assertThat(responseBody[i].getAuthor())
                     .isEqualToIgnoringGivenFields(expectedResult[i].getAuthor(), "avatar");
         }
@@ -74,32 +74,33 @@ public class ApiTests {
     }
 
     @Test
-    public void getAllPostsByUserNegative(){
+    public void getAllPostsByUserNegative() {
         String actualResponse =
                 given()
                         .contentType(ContentType.JSON)
                         .log().all()
-                .when()
+                        .when()
                         .get(EndPoints.POST_BY_USER, "notValidUser")
-                .then()
+                        .then()
                         .statusCode(200)
                         .log().all()
                         .extract().response().getBody().asString();
 
-        Assert.assertEquals("Message in response ","\"Sorry, invalid user requested.undefined\"", actualResponse);
-        Assert.assertEquals("Message in response ","Sorry, invalid user requested.undefined", actualResponse.replace("\"",""));
+        Assert.assertEquals("Message in response ", "\"Sorry, invalid user requested.undefined\"", actualResponse);
+        Assert.assertEquals("Message in response ", "Sorry, invalid user requested.undefined",
+                actualResponse.replace("\"", ""));
 
     }
 
     @Test
-    public void getAllPostsByUserPath(){
+    public void getAllPostsByUserPath() {
         Response actualResponse =
                 given()
                         .contentType(ContentType.JSON)
                         .log().all()
-                .when()
+                        .when()
                         .get(EndPoints.POST_BY_USER, user_name)
-                .then()
+                        .then()
                         .statusCode(200)
                         .log().all()
                         .extract().response();
@@ -122,13 +123,13 @@ public class ApiTests {
     }
 
     @Test
-    public void getAllPostsByUserSchema(){
+    public void getAllPostsByUserSchema() {
         given()
                 .contentType(ContentType.JSON)
                 .log().all()
-        .when()
+                .when()
                 .get(EndPoints.POST_BY_USER, user_name)
-        .then()
+                .then()
                 .statusCode(200)
                 .log().all()
                 .assertThat().body(matchesJsonSchemaInClasspath("response.json"))
@@ -136,8 +137,12 @@ public class ApiTests {
     }
 
 
-
-
+    @Test
+    public void test() {
+        given()
+                .baseUri("http://qa-complex-app-for-testing.herokuapp.com").log().all()
+                .when().get("/api/postsByAuthor/{0}");
+    }
 
 
 }
