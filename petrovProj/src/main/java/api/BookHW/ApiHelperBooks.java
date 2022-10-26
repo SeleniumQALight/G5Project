@@ -1,21 +1,25 @@
 package api.BookHW;
 
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import org.apache.log4j.Logger;
+import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
-import org.junit.Assert;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 
 public class ApiHelperBooks {
     public final String USER_NAME_DEFAULT = "StanLeeReader";
     public final String USER_PASS_DEFAULT = "Qwerty123@";
 
-    Logger logger = Logger.getLogger(getClass());
+    RequestSpecification requestSpecification = new RequestSpecBuilder()
+            .setContentType(ContentType.JSON)
+            .log(LogDetail.ALL)
+            .build();
 
-    UserDTO userDTO = login();
-    String token = userDTO.getToken();
-    String userId = userDTO.getUserId();
+    RequestSpecification requestSpecificationWithAuth = new RequestSpecBuilder()
+            .setAuth(oauth2(login().getToken()))
+            .build().spec(requestSpecification);
 
     public UserDTO login(){
         return login(USER_NAME_DEFAULT, USER_PASS_DEFAULT);
@@ -29,8 +33,7 @@ public class ApiHelperBooks {
 
         UserDTO responseBody =
                 given()
-                        .contentType(ContentType.JSON)
-                        .log().all()
+                        .spec(requestSpecification)
                         .body(requestParams.toMap())
                 .when()
                         .post(EndPointBook.LOGIN)
@@ -42,84 +45,38 @@ public class ApiHelperBooks {
         return responseBody;
     }
 
-
-    public UserBooksDTO getAllBooksByUser() {
-        return getAllBooksByUser(userId, token);
-    }
-
-    private UserBooksDTO getAllBooksByUser(String userId, String token) {
-        return given()
-                .auth().oauth2(token)
-                .contentType(ContentType.JSON)
-                .log().all()
-                .when()
-                .get(EndPointBook.GET_USER_BOOKS, userId)
-                .then()
-                .statusCode(200)
-                .log().all()
-                .extract().response().getBody().as(UserBooksDTO.class);
-    }
-
-
-
-//    public void deleteBooksTillPresent(){
-//        deleteBooksTillPresent(userId, token);
-//    }
-//
-//    public void deleteBooksTillPresent(String user_id, String token){
-//
-//        UserBooksDTO resultWithListOfBooks = getAllBooksByUser(user_id, token);
-//        BooksDTO[] listOfBooks = resultWithListOfBooks.getBooks();
-//
-//        for (int i = 0; i < listOfBooks.length; i++) {
-//            logger.info("listOfBooks -  "+listOfBooks[i]);
-//            deleteBooksByUserId(token, listOfBooks[i].getIsbn());
-//            logger.info(
-//                    String.format(
-//                            "Books with User_id %s was deleted",
-//                            listOfBooks[i].getIsbn()));
-//
-//        }
-//        Assert
-//                .assertEquals("Number of posts ", 0,
-//                        getAllBooksByUser(user_id, token).getBooks().length);
-//
-//    }
-
-    public void deleteBooksByUserId(){
-        deleteBooksByUserId(userId, token);
-    }
-    public void deleteBooksByUserId( String userId, String token) {
-
-        logger.info("-------------");
-        logger.info("token = "+token);
-        logger.info("userId = "+userId);
-        logger.info("-------------");
-
-        String response = given()
-                .contentType(ContentType.JSON)
-                .log().all()
-                .auth().oauth2(token)
-                .when()
-                .delete(EndPointBook.DELETE_USER_BOOKS, userId)
-                .then()
+    public void deleteBooksByUserId( String userId) {
+         given()
+                .spec(requestSpecificationWithAuth)
+                .queryParam("UserId", userId)
+         .when()
+                .delete(EndPointBook.BOOKS)
+         .then()
                 .statusCode(204)
                 .log().all()
                 .extract().response().getBody().asString();
-
     }
-
 
     public AllBooksDTO getAllBooksFromSite(){
         return given()
-                .contentType(ContentType.JSON)
-                .log().all()
-                .when()
+                .spec(requestSpecification)
+              .when()
                 .get(EndPointBook.BOOKS)
-                .then()
+              .then()
                 .statusCode(200)
                 .log().all()
                 .extract().response().getBody().as(AllBooksDTO.class);
+    }
+
+    public UserBooksDTO getBookByUser(String userId){
+        return given()
+            .spec(requestSpecificationWithAuth)
+            .when()
+            .get(EndPointBook.GET_USER_BOOKS, userId)
+            .then()
+            .statusCode(200)
+            .log().all()
+            .extract().response().getBody().as(UserBooksDTO.class);
     }
 
 }
