@@ -28,7 +28,7 @@ public class apiTestBookHW {
         userDTO = apiHelperBooks.login();
         token = userDTO.getToken();
         userId = userDTO.getUserId();
-        apiHelperBooks.deleteBooksByUserId(userId);
+        apiHelperBooks.deleteBooksByUserId(userId, token);
     }
 
 
@@ -59,7 +59,7 @@ public class apiTestBookHW {
         logger.info("response add books "+response);
 
 
-        UserBooksDTO usersBooks = apiHelperBooks.getBookByUser(userId);
+        UserBooksDTO usersBooks = apiHelperBooks.getBookByUser(userId, token);
 
         Assert.assertEquals("Number of books ", 1, usersBooks.getBooks().length);
         Assert.assertEquals("id of books ", isnbBook, usersBooks.getBooks()[0].getIsbn());

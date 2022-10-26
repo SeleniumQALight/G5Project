@@ -17,10 +17,6 @@ public class ApiHelperBooks {
             .log(LogDetail.ALL)
             .build();
 
-    RequestSpecification requestSpecificationWithAuth = new RequestSpecBuilder()
-            .setAuth(oauth2(login().getToken()))
-            .build().spec(requestSpecification);
-
     public UserDTO login(){
         return login(USER_NAME_DEFAULT, USER_PASS_DEFAULT);
     }
@@ -45,9 +41,10 @@ public class ApiHelperBooks {
         return responseBody;
     }
 
-    public void deleteBooksByUserId( String userId) {
+    public void deleteBooksByUserId( String userId, String token) {
          given()
-                .spec(requestSpecificationWithAuth)
+                .spec(requestSpecification)
+                .auth().oauth2(token)
                 .queryParam("UserId", userId)
          .when()
                 .delete(EndPointBook.BOOKS)
@@ -68,15 +65,16 @@ public class ApiHelperBooks {
                 .extract().response().getBody().as(AllBooksDTO.class);
     }
 
-    public UserBooksDTO getBookByUser(String userId){
+    public UserBooksDTO getBookByUser(String userId, String token){
         return given()
-            .spec(requestSpecificationWithAuth)
+                .spec(requestSpecification)
+                .auth().oauth2(token)
             .when()
-            .get(EndPointBook.GET_USER_BOOKS, userId)
+                .get(EndPointBook.GET_USER_BOOKS, userId)
             .then()
-            .statusCode(200)
-            .log().all()
-            .extract().response().getBody().as(UserBooksDTO.class);
+                .statusCode(200)
+                .log().all()
+                .extract().response().getBody().as(UserBooksDTO.class);
     }
 
 }
