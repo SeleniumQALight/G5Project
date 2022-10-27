@@ -23,7 +23,7 @@ public class LoginPage extends ParentPage {
     private WebElement inputPasswordHeader;
     @FindBy(xpath = ".//button[text()='Sign In']")
     private WebElement buttonSignIn;
-    @FindBy(xpath = ".//div[text()='Invalid username / pasword']")
+    @FindBy(xpath = ".//*[contains(@class,'alert alert-danger text-center')]")
     private WebElement alertInvalidLoginOrPassword;
     @FindBy(xpath = ".//input[@id='username-register']")
     private WebElement inputRegisterUsername;
@@ -179,5 +179,11 @@ public class LoginPage extends ParentPage {
         enterPasswordIntoPasswordInput(db_util_seleniumUsers.getPassForLogin("newqaauto"));
         clickOnSignInButton();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage checkAlertMessageText(String message) {
+        Assert.assertTrue("Alert does not displayed", alertInvalidLoginOrPassword.isDisplayed());
+        Assert.assertEquals("Alert has different text", message, alertInvalidLoginOrPassword.getText());
+        return this;
     }
 }
