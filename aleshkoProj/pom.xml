@@ -26,7 +26,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>                <!-- junit -->
+            <groupId>junit</groupId>                    <!-- junit -->
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
         </dependency>
@@ -38,81 +38,122 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
         <dependency>
-            <groupId>io.github.bonigarcia</groupId> <!-- webdrivermanager -->
+            <groupId>io.github.bonigarcia</groupId>     <!-- webdrivermanager -->
             <artifactId>webdrivermanager</artifactId>
             <version>5.3.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/log4j/log4j -->
         <dependency>
-            <groupId>log4j</groupId>                <!-- Логгер -->
+            <groupId>log4j</groupId>                    <!-- Логгер -->
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <dependency>
-            <groupId>org.assertj</groupId>          <!-- SoftAssertion -->
+            <groupId>org.assertj</groupId>              <!-- SoftAssertion -->
             <artifactId>assertj-core</artifactId>
             <version>3.23.1</version>
         </dependency>
         <dependency>
-            <groupId>pl.pragmatists</groupId>       <!-- Параметризація тестів -->
+            <groupId>pl.pragmatists</groupId>           <!-- Параметризація тестів -->
             <artifactId>JUnitParams</artifactId>
             <version>1.1.1</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
         <dependency>
-            <groupId>org.apache.poi</groupId>       <!-- Бібліотека для роботи з файлами типу [Excel] -->
+            <groupId>org.apache.poi</groupId>           <!-- Бібліотека для роботи з файлами типу [Excel] -->
             <artifactId>poi</artifactId>
             <version>3.14</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.aeonbits.owner/owner -->
         <dependency>
-            <groupId>org.aeonbits.owner</groupId>   <!-- Використання конфіг-файлів у проєкті -->
+            <groupId>org.aeonbits.owner</groupId>       <!-- Використання конфіг-файлів у проєкті -->
             <artifactId>owner</artifactId>
             <version>1.0.12</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
-            <groupId>mysql</groupId>                <!-- Бібліотека для роботи з MySQL_DB -->
+            <groupId>mysql</groupId>                    <!-- Бібліотека для роботи з MySQL_DB -->
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.30</version>
         </dependency>
         <dependency>
-            <groupId>io.qameta.allure</groupId>     <!-- Створення інфографіків та репортів тест-ранів -->
+            <groupId>io.qameta.allure</groupId>         <!-- Створення інфографіків та репортів тест-ранів -->
             <artifactId>allure-junit4</artifactId>
             <version>2.8.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
         <dependency>
-            <groupId>io.rest-assured</groupId>      <!-- Бібліотека для створення API тестів -->
+            <groupId>io.rest-assured</groupId>          <!-- Бібліотека для створення API тестів -->
             <artifactId>rest-assured</artifactId>
             <version>5.1.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
-            <groupId>org.json</groupId>             <!-- Парсер json респонсу -->
+            <groupId>org.json</groupId>                 <!-- Парсер json респонсу -->
             <artifactId>json</artifactId>
             <version>20220320</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
-            <groupId>com.google.code.gson</groupId> <!-- Парсер gson респонсу -->
+            <groupId>com.google.code.gson</groupId>     <!-- Парсер gson респонсу -->
             <artifactId>gson</artifactId>
             <version>2.8.6</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
-            <groupId>org.projectlombok</groupId>    <!-- Скорочення написання класів DTO/API -->
+            <groupId>org.projectlombok</groupId>        <!-- Скорочення написання класів DTO/API -->
             <artifactId>lombok</artifactId>
             <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>io.rest-assured</groupId>      <!-- Валідатор json запиту -->
+            <groupId>io.rest-assured</groupId>          <!-- Валідатор json запиту -->
             <artifactId>json-schema-validator</artifactId>
             <version>5.1.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-rest-assured -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>         <!-- Створення репортів rest-assured в allure -->
+            <artifactId>allure-rest-assured</artifactId>
+            <version>2.13.8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-java -->
+        <dependency>
+            <groupId>info.cukes</groupId>               <!-- cucumber part 1-->
+            <artifactId>cucumber-java</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-junit -->
+        <dependency>
+            <groupId>info.cukes</groupId>               <!-- cucumber for JUnit-->
+            <artifactId>cucumber-junit</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-core -->
+        <dependency>
+            <groupId>info.cukes</groupId>               <!-- cucumber part 2-->
+            <artifactId>cucumber-core</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber2-jvm -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>         <!-- Створення репортів cucumber в allure -->
+            <artifactId>allure-cucumber4-jvm</artifactId>
+            <version>2.13.9</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>     <!-- cucumber adaptor-->
+            <artifactId>allure-cucumber-jvm-adaptor</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.tapack</groupId>                <!-- cucumber adaptor-->
+            <artifactId>allure-cucumber-jvm-adaptor</artifactId>
+            <version>0.2</version>
+        </dependency>
+
     </dependencies>
 
     <profiles>
@@ -171,6 +212,60 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>cucumberTests</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>profile</name>
+                    <value>cucumberTests</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M5</version>
+                        <configuration>
+                            <forkCount>5</forkCount>
+                            <reuseForks>true</reuseForks>
+                            <parallel>all</parallel>
+                            <argLine>-Xmx512m</argLine>
+                            <argLine>-XX:MaxPermSize=256m</argLine>
+                            <threadCount>1</threadCount>
+                            <useUnlimitedThreads>true</useUnlimitedThreads>
+                            <testFailureIgnore>true</testFailureIgnore>
+                            <includes>
+                                <include>**/Parallel*IT.class</include>
+                            </includes>
+                            <testFailureIgnore>true</testFailureIgnore>
+                            <argLine>
+                                -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                                -Dcucumber.options="--plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"
+                            </argLine>
+                            <systemProperties>
+                                <property>
+                                    <name>allure.results.directory</name>
+                                    <value>${project.build.directory}/allure-results</value>
+                                </property>
+                                <property>
+                                    <name>allure.link.issue.pattern</name>
+                                    <value>https://example.org/issue/{}</value>
+                                </property>
+                            </systemProperties>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjweaver</artifactId>
+                                <version>${aspectj.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <build>
@@ -179,7 +274,6 @@
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version>2.10.0</version>
-
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -189,6 +283,31 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.temyers</groupId>
+                <artifactId>cucumber-jvm-parallel-plugin</artifactId>
+                <version>2.2.0</version>
+                <executions>
+                    <execution>
+                        <id>generateRunners</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>generateRunners</goal>
+                        </goals>
+                        <configuration>
+                            <glue>StepDefinitions</glue>
+                            <featuresDirectory>
+                                src/test/resources
+                            </featuresDirectory>
+                            <cucumberOutputDir>target/cucumber-parallel</cucumberOutputDir>
+                            <format>json,html</format>
+                            <tags>"${tag}"</tags>
+                            <!--<parallelScheme>SCENARIO</parallelScheme>-->
+                            <parallelScheme>FEATURE</parallelScheme>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 
