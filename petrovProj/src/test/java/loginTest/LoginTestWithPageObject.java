@@ -28,7 +28,7 @@ public class LoginTestWithPageObject extends BaseTest {
     @Category(SmokeTestFilter.class)
     public void validLogin(){
         loginPage.openLoginPage();
-        loginPage.enterUserNameIntoLoginInput("qaauto0");
+        loginPage.enterUserNameIntoLoginInput("qaauto");
         loginPage.enterPasswordIntoInputPassword("123456qwerty");
         loginPage.clickOnButtonLogin();
         Assert.assertTrue("Button Sign Out is not visible", homePage.isButtonSignOutDisplayed());
