@@ -1,5 +1,6 @@
 package suits;
 
+import apiTests.ApiTests;
 import loginTest.LoginTest;
 import loginTest.LoginTestWithPageObject;
 import loginTest.RegistrationNewUserTest;
@@ -10,7 +11,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         RegistrationNewUserTest.class,
         LoginTestWithPageObject.class,
-
+        ApiTests.class
 })
 public class SmokeSuite {
 }
