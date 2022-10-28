@@ -83,6 +83,15 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignIn);
     }
 
+    public HomePage clickOnButtonLogin_redirect() {
+        clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
+    }
+//    public HomePage checkIsIconVisible() {
+//        Assert.assertTrue("Avatar did not showing",  isElementDisplayed(getHeaderElement().getAvatarMyProfile()));
+//        return new HomePage(webDriver);
+//    }
+
     public boolean isMessageErrorLoginOrPassword(){
        return isElementWasDisplayed(messageErrorLoginOrPassword);
 
