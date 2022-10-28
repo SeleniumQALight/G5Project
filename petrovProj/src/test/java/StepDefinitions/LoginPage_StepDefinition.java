@@ -40,4 +40,28 @@ public class LoginPage_StepDefinition {
         loginPage.clickOnButtonLogin_redirect();
     }
 
+    @When("User enters '(.*)' username into 'Pick a username' input on 'Login' page")
+    public void userEntersUserNameUsernameIntoPickAUsernameInputOnLoginPage(String username) {
+        loginPage.enterUserNameIntoRegistrationForm(username);
+    }
+
+    @And("User enters '(.*)' into 'email' input on 'Login' page")
+    public void userEntersEmailIntoEmailInputOnLoginPage(String email) {
+        loginPage.enterEmailIntoRegistrationForm(email);
+
+    }
+
+    @And("User enters '(.*)' password into 'password' input on 'Login' page")
+    public void userEntersPassPasswordIntoPasswordInputOnLoginPage(String password) {
+        loginPage.enterPasswordIntoRegistrationForm(password);
+
+    }
+
+    @Then("Check '(.*)' on 'Login' page")
+    public void checkErrorMessageOnLoginPage(String errorMessages) {
+        loginPage.checkErrorsMessage(errorMessages);
+
+    }
+
+
 }
