@@ -40,6 +40,17 @@ public class LoginPage extends ParentPage {
     private List<WebElement> listOfErrors;
     @FindBy(xpath = ".//*[contains(@class,'alert alert-danger text-center')]")
     private WebElement alertInCenter;
+    @FindBy(xpath = "//img[@alt='My profile']")
+    private WebElement profilePicture;
+
+    @FindBy(xpath = "//div[contains(text(),'Username')]")
+    private WebElement errorNameField;
+
+    @FindBy(xpath = "//div[contains(text(),'email')]")
+    private WebElement errorEmailField;
+
+    @FindBy(xpath = "//div[contains(text(),'Password')]")
+    private WebElement errorPasswordField;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -82,21 +93,25 @@ public class LoginPage extends ParentPage {
     public void enterPasswordIntoInputPassword(String password) {
         enterTextIntoElement(inputPasswordHeader, password);
     }
+
     @Step
     public void clickOnButtonLogIn() {
         clickOnElement(buttonSingIn);
     }
+
     @Step
     public HomePage loginWithValidCred() {
         openLoginPage();
         loginWithValidCredWithOutOpenPage();
         return new HomePage(webDriver);
     }
+
     @Step
     public LoginPage enterUserNameIntoRegistrationForm(String userName) {
         enterTextIntoElement(inputLoginRegistration, userName);
         return this;
     }
+
     @Step
     public LoginPage enterEmailIntoRegistrationFrom(String email) {
         enterTextIntoElement(inputEmailRegistration, email);
@@ -105,7 +120,7 @@ public class LoginPage extends ParentPage {
 
     @Step
     public LoginPage enterPasswordIntoRegistrationForm(String password) {
-       enterTextIntoElement(inputPasswordRegistration, password);
+        enterTextIntoElement(inputPasswordRegistration, password);
         return this;
     }
 
@@ -121,7 +136,7 @@ public class LoginPage extends ParentPage {
         Assert.assertEquals(expectedErrorsArray.length, listOfErrors.size());
 
         ArrayList<String> actualTextFromErrors = new ArrayList<>();
-        for ( WebElement element: listOfErrors) {
+        for (WebElement element : listOfErrors) {
             actualTextFromErrors.add(element.getText());
         }
         SoftAssertions softAssertions = new SoftAssertions();
@@ -146,6 +161,23 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public MyProfilePage checkProfilePictureArePresent() {
+        Assert.assertTrue("User profile picture is not displayed", isElementDisplayed(profilePicture));
+        return new MyProfilePage(webDriver);
+    }
+
+    public LoginPage checkNameErrorMessage(String text){
+        campersTextFromElement(text,errorNameField);
+        return this;
+    }
+    public LoginPage checkEmailErrorMessage(String text){
+        campersTextFromElement(text,errorEmailField);
+        return this;
+    }
+    public LoginPage checkPasswordMessage(String text){
+        campersTextFromElement(text,errorPasswordField);
+        return this;
+    }
 
 //    private void printErrorAndStopTest(Exception e) {
 //        logger.error("Can not work with element " + e);

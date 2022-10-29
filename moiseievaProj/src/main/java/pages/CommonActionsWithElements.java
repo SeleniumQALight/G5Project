@@ -117,6 +117,13 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void campersTextFromElement(String text, WebElement element) {
+        try {
+        Assert.assertEquals("Message in Alert ", text, element.getText());
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
 
     public void usersPressesKeyEnterTime(int numberOfTimes) {
         Actions actions = new Actions(webDriver);
