@@ -38,4 +38,9 @@ public class RegistrationPage_StepDefinition {
         loginPage.checkPasswordMessage(message);
     }
 
+    @Given("^User click submit button 'Sign up for OurApp'$")
+    public void user_click_submit_button_Sign_up_for_OurApp() {
+        loginPage.clickButtonSignUp();
+    }
+
 }

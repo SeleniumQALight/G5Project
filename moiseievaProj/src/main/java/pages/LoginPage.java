@@ -52,6 +52,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//div[contains(text(),'Password')]")
     private WebElement errorPasswordField;
 
+    @FindBy(xpath = "//button[contains(text(),'Sign up')]")
+    private WebElement buttonSignUp;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -176,6 +179,11 @@ public class LoginPage extends ParentPage {
     }
     public LoginPage checkPasswordMessage(String text){
         campersTextFromElement(text,errorPasswordField);
+        return this;
+    }
+
+    public LoginPage clickButtonSignUp(){
+        clickOnElement(buttonSignUp);
         return this;
     }
 

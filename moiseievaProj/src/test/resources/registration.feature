@@ -6,10 +6,11 @@ Feature: User registration
     And User enters data '<username>' to 'Username' field
     And User enters data '<email>' to 'Email' field
     And User enters data '<password>' to 'Password' field
+    And User click submit button 'Sign up for OurApp'
     Then User sees error message to 'Username' field 'Username must be at least 3 characters.'
     Examples:
-      | username | email           | password     |
-      | nam      | email@gmail.com | qwerty123456 |
+      | username | email          | password     |
+      | na       | mail@gmail.com | qwerty123456 |
 
   @R004
   Scenario Outline:
@@ -17,6 +18,7 @@ Feature: User registration
     And User enters data '<username>' to 'Username' field
     And User enters data '<email>' to 'Email' field
     And User enters data '<password>' to 'Password' field
+    And User click submit button 'Sign up for OurApp'
     Then User sees error message to 'Email' field 'You must provide a valid email address.'
     Then User sees error message to 'Password' field 'Password must be at least 12 characters.'
     Examples:
