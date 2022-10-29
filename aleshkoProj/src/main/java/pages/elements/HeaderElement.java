@@ -29,6 +29,10 @@ public class HeaderElement extends CommonActionsWithElements {
         return new MyProfilePage(webDriver);
     }
 
+    public boolean isButtonMyProfileDisplayed() {
+        return isElementDisplayed(buttonMyProfile);
+    }
+
     public boolean isButtonSignOutDisplayed() {
         return isElementDisplayed(buttonSignOut);
     }
