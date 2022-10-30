@@ -40,7 +40,8 @@ private String notValidCredentialsMessage = ".//div[@class='alert alert-danger s
 @FindBy(xpath = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']" )
 private List<WebElement> listOfErrors;
 
-public LoginPage(WebDriver webDriver) {
+
+    public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
@@ -174,6 +175,10 @@ public LoginPage(WebDriver webDriver) {
         return new HomePage(webDriver);
     }
 
+    public LoginPage checkAlertMessage(String message) {
+    Assert.assertEquals("Message in alert", message, alertInvalidUsernamePassword.getText());
+    return this;
+    }
 
 
 //    private void printErrorAndStopTest(Exception e) {
