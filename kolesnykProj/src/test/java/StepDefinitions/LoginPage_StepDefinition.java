@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import Pages.HomePage;
 import Pages.LoginPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -9,6 +10,7 @@ import libs.DriverHelper;
 public class LoginPage_StepDefinition {
 
     LoginPage loginPage = new LoginPage(DriverHelper.getWebDriver());
+    HomePage homePage = new HomePage(DriverHelper.getWebDriver());
 
     @Given("^User opens 'Login' page$")
     public void user_opens_login_page(){
@@ -33,5 +35,10 @@ public class LoginPage_StepDefinition {
     @Then("^User sees alert message with text '(.*)'$")
     public void user_sees_alert_message_with_text_Invalid_username_password(String message){
         loginPage.checkMessageAlert(message);
+    }
+
+    @Then("^User is logged in$")
+    public void user_is_logged_in() {
+        homePage.getHeaderElements().isButtonSignOutDisplayed();
     }
 }
