@@ -50,6 +50,8 @@ public class LoginPage extends  ParentPage {
     private WebElement inputRegistationPassword;
 
     private String alerValidateMessage = ".//div[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+    @FindBy (xpath = ".//*[contains(@class,'alert alert-danger text-center')]")
+    private WebElement alertInCenter;
 
 
     public LoginPage(WebDriver webDriver) {
@@ -204,7 +206,12 @@ return numberElements;
             clickOnButtonLogIn();
             return new HomePage(webDriver);
         }
+
+    public LoginPage checkMessageText(String message) {
+        Assert.assertEquals("Message in Alert ", message, alertInCenter.getText() );
+        return this;
     }
+}
 //    private void prinErrorAndStopTest(Exception e) {
 //        logger.error("Can not work with element " + e);
 //        Assert.fail("Can not work with element " + e);

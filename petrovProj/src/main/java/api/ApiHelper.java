@@ -48,7 +48,6 @@ public class ApiHelper {
 
         return responseBody.asString().replace("\"", "");
 
-
     }
 
     /**
@@ -68,7 +67,6 @@ public class ApiHelper {
                 .statusCode(200)
                 .log().all()
                 .extract().response().getBody().as(PostDTO[].class);
-
     }
 
     public void deletePostTillPresent() {

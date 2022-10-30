@@ -40,6 +40,8 @@ public class LoginPage extends ParentPage {
     private WebElement buttonCreatePost;
     @FindBy(xpath = ".//*[@data-original-title='My Profile']")
     private WebElement buttonMyProfile;
+    @FindBy(xpath = ".//*[contains(@class,'alert alert-danger text-center')]")
+    private WebElement alertInCenter;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -206,5 +208,10 @@ public class LoginPage extends ParentPage {
     public MyProfilePage clickOnMyProfileButton() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
+    }
+
+    public LoginPage checkAlertMessageText(String message) {
+        Assert.assertEquals("Message in Alert ", message, alertInCenter.getText());
+        return this;
     }
 }
