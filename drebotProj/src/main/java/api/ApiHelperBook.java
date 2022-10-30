@@ -74,7 +74,7 @@ public class ApiHelperBook {
                 .auth().oauth2(token)
 
                 .when()
-                .delete(EndPointsBook.DELETE_ALL_BOOKS)
+                .delete(EndPointsBook.LIST_OF_ALL_BOOKS)
 
                 .then()
                 .statusCode(204)
@@ -184,6 +184,27 @@ public class ApiHelperBook {
                 .extract().response().as(BookIsbnDTO.class);
 
         Assert.assertEquals("Isbn ", isbn, responseAddBook.getBooks()[0].getIsbn());
+
+    }
+
+    public void deleteDetermineBook(String isbn, String userId, String token) {
+
+        JSONObject bodyParam = new JSONObject();
+        bodyParam.put("isbn", isbn);
+        bodyParam.put("userId", userId);
+
+        given()
+                .spec(requestSpecification)
+                .body(bodyParam.toMap())
+                .auth().oauth2(token)
+
+                .when()
+                .delete(EndPointsBook.DELETE_DETERMINE_BOOK)
+
+                .then()
+                .statusCode(204)
+                .log().all();
+
 
     }
 }
