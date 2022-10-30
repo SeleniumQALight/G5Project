@@ -3,6 +3,7 @@ package apiTests;
 import api.AuthorDTO;
 import api.EndPoints;
 import api.PostDTO;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
@@ -26,9 +27,12 @@ public class ApiTests {
         PostDTO[] responseBody = //респонс разбивается на массивы
                 given()//подготовка
                         .contentType(ContentType.JSON)
+                        .filter(new AllureRestAssured())//в allur-report добавляются степы
                         .log().all()//увитеть запрос
+
                         .when()//сам запрос
                         .get(EndPoints.POST_BY_USER, user_name)
+
                         .then()//проверка
                         .statusCode(200)
                         .log().all() //то что он получает,respons

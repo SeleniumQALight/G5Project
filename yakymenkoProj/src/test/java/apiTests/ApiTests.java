@@ -3,6 +3,7 @@ package apiTests;
 import api.AuthorDTO;
 import api.EndPoints;
 import api.PostDTO;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
@@ -26,6 +27,7 @@ public class ApiTests {
         PostDTO[] responseBody = given()
                 .contentType(ContentType.JSON)
 //                .queryParam("exchange")
+                .filter(new AllureRestAssured())
                 .log().all()
           .when()
                 .get(EndPoints.POST_BY_USER, user_name)
@@ -74,6 +76,7 @@ public class ApiTests {
         String actualResponse =
                 given()
                         .contentType(ContentType.JSON)
+                        .filter(new AllureRestAssured())
                         .log().all()
                 .when()
                         .get(EndPoints.POST_BY_USER, "notValidUser")
@@ -92,6 +95,7 @@ public class ApiTests {
         Response actualResponse =
                 given()
                         .contentType(ContentType.JSON)
+                        .filter(new AllureRestAssured())
                         .log().all()
                 .when()
                         .get(EndPoints.POST_BY_USER, user_name)
@@ -118,6 +122,7 @@ public class ApiTests {
     public void getAllPostsByUserSchema(){
         given()
                 .contentType(ContentType.JSON)
+                .filter(new AllureRestAssured())
                 .log().all()
         .when()
                 .get(EndPoints.POST_BY_USER, user_name)

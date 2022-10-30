@@ -2,6 +2,7 @@ package apiTests;
 
 import api.AuthorDTO;
 import api.PostDTO;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
@@ -18,13 +19,14 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class ApiTests {
-    String userName="autoapi";
+    String userName = "autoapi";
     Logger logger = Logger.getLogger(getClass());
 
     @Test
     public void getAllPostsByUser() {
         PostDTO[] responseBody = given()
                 .contentType(ContentType.JSON)
+                .filter(new AllureRestAssured())
                 .log().all()
                 .when()
                 .get(POST_BY_USER, userName)
@@ -53,45 +55,45 @@ public class ApiTests {
 //                new PostDTO("test2", "test body2","All Users", "no", new AuthorDTO("autoapi"),false)
         };
 
-        Assert.assertEquals(expectedResult.length, responseBody.length );
+        Assert.assertEquals(expectedResult.length, responseBody.length);
         SoftAssertions softAssertions = new SoftAssertions();
 
         for (int i = 0; i < expectedResult.length; i++) {
             softAssertions.assertThat(responseBody[i])
-                    .isEqualToIgnoringGivenFields(expectedResult[i],"id", "createdDate", "author");
+                    .isEqualToIgnoringGivenFields(expectedResult[i], "id", "createdDate", "author");
             softAssertions.assertThat(responseBody[i].getAuthor())
-                    .isEqualToIgnoringGivenFields(expectedResult[i].getAuthor(),"avatar");
+                    .isEqualToIgnoringGivenFields(expectedResult[i].getAuthor(), "avatar");
         }
         softAssertions.assertAll();
     }
 
     @Test
-    public void getAllPostsByUserNegative(){
+    public void getAllPostsByUserNegative() {
         String actualResponse =
                 given()
                         .contentType(ContentType.JSON)
                         .log().all()
-                .when()
-                        .get(POST_BY_USER,"notValidUser")
-                .then()
+                        .when()
+                        .get(POST_BY_USER, "notValidUser")
+                        .then()
                         .statusCode(200)
                         .log().all()
                         .extract().response().getBody().asString();
 
-        Assert.assertEquals("Message in response: ","\"Sorry, invalid user requested.undefined\"",actualResponse);
-        Assert.assertEquals("Message in response: ","Sorry, invalid user requested.undefined",actualResponse.replace("\"",""));
+        Assert.assertEquals("Message in response: ", "\"Sorry, invalid user requested.undefined\"", actualResponse);
+        Assert.assertEquals("Message in response: ", "Sorry, invalid user requested.undefined", actualResponse.replace("\"", ""));
     }
 
 
     @Test
-    public void getAllPostsByUserPath(){
+    public void getAllPostsByUserPath() {
         Response actualResponse =
                 given()
                         .contentType(ContentType.JSON)
                         .log().all()
-                .when()
-                        .get(POST_BY_USER,userName)
-                .then()
+                        .when()
+                        .get(POST_BY_USER, userName)
+                        .then()
                         .statusCode(200)
                         .log().all()
                         .extract().response();
@@ -99,7 +101,7 @@ public class ApiTests {
         List<String> actualTitleList = actualResponse.jsonPath().getList("title", String.class);
         SoftAssertions softAssertions = new SoftAssertions();
         for (int i = 0; i < actualTitleList.size(); i++) {
-            softAssertions.assertThat(actualTitleList.get(i)).as("Item number" + i ).contains("test");
+            softAssertions.assertThat(actualTitleList.get(i)).as("Item number" + i).contains("test");
         }
 
         List<Map> actualAuthorList = actualResponse.jsonPath().getList("author", Map.class);
@@ -112,7 +114,7 @@ public class ApiTests {
     }
 
     @Test
-    public void getAllPostsByUserSchema(){
+    public void getAllPostsByUserSchema() {
         given()
                 .contentType(ContentType.JSON)
                 .log().all()

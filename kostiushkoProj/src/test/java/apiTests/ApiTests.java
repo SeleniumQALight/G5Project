@@ -3,6 +3,7 @@ package apiTests;
 import api.AuthorDTO;
 import api.EndPoints;
 import api.PostDTO;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
@@ -21,6 +22,7 @@ public class ApiTests {
     public void getALLPostsByUser() {
         PostDTO[] responseBody = given()
                 .contentType(ContentType.JSON)
+                .filter(new AllureRestAssured())
         .when()
                 .get(EndPoints.POST_BY_USER, user_name)
         .then()
