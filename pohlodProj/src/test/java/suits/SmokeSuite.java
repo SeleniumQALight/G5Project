@@ -1,5 +1,6 @@
 package suits;
 
+import apiTest.ApiTest;
 import categories.SmokeTestFilter;
 import org.junit.experimental.categories.Categories;
 import org.junit.runner.RunWith;
@@ -15,7 +16,8 @@ import signUpTests.SignUpValidationMessages;
 @Suite.SuiteClasses({
         LoginTestWithPageObject.class,
         CreatePostTest.class,
-        SignUpValidationMessages.class
+        SignUpValidationMessages.class,
+        ApiTest.class
 })
 public class SmokeSuite {
 }
