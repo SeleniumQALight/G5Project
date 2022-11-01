@@ -1,4 +1,4 @@
-@LoginTest @RegistrationTest @FullRegression
+@RegistrationTest @FullRegression
 Feature: User Registration
 
   @R003

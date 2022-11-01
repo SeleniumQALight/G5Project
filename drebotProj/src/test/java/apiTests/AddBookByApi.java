@@ -1,30 +1,31 @@
 package apiTests;
 
 import api.*;
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class AddBookByApi {
+    String token = "";
+    String userId = "";
 
     ApiHelperBook apiHelperBook = new ApiHelperBook();
 
     @Before
     public void precondition() {
+        UserInfoDTO userInfoDTO = apiHelperBook.getUserInfoAfterLogin();
 
-        apiHelperBook.deleteAllBooksByUser();
+        userId = userInfoDTO.getUserId();
+        token = userInfoDTO.getToken();
+
+        apiHelperBook.deleteAllBooksByUser(userId, token);
 
     }
 
     @Test
     public void addBookToProfileByUser() {
-        UserInfoDTO userInfoDTO = apiHelperBook.getUserInfoAfterLogin();
 
-        String token = userInfoDTO.getToken();
-        String userId = userInfoDTO.getUserId();
-
-        BooksDTO listOfBooks = apiHelperBook.getAllBooks(token);
+        BooksDTO listOfBooks = apiHelperBook.getAllBooks();
 
         String isbn = listOfBooks.getBooks()[0].getIsbn();
 

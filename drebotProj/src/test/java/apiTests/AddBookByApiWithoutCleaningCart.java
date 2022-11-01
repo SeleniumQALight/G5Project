@@ -1,6 +1,7 @@
 package apiTests;
 
 import api.*;
+import org.junit.Before;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.After;
@@ -16,23 +17,29 @@ public class AddBookByApiWithoutCleaningCart {
     Logger logger = Logger.getLogger(getClass());
 
     String isbnBook = "";
+    String token = "";
+    String userId = "";
+
+    @Before
+    public void precondition() {
+        UserInfoDTO userInfoDTO = apiHelperBook.getUserInfoAfterLogin();
+
+        userId = userInfoDTO.getUserId();
+        token = userInfoDTO.getToken();
+
+    }
+
 
     @Test
     public void addBookToProfileByUserWithoutCleanProfile() {
-//        TODO
-//        нужно ли выносить userId и token в виде переменных класс?
-//        мы к ним часто обращаемся и все время дергаем АПИ
-
-        UserInfoDTO userInfoDTO = apiHelperBook.getUserInfoAfterLogin();
-        String userId = userInfoDTO.getUserId();
-        String token = userInfoDTO.getToken();
 
         ProfileDTO profileDTO = apiHelperBook.getProfileInfo(userId, token);
+
         BookDTO[] userBook = profileDTO.getBooks();
         Integer beginningSizeOfUsersCart = userBook.length;
         List<String> listOfUserIsbn = new ArrayList<>();
 
-        BooksDTO listOfAllBooks = apiHelperBook.getAllBooks(token);
+        BooksDTO listOfAllBooks = apiHelperBook.getAllBooks();
         BookDTO[] allBookFromDTO = listOfAllBooks.getBooks();
 
         List<String> listOfAllIsbn = new ArrayList<>();
@@ -50,7 +57,7 @@ public class AddBookByApiWithoutCleaningCart {
             }
         } else {
             logger.info("all books already add, so clean your cart ");
-            apiHelperBook.deleteAllBooksByUser();
+            apiHelperBook.deleteAllBooksByUser(userId, token);
         }
 
         apiHelperBook.addBookToUser(userId, token, listOfAllIsbn.get(0));
@@ -75,9 +82,6 @@ public class AddBookByApiWithoutCleaningCart {
 
     @After
     public void deleteAddingBook() {
-        UserInfoDTO userInfoDTO = apiHelperBook.getUserInfoAfterLogin();
-        String userId = userInfoDTO.getUserId();
-        String token = userInfoDTO.getToken();
 
         ProfileDTO profileDTOBeforeDelete = apiHelperBook.getProfileInfo(userId, token);
         Integer countOfBookBeforeDelete = profileDTOBeforeDelete.getBooks().length;

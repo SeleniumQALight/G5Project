@@ -51,22 +51,17 @@ public class ApiHelperBook {
                         .log().all()
                         .extract().response().as(UserInfoDTO.class);
 
-        Assert.assertEquals("User name ", USER_NAME, responseBody.getUserName());
-        Assert.assertEquals("Password ", PASSWORD, responseBody.getPassword());
+        Assert.assertEquals("User name ", userName, responseBody.getUserName());
+        Assert.assertEquals("Password ", password, responseBody.getPassword());
 
         return responseBody;
     }
 
-    public void deleteAllBooksByUser() {
-        deleteAllBooksByUser(USER_NAME, PASSWORD);
-    }
+//    public void deleteAllBooksByUser() {
+//        deleteAllBooksByUser(USER_NAME, PASSWORD);
+//    }
 
-    public void deleteAllBooksByUser(String userName, String password) {
-
-        UserInfoDTO userBookDTO = getUserInfoAfterLogin(userName, password);
-
-        String userId = userBookDTO.getUserId();
-        String token = userBookDTO.getToken();
+    public void deleteAllBooksByUser(String userId, String token) {
 
         given()
                 .spec(requestSpecification)
@@ -107,36 +102,10 @@ public class ApiHelperBook {
 
         return profileDTO;
 
-//        TODO
-//        как лучше делвть - использовать  ответ в виде DTO(как выше написала) или сохранять response  и через jsonPath()
-//        стучаться к полям, как код ниже
-//        public Response getUserResult(String userId, String token) {
-//
-//            Response responseProfileInfo = given()
-//                    .contentType(ContentType.JSON)
-//                    .log().all()
-//                    .auth().oauth2(token)
-//
-//                    .when()
-//                    .get(EndPointsBook.PROFILE_INFO, userId)
-//
-//                    .then()
-//                    .statusCode(200)
-//                    .log().all()
-//                    .extract().response();
-//
-//
-//            List<BookDTO> actualBookList = responseProfileInfo.jsonPath().getList("books", BookDTO.class);
-//
-//            Assert.assertEquals("count of books ", 0, actualBookList.size());
-//            logger.info("\n\ncheck count of book = " + actualBookList.size());
-//            return responseProfileInfo;
-//
-//        }
     }
 
 
-    public BooksDTO getAllBooks(String token) {
+    public BooksDTO getAllBooks() {
 
         return given()
                 .spec(requestSpecification)
@@ -151,16 +120,6 @@ public class ApiHelperBook {
     }
 
     public void addBookToUser(String userId, String token, String isbn) {
-//        TODO
-//        using JSONObject  - code below wright?
-
-//        JSONObject bodyParameters = new JSONObject();
-//        bodyParameters.put("userId", userId);
-//        List<HashMap<String, String>> bodyIsbnParam = new ArrayList<>();
-//        HashMap<String, String> mapOfIsbn = new HashMap<>();
-//        mapOfIsbn.put("isbn", isbn);
-//        bodyIsbnParam.add(0, mapOfIsbn);
-//        bodyParameters.put("collectionOfIsbns", bodyIsbnParam);
 
         Map<String, Object> bodyParam = new HashMap<String, Object>();
         bodyParam.put("userId", userId);
