@@ -59,84 +59,71 @@ public class ApiHelperDemoqa {
      * @return
      */
     public void deleteUsersBooks() {
-        deleteUsersBooks(id, token);
+
+        deleteUsersBooks(token, id);
     }
-    private void deleteUsersBooks(String id, String token) {
+    private void deleteUsersBooks(String token, String id) {
 
                 given().header("Authorization", "Bearer " + token)
                         .contentType(ContentType.JSON)
                         .queryParam("UserId", id)
                         .log().all()
                 .when()
-                        .delete(EndPointsDemoqa. DELETE_BOOKS)
+                        .delete(EndPointsDemoqa. BOOKS_DEMOQA)
                 .then()
                         .statusCode(204)
-                        .log().all()
-                        .extract().response().getBody().asString();
-
-        getListBooks(token, id);
+                        .log().all();
 
         logger.info("All books have been deleted");
-        Assert.assertEquals("number of books ", 0, getListBooks(token, id));
     }
 
     /**
      * Get a list of users books
      * @return
      */
-    public int getListBooks(String token, String id) {
-        String actualResponce =
-                given().header("Authorization", "Bearer " + token)
+    public UserDemoqaDTO getListBooks() {
+        logger.info("List of books: ");
+        return given()
+                .header("Authorization", "Bearer " + token)
                         .contentType(ContentType.JSON)
                         .log().all()
                 .when()
-                        .get(EndPointsDemoqa.LIST_BOOKS, id)
+                        .get(EndPointsDemoqa.ADD_BOOKS)
                 .then()
                         .statusCode(200)
                         .log().all()
-                        .extract().response().getBody().asString();
-        JSONObject listBooks = new JSONObject(actualResponce);
-        int bookKount = listBooks.getJSONArray("books").length();
-        logger.info("number of books " + bookKount);
-        return bookKount;
+                        .extract().response().getBody().as(UserDemoqaDTO.class);
+
     }
 
     /**
-     * Get default Id book
+     * Get books in store
      * @return
      */
-    public String getIsbnSomeBookDemoqa() {
-        String actualResponce =
-                given()
+    public AllBooksStoryDemoqaDTO getAllBooksStoreDemoqa() {
+        logger.info("List of all books: ");
+            return given()
                         .spec(requestSpecification)
                 .when()
-                        .get(EndPointsDemoqa.LIST_BOOKS_DEMOQA)
+                        .get(EndPointsDemoqa.BOOKS_DEMOQA)
                 .then()
                         .statusCode(200)
                         .log().all()
-                        .extract().response().getBody().asString();
-        JSONObject userJson = new JSONObject(actualResponce);
-        String someBook = userJson.getJSONArray("books").getJSONObject(0).getString("isbn");
-
-        logger.info("book isbn added" + someBook);
-        return someBook;
+                        .extract().response().getBody().as(AllBooksStoryDemoqaDTO.class);
     }
+
 
     /**
      * Add new book
      * @return
      */
-    private void addBooksInProfile(String token, String id){
-        String someBook = getIsbnSomeBookDemoqa();
-
-        logger.info("book isbn added" + someBook);
+    private void addBooksInProfile(String token, String id, String isbn){
         HashMap<String, String> isbnList = new HashMap<>();
-        isbnList.put("isbn", someBook);
-        HashMap[] collectionOfIsbns = {isbnList};
-
+        isbnList.put("isbn", isbn);
+        HashMap[] isbns = {isbnList};
         JSONObject bodyParams = new JSONObject();
         bodyParams.put("userId", id);
-        bodyParams.put("collectionOfIsbns", collectionOfIsbns);
+        bodyParams.put("collectionOfIsbns", isbns);
 
         String responseBody =
                 given()
@@ -144,19 +131,16 @@ public class ApiHelperDemoqa {
                         .spec(requestSpecification)
                         .body(bodyParams.toMap())
                 .when()
-                        .post(EndPointsDemoqa.ADDBOOK)
+                        .post(EndPointsDemoqa.BOOKS_DEMOQA)
                 .then()
                         .log().all()
                         .statusCode(201)
                         .extract().response().getBody().asString();
 
-        Assert.assertTrue("Book was not added", responseBody.contains(someBook));
-        logger.info(String.format("Book with isbn = %s was added", someBook));
-        Assert.assertEquals("number of books ", 1, getListBooks(token, id));
+        Assert.assertTrue("Book was not added", responseBody.contains(isbn));
+        logger.info(String.format("Book with isbn = %s was added", isbns));    }
 
-    }
-
-    public void addBooksInProfile() {
-        addBooksInProfile(token, id);
+    public void addBooksInProfile(String isbn) {
+        addBooksInProfile(token, id, isbn);
     }
 }

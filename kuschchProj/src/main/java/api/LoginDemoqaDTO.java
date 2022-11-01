@@ -9,11 +9,11 @@ import lombok.*;
 @ToString
 @Builder
 public class LoginDemoqaDTO {
-        String userId;
-        String username;
-        String password;
-        String token;
-        String expires;
-        String created_date;
-        Boolean isActive;
+        private String userId;
+        private String username;
+        private String password;
+        private String expires;
+        private String created_date;
+        private Boolean isActive;
+        private String token;
 }

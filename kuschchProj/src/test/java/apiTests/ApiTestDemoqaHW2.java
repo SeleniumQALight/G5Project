@@ -18,7 +18,8 @@ public class ApiTestDemoqaHW2 {
 
     @Test
     public void addBooksInProfile() {
-        apiHelperDemoqa.addBooksInProfile();
+        String firstIsbn = apiHelperDemoqa.getAllBooksStoreDemoqa().getBooks()[0].getIsbn();
+        apiHelperDemoqa.addBooksInProfile(firstIsbn);
         logger.info("book added in profile");
     }
 
