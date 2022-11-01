@@ -79,8 +79,9 @@ public class LoginPage extends ParentPage {
        return this;
     }
 
-    public void clickOnButtonLogin() {
+    public HomePage clickOnButtonLogin() {
         clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
     }
 
     public boolean isMessageErrorLoginOrPassword(){

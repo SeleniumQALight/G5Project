@@ -1,6 +1,5 @@
 package StepDefinitions;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -32,6 +31,10 @@ public class LoginPage_StepDefinition {
     @Then("^User sees alert message with text '(.*)'$")
     public void user_sees_alert_message_with_text_Invalid_username_password(String message) {
        loginPage.checkAlertMessageText(message);
+    }
+    @Then("^User profile picture are present$")
+    public void user_profile_picture_are_present() {
+       loginPage.checkProfilePictureArePresent();
     }
 
 }
