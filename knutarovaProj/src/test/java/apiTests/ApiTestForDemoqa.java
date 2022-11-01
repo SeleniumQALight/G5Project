@@ -3,7 +3,6 @@ package apiTests;
 import api.*;
 import io.restassured.http.ContentType;
 import org.apache.log4j.Logger;
-import org.assertj.core.api.SoftAssertions;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,7 +26,7 @@ public class ApiTestForDemoqa {
         UserDTODemoqa userDTO = apiHelperForDemoqa.loginByUser();
         token = userDTO.getToken();
         userId = userDTO.getUserId();
-        apiHelperForDemoqa.deleteAllBooksTillPresent();
+        apiHelperForDemoqa.deleteAllBooksTillPresent(token, userId);
     }
 
     @Test
@@ -51,19 +50,16 @@ public class ApiTestForDemoqa {
                 .body(requestParams.toMap())
                 .log().all()
             .when()
-                .post(EndPointsForDemoqa.ALL_BOOKS_TO_STORE)
+                .post(EndPointsForDemoqa.ALL_BOOKS_TO_STORE_AND_DELETE)
             .then()
                 .statusCode(201)
                 .log().all();
 
-        BooksAddedDTOByDemoqa responseCountOfBooksByUser = apiHelperForDemoqa.checkCountOfBooksByUser(userId, token);
-        SoftAssertions softAssertions = new SoftAssertions();
+        BooksAddedDTOByDemoqa responseCountOfBooksByUser = apiHelperForDemoqa.getNomenclatureOfBooksByUser(userId, token);
         Assert.assertEquals("Count of books = 1", 1, responseCountOfBooksByUser.books.size());
         String isbnFromAddedBookByUser = String.valueOf(responseCountOfBooksByUser.books.get(0).getIsbn());
         Assert.assertEquals("ISBN by added book is equal to first book from list", isbnFromFirstBookFromList
                 , isbnFromAddedBookByUser);
-                softAssertions.assertAll();
-        logger.info(String.format("Count of books = 1", 1, responseCountOfBooksByUser.books.size()));
         logger.info(String.format("ISBN by added book is equal to first book from list", isbnFromFirstBookFromList
                 , isbnFromAddedBookByUser));
     }

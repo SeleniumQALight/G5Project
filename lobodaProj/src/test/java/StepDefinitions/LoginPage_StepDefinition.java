@@ -4,11 +4,13 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import libs.DriverHelper;
+import pages.HomePage;
 import pages.LoginPage;
 
 public class LoginPage_StepDefinition {
 
     LoginPage loginPage = new LoginPage(DriverHelper.getWebDriver());
+    HomePage homePage = new HomePage(DriverHelper.getWebDriver());
 
 
     @Given("^User opens 'Login' page$")
@@ -39,6 +41,31 @@ public class LoginPage_StepDefinition {
 
     }
 
+    @Then("^User sees avatar$")
+    public void user_sees_avatar() {
+        homePage.checkAvatarIsDisplayed();
+
+    }
+
+    @When("^User enters '(.*)' into 'Registration username' input on 'Login' page$")
+    public void user_enters_login_into_Registration_username_input_on_Login_page(String login){
+        loginPage.enterUserNameIntoRegistrationForm(login);
+    }
+
+    @When("^User enters '(.*)' into 'Registration email' input on 'Login' page$")
+    public void user_enters_qqq_into_Registration_email_input_on_Login_page(String email){
+        loginPage.enterEmailIntoRegistrationFrom(email);
+    }
+
+    @When("^User enters '(.*)' into 'Registration password' input on 'Login' page$")
+    public void user_enters_into_Registration_password_input_on_Login_page(String password){
+        loginPage.enterPasswordIntoRegistrationForm(password);
+    }
+
+    @Then("^User sees error messages '(.*)' on 'Login' page$")
+    public void user_sees_error_messages_expectedErrors_on_Login_page(String expectedErrors){
+        loginPage.checkErrorsMessages(expectedErrors);
+    }
 
 
 }
