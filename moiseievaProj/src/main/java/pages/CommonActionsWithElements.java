@@ -117,12 +117,8 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected void campersTextFromElement(String text, WebElement element) {
-        try {
+    protected void comperesTextFromElement(String text, WebElement element) {
         Assert.assertEquals("Message in Alert ", text, element.getText());
-        }catch (Exception e){
-            printErrorAndStopTest(e);
-        }
     }
 
     public void usersPressesKeyEnterTime(int numberOfTimes) {

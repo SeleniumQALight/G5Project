@@ -8,18 +8,18 @@ import pages.LoginPage;
 public class RegistrationPage_StepDefinition {
     LoginPage loginPage = new LoginPage(DriverHelper.getWebDriver());
 
-    @Given("^User enters data '(.*)' to 'Username' field$")
-    public void user_enters_data_use_to_Username_field(String username) {
+    @Given("^User enters data '(.*)' to 'Username' field on 'Registration' form$")
+    public void user_enters_data_use_to_Username_field_on_registration_form(String username) {
         loginPage.enterUserNameIntoRegistrationForm(username);
     }
 
-    @Given("^User enters data '(.*)' to 'Email' field$")
-    public void user_enters_data_to_Email_field(String email) {
+    @Given("^User enters data '(.*)' to 'Email' field on 'Registration' form$")
+    public void user_enters_data_to_Email_field_on_registration_form(String email) {
         loginPage.enterEmailIntoRegistrationFrom(email);
     }
 
-    @Given("^User enters data '(.*)' to 'Password' field$")
-    public void user_enters_data_to_Password_field(String pass) {
+    @Given("^User enters data '(.*)' to 'Password' field on 'Registration' form$")
+    public void user_enters_data_to_Password_field_on_registration_form(String pass) {
         loginPage.enterPasswordIntoRegistrationForm(pass);
     }
 
@@ -38,9 +38,14 @@ public class RegistrationPage_StepDefinition {
         loginPage.checkPasswordMessage(message);
     }
 
-    @Given("^User click submit button 'Sign up for OurApp'$")
-    public void user_click_submit_button_Sign_up_for_OurApp() {
+    @Given("^User click submit button 'Sign up for OurApp' on 'Registration' form$")
+    public void user_click_submit_button_Sign_up_for_OurApp_on_registration_form() {
         loginPage.clickButtonSignUp();
+    }
+
+    @Then("^User sees error message with text '(.*)'$")
+    public void user_sees_error_message_with_text(String errorMessage) {
+        loginPage.checkErrorsMessages(errorMessage);
     }
 
 }

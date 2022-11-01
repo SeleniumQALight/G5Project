@@ -170,15 +170,15 @@ public class LoginPage extends ParentPage {
     }
 
     public LoginPage checkNameErrorMessage(String text){
-        campersTextFromElement(text,errorNameField);
+        comperesTextFromElement(text,errorNameField);
         return this;
     }
     public LoginPage checkEmailErrorMessage(String text){
-        campersTextFromElement(text,errorEmailField);
+        comperesTextFromElement(text,errorEmailField);
         return this;
     }
     public LoginPage checkPasswordMessage(String text){
-        campersTextFromElement(text,errorPasswordField);
+        comperesTextFromElement(text,errorPasswordField);
         return this;
     }
 
