@@ -10,6 +10,7 @@ public class HomePage extends ParentPage{
     @FindBy(xpath = ".//button[text()='Sign Out']")
     private WebElement buttonSingOut;
 
+
     private HeaderElement headerElement = new HeaderElement(webDriver);
 
     public HomePage(WebDriver webDriver) {
@@ -55,5 +56,10 @@ public class HomePage extends ParentPage{
      */
     public HeaderElement getHeaderElement() {
         return headerElement;
+    }
+
+    public HomePage checkIsIconVisible() {
+        Assert.assertTrue("Avatar did not showing",  isElementDisplayed(getHeaderElement().getAvatarMyProfile()));
+        return new HomePage(webDriver);
     }
 }

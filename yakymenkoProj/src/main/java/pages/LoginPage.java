@@ -42,6 +42,8 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
     private String listOfErrorsLocator = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
     private List<WebElement> listOfErrors;
+    @FindBy(xpath = ".//*[contains(@class,'alert alert-danger text-center')]")
+    private WebElement alertInCenter;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -194,6 +196,11 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
     @Step
     public LoginPage checkInvalidLoginMessage() {
         Assert.assertTrue("Button 'Sign In' and alert massage are not visible", isButtonSignInDisplayed() & isAlertDisplayed());
+        return this;
+    }
+
+    public LoginPage checkAlertMessageText(String message) {
+        Assert.assertEquals("Message in Alert ", message, alertInCenter.getText());
         return this;
     }
 }

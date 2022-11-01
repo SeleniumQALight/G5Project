@@ -9,8 +9,6 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
 
-import java.net.UnknownServiceException;
-
 import static io.restassured.RestAssured.given;
 
 public class ApiHelper {
