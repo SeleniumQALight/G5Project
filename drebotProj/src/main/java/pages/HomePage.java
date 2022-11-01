@@ -77,6 +77,11 @@ public class HomePage extends ParentPage {
 
     }
 
+    public HomePage checkIsAvatarDisplayed() {
+        Assert.assertTrue("Avatar is displayed", headerElement.isAvatarDisplayed());
+        return this;
+    }
+
     public HeaderElement getHeaderElement() {
         return headerElement;
     }

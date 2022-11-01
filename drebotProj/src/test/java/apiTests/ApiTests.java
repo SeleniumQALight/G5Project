@@ -86,37 +86,36 @@ public class ApiTests {
                         .statusCode(200)
                         .log().all()
                         .extract().response().getBody().asString();
-        Assert.assertEquals("Message in response","\"Sorry, invalid user requested.undefined\"",actualResponse);
-        Assert.assertEquals("Message in response","Sorry, invalid user requested.undefined",actualResponse.replace("\"",""));
+        Assert.assertEquals("Message in response", "\"Sorry, invalid user requested.undefined\"", actualResponse);
+        Assert.assertEquals("Message in response", "Sorry, invalid user requested.undefined", actualResponse.replace("\"", ""));
     }
 
     @Test
-    public void getAllPostsByUserPath(){
+    public void getAllPostsByUserPath() {
         Response actualResponse =
                 given()
                         .contentType(ContentType.JSON)
                         .log().all()
 
                         .when()
-                        .get(EndPoints.POST_BY_USER,user_name)
+                        .get(EndPoints.POST_BY_USER, user_name)
 
                         .then()
                         .statusCode(200)
                         .log().all()
                         .extract().response();
 
-        List<String> actualTitleList=actualResponse.jsonPath().getList("title",String.class);
-        SoftAssertions softAssertions=new SoftAssertions();
+        List<String> actualTitleList = actualResponse.jsonPath().getList("title", String.class);
+        SoftAssertions softAssertions = new SoftAssertions();
         for (int i = 0; i < actualTitleList.size(); i++) {
-            softAssertions.assertThat(actualTitleList.get(i)).as("item number "+i).contains("test");
+            softAssertions.assertThat(actualTitleList.get(i)).as("item number " + i).contains("test");
         }
 
 
-
-        List<Map> actualAuthorList=actualResponse.jsonPath().getList("author",Map.class);
-        for (int i = 0; i <actualAuthorList.size() ; i++) {
+        List<Map> actualAuthorList = actualResponse.jsonPath().getList("author", Map.class);
+        for (int i = 0; i < actualAuthorList.size(); i++) {
             softAssertions.assertThat(actualAuthorList.get(i).get("username"))
-                    .as("Item number "+i).isEqualTo(user_name);
+                    .as("Item number " + i).isEqualTo(user_name);
 
         }
 
@@ -125,13 +124,13 @@ public class ApiTests {
     }
 
     @Test
-    public void getAllPostByUserSchema(){
+    public void getAllPostByUserSchema() {
         given()
                 .contentType(ContentType.JSON)
                 .log().all()
 
                 .when()
-                .get(EndPoints.POST_BY_USER,user_name)
+                .get(EndPoints.POST_BY_USER, user_name)
 
                 .then()
                 .statusCode(200)
