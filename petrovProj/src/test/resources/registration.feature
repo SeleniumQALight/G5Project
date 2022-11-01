@@ -1,4 +1,4 @@
-@LoginTest @FullRegression
+@RegistrationTest @FullRegression
 Feature: Registration form on login page
 
     @R003
