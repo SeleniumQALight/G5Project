@@ -9,6 +9,10 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class MyProfilePage extends ParentPage {
+
+    @FindBy(xpath = ".//a[@class='list-group-item list-group-item-action']")
+    private List<WebElement> postList;
+
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -69,12 +73,17 @@ public class MyProfilePage extends ParentPage {
                 By.xpath(String.format(postTitleLocator, title)));
     }
 
-    public PostPage clickOnPostWithTitle(String title){
-        if (getPostsWithTitle(title).size() > 1 || getPostsWithTitle(title).size() == 0 ){
+    public PostPage clickOnPostWithTitle(String title) {
+        if (getPostsWithTitle(title).size() > 1 || getPostsWithTitle(title).size() == 0) {
             logger.info("There is no post with provided title");
         } else {
             webDriver.findElement(By.xpath(String.format(postTitleLocator, title))).click();
         }
         return new PostPage(webDriver);
+    }
+
+    public MyProfilePage checkNumberOfPosts(int expectedNumOfPosts) {
+        Assert.assertEquals("Number of posts ", expectedNumOfPosts, postList.size());
+        return this;
     }
 }
