@@ -14,7 +14,7 @@ Feature: User registration
       | na       | mail1@gmail.com | qwerty123456 |
 
   @R004
-  Scenario Outline: R003 Registration with invalid email
+  Scenario Outline: R004 Registration with invalid email
     Given User opens 'Login' page
     And User enters data '<username>' to 'Username' field on 'Registration' form
     And User enters data '<email>' to 'Email' field on 'Registration' form
