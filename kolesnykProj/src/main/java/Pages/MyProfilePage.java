@@ -17,6 +17,8 @@ public class MyProfilePage extends ParentPage{
     private WebElement successDeletePostMessage;
 
     private String postTitleLocator = ".//*[text()='%s']";
+    @FindBy(xpath = ".//a[@class='list-group-item list-group-item-action']")
+    private List<WebElement> postsList;
 
     public MyProfilePage(WebDriver driver) {
         super(driver);
@@ -70,5 +72,10 @@ public class MyProfilePage extends ParentPage{
     public PostPage clickOnPost(String title){
         clickOnElement(String.format(postTitleLocator,title));
         return new PostPage(driver);
+    }
+
+    public MyProfilePage checkNumberOfPosts(int expectedNumberOfPosts) {
+        Assert.assertEquals("Number of post is : ", expectedNumberOfPosts, postsList.size());
+        return this;
     }
 }
