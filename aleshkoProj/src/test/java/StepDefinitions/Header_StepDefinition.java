@@ -2,6 +2,7 @@ package StepDefinitions;
 
 import cucumber.api.java.en.Then;
 import libs.DriverHelper;
+import org.junit.Assert;
 import pages.elements.HeaderElement;
 
 public class Header_StepDefinition {
@@ -9,6 +10,6 @@ public class Header_StepDefinition {
 
     @Then("^User sees profile avatar$")
     public void user_sees_a_profile_avatar() {
-        headerElement.isButtonMyProfileDisplayed();
+        Assert.assertTrue("Profile avatar is not displayed", headerElement.isButtonMyProfileDisplayed());
     }
 }
