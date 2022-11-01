@@ -1,8 +1,8 @@
-@LoginTest @FullRegression
+@RegistrationTest @Regression
   Feature: Registration Form
 
     @R003
-    Scenario Outline: R003 Login with invalid username <username> and email <email>
+    Scenario Outline: R003 Registration with invalid username <username> and email <email>
       Given User opens 'Login' page
       When User enters '<username>' username into 'Username' input on 'Login' page
       And User enters '<email>' email into 'Email' input on 'Login' page
