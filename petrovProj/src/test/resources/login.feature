@@ -21,7 +21,7 @@ Feature: User Login
     When User enters '<login>' login into 'Login' input on 'Login' page
     And User enters '<password>' passWord into 'PassWord' input on 'Login' page
     And User click on 'SingIn' button on 'Login' page and redirect to Home page
-    Then User sees avatar icon
+    Then User sees avatar icon on 'Home' page
 
     Examples:
       | login  | password     |

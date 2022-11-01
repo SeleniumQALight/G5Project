@@ -79,18 +79,10 @@ public class LoginPage extends ParentPage {
        return this;
     }
 
-    public void clickOnButtonLogin() {
-        clickOnElement(buttonSignIn);
-    }
-
-    public HomePage clickOnButtonLogin_redirect() {
+    public HomePage clickOnButtonLogin() {
         clickOnElement(buttonSignIn);
         return new HomePage(webDriver);
     }
-//    public HomePage checkIsIconVisible() {
-//        Assert.assertTrue("Avatar did not showing",  isElementDisplayed(getHeaderElement().getAvatarMyProfile()));
-//        return new HomePage(webDriver);
-//    }
 
     public boolean isMessageErrorLoginOrPassword(){
        return isElementWasDisplayed(messageErrorLoginOrPassword);

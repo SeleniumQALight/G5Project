@@ -1,5 +1,5 @@
-
-  Feature: registration errors check
+@LoginTest @FullRegression
+Feature: Registration form on login page
 
     @R003
     Scenario Outline: check errors message with invalid registration data

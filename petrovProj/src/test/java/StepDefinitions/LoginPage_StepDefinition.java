@@ -37,7 +37,7 @@ public class LoginPage_StepDefinition {
 
     @And("User click on 'SingIn' button on 'Login' page and redirect to Home page")
     public void userClickOnSingInButtonOnLoginPageAndRedirectToHomePage() {
-        loginPage.clickOnButtonLogin_redirect();
+        loginPage.clickOnButtonLogin();
     }
 
     @When("User enters '(.*)' username into 'Pick a username' input on 'Login' page")
