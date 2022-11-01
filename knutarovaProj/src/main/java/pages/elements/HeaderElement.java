@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.CommonActionsWithElements;
 import pages.CreatePostPage;
-import pages.EditPostPage;
 import pages.MyProfilePage;
 
 public class HeaderElement extends CommonActionsWithElements {
@@ -17,7 +16,7 @@ public class HeaderElement extends CommonActionsWithElements {
     private WebElement buttonSignOut;
 
     @FindBy(xpath = ".//*[@data-original-title='My Profile']")
-    private WebElement buttonMyProfile;
+    private WebElement avatarMyProfile;
 
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
@@ -40,7 +39,13 @@ public class HeaderElement extends CommonActionsWithElements {
 
     @Step
     public MyProfilePage clickOnMyProfileButton(){
-        clickOnElement(buttonMyProfile);
+        clickOnElement(avatarMyProfile);
         return new MyProfilePage(webDriver);
+    }
+
+    @Step
+    public  boolean isAvatarMyProfileDisplayed(){
+        return isElementDisplayed(avatarMyProfile);
+
     }
 }
