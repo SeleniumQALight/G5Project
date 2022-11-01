@@ -14,7 +14,7 @@ Feature: User registration
       | na       | mail1@gmail.com | qwerty123456 |
 
   @R004
-  Scenario Outline:
+  Scenario Outline: R003 Registration with invalid email
     Given User opens 'Login' page
     And User enters data '<username>' to 'Username' field on 'Registration' form
     And User enters data '<email>' to 'Email' field on 'Registration' form
@@ -27,7 +27,7 @@ Feature: User registration
       | naming   | gmail.com | qwerty   |
 
   @R005
-  Scenario Outline:
+  Scenario Outline: R005 Registration with invalid parameters
     Given User opens 'Login' page
     And User enters data '<username>' to 'Username' field on 'Registration' form
     And User enters data '<email>' to 'Email' field on 'Registration' form
@@ -35,9 +35,10 @@ Feature: User registration
     And User click submit button 'Sign up for OurApp' on 'Registration' form
     Then User sees error message with text '<error message>'
     Examples:
-      | username | email           | password     | error message                            |
-      | na       | mail1@gmail.com | qwerty123456 | Username must be at least 3 characters.  |
-      | naming   | mail@gmail.com  | qwerty123456 | That email is already being used.        |
-      | naming   | gmail.com       | qwerty123456 | You must provide a valid email address.  |
-      | naming   | mail1@gmail.com | qwerty       | Password must be at least 12 characters. |
+      | username | email           | password     | error message                                                                    |
+      | na       | mail1@gmail.com | qwerty123456 | Username must be at least 3 characters.                                          |
+      | naming   | mail@gmail.com  | qwerty123456 | That email is already being used.                                                |
+      | naming   | gmail.com       | qwerty123456 | You must provide a valid email address.                                          |
+      | naming   | mail1@gmail.com | qwerty       | Password must be at least 12 characters.                                         |
+      | na       | mail1@gmail.com | qwerty       | Username must be at least 3 characters.;Password must be at least 12 characters. |
 
