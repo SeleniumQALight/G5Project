@@ -325,6 +325,33 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.github.temyers</groupId>
+                <artifactId>cucumber-jvm-parallel-plugin</artifactId>
+                <version>2.2.0</version>
+                <executions>
+                    <execution>
+                        <id>generateRunners</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>generateRunners</goal>
+
+                        </goals>
+
+                        <configuration>
+                            <glue>StepDefinitions</glue>
+                            <featuresDirectory>
+                                src/test/resources
+                            </featuresDirectory>
+                            <cucumberOutputDir>target/cucumber-parallel</cucumberOutputDir>
+                            <format>json,html</format>
+                            <tags>"${tag}"</tags>
+                            <!--<parallelScheme>SCENARIO</parallelScheme>-->
+                            <parallelScheme>FEATURE</parallelScheme>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <resources>
             <resource>
