@@ -47,4 +47,7 @@ public class HeaderElement extends CommonActionsWithElements {
         return new LoginPage(webDriver);
     }
 
+    public boolean isButtonMyProfileDisplayed() {
+        return isElementDisplayed(buttonMyProfile);
+    }
 }
