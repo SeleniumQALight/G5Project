@@ -14,7 +14,7 @@ Feature: User Login
     | wrongLogin  | 1234      |
 
     @R002
-    Scenario Outline:  Login with valid data
+    Scenario Outline: R002 Login with valid data
       Given User opens 'Login' page
       When User enters '<login>' login into 'Login' input on 'Login' page
       And User enters '<password>' passWord into 'PassWord' input on 'Login' page
