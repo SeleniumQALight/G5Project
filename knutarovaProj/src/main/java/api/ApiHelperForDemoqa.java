@@ -7,14 +7,13 @@ import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
-import org.junit.Assert;
 
 import static io.restassured.RestAssured.given;
 
 public class ApiHelperForDemoqa {
     public static final String USERNAME = "irynaknutarova";
     private final String PASSWORD = "12345qwertyY!";
-    private String TOKEN;
+    private String token;
     private String USERID;
     Logger logger = Logger.getLogger(getClass());
     RequestSpecification requestSpecification = new RequestSpecBuilder()
@@ -46,12 +45,11 @@ public class ApiHelperForDemoqa {
     }
 
     public void deleteAllBooksTillPresent() {
-        deleteAllBooksTillPresent(TOKEN, USERID);
+        deleteAllBooksTillPresent(token, USERID);
     }
 
-    private void deleteAllBooksTillPresent(String token, String UserId) {
-        token = loginByUser().getToken();
-        deleteAllBooksByUserId(token, loginByUser().getUserId());
+    public void deleteAllBooksTillPresent(String token, String UserId) {
+        deleteAllBooksByUserId(token, UserId);
         logger.info(String.format("Books by username " + loginByUser().getUsername() + " was deleted"));
     }
 
@@ -59,8 +57,9 @@ public class ApiHelperForDemoqa {
         String response = given()
                 .spec(requestSpecification)
                 .auth().oauth2(token)
+                .queryParam("UserId", userId)
             .when()
-                .delete(EndPointsForDemoqa.DELETE_BOOKS, userId)
+                .delete(EndPointsForDemoqa.ALL_BOOKS_TO_STORE_AND_DELETE)
            .then()
                 .statusCode(204)
                 .log().all()
@@ -71,7 +70,7 @@ public class ApiHelperForDemoqa {
         BookForBooksDTODemoqa responseBody = given()
                 .spec(requestSpecification)
             .when()
-                .get(EndPointsForDemoqa.ALL_BOOKS_TO_STORE)
+                .get(EndPointsForDemoqa.ALL_BOOKS_TO_STORE_AND_DELETE)
             .then()
                 .statusCode(200)
                 .log().all()
@@ -80,7 +79,7 @@ public class ApiHelperForDemoqa {
         return responseBody;
     }
 
-    public BooksAddedDTOByDemoqa checkCountOfBooksByUser(String userId, String token) {
+    public BooksAddedDTOByDemoqa getNomenclatureOfBooksByUser(String userId, String token) {
         return given()
                 .spec(requestSpecification)
                 .auth().oauth2(token)
