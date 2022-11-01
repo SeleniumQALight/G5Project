@@ -20,7 +20,7 @@ abstract class ParentPage extends CommonActionWithElements{
     protected void checkUrl(){
         Assert.assertEquals("Invalid page"
                 ,baseUrl + getRelativeUrl()
-                ,driver.getCurrentUrl() );
+                ,driver.getCurrentUrl());
     }
 
     protected void checkUrlWithPattern(){
