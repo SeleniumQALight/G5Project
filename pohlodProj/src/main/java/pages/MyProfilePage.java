@@ -18,7 +18,8 @@ public class MyProfilePage extends ParentPage{
 
     private String postTitleLocator = ".//*[text()='%s']";
 
-
+    @FindBy(xpath = ".//a[@class='list-group-item list-group-item-action']")
+    private List<WebElement> postsList;
 
 
     public MyProfilePage(WebDriver webDriver) {
@@ -75,5 +76,10 @@ public class MyProfilePage extends ParentPage{
     public PostPage clickOnThePost(String title) {
         clickOnElement(String.format(postTitleLocator, title));
         return new PostPage(webDriver);
+    }
+
+    public MyProfilePage checkNumberOfPosts(int expectedNumberOfPosts) {
+        Assert.assertEquals("Number of posts ", expectedNumberOfPosts, postsList.size());
+        return this;
     }
 }
