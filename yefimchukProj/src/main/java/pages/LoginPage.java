@@ -34,6 +34,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']")
     private List<WebElement> listOfErrors;
 
+    @FindBy(xpath = ".//*[contains(@class,'alert alert-danger text-center')]")
+    private WebElement alertInCenter;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -42,7 +45,8 @@ public class LoginPage extends ParentPage {
     String getRelativeURL() {
         return "/";
     }
-@Step
+
+    @Step
     public LoginPage openLoginPage() {
         try {
             webDriver.get(baseURL);
@@ -54,7 +58,8 @@ public class LoginPage extends ParentPage {
         }
         return this;
     }
-@Step
+
+    @Step
     public void enterUserNameIntoLoginInput(String userName) {
 //        try {
 ////            WebElement webElement = webDriver.findElement(By.xpath(".//input[@name='username' and @placeholder='Username']"));
@@ -66,7 +71,8 @@ public class LoginPage extends ParentPage {
 //        }
         enterTextIntoElement(inputUserNameHeader, userName);
     }
-@Step
+
+    @Step
     public void enterPasswordIntoInputPassword(String password) {
 //        try {
 ////            WebElement webElement = webDriver.findElement(By.xpath(".//input[@placeholder='Password']"));
@@ -79,7 +85,8 @@ public class LoginPage extends ParentPage {
 //        }
         enterTextIntoElement(inputPasswordHeader, password);
     }
-@Step
+
+    @Step
     public void clickOnButtonLogIn() {
 //        try {
 ////            webDriver.findElement(By.xpath(".//button[text()='Sign In']")).click();
@@ -90,7 +97,8 @@ public class LoginPage extends ParentPage {
 //        }
         clickOnElement(buttonSignIn);
     }
-@Step
+
+    @Step
     public HomePage loginWithValidCred() {
         openLoginPage();
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
@@ -99,22 +107,26 @@ public class LoginPage extends ParentPage {
 
         return new HomePage(webDriver);
     }
-@Step
+
+    @Step
     public LoginPage enterUserNameIntoRegistrationForm(String userName) {
         enterTextIntoElement(inputLoginRegistration, userName);
         return this;
     }
-@Step
+
+    @Step
     public LoginPage enterEmailIntoRegistrationForm(String email) {
         enterTextIntoElement(inputEmailRegistration, email);
         return this;
     }
-@Step
+
+    @Step
     public LoginPage enterPasswordIntoRegistrationForm(String password) {
         enterTextIntoElement(inputPasswordRegistration, password);
         return this;
     }
-@Step
+
+    @Step
     public LoginPage checkErrorsMessages(String expectedErrors) {
         // test;test1 -> array[0] = test, array[1] = test1
         String[] expectedErrorsArray = expectedErrors.split(";");
@@ -135,12 +147,18 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
         return this;
     }
-@Step
+
+    @Step
     public HomePage loginWithValidCredWithoutOpenPage() {
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);
         clickOnButtonLogIn();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage checkAlertMessageText(String message) {
+        Assert.assertEquals("Message in Alert ", message, alertInCenter.getText());
+        return this;
     }
 //    private void printErrorAndStopTest(Exception e) {
 //        logger.error("Can not work with element" + e);

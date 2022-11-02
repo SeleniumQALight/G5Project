@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -39,7 +38,7 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = ".//a[text()='Create Post']")
     private WebElement buttonCreatePost;
     @FindBy(xpath = ".//*[@data-original-title='My Profile']")
-    private WebElement buttonMyProfile;
+    private WebElement avatarMyProfile;
     @FindBy(xpath = ".//*[contains(@class,'alert alert-danger text-center')]")
     private WebElement alertInCenter;
 
@@ -206,7 +205,7 @@ public class LoginPage extends ParentPage {
 
     @Step
     public MyProfilePage clickOnMyProfileButton() {
-        clickOnElement(buttonMyProfile);
+        clickOnElement(avatarMyProfile);
         return new MyProfilePage(webDriver);
     }
 
