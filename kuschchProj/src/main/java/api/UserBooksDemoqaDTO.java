@@ -12,6 +12,6 @@ import lombok.*;
 public class UserBooksDemoqaDTO {
         String userId;
         String username;
-        UserBooksDemoqaDTO[] books;
+        UserDemoqaDTO[] books;
 
 }

@@ -2,15 +2,13 @@ package api;
 
 import lombok.*;
 
-
-public class UserDemoqaDTO {
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     @ToString
     @Builder
-    public class UserBooksDTO {
+    public class UserDemoqaDTO {
         String isbn;
         String title;
         String subTitle;
@@ -20,6 +18,5 @@ public class UserDemoqaDTO {
         Integer pages;
         String description;
         String website;
-    }
 
 }

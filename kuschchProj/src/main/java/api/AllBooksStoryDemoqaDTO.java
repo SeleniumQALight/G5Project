@@ -10,5 +10,5 @@ import lombok.*;
 @Builder
 
 public class AllBooksStoryDemoqaDTO {
-    AllBooksStoryDemoqaDTO[] books;
+    private UserDemoqaDTO[] books;
 }

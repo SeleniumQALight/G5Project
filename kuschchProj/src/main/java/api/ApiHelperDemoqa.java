@@ -81,7 +81,11 @@ public class ApiHelperDemoqa {
      * Get a list of users books
      * @return
      */
-    public UserDemoqaDTO getListBooks() {
+
+    public UserBooksDemoqaDTO getListBooks(){
+        return getListBooks(token, id);
+    }
+    public UserBooksDemoqaDTO getListBooks(String token, String id) {
         logger.info("List of books: ");
         return given()
                 .header("Authorization", "Bearer " + token)
@@ -92,8 +96,7 @@ public class ApiHelperDemoqa {
                 .then()
                         .statusCode(200)
                         .log().all()
-                        .extract().response().getBody().as(UserDemoqaDTO.class);
-
+                        .extract().response().getBody().as(UserBooksDemoqaDTO.class);
     }
 
     /**
