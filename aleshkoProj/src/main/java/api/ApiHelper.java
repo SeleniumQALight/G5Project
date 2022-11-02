@@ -10,6 +10,8 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
 
+import java.util.HashMap;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiHelper {
@@ -40,10 +42,10 @@ public class ApiHelper {
 //                .log().all()
                         .spec(requestSpecification)
                         .body(requestParams.toMap())
-                .when()
+                        .when()
                         .post(EndPoints.LOGIN)
 
-                .then()
+                        .then()
                         .statusCode(200)
                         .log().all()
                         .extract().response().getBody();
@@ -62,13 +64,13 @@ public class ApiHelper {
 
     private PostDTO[] getAllPostsByUser(String userName) {
         return given()
-                    .spec(requestSpecification)
-               .when()
-                    .get(EndPoints.POST_BY_USER, userName)
-               .then()
-                    .statusCode(200)
-                    .log().all()
-                    .extract().response().getBody().as(PostDTO[].class);
+                .spec(requestSpecification)
+                .when()
+                .get(EndPoints.POST_BY_USER, userName)
+                .then()
+                .statusCode(200)
+                .log().all()
+                .extract().response().getBody().as(PostDTO[].class);
     }
 
     /**
@@ -78,7 +80,7 @@ public class ApiHelper {
         deletePostsTillPresent(TestData.USER_NAME, TestData.PASSWORD);
     }
 
-    private void deletePostsTillPresent(String userName, String password) {
+    public void deletePostsTillPresent(String userName, String password) {
         PostDTO[] listOfPosts = getAllPostsByUser(userName);
         String token = getToken(userName, password);
         for (int i = 0; i < listOfPosts.length; i++) {
@@ -96,13 +98,32 @@ public class ApiHelper {
         String response = given()
                 .spec(requestSpecification)
                 .body(bodyParams.toMap())
-        .when()
+                .when()
                 .delete(EndPoints.DELETE_POST, id)
-        .then()
+                .then()
                 .statusCode(200)
                 .log().all()
                 .extract().response().getBody().asString();
 
         Assert.assertEquals("Message ", "\"Success\"", response);
+    }
+
+    public void createPost(String title, String userName, String password) {
+        String token = getToken(userName.toLowerCase(), password);
+
+        HashMap<String, String> requestParams = new HashMap<>();
+        requestParams.put("title", title);
+        requestParams.put("body", "post body");
+        requestParams.put("select1", "One Person");
+        requestParams.put("uniquePost", "yes");
+        requestParams.put("token", token);
+
+        given()
+                .spec(requestSpecification)
+                .body(requestParams)
+        .when()
+                .post(EndPoints.CREATE_POST)
+        .then()
+                .statusCode(200);
     }
 }
