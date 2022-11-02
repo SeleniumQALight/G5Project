@@ -9,6 +9,8 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
 
+import java.util.HashMap;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiHelper {
@@ -76,7 +78,7 @@ public class ApiHelper {
         deletePostsTillPresent(USER_NAME, PASSWORD);
     }
 
-    private void deletePostsTillPresent(String userName, String password) {
+    public void deletePostsTillPresent(String userName, String password) {
         PostDTO[] listOfPosts = getAllPostByUser(userName);
         String token = getToken(userName, password);
         for (int i = 0; i < listOfPosts.length; i++) {
@@ -102,5 +104,23 @@ public class ApiHelper {
                 .extract().response().getBody().asString();
         Assert.assertEquals("Message", "\"Success\"", response);
 
+    }
+
+    public void createPost(String title, String username, String password) {
+        String token = getToken(username.toLowerCase(), password);
+        HashMap<String, String> requestParams = new HashMap<>();
+        requestParams.put("title", title);
+        requestParams.put("body", "post body");
+        requestParams.put("select1", "One Person");
+        requestParams.put("uniquePost", "no");
+        requestParams.put("token", token);
+
+        given()
+                .spec(requestSpecification)
+                .body(requestParams)
+                .when()
+                .post(EndPoints.CREATE_POST)
+                .then()
+                .statusCode(200);
     }
 }

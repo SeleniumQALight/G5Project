@@ -17,6 +17,8 @@ public class MyProfilePage extends ParentPage{
     private WebElement successDeletePostMessage;
     @FindBy(xpath = ".//button[@class='btn btn-sm btn-secondary']")
     private WebElement buttonSignOut;
+    @FindBy(xpath = ".//a[@class='list-group-item list-group-item-action']")
+    private List<WebElement> postsList;
 
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
@@ -74,5 +76,10 @@ public class MyProfilePage extends ParentPage{
     public HomePage clickOnButtonSignOut() {
             clickOnElement(buttonSignOut);
             return new HomePage(webDriver);
+    }
+
+    public MyProfilePage checkNumberOfPosts(int expectedNumberOfPosts) {
+        Assert.assertEquals("Number of posts ", expectedNumberOfPosts, postsList.size());
+        return this;
     }
 }
