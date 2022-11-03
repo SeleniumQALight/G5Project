@@ -63,16 +63,19 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public void enterUserNameIntoLoginInput(String userName) {
+    public LoginPage enterUserNameIntoLoginInput(String userName) {
         enterTextIntoElement(inputUserNameHeader, userName);
+        return this;
     }
 
-    public  void  enterPasswordIntoInputPassword(String password){
+    public  LoginPage  enterPasswordIntoInputPassword(String password){
         enterTextIntoElement(inputPasswordHeader, password);
+        return this;
     }
 
-    public void clickOnButtonLogIn(){
+    public HomePage clickOnButtonLogIn(){
         clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
     }
 
     public boolean isButtonSignInDisplayed(){
