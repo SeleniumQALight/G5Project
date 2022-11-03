@@ -3,12 +3,13 @@ package StepDefinitions;
 import api.ApiHelper;
 import api.PrivatHW.ExchangeCoursResponseDTO;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
 import libs.TestData;
 
 public class ApiPrivat_StepDefinition {
     ApiHelper apiHelper = new ApiHelper();
 
-    @Given("^Get and save currency rates from API '(.*)' to '(.*)'$")
+    @Given("^User send API and save currency rates from API '(.*)' to '(.*)'$")
     public void getCurrencyCoursFromAPICurrencyFromToCurrencyTo(String currencyFrom, String currencyTo) {
 
         ExchangeCoursResponseDTO[] response = apiHelper.getExchangeRateByPrivat24();
@@ -19,17 +20,18 @@ public class ApiPrivat_StepDefinition {
                 TestData.CurrencyFromName = response[i].getCcy();
                 TestData.CurrencyToName = response[i].getBase_ccy();
 
-                TestData.CurrencyRateBuy = response[i].getBuy();
-                TestData.CurrencyRateSale = response[i].getSale();
+                TestData.CurrencyRateBuyFromAPI = response[i].getBuy();
+                TestData.CurrencyRateSaleFromAPI = response[i].getSale();
             }
         }
 
         System.out.println("----------------");
         System.out.println(TestData.CurrencyFromName);
         System.out.println(TestData.CurrencyToName);
-        System.out.println(TestData.CurrencyRateBuy);
-        System.out.println(TestData.CurrencyRateSale);
+        System.out.println(TestData.CurrencyRateBuyFromAPI);
+        System.out.println(TestData.CurrencyRateSaleFromAPI);
         System.out.println("_________________");
 
     }
+
 }
