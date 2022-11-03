@@ -16,6 +16,8 @@ public class MyProfilePage extends ParentPage{
     private String postTitleLocator = ".//*[text()='%s']";
     @FindBy(xpath = ".//*[text()='Post successfully deleted']")
     private WebElement successDeletedPostMessage;
+    @FindBy(xpath = ".//a[@class='list-group-item list-group-item-action']")
+    private List<WebElement> postList;
 
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
@@ -69,5 +71,10 @@ public class MyProfilePage extends ParentPage{
 
     private List<WebElement> getPostsListWithTitle(String title){
         return webDriver.findElements(By.xpath(String.format(postTitleLocator, title))); //znayde vsi posty
+    }
+
+    public MyProfilePage checkNumberOfPosts(int expectedNumberOfPosts) {
+        Assert.assertEquals("Number of posts ", expectedNumberOfPosts, postList.size());
+        return this;
     }
 }

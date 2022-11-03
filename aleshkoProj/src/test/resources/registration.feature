@@ -1,8 +1,8 @@
 @RegistrationTest @FullRegression
   Feature: User register
 
-    @R010
-    Scenario Outline: User pass registration with errors
+    @R003
+    Scenario Outline: R003 User pass registration with errors
       Given User opens 'Login' page
       When User enters '<username>' into 'Username' input on 'Registration' form
       And User enters '<email>' into 'Email' input on 'Registration' form
