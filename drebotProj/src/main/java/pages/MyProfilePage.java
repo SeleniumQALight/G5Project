@@ -14,6 +14,8 @@ public class MyProfilePage extends ParentPage {
     private String postTitleLocator = ".//*[text()='%s']";
     @FindBy(xpath = ".//*[text()='Post successfully deleted']")
     private WebElement successDeletedPostMessage;
+    @FindBy(xpath = ".//a[@class='list-group-item list-group-item-action']")
+    private List<WebElement> postsList;
 
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
@@ -81,7 +83,6 @@ public class MyProfilePage extends ParentPage {
             logger.info("post with title '" + title + "' wasn't find");
         }
 
-
         return new EditPostPage(webDriver);
     }
 
@@ -91,5 +92,8 @@ public class MyProfilePage extends ParentPage {
         return this;
     }
 
-
+    public MyProfilePage checkNumberOfPosts(int expectedNumberOfPosts) {
+        Assert.assertEquals("Number of posts", expectedNumberOfPosts, postsList.size());
+        return this;
+    }
 }
