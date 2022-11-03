@@ -19,6 +19,9 @@ public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = ".//*[@data-original-title='My Profile']")
     private WebElement buttonMyProfile;
 
+    @FindBy(xpath = ".//*[@alt='My profile']")
+    private WebElement userAvatar;
+
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
     }
@@ -43,6 +46,11 @@ public class HeaderElement extends CommonActionsWithElements {
     public MyProfilePage clickOnMyProfileButton(){
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
+    }
+
+    @Step
+    public boolean isAvatarDisplayed() {
+        return isElementDisplayed(userAvatar);
     }
 
 }

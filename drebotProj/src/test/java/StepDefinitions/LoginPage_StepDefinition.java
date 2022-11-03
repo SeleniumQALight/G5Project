@@ -35,5 +35,23 @@ public class LoginPage_StepDefinition {
         loginPage.checkAlertMessagesText(message);
     }
 
+    @When("^User enters '(.*)' username into 'Username' input on 'Login' page registration section$")
+    public void user_enters_tr_username_into_Username_input_on_Login_page_registration_section(String userName) {
+        loginPage.enterUserNameIntoRegistration(userName);
+    }
 
+    @When("^User enters '(.*)' email into 'Email' input on 'Login' page registration section$")
+    public void user_enters_test_com_email_into_Email_input_on_Login_page_registration_section(String email) {
+        loginPage.enterEmailIntoRegistration(email);
+    }
+
+    @When("^User enters '(.*)' password into 'Password' input on 'Login' page registration section$")
+    public void user_enters_password_into_Password_input_on_Login_page_registration_section(String password) {
+        loginPage.enterPasswordIntoRegistration(password);
+    }
+
+    @Then("^User sees alert message with '(.*)' text$")
+    public void user_sees_alert_message_with_text(String message) {
+        loginPage.checkErrorMessages(message);
+    }
 }

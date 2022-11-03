@@ -117,6 +117,9 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void comperesTextFromElement(String text, WebElement element) {
+        Assert.assertEquals("Message in Alert ", text, element.getText());
+    }
 
     public void usersPressesKeyEnterTime(int numberOfTimes) {
         Actions actions = new Actions(webDriver);

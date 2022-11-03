@@ -13,6 +13,8 @@ public class MyProfilePage extends ParentPage {
     private WebElement avatar;
     @FindBy(xpath = ".//*[text()='Post successfully deleted']")
     private WebElement successDeletedPostMessage;
+    @FindBy(xpath = ".//a[@class='list-group-item list-group-item-action']")
+    private List<WebElement> postsList;
 
     private String postTitleLocator = ".//*[text()='%s']";
 
@@ -74,5 +76,11 @@ public class MyProfilePage extends ParentPage {
             Assert.fail("There are no posts with title " + title);
         }
         return new PostPage(webDriver);
+    }
+
+    public MyProfilePage checkNumberOfPosts(int expectedNumberOfPosts) {
+        Assert.assertEquals("Number of posts ", expectedNumberOfPosts, postsList.size());
+
+        return this;
     }
 }

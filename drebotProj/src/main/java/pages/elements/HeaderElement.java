@@ -21,7 +21,6 @@ public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = ".//span[@class='text-white mr-2']")
     private WebElement userNameInHeader;
 
-
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
     }
@@ -50,6 +49,10 @@ public class HeaderElement extends CommonActionsWithElements {
     public LoginPage clickOnButtonSignOut() {
         clickOnElement(buttonSignOut);
         return new LoginPage(webDriver);
+    }
+
+    public boolean isAvatarDisplayed(){
+        return isElementDisplayed(buttonMyProfile);
     }
 }
 

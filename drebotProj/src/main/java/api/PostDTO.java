@@ -11,8 +11,8 @@ import lombok.*;
 @Builder
 public class PostDTO {
     @JsonProperty("_id")//если не совпадает имя в JSON с нашим именем
-
     String id;
+
     String title;
     String body;
     String select1;
