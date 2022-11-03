@@ -1,5 +1,7 @@
 package api;
 
+import api.PrivatHW.EndPointsExchangeCours;
+import api.PrivatHW.ExchangeCoursResponseDTO;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
@@ -103,6 +105,21 @@ public class ApiHelper {
                 .extract().response().getBody().asString();
         Assert.assertEquals("Message", "\"Success\"", response);
 
+    }
+
+    public ExchangeCoursResponseDTO[] getExchangeRateByPrivat24() {
+        return given()
+                .contentType(ContentType.JSON)
+                .queryParam("exchange")
+                .queryParam("json")
+                .queryParam("coursid", 11)
+                //.log().all()
+                .when()
+                .get(EndPointsExchangeCours.EXCHANGE)
+                .then()
+                .statusCode(200)
+                //.log().all()
+                .extract().response().as(ExchangeCoursResponseDTO[].class);
     }
 
 

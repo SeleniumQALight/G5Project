@@ -1,5 +1,6 @@
 package apiTests;
 
+import api.ApiHelper;
 import api.PrivatHW.EndPointsExchangeCours;
 import api.PrivatHW.ExchangeCoursResponseDTO;
 import io.restassured.http.ContentType;
@@ -12,22 +13,13 @@ import static io.restassured.RestAssured.given;
 
 public class ApiTestsPrivatHW {
 
+    ApiHelper apiHelper = new ApiHelper();
     Logger logger = Logger.getLogger(getClass());
 
     @Test
     public void getExchangeCoursByPrivat24() {
-        ExchangeCoursResponseDTO[] responseBody = given()
-                .contentType(ContentType.JSON)
-                .queryParam("exchange")
-                .queryParam("json")
-                .queryParam("coursid",11)
-                .log().all()
-                .when()
-                .get(EndPointsExchangeCours.EXCHANGE)
-                .then()
-                .statusCode(200)
-                .log().all()
-                .extract().response().as(ExchangeCoursResponseDTO[].class);
+
+        ExchangeCoursResponseDTO[] responseBody = apiHelper.getExchangeRateByPrivat24();
 
         logger.info("number of posts = " + responseBody.length);
 
