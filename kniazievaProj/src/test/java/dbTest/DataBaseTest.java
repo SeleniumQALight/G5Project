@@ -37,7 +37,7 @@ public class DataBaseTest {
 
     }
     @After
-    public void tesrDown(){
-
+    public void closeDBConnection() throws SQLException {
+        mysqlDB.quit();
     }
 }
