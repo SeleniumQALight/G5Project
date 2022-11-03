@@ -9,6 +9,8 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
 
+import java.util.HashMap;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiHelper {
@@ -29,6 +31,7 @@ public class ApiHelper {
 
     /**
      * Get token for default user
+     *
      * @return
      */
     public String getToken(String user_name, String password) {
@@ -42,9 +45,9 @@ public class ApiHelper {
 //                        .log().all()
                         .spec(requestSpecification)
                         .body(requestParams.toMap())
-                .when()
+                        .when()
                         .post(EndPoints.LOGIN)
-                .then()
+                        .then()
                         .statusCode(200)
                         .log().all()
                         .extract().response().getBody();
@@ -55,6 +58,7 @@ public class ApiHelper {
 
     /**
      * Get posts for DEFAULT user
+     *
      * @return
      */
     public PostDTO[] getAllPostsByUser() {
@@ -63,12 +67,12 @@ public class ApiHelper {
 
     private PostDTO[] getAllPostsByUser(String user_name) {
         return given()
-                    .spec(requestSpecification)
+                .spec(requestSpecification)
                 .when()
-                    .get(EndPoints.POST_BY_USER, user_name)
+                .get(EndPoints.POST_BY_USER, user_name)
                 .then()
-                    .statusCode(200)
-                    .log().all()
+                .statusCode(200)
+                .log().all()
                 .extract().response().getBody().as(PostDTO[].class);
     }
 
@@ -76,7 +80,7 @@ public class ApiHelper {
         deletePostsTillPresent(USER_NAME, PASSWORD); // для видалення токену необхідно як логін так і пароль
     }
 
-    private void deletePostsTillPresent(String userName, String password) {
+    public void deletePostsTillPresent(String userName, String password) {
         PostDTO[] listOfPosts = getAllPostsByUser(userName);
         String token = getToken(userName, password);
 
@@ -96,13 +100,33 @@ public class ApiHelper {
         String response = given()
                 .spec(requestSpecification)
                 .body(bodyParams.toMap())
-        .when()
+                .when()
                 .delete(EndPoints.DELETE_POST, id)
-        .then()
+                .then()
                 .statusCode(200)
                 .log().all()
                 .extract().response().getBody().asString();
 
         Assert.assertEquals("Message ", "\"Success\"", response);
+    }
+
+    public void createPost(String title, String userName, String password) {
+        String token = getToken(userName.toLowerCase(), password);
+
+        HashMap<String, String> requestParams = new HashMap<>();
+        requestParams.put("title", title);
+        requestParams.put("body", "post body");
+        requestParams.put("select1", "One Person");
+        requestParams.put("uniquePost", "no");
+        requestParams.put("token", token);
+
+        given()
+                .spec(requestSpecification)
+                .body(requestParams)
+                .when()
+                .post(EndPoints.CREATE_POST)
+                .then()
+                .statusCode(200);
+
     }
 }
