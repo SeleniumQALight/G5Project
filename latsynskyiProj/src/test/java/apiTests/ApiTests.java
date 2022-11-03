@@ -5,7 +5,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 
 import api.AuthorDTO;
 import api.PostDTO;
-import io.restassured.module.jsv.JsonSchemaValidator;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -15,7 +15,6 @@ import org.junit.Test;
 import api.EndPoints;
 import io.restassured.http.ContentType;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +27,7 @@ public class ApiTests {
         PostDTO[] responseBody = given()
                 .contentType(ContentType.JSON)
                 //.queryParam("exchange")
+                .filter(new AllureRestAssured())
                 .log().all()
                 .when()
                 .get(EndPoints.POST_BY_USER, user_name)
