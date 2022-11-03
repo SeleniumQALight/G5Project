@@ -32,7 +32,7 @@ public class LoginPage extends ParentPage {
     @FindBy(id = "email-register")
     private WebElement inputEmailRegistration;
 
-    @FindBy(id = "password-register1")//
+    @FindBy(id = "password-register")//
     private WebElement inputPasswordRegistration;
 
     @FindBy(xpath = ".//button[@class='py-3 mt-4 btn btn-lg btn-success btn-block']")
