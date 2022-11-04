@@ -11,6 +11,9 @@ public class TestData {
     public static String CurrencyRateSaleFromAPI;
     public static String CurrencyRateBuyFromAPI;
 
-    public static String CurrencyFromName;
-    public static String CurrencyToName;
+    public static String Currency_NameFrom_FromAPI;
+    public static String Currency_NameTo_FromApi;
+    
+    public static String CurrencyRateBuyFromUI;
+    public static String CurrencyRateSaleFromUI;
 }

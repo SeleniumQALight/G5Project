@@ -1,6 +1,6 @@
 package postTests;
 
-import baseTest.BaseTest;
+import baseTest.BaseTestComplexApp;
 import libs.DB_Util_V2;
 import libs.ExcelDriver;
 import libs.TestData;
@@ -14,7 +14,7 @@ import java.util.Map;
 import static pages.CommonActionsWithElements.configProperties;
 
 
-public class CreateNewPostWithDbDataTest extends BaseTest {
+public class CreateNewPostWithDbDataTest extends BaseTestComplexApp {
     String login, title, body, check, dropRole;
     DB_Util_V2 db_util_v2 = new DB_Util_V2();
 

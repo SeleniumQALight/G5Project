@@ -11,7 +11,7 @@ Feature: Exchange currency
 
     Examples:
     | Currency from | Currency to    |
-    | EUR           | UAH            |
     | USD           | UAH            |
+    | EUR           | UAH            |
 
 
