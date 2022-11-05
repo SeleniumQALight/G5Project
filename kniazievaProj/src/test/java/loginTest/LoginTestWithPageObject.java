@@ -1,12 +1,14 @@
 package loginTest;
 
 import baseTest.BaseTest;
+import categories.SmokeTestFilter;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import libs.ExcelDriver;
 import libs.TestData;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
 
@@ -16,13 +18,23 @@ import java.util.Map;
 import static pages.CommonActionsWithElements.configProperties;
 
 @RunWith(JUnitParamsRunner.class)
+@Category(SmokeTestFilter.class)
 public class LoginTestWithPageObject extends BaseTest {
 
     final static String COMMA = ",";
 
+    @Test
+    public void validLogin() {
+        loginPage.openLoginPage();
+        loginPage.enterUserNameIntoLoginInput("qaauto");
+        loginPage.enterPasswordIntoInputPassword("123456qwerty");
+        loginPage.clickOnButtonLogIn();
+        Assert.assertTrue("Button Sign Out isn't Displayed"
+                , homePage.getHeaderElement().isButtonSignOutDisplayed());
+    }
+
 
     @Test
-
     public void validLoginWithExcel() throws IOException {
         Map<String, String> dataForValidLogin = ExcelDriver.getData(
                 configProperties.DATA_FILE(),"validLogOn");
