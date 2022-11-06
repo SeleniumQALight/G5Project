@@ -13,6 +13,10 @@ public class HomePage extends ParentPage{
     @FindBy (xpath = ".//button[text()='Sign Out']")
     private WebElement buttonSingOut;
 
+    @FindBy (xpath = ".//img [@alt='My profile']")
+    private WebElement userAvatar;
+
+
 
     private HeaderElement headerElement = new HeaderElement(webDriver);
     /**
@@ -56,6 +60,10 @@ public class HomePage extends ParentPage{
     public void isButtonSignOutDisplayed(){
         //TODo check url
         Assert.assertTrue("Button sign out not displayed", isElementDisplayed(buttonSingOut));
+    }
+
+    public void isUserAvatarDisplayed(){
+        Assert.assertTrue("User Avatar not displayed", isElementDisplayed(userAvatar));
     }
 
 //    public boolean isTextNoLogginDisplayed() {
