@@ -6,9 +6,7 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import libs.TestData;
 import org.apache.log4j.Logger;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import pages.PrivatHomePage;
 
 import static io.restassured.RestAssured.given;
 
@@ -33,11 +31,9 @@ public class ApiHelperPrivat {
              .extract().response().as(ExchangeDTO[].class);
 
         for (int i = 0; i < responseBody.length; i++) {
-            BigDecimal bigDecimalBuy = BigDecimal.valueOf(responseBody[i].getBuy());
-            BigDecimal bigDecimalSale = BigDecimal.valueOf(responseBody[i].getSale());
             if (responseBody[i].getCcy().equalsIgnoreCase(currency)){
-                TestData.RATE_BUY_API = Float.parseFloat(String.valueOf(bigDecimalBuy.setScale(2, RoundingMode.HALF_UP)));
-                TestData.RATE_SALE_API = Float.parseFloat(String.valueOf(bigDecimalSale.setScale(2, RoundingMode.HALF_UP)));
+                TestData.RATE_BUY_API = PrivatHomePage.rounding(responseBody[i].getBuy());
+                TestData.RATE_SALE_API = PrivatHomePage.rounding(responseBody[i].getSale());
                 logger.info("From API: Currency " + currency + " buy rate is " + TestData.RATE_BUY_API +
                         " and sell rate is " + TestData.RATE_SALE_API);
             }

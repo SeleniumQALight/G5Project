@@ -31,14 +31,15 @@ public class PrivatHomePage {
                 Assert.fail("Can not work with site");
             }
         }
-
+    public static Float rounding(Float value){
+        BigDecimal bigDecimal = BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP);
+        return Float.valueOf(String.valueOf(bigDecimal));
+    }
     public void getExchangeRateByCurrency(String currency) {
         WebElement buyRate = webDriver.findElement(By.id(String.format("%s_buy", currency)));
         WebElement saleRate = webDriver.findElement(By.id(String.format("%s_sell", currency)));
-        BigDecimal bigDecimalBuy = BigDecimal.valueOf(Float.parseFloat(buyRate.getText()));
-        BigDecimal bigDecimalSale = BigDecimal.valueOf(Float.parseFloat(saleRate.getText()));
-        TestData.RATE_BUY_UI = Float.parseFloat(String.valueOf(bigDecimalBuy.setScale(2, RoundingMode.HALF_UP)));
-        TestData.RATE_SALE_UI = Float.parseFloat(String.valueOf(bigDecimalSale.setScale(2, RoundingMode.HALF_UP)));
+        TestData.RATE_BUY_UI = rounding(Float.valueOf(buyRate.getText()));
+        TestData.RATE_SALE_UI = rounding(Float.valueOf(saleRate.getText()));
 
         logger.info("Buy rate on UI is " + TestData.RATE_BUY_UI + " and sale rate on UI is " + TestData.RATE_SALE_UI);
     }
