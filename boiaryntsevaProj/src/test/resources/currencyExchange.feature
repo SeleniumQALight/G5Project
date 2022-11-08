@@ -11,5 +11,4 @@ Feature: Currency Exchange
       | currency |
       | USD      |
       | EUR      |
-      | BTC      |
 

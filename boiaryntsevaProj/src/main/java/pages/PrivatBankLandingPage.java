@@ -3,24 +3,12 @@ package pages;
 import api.BankEndPoints;
 import libs.TestData;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class PrivatBankLandingPage extends ParentPage {
-
-    @FindBy(xpath = ".//*[@id='EUR_buy']")
-    private WebElement euroBuy;
-
-    @FindBy(xpath = ".//*[@id='EUR_sell']")
-    private WebElement euroSell;
-
-    @FindBy(xpath = ".//*[@id='USD_buy']")
-    private WebElement usdBuy;
-
-    @FindBy(xpath = ".//*[@id='USD_sell']")
-    private WebElement usdSell;
-
 
     public PrivatBankLandingPage(WebDriver webDriver) {
         super(webDriver);
@@ -38,20 +26,12 @@ public class PrivatBankLandingPage extends ParentPage {
     }
 
     public PrivatBankLandingPage getCurrencyRateOnUi(String currency) {
-        if (currency.equalsIgnoreCase("USD")) {
-            TestData.setUiCurrencyBuy(Float.parseFloat(usdBuy.getText()));
-            TestData.setUiCurrencySell(Float.parseFloat(usdSell.getText()));
+        WebElement currencyElementBuy= webDriver.findElement(By.id(currency+"_buy"));
+        WebElement currencyElementSell= webDriver.findElement(By.id(currency+"_sell"));
+            TestData.setUiCurrencyBuy(Float.parseFloat(currencyElementBuy.getText()));
+            TestData.setUiCurrencySell(Float.parseFloat(currencyElementSell.getText()));
             logger.info("Exchange rate on UI for " + currency + " is Buy: " + TestData.getUiCurrencyBuy() + "and Sell: "
                     + TestData.getUiCurrencySell());
-        } else if (currency.equalsIgnoreCase("EUR")) {
-            TestData.setUiCurrencyBuy(Float.parseFloat(euroBuy.getText()));
-            TestData.setUiCurrencySell(Float.parseFloat(euroSell.getText()));
-            logger.info("Exchange rate on UI for " + currency + " is Buy: " + TestData.getUiCurrencyBuy() + "and Sell: "
-                    + TestData.getUiCurrencySell());
-        } else {
-            TestData.noCorrespondingCurrency = true;
-            logger.info("No such currency on UI");
-        }
         return this;
     }
 
