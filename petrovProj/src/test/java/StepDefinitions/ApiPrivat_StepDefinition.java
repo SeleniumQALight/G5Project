@@ -13,7 +13,7 @@ public class ApiPrivat_StepDefinition {
 
     @Given("^User send API and save currency rates from API '(.*)' to '(.*)'$")
     public void getCurrencyCoursFromAPICurrencyFromToCurrencyTo(String currencyFrom, String currencyTo) {
-        ExchangeCoursResponseDTO[] response = apiHelper.getExchangeRateByPrivat24ForComparing();
+        ExchangeCoursResponseDTO[] response = apiHelper.getExchangeRateByPrivat24(5);
 
         for (int i = 0; i < response.length; i++) {
             if(response[i].getCcy().equalsIgnoreCase(currencyFrom) && response[i].getBase_ccy().equalsIgnoreCase(currencyTo)){

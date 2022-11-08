@@ -19,7 +19,7 @@ public class ApiTestsPrivatHW {
     @Test
     public void getExchangeCoursByPrivat24() {
 
-        ExchangeCoursResponseDTO[] responseBody = apiHelper.getExchangeRateByPrivat24();
+        ExchangeCoursResponseDTO[] responseBody = apiHelper.getExchangeRateByPrivat24(11);
 
         logger.info("number of posts = " + responseBody.length);
 

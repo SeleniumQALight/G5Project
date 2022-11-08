@@ -120,26 +120,15 @@ public class ApiHelper {
             .build().queryParam("exchange").queryParam("json");
 
 
-    public ExchangeCoursResponseDTO[] getExchangeRateByPrivat24() {
+    public ExchangeCoursResponseDTO[] getExchangeRateByPrivat24(int coursIdQueryParam) {
         return given()
                 .spec(requestSpecificationForRates)
-                .queryParam("coursid", 11)
+                .queryParam("coursid", coursIdQueryParam)
                 .when()
                 .get(EndPointsExchangeCours.EXCHANGE)
                 .then()
                 .statusCode(200)
                 .log().all()
-                .extract().response().as(ExchangeCoursResponseDTO[].class);
-    }
-
-    public ExchangeCoursResponseDTO[] getExchangeRateByPrivat24ForComparing() {
-        return given()
-                .spec(requestSpecificationForRates)
-                .queryParam("coursid", 5)
-                .when()
-                .get(EndPointsExchangeCours.EXCHANGE)
-                .then()
-                .statusCode(200)
                 .extract().response().as(ExchangeCoursResponseDTO[].class);
     }
 
