@@ -1,6 +1,7 @@
 package StepDefinitions;
 
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.HomePage;
 import pages.LoginPage;
@@ -18,5 +19,11 @@ HomePage homePage = new HomePage(getWebDriver());
     @When("^User click on 'MyProfile' button on 'Home' page$")
     public void userClickOnMyProfileButtonOnHomePage() {
         homePage.getHeaderElement().clickOnMyProfileButton();
+    }
+
+
+    @Then("User sees profile avatar")
+    public void userSeesProfileAvatar() {
+        homePage.isUserAvatarDisplayed();
     }
 }
