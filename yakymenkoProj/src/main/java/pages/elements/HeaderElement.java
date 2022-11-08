@@ -42,4 +42,8 @@ public class HeaderElement extends CommonActionsWithElements {//alt+enter → co
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
     }
+
+    public boolean isButtonMyProfileDisplayed() {
+        return isElementDisplayed(buttonMyProfile);
+    }
 }
