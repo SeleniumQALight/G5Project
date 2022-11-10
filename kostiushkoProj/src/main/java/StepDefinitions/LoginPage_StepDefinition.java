@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -33,4 +34,23 @@ LoginPage loginPage = new LoginPage(DriverHelper.getWebDriver());
     loginPage.checkMessageText(message);
     }
 
+    @When("^User enters '(.*)' username into 'Username' input on 'Registration' form on 'Login' page$")
+    public void userEntersUsernameUsernameIntoUsernameInputOnRegistrationFormOnLoginPage(String username) {
+    loginPage.enterUserNameIntoRegistrationForm(username);
+    }
+
+    @And("^User enters '(.*)' email into 'Email' input on 'Registration' form on 'Login' page$")
+    public void userEntersEmailEmailIntoEmailInputOnRegistrationFormOnLoginPage(String email) {
+        loginPage.enterEmailIntoRegistrationForm(email);
+    }
+
+    @And("^User enters '(.*)' password into 'Password' input on 'Registration' form on 'Login' page$")
+    public void userEntersPasswordPasswordIntoPasswordInputOnRegistrationFormOnLoginPage(String password) {
+        loginPage.enterPasseordIntoRegistrationForm(password);
+    }
+
+    @Then("^User sees error alert message with text '(.*)'$")
+    public void userSeesAlertMessageSWithTextErrorMessageS(String expectedErrors) {
+        loginPage.chekErrorsMessages(expectedErrors);
+    }
 }

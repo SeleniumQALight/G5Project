@@ -13,3 +13,15 @@
       | login           | password |
       | wrong login     | 1234     |
       | wrong login5678 | 12345678 |
+
+    @R002
+    Scenario Outline: R002 Login with valid login
+      Given User opens 'Login' page
+      When User enters '<login>' login into 'Login' input on 'Login' page
+      And User enters '<password>' passWord into 'PassWord' input on 'Login' page
+      And User click on 'SingIn' button on 'Login' page
+      Then User sees avatar
+
+      Examples:
+        | login   | password            |
+        | yuriy2  | zuma13298@gmail.com |

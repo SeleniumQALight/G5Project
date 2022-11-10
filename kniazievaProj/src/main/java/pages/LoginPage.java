@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import libs.TestData;
 import libs.Util;
 import org.assertj.core.api.SoftAssertions;
@@ -51,6 +52,7 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         try {
             webDriver.get(baseUrl);
@@ -63,38 +65,44 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public void enterUserNameIntoLoginInput(String userName) {
+    @Step
+    public LoginPage enterUserNameIntoLoginInput(String userName) {
         enterTextIntoElement(inputUserNameHeader, userName);
+        return this;
     }
-
-    public  void  enterPasswordIntoInputPassword(String password){
+    @Step
+    public  LoginPage  enterPasswordIntoInputPassword(String password){
         enterTextIntoElement(inputPasswordHeader, password);
+        return this;
     }
-
-    public void clickOnButtonLogIn(){
+    @Step
+    public HomePage clickOnButtonLogIn(){
         clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
     }
-
+    @Step
     public boolean isButtonSignInDisplayed(){
         return isElementDisplayed(buttonSignIn);
     }
 
+    @Step
     public boolean isLoginOrPassInvalid(){
         return isElementDisplayed(invalidUsernameOrPassword);
     }
 
+    @Step
     public HomePage loginWithValidCred() {
         openLoginPage();
         loginWithValidCredWithoutOpenPage();
         return new HomePage(webDriver);
 
     }
-
+    @Step
     public void checkNumberOfMessageInRegistrationForm(int numberOfMessage){
         webDriverWaitHigh.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//*[@class = 'alert alert-danger small liveValidateMessage liveValidateMessage--visible']"), numberOfMessage));
     }
 
-
+    @Step
     public void checkMessageDisplayedWithText(String text){
         try{
             WebElement tempElement = webDriver.findElement(By.xpath(".//*[text() = '"+text+"']"));
@@ -106,21 +114,23 @@ public class LoginPage extends ParentPage {
 
     }
 
+    @Step
     public LoginPage enterUsernameInRegistrationForm(String userName){
         enterTextIntoElement(inputUsernameRegistered, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterEmailInRegistrationForm(String email){
         enterTextIntoElement(inputEmailRegistered, email);
         return this;
     }
-
+    @Step
     public LoginPage enterPasswordInRegistrationForm(String password){
         enterTextIntoElement(inputPasswordRegister, password);
         return this;
     }
-
+    @Step
     public LoginPage checkErrorMessages(String expectedErrors) {
         String[] expectedErrorsArray = expectedErrors.split(";");
         webDriverWaitLow
@@ -145,6 +155,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public HomePage loginWithValidCredWithoutOpenPage() {
         enterUserNameIntoLoginInput(TestData.VALID_LOGIN);
         enterPasswordIntoInputPassword(TestData.VALID_PASSWORD);

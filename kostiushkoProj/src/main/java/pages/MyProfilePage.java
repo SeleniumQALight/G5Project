@@ -16,6 +16,9 @@ public class MyProfilePage extends ParentPage {
     private  String postTitleLocator = ".//*[text()='%s']";
     @FindBy (xpath = ".//*[text()='Post successfully deleted']")
     private WebElement successDeletedPostmessage;
+    @FindBy (xpath = ".//a[@class='list-group-item list-group-item-action']")
+    private List<WebElement> postsList;
+
 
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
@@ -77,5 +80,10 @@ Assert.assertTrue("SuccessDeletePostMessage element is not displayed", isElement
         List<WebElement> post =  webDriver.findElements(By.xpath(".//*[contains(text(),'"+title+"')]"));
         clicOnElement(post.get(0));
         return new PostPage(webDriver);
+    }
+
+    public MyProfilePage checkNumberOfPosts(int expectedNumberOfPosts) {
+        Assert.assertEquals("Number of posts ", expectedNumberOfPosts,postsList.size());
+        return this;
     }
 }

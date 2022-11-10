@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class ApiTestsForPrivatBank {
+public class ApiTestsForPrivatBankHW1 {
     Logger logger = Logger.getLogger(getClass());
 
     @Test

@@ -1,5 +1,7 @@
 package api;
 
+import api.PrivatHW.EndPointsExchangeCours;
+import api.PrivatHW.ExchangeCoursResponseDTO;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
@@ -8,6 +10,9 @@ import io.restassured.specification.RequestSpecification;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
+
+import java.text.DecimalFormat;
+import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 
@@ -21,6 +26,8 @@ public class ApiHelper {
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
+
+
 
     /**
      * get token for default user
@@ -73,7 +80,7 @@ public class ApiHelper {
         deletePostTillPresent(USER_NAME, PASSWORD);
     }
 
-    private void deletePostTillPresent(String user_name, String password) {
+    public void deletePostTillPresent(String user_name, String password) {
         PostDTO[] listOfPost = getAllPostsByUser(user_name);
         String token = getToken(user_name, password);
         for (int i = 0; i < listOfPost.length; i++) {
@@ -87,6 +94,8 @@ public class ApiHelper {
         }
         Assert.assertEquals("Number of posts ", 0, getAllPostsByUser(user_name).length);
     }
+
+
 
     private void deletePostById(String token, String id) {
         JSONObject bodyParams = new JSONObject();
@@ -105,5 +114,58 @@ public class ApiHelper {
 
     }
 
+    RequestSpecification requestSpecificationForRates = new RequestSpecBuilder()
+            .setContentType(ContentType.JSON)
+            .log(LogDetail.ALL)
+            .build().queryParam("exchange").queryParam("json");
 
+
+    public ExchangeCoursResponseDTO[] getExchangeRateByPrivat24(int coursIdQueryParam) {
+        return given()
+                .spec(requestSpecificationForRates)
+                .queryParam("coursid", coursIdQueryParam)
+                .when()
+                .get(EndPointsExchangeCours.EXCHANGE)
+                .then()
+                .statusCode(200)
+                .log().all()
+                .extract().response().as(ExchangeCoursResponseDTO[].class);
+    }
+
+
+    public void createPost(String title, String userName, String password) {
+        String token = getToken(userName.toLowerCase(), password);
+
+        HashMap<String, String> requestParams = new HashMap<>();
+        requestParams.put("title", title);
+        requestParams.put("body", "post body");
+        requestParams.put("select1", "One Person");
+        requestParams.put("uniquePost", "no");
+        requestParams.put("token", token);
+
+        given()
+                .spec(requestSpecification)
+                .body(requestParams)
+                .when()
+                .post(EndPoints.CREATE_POST)
+                .then()
+                .statusCode(200);
+
+    }
+
+    public Double stringToDouble(String numberString){
+        return  Double.parseDouble(numberString);
+    }
+
+    public String doubleToString(Double numberDouble){
+        return  Double.toString(numberDouble);
+    }
+
+
+    public String decimalFormatCurrency(String numberString){
+        DecimalFormat df = new DecimalFormat("####0.00");
+        double e = stringToDouble(numberString);
+        df.format(e);
+        return  doubleToString(e);
+    }
 }

@@ -9,12 +9,15 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
 
+import java.util.HashMap;
+import java.util.Locale;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiHelper {
     public static final String USER_NAME = "boiaryntseva";
     private final String PASSWORD = "qwerty123456";
-    Logger logger=Logger.getLogger(getClass());
+    Logger logger = Logger.getLogger(getClass());
 
     RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
@@ -23,6 +26,7 @@ public class ApiHelper {
 
     /**
      * Get token for default user
+     *
      * @return
      */
 
@@ -41,18 +45,19 @@ public class ApiHelper {
 //                        .log().all()
                         .spec(requestSpecification)
                         .body(requestParams.toMap())
-                .when()
+                        .when()
                         .post(EndPoints.LOGIN)
-                .then()
+                        .then()
                         .statusCode(200)
                         .log().body()
                         .extract().response().getBody();
 
-        return responseBody.asString().replace("\"","");
+        return responseBody.asString().replace("\"", "");
     }
 
     /**
      * get posts by Default user
+     *
      * @return
      */
 
@@ -72,16 +77,16 @@ public class ApiHelper {
     }
 
     public void deletePostsTillPresent() {
-        deletePostsTillPresent(USER_NAME,PASSWORD);
+        deletePostsTillPresent(USER_NAME, PASSWORD);
     }
 
-    private void deletePostsTillPresent(String userName, String password) {
+    public void deletePostsTillPresent(String userName, String password) {
         PostDTO[] listOfPosts = getAllPostsByUser(userName);
         String token = getToken(userName, password);
 
         for (int i = 0; i < listOfPosts.length; i++) {
             deletePostById(token, listOfPosts[i].getId());
-            logger.info(String.format("Post", listOfPosts[i].getId(),listOfPosts[i].getTitle()));
+            logger.info(String.format("Post", listOfPosts[i].getId(), listOfPosts[i].getTitle()));
         }
         Assert.assertEquals("Number of posts", 0, getAllPostsByUser(userName).length);
 
@@ -92,16 +97,33 @@ public class ApiHelper {
         body.put("token", token);
 
         String response =
-        given()
-                .spec(requestSpecification)
-                .body(body.toMap())
-                .when()
-                .delete(EndPoints.DELETE_POST, id)
-                .then()
-                .statusCode(200)
-                .log().all()
-                .extract().response().getBody().asString();
+                given()
+                        .spec(requestSpecification)
+                        .body(body.toMap())
+                        .when()
+                        .delete(EndPoints.DELETE_POST, id)
+                        .then()
+                        .statusCode(200)
+                        .log().all()
+                        .extract().response().getBody().asString();
 
         Assert.assertEquals("Message", "\"Success\"", response);
+    }
+
+    public void createPost(String title, String userName, String pass) {
+        String token = getToken(userName.toLowerCase(), pass);
+
+        HashMap<String, String> requestParams = new HashMap<>();
+        requestParams.put("title", title);
+        requestParams.put("body", "post body");
+        requestParams.put("select1", "One Person");
+        requestParams.put("uniquePost", "no");
+        requestParams.put("token", token);
+
+        given().spec(requestSpecification)
+                .body(requestParams)
+                .post(EndPoints.CREATE_POST)
+                .then()
+                .statusCode(200);
     }
 }

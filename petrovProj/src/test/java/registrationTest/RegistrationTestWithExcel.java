@@ -1,6 +1,6 @@
 package registrationTest;
 
-import baseTest.BaseTest;
+import baseTest.BaseTestComplexApp;
 import junitparams.naming.TestCaseName;
 import libs.SpreadsheetData;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import java.util.Collection;
 import static pages.CommonActionsWithElements.configProperties;
 
 @RunWith(Parameterized.class)
-public class RegistrationTestWithExcel extends BaseTest {
+public class RegistrationTestWithExcel extends BaseTestComplexApp {
     String userName,  email, password, expectedErrors;
 
     public RegistrationTestWithExcel(String userName, String email, String password, String expectedErrors) {

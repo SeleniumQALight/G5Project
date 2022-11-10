@@ -9,6 +9,9 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
 
+import java.util.HashMap;
+import java.util.Locale;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiHelper {
@@ -71,16 +74,16 @@ public class ApiHelper {
         deletePostsTillPresent(USER_NAME, PASSWORD);
     }
 
-    private void deletePostsTillPresent(String userName, String password) {
+    public void deletePostsTillPresent(String userName, String password) {
     PostDTO[] listOfPosts = getAllPostsByUser(userName);
-    String token = getToken();
+    String token = getToken(userName, password);
 
         for (int i = 0; i <listOfPosts.length ; i++) {
             deletePostByID(token, listOfPosts[i].getId());
             logger.info(String.format("Post with id %s and title %s was deleted", listOfPosts[i].getId(), listOfPosts[i].getTitle()));
 
         }
-        Assert.assertEquals("Number of posts", 0 ,getAllPostsByUser().length);
+        Assert.assertEquals("Number of posts", 0 ,getAllPostsByUser(userName).length);
     }
 
     private void deletePostByID(String token, String id) {
@@ -97,5 +100,23 @@ public class ApiHelper {
             .log().all()
             .extract().response().getBody().asString();
     Assert.assertEquals("Message", "\"Success\"", response);
+    }
+
+    public void createPost(String title, String userName, String password) {
+    String token = getToken(userName.toLowerCase(), password);
+        HashMap<String, String> requestParams = new HashMap<>();
+        requestParams.put("title", title);
+        requestParams.put("body", "post body");
+        requestParams.put("select1", "One Person");
+        requestParams.put("uniquePost", "no");
+        requestParams.put("token", token);
+
+        given()
+                .spec(requestSpecification)
+                .body(requestParams)
+                .when()
+                .post(EndPoints.CREATE_POST)
+                .then()
+                .statusCode(200);
     }
 }
