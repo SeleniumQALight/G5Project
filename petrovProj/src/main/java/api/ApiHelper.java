@@ -1,5 +1,7 @@
 package api;
 
+import api.PrivatHW.EndPointsExchangeCours;
+import api.PrivatHW.ExchangeCoursResponseDTO;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
@@ -9,8 +11,8 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
-import java.util.Locale;
 
 import static io.restassured.RestAssured.given;
 
@@ -24,6 +26,8 @@ public class ApiHelper {
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
+
+
 
     /**
      * get token for default user
@@ -91,6 +95,8 @@ public class ApiHelper {
         Assert.assertEquals("Number of posts ", 0, getAllPostsByUser(user_name).length);
     }
 
+
+
     private void deletePostById(String token, String id) {
         JSONObject bodyParams = new JSONObject();
         bodyParams.put("token", token);
@@ -106,6 +112,24 @@ public class ApiHelper {
                 .extract().response().getBody().asString();
         Assert.assertEquals("Message", "\"Success\"", response);
 
+    }
+
+    RequestSpecification requestSpecificationForRates = new RequestSpecBuilder()
+            .setContentType(ContentType.JSON)
+            .log(LogDetail.ALL)
+            .build().queryParam("exchange").queryParam("json");
+
+
+    public ExchangeCoursResponseDTO[] getExchangeRateByPrivat24(int coursIdQueryParam) {
+        return given()
+                .spec(requestSpecificationForRates)
+                .queryParam("coursid", coursIdQueryParam)
+                .when()
+                .get(EndPointsExchangeCours.EXCHANGE)
+                .then()
+                .statusCode(200)
+                .log().all()
+                .extract().response().as(ExchangeCoursResponseDTO[].class);
     }
 
 
@@ -127,5 +151,21 @@ public class ApiHelper {
                 .then()
                 .statusCode(200);
 
+    }
+
+    public Double stringToDouble(String numberString){
+        return  Double.parseDouble(numberString);
+    }
+
+    public String doubleToString(Double numberDouble){
+        return  Double.toString(numberDouble);
+    }
+
+
+    public String decimalFormatCurrency(String numberString){
+        DecimalFormat df = new DecimalFormat("####0.00");
+        double e = stringToDouble(numberString);
+        df.format(e);
+        return  doubleToString(e);
     }
 }

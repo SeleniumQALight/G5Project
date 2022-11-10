@@ -3,7 +3,6 @@ package baseTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Attachment;
 import org.apache.log4j.Logger;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
@@ -12,14 +11,12 @@ import org.junit.runner.Description;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import pages.CommonActionsWithElements;
 import pages.HomePage;
 import pages.LoginPage;
-import postTests.CreatePostTest;
 
 import java.time.Duration;
 
@@ -27,9 +24,6 @@ public class BaseTest {
 
     protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
-    protected LoginPage loginPage;
-    protected HomePage homePage;
-
 
     @Before
     public void setUp() {
@@ -39,8 +33,6 @@ public class BaseTest {
         webDriver.manage().timeouts().implicitlyWait(
                 Duration.ofSeconds(CommonActionsWithElements.configProperties.TIME_FOR_DEFAULT_WAIT()));
         logger.info("Browser was opened");
-        loginPage = new LoginPage(webDriver);
-        homePage = new HomePage(webDriver);
 
     }
 
@@ -72,14 +64,6 @@ public class BaseTest {
             }
         }
     };
-/*
-    @After
-    public void tearDown() {
-        webDriver.quit();
-        logger.info("Browser was closed");
-        logger.info("--- "+testName.getMethodName()+" was ended ---\n");
-    }
-*/
 
     @Rule
     public TestName testName = new TestName();

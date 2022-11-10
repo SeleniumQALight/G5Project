@@ -1,13 +1,13 @@
 package postTests;
 
-import baseTest.BaseTest;
+import baseTest.BaseTestComplexApp;
 import libs.TestData;
 import libs.Util;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class EditPostTest extends BaseTest {
+public class EditPostTest extends BaseTestComplexApp {
     final String TITLE = "petrov-TC1_"+ Util.getDateAndTimeFormatted();
     String contentText = "Text into tag textArea on page create post";
     String checkBoxAction = "check";
