@@ -44,7 +44,7 @@ public class LoginTestWithPageObject extends BaseTest {
     public void validLoginAndInvalidPassword() {
         loginPage.openLoginPage();
         loginPage.enterUserNameIntoLoginInput("qaauto");
-        loginPage.enterPasswordIntoPasswordInput("123456qwerty");
+        loginPage.enterPasswordIntoPasswordInput("123456qwerty1");
         loginPage.clickOnButtonLogIn();
 
 //        Assert.assertTrue("Alert 'Invalid username/password' is not displayed ", homePage.isAlertDisplayed());
