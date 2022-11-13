@@ -25,11 +25,11 @@ public class PrivatBankUI_StepDefinition {
 
     @Then("^Check that currency value is the same on UI and API$")
     public void checkThatCurrencyValueIsTheSameOnUIAndAPI() {
-        Float curFromApiExpected = Float.parseFloat(ApiHelperPB.currencyApi.substring(0,7));
+        Float curFromApiExpected = Float.parseFloat(ApiHelperPB.currencyApiBuy.substring(0,7));
         Float curFromUIactual = Float.parseFloat(mainPagePrivatBank.getCurrencyUiValue());
-        logger.info(ApiHelperPB.currencyApi);
+        logger.info(ApiHelperPB.currencyApiBuy);
         logger.info(mainPagePrivatBank.getUsdUiValue());
-        logger.info("substring : " + ApiHelperPB.currencyApi.substring(0,4));
+        logger.info("substring : " + ApiHelperPB.currencyApiBuy.substring(0,4));
         Assert.assertEquals("Currency value does not match : ", curFromApiExpected , curFromUIactual);
     }
 }

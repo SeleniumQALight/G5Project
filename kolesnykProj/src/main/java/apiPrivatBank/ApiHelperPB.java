@@ -8,7 +8,8 @@ import static io.restassured.RestAssured.given;
 
 public class ApiHelperPB {
 
-    public static String currencyApi;
+    public static String currencyApiBuy;
+    public static String currencyApiSell;
 
     private static CurrencyDTO[] responseCurrencyBody;
 
@@ -31,8 +32,9 @@ public class ApiHelperPB {
     public void storeCurrencyValue(String currency){
         for (int i = 0; i < responseCurrencyBody.length; i++) {
             if (responseCurrencyBody[i].ccy.equals(currency)){
-                currencyApi = responseCurrencyBody[i].getBuy();
-                logger.info("Currency value from API : "+currencyApi);
+                currencyApiBuy = responseCurrencyBody[i].getBuy();
+                currencyApiSell = responseCurrencyBody[i].getSale();
+                logger.info("Currency value from API : "+ currencyApiBuy);
 
             }
         }

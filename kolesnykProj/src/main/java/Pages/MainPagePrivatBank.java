@@ -13,10 +13,6 @@ public class MainPagePrivatBank extends ParentPage{
     Logger logger = Logger.getLogger(getClass());
 
     DriverHelper driverHelper = new DriverHelper();
-    private String usd = "USD";
-    private String eur = "EUR";
-    private String usdUiValue;
-    private String eurUiValue;
     private String currencyUiValue;
 
     public String getCurrencyUiValue() {
@@ -43,7 +39,7 @@ public class MainPagePrivatBank extends ParentPage{
 
     @Override
     String getRelativeUrl() {
-        return null;
+        return "/";
     }
 
     public MainPagePrivatBank openMainPrivatBankPage(){
@@ -59,14 +55,7 @@ public class MainPagePrivatBank extends ParentPage{
     }
 
     private MainPagePrivatBank getUICurrencyValue(String currency){
-        if(currency.equals(usd)){
-            usdUiValue = driver.findElement(By.xpath(String.format("//td[contains(text(), '%s')]/following-sibling::td[@id='USD_buy']", currency))).getText().trim();
-            currencyUiValue = usdUiValue;
-        } else if (currency.equals(eur)) {
-            Util.waitABit(3);
-            eurUiValue = driver.findElement(By.xpath(String.format("//td[contains(text(), '%s')]/following-sibling::td[@id='EUR_buy']", currency))).getText();
-            currencyUiValue = eurUiValue;
-        }
+        currencyUiValue = driver.findElement(By.xpath(String.format("//td[contains(text(), '%s')]/following-sibling::td[@id='%s_buy']", currency,currency))).getText().trim();
         return this;
     }
 
