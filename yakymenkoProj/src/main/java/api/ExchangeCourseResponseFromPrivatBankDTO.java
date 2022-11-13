@@ -3,8 +3,8 @@ package api;
 public class ExchangeCourseResponseFromPrivatBankDTO {
     String ccy;
     String base_ccy;
-    String buy;
-    String sale;
+    Float buy;
+    Float sale;
 
     public ExchangeCourseResponseFromPrivatBankDTO() {
     }
@@ -30,19 +30,19 @@ public class ExchangeCourseResponseFromPrivatBankDTO {
         this.base_ccy = base_ccy;
     }
 
-    public String getBuy() {
+    public Float getBuy() {
         return buy;
     }
 
-    public void setBuy(String buy) {
+    public void setBuy(Float buy) {
         this.buy = buy;
     }
 
-    public String getSale() {
+    public Float getSale() {
         return sale;
     }
 
-    public void setSale(String sale) {
+    public void setSale(Float sale) {
         this.sale = sale;
     }
 
