@@ -19,13 +19,6 @@ public class MainPagePrivatBank extends ParentPage{
         return currencyUiValue;
     }
 
-    public String getUsdUiValue() {
-        return usdUiValue;
-    }
-
-    public String getEurUiValue() {
-        return eurUiValue;
-    }
 
     @Override
     protected void printErrorAndStopTest(Exception e) {
@@ -63,8 +56,8 @@ public class MainPagePrivatBank extends ParentPage{
     public MainPagePrivatBank getCurrencyValue(String currency){
         //dropdownSelect();
         getUICurrencyValue(currency);
-        logger.info("USD value on UI : " + usdUiValue);
-        logger.info("EUR value on UI : " + eurUiValue);
+        logger.info("USD value on UI : " + currencyUiValue);
+        logger.info("EUR value on UI : " + currencyUiValue);
         return this;
     }
 
