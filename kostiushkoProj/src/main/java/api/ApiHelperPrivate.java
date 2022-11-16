@@ -4,7 +4,7 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import libs.dataPrivate;
+import libs.DataPrivate;
 import org.apache.log4j.Logger;
 import static io.restassured.RestAssured.given;
 
@@ -32,10 +32,10 @@ public class ApiHelperPrivate {
 
         for (int i = 0; i < responseBody.length; i++) {
             if (responseBody[i].getCcy().equalsIgnoreCase(currency)){
-                dataPrivate.BUY_API = responseBody[i].getBuy();
-                dataPrivate.SALE_API = responseBody[i].getSale();
-                logger.info(currency + " API buy rate is " + dataPrivate.BUY_API +
-                        " and sell rate is " + dataPrivate.SALE_API);
+                DataPrivate.BUY_API = responseBody[i].getBuy();
+                DataPrivate.SALE_API = responseBody[i].getSale();
+                logger.info(currency + " API buy rate is " + DataPrivate.BUY_API +
+                        " and sell rate is " + DataPrivate.SALE_API);
             }
         }
     }
