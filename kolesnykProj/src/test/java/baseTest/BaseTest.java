@@ -27,6 +27,7 @@ public class BaseTest {
     protected HomePage homePage;
     protected PostPage postPage;
     protected MyProfilePage myProfilePage;
+    protected MainPagePrivatBank mainPagePrivatBank;
 
     @Before
     public void setUp() {
@@ -40,6 +41,7 @@ public class BaseTest {
         homePage = new HomePage(driver);
         postPage = new PostPage(driver);
         myProfilePage = new MyProfilePage(driver);
+        mainPagePrivatBank = new MainPagePrivatBank(driver);
     }
 
 //    @After
