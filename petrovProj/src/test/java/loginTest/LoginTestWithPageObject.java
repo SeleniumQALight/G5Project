@@ -1,6 +1,6 @@
 package loginTest;
 
-import baseTest.BaseTest;
+import baseTest.BaseTestComplexApp;
 import categories.SmokeTestFilter;
 import io.qameta.allure.*;
 import libs.ExcelDriver;
@@ -15,7 +15,7 @@ import static pages.CommonActionsWithElements.configProperties;
 
 @Epic("Allure examples")
 @Feature("Junit 4 support")
-public class LoginTestWithPageObject extends BaseTest {
+public class LoginTestWithPageObject extends BaseTestComplexApp {
 
     @Description("Some detailed test description")
     @Link("https://example.org")

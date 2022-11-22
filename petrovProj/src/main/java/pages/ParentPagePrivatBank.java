@@ -9,7 +9,7 @@ abstract class ParentPagePrivatBank extends CommonActionsWithElements{
 
     public ParentPagePrivatBank(WebDriver webDriver) {
         super(webDriver);
-        basePrivatBankUrl = "https://privatbank.ua/";
+        basePrivatBankUrl = configProperties.base_url_privat();
 
     }
 

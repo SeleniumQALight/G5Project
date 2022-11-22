@@ -1,6 +1,6 @@
 package postTests;
 
-import baseTest.BaseTest;
+import baseTest.BaseTestComplexApp;
 import categories.SmokeTestFilter;
 import libs.TestData;
 import libs.Util;
@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-public class CreatePostTest extends BaseTest {
+public class CreatePostTest extends BaseTestComplexApp {
     final String TITLE = "petrov-TC1_"+ Util.getDateAndTimeFormatted();
     String contentText = "Text into tag textArea on page create post";
     String checkBoxAction = "check";

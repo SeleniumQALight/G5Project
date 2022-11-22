@@ -1,10 +1,10 @@
 package registrationTest;
 
-import baseTest.BaseTest;
+import baseTest.BaseTestComplexApp;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class validMessageFromLoginPageTest extends BaseTest {
+public class validMessageFromLoginPageTest extends BaseTestComplexApp {
     
     @Test
     public void validMessageFromLoginPage(){

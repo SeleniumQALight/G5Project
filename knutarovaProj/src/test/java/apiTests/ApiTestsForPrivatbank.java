@@ -2,6 +2,7 @@ package apiTests;
 
 import api.EndPointsForPrivatbank;
 import api.PrivatbankCourseExchangeDTO;
+import api.PrivatbankCourseExchangeForCompareDTO;
 import io.restassured.http.ContentType;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;

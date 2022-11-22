@@ -1,5 +1,7 @@
 package baseTest;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 import org.apache.log4j.Logger;
@@ -13,8 +15,11 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Attachment;
@@ -92,7 +97,21 @@ public class BaseTest {
             // in most cases 32bit version is needed
             WebDriverManager.iedriver().arch32().setup();
             return new InternetExplorerDriver();
-        }
+        }if ("remote".equals(browser)){
+            WebDriverManager.chromedriver().setup();
+            DesiredCapabilities cap=new DesiredCapabilities();
+            cap.setBrowserName("chrome");
+//            cap.setPlatform(Platform.WINDOWS);
+//            cap.setVersion("79");
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.merge(cap);
+            try {
+                webDriver = new RemoteWebDriver(
+                        new URL("http://localhost:4444/wd/hub"),
+                        chromeOptions);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }}
 
         return webDriver;
     }

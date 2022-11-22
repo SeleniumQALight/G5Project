@@ -56,4 +56,16 @@ public class LoginTest {
         }
     }
 
+    @Test
+    public void test() {
+        int[] area = {1, 2, 3, 4};
+//        System.out.println(area[1]);
+
+       String line = "1111;2222;3333";
+       String[] lineArr = line.split(";");
+        System.out.println(lineArr[1]);
+
+        System.out.println(line.replace(";", "-"));
+
+    }
 }

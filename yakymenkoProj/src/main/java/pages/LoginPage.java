@@ -163,7 +163,7 @@ public class LoginPage extends ParentPage { // Alt+Insert↓ - create constructo
     }
 
     @Step
-    public LoginPage checkErrorsMessages(String expectedErrors) {
+    public LoginPage checkErrorsMessagesOnRegistrationForm(String expectedErrors) {
         // test;test1 → array[0] = test , array[1] = test1
         String[] expectedErrorsArray = expectedErrors.split(";");// пройдеться і розіб'є на частини у масив
         webDriverWaitLow
