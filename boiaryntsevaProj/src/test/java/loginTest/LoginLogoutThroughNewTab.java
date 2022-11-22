@@ -2,9 +2,7 @@ package loginTest;
 
 import baseTest.BaseTest;
 import libs.TestData;
-import libs.Util;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class LoginLogoutThroughNewTab extends BaseTest {

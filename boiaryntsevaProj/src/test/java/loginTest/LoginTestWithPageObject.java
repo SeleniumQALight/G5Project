@@ -4,16 +4,11 @@ package loginTest;
 import baseTest.BaseTest;
 import categories.SmokeTestFilter;
 import io.qameta.allure.*;
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
-import junitparams.naming.TestCaseName;
 import libs.ExcelDriver;
 import libs.TestData;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.junit.runner.RunWith;
 import pages.CommonActionsWithElements;
 
 import java.io.IOException;

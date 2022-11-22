@@ -5,7 +5,6 @@ import libs.Util;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pages.MyProfilePage;
 
 public class ReplacementTitleOfPost extends BaseTest {
     final String TITLE = "TC2_knutarova_" + Util.getDateAndTimeFormatted();

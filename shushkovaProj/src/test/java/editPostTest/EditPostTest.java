@@ -5,9 +5,6 @@ import libs.Util;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import pages.MyProfilePage;
-import pages.PostPage;
 
 public class EditPostTest extends BaseTest {
     final String TITLE ="TC_2_shushkova-post1"+ Util.getDateAndTimeFormatted();

@@ -1,7 +1,6 @@
 package libs;
 
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 
 public class TestData {
     public final static String VALID_LOGIN = "boiaryntseva";

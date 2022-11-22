@@ -1,7 +1,6 @@
 package registrationTest;
 
 import baseTest.BaseTest;
-import junitparams.naming.TestCaseName;
 import libs.SpreadsheetData;
 import org.junit.Test;
 import org.junit.runner.RunWith;

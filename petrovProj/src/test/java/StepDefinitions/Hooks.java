@@ -8,8 +8,6 @@ import libs.DriverHelper;
 import libs.TestData;
 import org.apache.log4j.Logger;
 
-import java.util.Locale;
-
 public class Hooks {
 
     ApiHelper apiHelper = new ApiHelper();

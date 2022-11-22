@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.elements.HeaderElement;
 
-import static org.hamcrest.CoreMatchers.containsString;
-
 public class PostInfoPage extends ParentPage {
     private HeaderElement headerElement = new HeaderElement(webDriver);
 

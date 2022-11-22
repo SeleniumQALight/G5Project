@@ -1,6 +1,5 @@
 package pages;
 
-import libs.Util;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

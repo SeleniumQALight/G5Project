@@ -1,9 +1,7 @@
 package loginTest;
 
 import baseTest.BaseTest;
-import libs.Color;
 import libs.TestData;
-import libs.Util;
 import org.junit.Assert;
 import org.junit.Test;
 

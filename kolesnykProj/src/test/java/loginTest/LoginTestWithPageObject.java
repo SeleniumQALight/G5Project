@@ -1,6 +1,5 @@
 package loginTest;
 
-import categories.SmokeTestFilter;
 import baseTest.BaseTest;
 import io.qameta.allure.*;
 import junitparams.JUnitParamsRunner;
@@ -9,7 +8,6 @@ import junitparams.naming.TestCaseName;
 import libs.ExcelDriver;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;

@@ -5,7 +5,6 @@ import categories.SmokeTestFilter;
 import io.qameta.allure.*;
 import libs.ExcelDriver;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 

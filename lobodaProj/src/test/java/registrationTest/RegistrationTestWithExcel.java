@@ -12,12 +12,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import baseTest.BaseTest;
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
-import junitparams.naming.TestCaseName;
 import libs.SpreadsheetData;
-import libs.TestData;
-import libs.Util;
 
 @RunWith(Parameterized.class)
 public class RegistrationTestWithExcel extends BaseTest {

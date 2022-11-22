@@ -7,8 +7,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import java.util.Locale;
-
 public class CreatePostTest extends BaseTest {
     final String TITLE ="TC_1_shushkova-post1"+ Util.getDateAndTimeFormatted();
 

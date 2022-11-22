@@ -2,7 +2,6 @@ package StepDefinitions;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
-import pages.HomePage;
 import pages.MyProfilePage;
 
 import static libs.DriverHelper.getWebDriver;

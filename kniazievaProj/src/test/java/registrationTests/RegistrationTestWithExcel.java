@@ -1,11 +1,7 @@
 package registrationTests;
 
 import baseTest.BaseTest;
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
-import junitparams.naming.TestCaseName;
 import libs.SpreadsheetData;
-import libs.TestData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

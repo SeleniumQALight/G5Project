@@ -2,7 +2,6 @@ package pages;
 
 
 
-import io.qameta.allure.Step;
 import libs.DB_Util_seleniumUsers;
 import libs.TestData;
 import libs.Util;
@@ -16,8 +15,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-
 import java.util.List;
 
 public class LoginPage extends  ParentPage {

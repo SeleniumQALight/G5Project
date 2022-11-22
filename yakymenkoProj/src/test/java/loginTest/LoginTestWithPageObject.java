@@ -8,7 +8,6 @@ import libs.TestData;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import pages.CommonActionsWithElements;
 
 import java.io.IOException;
 import java.util.Map;

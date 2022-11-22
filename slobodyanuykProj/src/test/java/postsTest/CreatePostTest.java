@@ -1,20 +1,20 @@
 package postsTest;
 
 import BaseTest.BaseTest;
-import org.junit.Assert;
+import libs.Util;
+import org.junit.After;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import pages.CreatePostPage;
 
 public class CreatePostTest extends BaseTest {
+    final String TITLE = "TC1_slobodyanuyk-post1" + Util.getDateAndTimeFormatted();
     @Test
-    public void createNewPost () {
+    public void TC1_createNewPost () {
+
         homePage
                 .openHomePage()
                 .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
-                .enterTextInInputTitle("Slobodyanuyk-post")
+                .enterTextInInputTitle(TITLE)
                 .enterTextInInputBody("Slobodyanuyk-Body")
                 .selectTextInDropDownUi("Групове поввідомлення")
                 .clickOnButtonSaveNewPost()
@@ -24,6 +24,17 @@ public class CreatePostTest extends BaseTest {
                 .checkTestInAlert("New post successfully created.")
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
+                .checkPostWasCreated(TITLE)
         ;
+    }
+    @After
+    public void deletedPosts() {
+        homePage
+                .openHomePage()
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostsWithTitleTillPresent(TITLE);
+
+
     }
 }

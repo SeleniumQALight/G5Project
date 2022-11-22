@@ -5,7 +5,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import libs.DriverHelper;
 import pages.HomePage;
-import pages.LoginPage;
 
 public class HomePage_StepDefinition {
     HomePage homePage = new HomePage(DriverHelper.getWebDriver());
