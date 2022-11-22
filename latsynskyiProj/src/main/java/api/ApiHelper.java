@@ -10,6 +10,8 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.remote.Response;
 
+import java.util.HashMap;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiHelper {
@@ -83,7 +85,7 @@ public static String USER_NAME = "ooo";
     deletePostTillPresent(USER_NAME,PASSWORD);
     }
 
-    private void deletePostTillPresent(String userName, String password) {
+    public void deletePostTillPresent(String userName, String password) {
     PostDTO[] listOfPosts = getAllPostsByUser(userName);
     String token = getToken(userName,password);
 
@@ -112,6 +114,25 @@ public static String USER_NAME = "ooo";
            .extract().response().getBody().asString();
 
    Assert.assertEquals("Message ","\"Success\"",response);
+
+    }
+
+    public void createPost(String title, String userName, String password) {
+    String token = getToken(userName.toLowerCase(),password);
+
+        HashMap<String,String> requestParams = new HashMap<>();
+        requestParams.put("title",title);
+        requestParams.put("body","post body");
+        requestParams.put("select1","One Person");
+        requestParams.put("uniquePost","no");
+        requestParams.put("token",token);
+        given()
+                .spec(requestSpecification)
+                .body(requestParams)
+                .when()
+                .post(EndPoints.CREATE_POST)
+                .then()
+                .statusCode(200);
 
     }
 }
