@@ -21,6 +21,7 @@ public class HeaderElement extends CommonActionWithElement {
     /**
      * клик на кнопку "Create Post"
      * и возвращаем пейжу Создания поста
+     * и возвращаем пейжу Создания поста
      */
     public CreatePostPage clickOnButtonCreatePost () {
         clickOnElement(buttonCreatePost);
