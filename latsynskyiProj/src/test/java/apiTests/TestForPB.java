@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 
 public class TestForPB {
 
-    String ccy_EUR_RUR_USD = "3";
+    String ccy_EUR_RUR_USD = "11";
 
     @Test
     public  void getCurrencyPB (){
@@ -42,9 +42,9 @@ public class TestForPB {
 //        }
         GetDTOPB[] expectedResult = {
                 new GetDTOPB("EUR","UAH"),
-                new GetDTOPB("RUR","UAH"),
+                //new GetDTOPB("RUR","UAH"),
                 new GetDTOPB("USD","UAH"),
-                new GetDTOPB("BTC","USD")
+                //new GetDTOPB("BTC","USD")
         };
 
         Assert.assertEquals("Number of posts ",expectedResult.length,responseBody.length);

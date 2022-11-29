@@ -1,19 +1,20 @@
 package api;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@ToString
+@Builder
 public class GetDTOPB {
-    @JsonProperty
-
     String ccy ;
     String base_ccy;
     Double buy;
     Double sale;
-
     public GetDTOPB (){
 
     }
-
     public GetDTOPB(String ccy, String base_ccy) {
         this.ccy = ccy;
         this.base_ccy = base_ccy;
@@ -24,6 +25,9 @@ public class GetDTOPB {
     }
 
     public void setCcy(String ccy) {
+        this.ccy = ccy;
+    }
+    public void getCcy(String ccy) {
         this.ccy = ccy;
     }
 
