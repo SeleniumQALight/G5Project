@@ -5,10 +5,12 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
+import libs.TestData;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.remote.Response;
+
+import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 
@@ -83,7 +85,7 @@ public static String USER_NAME = "ooo";
     deletePostTillPresent(USER_NAME,PASSWORD);
     }
 
-    private void deletePostTillPresent(String userName, String password) {
+    public void deletePostTillPresent(String userName, String password) {
     PostDTO[] listOfPosts = getAllPostsByUser(userName);
     String token = getToken(userName,password);
 
@@ -114,4 +116,51 @@ public static String USER_NAME = "ooo";
    Assert.assertEquals("Message ","\"Success\"",response);
 
     }
-}
+
+    public void createPost(String title, String userName, String password) {
+    String token = getToken(userName.toLowerCase(),password);
+
+        HashMap<String,String> requestParams = new HashMap<>();
+        requestParams.put("title",title);
+        requestParams.put("body","post body");
+        requestParams.put("select1","One Person");
+        requestParams.put("uniquePost","no");
+        requestParams.put("token",token);
+        given()
+                .spec(requestSpecification)
+                .body(requestParams)
+                .when()
+                .post(EndPoints.CREATE_POST)
+                .then()
+                .statusCode(200);
+
+    }
+    String ccy_EUR_RUR_USD = "11";
+    public  void getCurrencyPBByAPI(String currency){
+
+        Logger logger = Logger.getLogger(getClass());
+
+        GetDTOPB[] responseBody = given()
+                .contentType(ContentType.JSON)
+                .log().all()
+                .when()
+                .get(EndPointsPB.GET_FOR_CURRENCY,ccy_EUR_RUR_USD)
+                .then()
+                .statusCode(200)
+                .log().all()
+                .extract()
+                .response().as(GetDTOPB[].class);
+        for (int i = 0; i < responseBody.length; i++) {
+            if (responseBody[i].getCcy().equalsIgnoreCase(currency)){
+                TestData.CURRENCY_NAME_FROM_API =responseBody[i].getCcy();
+                TestData.CURRENCY_BUY_FROM_API =responseBody[i].getBuy();
+                TestData.CURRENCY_SALE_FROM_API =responseBody[i].getSale(); }
+        }
+        logger.info(TestData.CURRENCY_NAME_FROM_API +" BUY= "+TestData.CURRENCY_BUY_FROM_API +" SALE= "+TestData.CURRENCY_SALE_FROM_API);
+       }
+        }
+
+
+
+
+

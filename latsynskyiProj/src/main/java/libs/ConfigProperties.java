@@ -9,6 +9,7 @@ public interface ConfigProperties extends Config {
 	long TIME_FOR_EXPLICIT_WAIT_HIGHT();
 
 	String base_url();
+	String base_urlPB();
 	String DATA_FILE();
 	String DATA_FILE_PATH();
 	String Oracle();
@@ -18,4 +19,6 @@ public interface ConfigProperties extends Config {
 	String MySQL_DB();
 	String MySQL_DB_USER();
 	String MySQL_DB_PASSWORD();
+
+	String baseUrlUIPrivatBank();
 }
