@@ -1,4 +1,6 @@
-package api;
+package api.book_store.dto;
+
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +15,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class AuthorDTO {
-    String username;
-    String avatar;
+public class BookInStoreDTO {
+    private List<Book> books ;
 }

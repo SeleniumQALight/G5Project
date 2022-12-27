@@ -1,13 +1,20 @@
 package apiTests;
+
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 import java.util.List;
 import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.junit.Test;
-import api.*;
+
+import api.AuthorDTO;
+import api.EndPoints;
+import api.PostDTO;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
@@ -20,6 +27,8 @@ public class ApiTests {
 
         PostDTO[] responseBody = given()
                 .contentType(ContentType.JSON)
+//                .queryParam("exchange")
+                .filter(new AllureRestAssured())
                 .log().all()
                 .when()
                 .get(EndPoints.POST_BY_USER, user_name)
@@ -38,7 +47,9 @@ public class ApiTests {
         }
 
         PostDTO[] expectedResult = {
-                PostDTO.builder().title("test").body("test body").select1("All Users").uniquePost("no")
+//               new PostDTO("test","test body", "All Users", "no", new AuthorDTO("autoapi"), false) ,
+//               new PostDTO("test2","test body2","All Users","no", new AuthorDTO("autoapi"), false)
+                PostDTO.builder().title("test1").body("test body").select1("All Users").uniquePost("no")
                         .author(AuthorDTO.builder().username("autoapi").build()).isVisitorOwner(false)
                         .build(),
                 PostDTO.builder().title("test2").body("test body2").select1("All Users").uniquePost("no")
@@ -59,6 +70,9 @@ public class ApiTests {
 
         softAssertions.assertAll();
 
+
+//https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11
+
     }
 
     @Test
@@ -75,7 +89,8 @@ public class ApiTests {
                         .extract().response().getBody().asString();
 
         Assert.assertEquals("Message in response ", "\"Sorry, invalid user requested.undefined\"", actualResponse);
-        Assert.assertEquals("Message in response ", "Sorry, invalid user requested.undefined", actualResponse.replace("\"", ""));
+        Assert.assertEquals("Message in response ", "Sorry, invalid user requested.undefined",
+                actualResponse.replace("\"", ""));
 
     }
 
@@ -121,6 +136,14 @@ public class ApiTests {
                 .log().all()
                 .assertThat().body(matchesJsonSchemaInClasspath("response.json"))
         ;
+    }
+
+
+    @Test
+    public void test() {
+        given()
+                .baseUri("http://qa-complex-app-for-testing.herokuapp.com").log().all()
+                .when().get("/api/postsByAuthor/{0}");
     }
 
 

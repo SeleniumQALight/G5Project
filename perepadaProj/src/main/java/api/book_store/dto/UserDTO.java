@@ -1,4 +1,4 @@
-package api;
+package api.book_store.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,16 +15,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class PostDTO {
-    @JsonProperty("_id")
-    String id;
-
-    String title;
-    String body;
-    String select1;
-    String uniquePost;
-    String createdDate;
-    AuthorDTO author;
-    Boolean isVisitorOwner;
-
+public class UserDTO {
+    private String userId;
+    private String username;
+    private String password;
+    private String token;
+    private String expires;
+    @JsonProperty("created_date")
+    private String createdDate;
+    private Boolean isActive;
 }
